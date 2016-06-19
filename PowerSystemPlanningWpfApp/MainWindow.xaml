@@ -1,0 +1,162 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:t="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PowerSystemPlanningWpfApp"
+        xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
+        mc:Ignorable="d"
+        Title="Power System Planning" Height="497.27" Width="778.621" WindowState="Maximized">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="NewCommandBinding_Executed" />
+        <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommandBinding_Executed" />
+        <CommandBinding Command="ApplicationCommands.Save" Executed="SaveCommandBinding_Executed" />
+        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAsCommandBinding_Executed" />
+        <CommandBinding Command="ApplicationCommands.Close" Executed="CloseCommandBinding_Executed" />
+    </Window.CommandBindings>
+    <!--<Window.InputBindings>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding ApplicationCommands.Open}" />
+    </Window.InputBindings>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="300*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Menu DockPanel.Dock="Left" Background="White">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="menubtnNew" Header="_New" Command="ApplicationCommands.New">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Resources/NewFile_16x.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="menubtnOpen" Header="_Open" Command="ApplicationCommands.Open" >
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Resources/Open_16x.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="menubtnSave" Header="_Save" Command="ApplicationCommands.Save">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Resources/Save_16x.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="menubtnSaveAs" Header="_Save As" Command="ApplicationCommands.SaveAs">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Resources/SaveAs_16x.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem x:Name="menubtnExit" Header="_Exit" Command="ApplicationCommands.Close">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Resources/CloseSolution_16x.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Models">
+                    <MenuItem Header="_Load Duration Curve (LDC) Model" />
+                    <MenuItem Header="_LDC for Static TEP" />
+                    <MenuItem Header="_LDC for TEP under Scenarios" />
+                    <!--<MenuItem Header="_Show groups" IsCheckable="True" IsChecked="True" />-->
+                </MenuItem>
+                <MenuItem Header="_Optimization">
+                    <MenuItem Header="_Economic Dispatch" />
+                    <MenuItem Header="_Optimal Power Flow" />
+                    <MenuItem Header="_Two-stage stochastic TEP" />
+                    <MenuItem Header="_Minimax regret TEP" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Left" LastChildFill="False" Grid.Row="1" VerticalAlignment="Center">
+            <Label x:Name="label" Content="Power System Name:" HorizontalAlignment="Left"/>
+            <TextBox x:Name="tbPowerSystemName" Width="100" />
+            <Label x:Name="label2" Content="Number of nodes:" HorizontalAlignment="Left"/>
+            <xctk:IntegerUpDown x:Name="numNodes" Width="80" ValueChanged="numNodes_ValueChanged" />
+        </DockPanel>
+        <Grid Margin="0,0,0,0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="284*" />
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Stretch" Margin="0,0,-0.001,0" />
+            <GroupBox x:Name="groupBox" Header="Nodes" Grid.ColumnSpan="2">
+                <DataGrid x:Name="dgNodes" Margin="4,10,4,4" AutoGenerateColumns="False">
+                    <DataGrid.AlternatingRowBackground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                    </DataGrid.AlternatingRowBackground>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <Grid Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+                    <GroupBox x:Name="groupBox1" Header="Generators" Margin="1.19,5,0,0">
+                        <DataGrid x:Name="dgGenerators" Margin="-1,10,4,4" AutoGenerateColumns="False">
+                            <DataGrid.AlternatingRowBackground>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                            </DataGrid.AlternatingRowBackground>
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeId}" />
+                                <DataGridTextColumn Header="Installed Capacity (MW)" Binding="{Binding InstalledCapacityMW}" />
+                                <DataGridTextColumn Header="Marginal Cost" Binding="{Binding MarginalCost}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                    <GroupBox x:Name="groupBox2" Grid.Column="2" Header="Consumers" Margin="1.785,4,0,0">
+                        <DataGrid x:Name="dgConsumers" Margin="0.999,10,4,4" AutoGenerateColumns="False">
+                            <DataGrid.AlternatingRowBackground>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                            </DataGrid.AlternatingRowBackground>
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeId}" />
+                                <DataGridTextColumn Header="Consumption (MW)" Binding="{Binding ConsumptionMW}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+                <GroupBox x:Name="groupBox3" Header="Transmission Lines" Margin="0.19,-0.385,0,0" Grid.Row="2">
+                    <DataGrid x:Name="dgTransmissionLines" Margin="0,10,4,4" AutoGenerateColumns="False">
+                        <DataGrid.AlternatingRowBackground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                        </DataGrid.AlternatingRowBackground>
+                        <DataGrid.Columns>
+                            <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="From Node" Binding="{Binding NodeToID}" />
+                            <DataGridTextColumn Header="To Node" Binding="{Binding NodeFromID}" />
+                            <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacityMW}" />
+                            <DataGridTextColumn Header="Reactance (ohm)" Binding="{Binding ReactanceOhm}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+        <GroupBox Header="Output" Grid.Row="3">
+            <localUtils:SimpleTerminal />
+        </GroupBox>
+    </Grid>
+</Window>

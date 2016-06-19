@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSystemPlanning", "PowerSystemPlanning\PowerSystemPlanning.csproj", "{A8CEA095-A105-416A-86BF-EE44A4F16640}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSystemPlanningGUI", "PowerSystemPlanningGUI\PowerSystemPlanningGUI.csproj", "{75254821-61AF-4190-81CB-88FD6EA75B55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSystemPlanningWpfApp", "PowerSystemPlanningWpfApp\PowerSystemPlanningWpfApp.csproj", "{29280D9B-11AF-4ECC-82F4-4C54A632351C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{A8CEA095-A105-416A-86BF-EE44A4F16640}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8CEA095-A105-416A-86BF-EE44A4F16640}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8CEA095-A105-416A-86BF-EE44A4F16640}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75254821-61AF-4190-81CB-88FD6EA75B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75254821-61AF-4190-81CB-88FD6EA75B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75254821-61AF-4190-81CB-88FD6EA75B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75254821-61AF-4190-81CB-88FD6EA75B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29280D9B-11AF-4ECC-82F4-4C54A632351C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29280D9B-11AF-4ECC-82F4-4C54A632351C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29280D9B-11AF-4ECC-82F4-4C54A632351C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29280D9B-11AF-4ECC-82F4-4C54A632351C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

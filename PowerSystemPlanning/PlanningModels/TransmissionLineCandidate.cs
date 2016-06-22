@@ -13,6 +13,10 @@ namespace PowerSystemPlanning.PlanningModels
     {
         private double investmentCost;
 
+        public TransmissionLineCandidate(PowerSystem power_system) : base(power_system)
+        {
+        }
+
         /// <summary>
         /// Total investment cost in this new transmission line (in US$).
         /// </summary>

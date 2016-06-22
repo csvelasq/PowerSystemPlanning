@@ -59,6 +59,9 @@ namespace PowerSystemPlanning
         /// </summary>
         public List<InelasticLoad> inelasticLoads;
 
+        /// <summary>
+        /// Empty constructor, not meant to be used but rather included only to allow serialization.
+        /// </summary>
         public Node()
         {
 

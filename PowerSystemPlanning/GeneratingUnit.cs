@@ -11,7 +11,7 @@ namespace PowerSystemPlanning
     /// </summary>
     public class GeneratingUnit : NodeElement
     {
-        private double installedCapacityMW;
+        private double _InstalledCapacityMW;
 
         /// <summary>
         /// Installed capacity of the generating unit, in MW.
@@ -21,16 +21,16 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return installedCapacityMW;
+                return _InstalledCapacityMW;
             }
 
             set
             {
-                installedCapacityMW = value;
+                _InstalledCapacityMW = value;
             }
         }
 
-        private double marginalCost;
+        private double _MarginalCost;
 
         /// <summary>
         /// Marginal cost, in $ per MWh, of this generating unit.
@@ -39,18 +39,22 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return marginalCost;
+                return _MarginalCost;
             }
 
             set
             {
-                marginalCost = value;
+                _MarginalCost = value;
             }
         }
 
-        public GeneratingUnit()
-        {
+        /// <summary>
+        /// Empty constructor, not meant to be used but rather included only to allow serialization.
+        /// </summary>
+        public GeneratingUnit():base() { }
 
+        public GeneratingUnit(PowerSystem power_system) : base(power_system)
+        {
         }
     }
 }

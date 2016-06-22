@@ -1,0 +1,155 @@
+\hypertarget{class_power_system_planning_1_1_power_system}{}\section{Power\+System\+Planning.\+Power\+System Class Reference}
+\label{class_power_system_planning_1_1_power_system}\index{Power\+System\+Planning.\+Power\+System@{Power\+System\+Planning.\+Power\+System}}
+
+
+Represents the technical and economic model of a Power System for the objectives of medium to long term planning.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Power\+System} (string name)\hypertarget{class_power_system_planning_1_1_power_system_a6892a52047756c1fc3cf988695e1b787}{}\label{class_power_system_planning_1_1_power_system_a6892a52047756c1fc3cf988695e1b787}
+
+\item 
+{\bfseries Power\+System} (string name, Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_generating_unit}{Generating\+Unit} $>$ \hyperlink{class_power_system_planning_1_1_power_system_a899692153e8c860b54745c503f8af765}{generating\+Units}, Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_inelastic_load}{Inelastic\+Load} $>$ \hyperlink{class_power_system_planning_1_1_power_system_a0445fbb84b2deb936cfc1b7b38d8f5ed}{inelastic\+Loads}, Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_transmission_line}{Transmission\+Line} $>$ \hyperlink{class_power_system_planning_1_1_power_system_a1394f9c3a23efcc0cd93acb46611c102}{transmission\+Lines})\hypertarget{class_power_system_planning_1_1_power_system_a127fe1b1817e0e5b8060210dcf6490a6}{}\label{class_power_system_planning_1_1_power_system_a127fe1b1817e0e5b8060210dcf6490a6}
+
+\item 
+void \hyperlink{class_power_system_planning_1_1_power_system_a0f3c09d821634b02e79b54c82297e9f6}{save\+To\+X\+M\+L\+File} (Text\+Writer save\+Stream)
+\begin{DoxyCompactList}\small\item\em Saves the current power sysem to an X\+ML file, provided the stream. The provided stream must is not closed within this method. I\+O\+Exception and other exceptions are not managed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_power_system_planning_1_1_power_system}{Power\+System} \hyperlink{class_power_system_planning_1_1_power_system_ad61746fe7b02b94761abec0f022d106a}{read\+From\+X\+M\+L\+File} (Stream\+Reader xml\+Stream)
+\begin{DoxyCompactList}\small\item\em Creates a Power System by reading an X\+ML file, provided the stream. The provided stream must is not closed within this method. I\+O\+Exception and other exceptions are not managed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_node}{Node} $>$ \hyperlink{class_power_system_planning_1_1_power_system_aa5709bbb488708bcb162646585f01c79}{nodes}
+\begin{DoxyCompactList}\small\item\em Nodes of the power system. \end{DoxyCompactList}\item 
+Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_generating_unit}{Generating\+Unit} $>$ \hyperlink{class_power_system_planning_1_1_power_system_a899692153e8c860b54745c503f8af765}{generating\+Units}
+\begin{DoxyCompactList}\small\item\em All Generating units in the power system. \end{DoxyCompactList}\item 
+Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_inelastic_load}{Inelastic\+Load} $>$ \hyperlink{class_power_system_planning_1_1_power_system_a0445fbb84b2deb936cfc1b7b38d8f5ed}{inelastic\+Loads}
+\begin{DoxyCompactList}\small\item\em All Inelastic loads in the power system. \end{DoxyCompactList}\item 
+Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_transmission_line}{Transmission\+Line} $>$ \hyperlink{class_power_system_planning_1_1_power_system_a1394f9c3a23efcc0cd93acb46611c102}{transmission\+Lines}
+\begin{DoxyCompactList}\small\item\em All Transmission lines in the power sytem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_power_system_planning_1_1_power_system_ae511d3a9d7c871726037041b9fdabe14}{Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Name of the power system. \end{DoxyCompactList}\item 
+int \hyperlink{class_power_system_planning_1_1_power_system_a3d7abefe87bb1621c5d61644b83ae3d5}{Number\+Of\+Nodes}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Number of nodes in the power system. \end{DoxyCompactList}\item 
+int {\bfseries Number\+Of\+Generating\+Units}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_power_system_planning_1_1_power_system_ab4f682e8428fe860d1541b3f81a4a5d4}{}\label{class_power_system_planning_1_1_power_system_ab4f682e8428fe860d1541b3f81a4a5d4}
+
+\item 
+int {\bfseries Number\+Of\+Inelastic\+Loads}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_power_system_planning_1_1_power_system_a923796a156c2438a8a95bc34308732bc}{}\label{class_power_system_planning_1_1_power_system_a923796a156c2438a8a95bc34308732bc}
+
+\item 
+double \hyperlink{class_power_system_planning_1_1_power_system_ade5099d2eb198a61bf794e14ce4b3018}{Total\+M\+W\+Inelastic\+Loads}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Total MW of inelastic loads. \end{DoxyCompactList}\item 
+int {\bfseries Number\+Of\+Transmission\+Lines}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_power_system_planning_1_1_power_system_aec138fa5496014f03d2511d62f19ce1f}{}\label{class_power_system_planning_1_1_power_system_aec138fa5496014f03d2511d62f19ce1f}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents the technical and economic model of a Power System for the objectives of medium to long term planning. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!read\+From\+X\+M\+L\+File@{read\+From\+X\+M\+L\+File}}
+\index{read\+From\+X\+M\+L\+File@{read\+From\+X\+M\+L\+File}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{read\+From\+X\+M\+L\+File(\+Stream\+Reader xml\+Stream)}{readFromXMLFile(StreamReader xmlStream)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Power\+System} Power\+System\+Planning.\+Power\+System.\+read\+From\+X\+M\+L\+File (
+\begin{DoxyParamCaption}
+\item[{Stream\+Reader}]{xml\+Stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_power_system_planning_1_1_power_system_ad61746fe7b02b94761abec0f022d106a}{}\label{class_power_system_planning_1_1_power_system_ad61746fe7b02b94761abec0f022d106a}
+
+
+Creates a Power System by reading an X\+ML file, provided the stream. The provided stream must is not closed within this method. I\+O\+Exception and other exceptions are not managed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xml\+Stream} & Full file path of the X\+ML file where the power system was stored.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new power system object with the contents serialized in the X\+ML file.
+\end{DoxyReturn}
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!save\+To\+X\+M\+L\+File@{save\+To\+X\+M\+L\+File}}
+\index{save\+To\+X\+M\+L\+File@{save\+To\+X\+M\+L\+File}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{save\+To\+X\+M\+L\+File(\+Text\+Writer save\+Stream)}{saveToXMLFile(TextWriter saveStream)}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+System\+Planning.\+Power\+System.\+save\+To\+X\+M\+L\+File (
+\begin{DoxyParamCaption}
+\item[{Text\+Writer}]{save\+Stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_power_system_planning_1_1_power_system_a0f3c09d821634b02e79b54c82297e9f6}{}\label{class_power_system_planning_1_1_power_system_a0f3c09d821634b02e79b54c82297e9f6}
+
+
+Saves the current power sysem to an X\+ML file, provided the stream. The provided stream must is not closed within this method. I\+O\+Exception and other exceptions are not managed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em save\+Stream} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!generating\+Units@{generating\+Units}}
+\index{generating\+Units@{generating\+Units}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{generating\+Units}{generatingUnits}}]{\setlength{\rightskip}{0pt plus 5cm}Binding\+List$<${\bf Generating\+Unit}$>$ Power\+System\+Planning.\+Power\+System.\+generating\+Units}\hypertarget{class_power_system_planning_1_1_power_system_a899692153e8c860b54745c503f8af765}{}\label{class_power_system_planning_1_1_power_system_a899692153e8c860b54745c503f8af765}
+
+
+All Generating units in the power system. 
+
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!inelastic\+Loads@{inelastic\+Loads}}
+\index{inelastic\+Loads@{inelastic\+Loads}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{inelastic\+Loads}{inelasticLoads}}]{\setlength{\rightskip}{0pt plus 5cm}Binding\+List$<${\bf Inelastic\+Load}$>$ Power\+System\+Planning.\+Power\+System.\+inelastic\+Loads}\hypertarget{class_power_system_planning_1_1_power_system_a0445fbb84b2deb936cfc1b7b38d8f5ed}{}\label{class_power_system_planning_1_1_power_system_a0445fbb84b2deb936cfc1b7b38d8f5ed}
+
+
+All Inelastic loads in the power system. 
+
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!nodes@{nodes}}
+\index{nodes@{nodes}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{nodes}{nodes}}]{\setlength{\rightskip}{0pt plus 5cm}Binding\+List$<${\bf Node}$>$ Power\+System\+Planning.\+Power\+System.\+nodes}\hypertarget{class_power_system_planning_1_1_power_system_aa5709bbb488708bcb162646585f01c79}{}\label{class_power_system_planning_1_1_power_system_aa5709bbb488708bcb162646585f01c79}
+
+
+Nodes of the power system. 
+
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!transmission\+Lines@{transmission\+Lines}}
+\index{transmission\+Lines@{transmission\+Lines}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{transmission\+Lines}{transmissionLines}}]{\setlength{\rightskip}{0pt plus 5cm}Binding\+List$<${\bf Transmission\+Line}$>$ Power\+System\+Planning.\+Power\+System.\+transmission\+Lines}\hypertarget{class_power_system_planning_1_1_power_system_a1394f9c3a23efcc0cd93acb46611c102}{}\label{class_power_system_planning_1_1_power_system_a1394f9c3a23efcc0cd93acb46611c102}
+
+
+All Transmission lines in the power sytem. 
+
+
+
+\subsection{Property Documentation}
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!Name@{Name}}
+\index{Name@{Name}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{Name}{Name}}]{\setlength{\rightskip}{0pt plus 5cm}string Power\+System\+Planning.\+Power\+System.\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\hypertarget{class_power_system_planning_1_1_power_system_ae511d3a9d7c871726037041b9fdabe14}{}\label{class_power_system_planning_1_1_power_system_ae511d3a9d7c871726037041b9fdabe14}
+
+
+Name of the power system. 
+
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!Number\+Of\+Nodes@{Number\+Of\+Nodes}}
+\index{Number\+Of\+Nodes@{Number\+Of\+Nodes}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{Number\+Of\+Nodes}{NumberOfNodes}}]{\setlength{\rightskip}{0pt plus 5cm}int Power\+System\+Planning.\+Power\+System.\+Number\+Of\+Nodes\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_power_system_a3d7abefe87bb1621c5d61644b83ae3d5}{}\label{class_power_system_planning_1_1_power_system_a3d7abefe87bb1621c5d61644b83ae3d5}
+
+
+Number of nodes in the power system. 
+
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!Total\+M\+W\+Inelastic\+Loads@{Total\+M\+W\+Inelastic\+Loads}}
+\index{Total\+M\+W\+Inelastic\+Loads@{Total\+M\+W\+Inelastic\+Loads}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{Total\+M\+W\+Inelastic\+Loads}{TotalMWInelasticLoads}}]{\setlength{\rightskip}{0pt plus 5cm}double Power\+System\+Planning.\+Power\+System.\+Total\+M\+W\+Inelastic\+Loads\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_power_system_ade5099d2eb198a61bf794e14ce4b3018}{}\label{class_power_system_planning_1_1_power_system_ade5099d2eb198a61bf794e14ce4b3018}
+
+
+Total MW of inelastic loads. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Power\+System.\+cs\end{DoxyCompactItemize}

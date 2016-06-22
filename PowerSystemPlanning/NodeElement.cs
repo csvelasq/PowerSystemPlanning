@@ -11,7 +11,9 @@ namespace PowerSystemPlanning
     /// </summary>
     public abstract class NodeElement
     {
-        private int id;
+        private PowerSystem _PowerSystem;
+
+        private int _Id;
 
         /// <summary>
         /// ID of this element (unique within the given power system).
@@ -20,16 +22,16 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return id;
+                return _Id;
             }
 
             set
             {
-                id = value;
+                _Id = value;
             }
         }
 
-        private string name;
+        private string _Name;
 
         /// <summary>
         /// Name of this element (arbitrary string set by the user).
@@ -38,16 +40,14 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return name;
+                return _Name;
             }
 
             set
             {
-                name = value;
+                _Name = value;
             }
         }
-
-        private int connectionNodeId;
 
         /// <summary>
         /// ID of the node to which this element is connected
@@ -56,18 +56,54 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return connectionNodeId;
+                if (this.ConnectionNode != null)
+                    return ConnectionNode.Id;
+                else return -1;
             }
-
             set
             {
-                connectionNodeId = value;
+                if (this.ConnectionNode!=null)
+                {
+                    if (this.ConnectionNode.Id != value) this.ConnectionNode = _PowerSystem.nodes.SingleOrDefault(x=> x.Id==value);
+                }
+                else this.ConnectionNode = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
+            }
+        }
+
+        /// <summary>
+        /// Name of the node to which this element is connected
+        /// </summary>
+        public string ConnectionNodeName
+        {
+            get
+            {
+                if (this.ConnectionNode != null)
+                    return ConnectionNode.Name;
+                else return "";
+            }
+            set
+            {
+                if (this.ConnectionNode != null)
+                {
+                    if (this.ConnectionNode.Name != value) this.ConnectionNode = _PowerSystem.nodes.SingleOrDefault(x => x.Name == value);
+                }
+                else this.ConnectionNode = _PowerSystem.nodes.SingleOrDefault(x => x.Name == value);
             }
         }
 
         /// <summary>
         /// The node to which this element is connected.
         /// </summary>
-        public Node connectionNode;
+        public Node ConnectionNode;
+
+        /// <summary>
+        /// Empty constructor, not meant to be used but rather included only to allow serialization.
+        /// </summary>
+        public NodeElement() { }
+
+        public NodeElement(PowerSystem power_system)
+        {
+            this._PowerSystem = power_system;
+        }
     }
 }

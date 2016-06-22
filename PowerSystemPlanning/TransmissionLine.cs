@@ -8,7 +8,7 @@ namespace PowerSystemPlanning
 {
     public class TransmissionLine : TransmissionElement
     {
-        private double thermalCapacityMW;
+        private double _ThermalCapacityMW;
 
         /// <summary>
         /// Maximum thermal capacity of the transmission line, in MW.
@@ -17,14 +17,16 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return thermalCapacityMW;
+                return _ThermalCapacityMW;
             }
 
             set
             {
-                thermalCapacityMW = value;
+                _ThermalCapacityMW = value;
             }
         }
+
+        private double _ReactanceOhm;
 
         /// <summary>
         /// Series reactance of the transmission line, in ohms.
@@ -33,20 +35,22 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return reactanceOhm;
+                return _ReactanceOhm;
             }
 
             set
             {
-                reactanceOhm = value;
+                _ReactanceOhm = value;
             }
         }
 
-        private double reactanceOhm;
+        /// <summary>
+        /// Empty constructor, not meant to be used but rather included only to allow serialization.
+        /// </summary>
+        public TransmissionLine() : base() { }
 
-        public TransmissionLine()
+        public TransmissionLine(PowerSystem power_system) : base(power_system)
         {
-
         }
     }
 }

@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="PowerSystemPlanning.Node",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_power_system_planning_1_1_node.html",tooltip="A node in a given power system. A node is an element to which generators and loads are connected..."];
+}

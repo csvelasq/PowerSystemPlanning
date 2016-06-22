@@ -152,6 +152,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\InelasticLoadList.cs" />
     <Compile Include="Models\PowerSystemViewModel.cs" />
     <Compile Include="OPF\RunEconomicDispatch.xaml.cs">
       <DependentUpon>RunEconomicDispatch.xaml</DependentUpon>

@@ -17,10 +17,7 @@
         <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAsCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Close" Executed="CloseCommandBinding_Executed" />
     </Window.CommandBindings>
-    <!--<Window.InputBindings>
-        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding ApplicationCommands.Open}" />
-    </Window.InputBindings>-->
-    <Grid>
+    <Grid Background="{DynamicResource LightBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
@@ -73,9 +70,7 @@
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Grid.Row="1" VerticalAlignment="Center">
             <Label x:Name="label" Content="Power System Name:" HorizontalAlignment="Left"/>
-            <TextBox x:Name="tbPowerSystemName" Width="100" />
-            <Label x:Name="label2" Content="Number of nodes:" HorizontalAlignment="Left"/>
-            <xctk:IntegerUpDown x:Name="numNodes" Width="80" ValueChanged="numNodes_ValueChanged" />
+            <TextBox x:Name="tbPowerSystemName" Width="200" Text="{Binding Path=powerSystemName}" />
         </DockPanel>
         <Grid Margin="0,0,0,0" Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -86,7 +81,7 @@
             </Grid.ColumnDefinitions>
             <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Stretch" Margin="0,0,-0.001,0" />
             <GroupBox x:Name="groupBox" Header="Nodes" Grid.ColumnSpan="2">
-                <DataGrid x:Name="dgNodes" Margin="4,10,4,4" AutoGenerateColumns="False">
+                <DataGrid x:Name="dgNodes" ItemsSource="{Binding}" Margin="4,10,4,4" AutoGenerateColumns="False">
                     <DataGrid.AlternatingRowBackground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                     </DataGrid.AlternatingRowBackground>
@@ -110,21 +105,22 @@
                     </Grid.ColumnDefinitions>
                     <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
                     <GroupBox x:Name="groupBox1" Header="Generators" Margin="1.19,5,0,0">
-                        <DataGrid x:Name="dgGenerators" Margin="-1,10,4,4" AutoGenerateColumns="False">
+                        <DataGrid x:Name="dgGenerators" ItemsSource="{Binding}" Margin="-1,10,4,4" AutoGenerateColumns="False">
                             <DataGrid.AlternatingRowBackground>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
                             <DataGrid.Columns>
                                 <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                                <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeId}" />
+                                <DataGridTextColumn Header="Connection Node ID" Binding="{Binding ConnectionNodeId}" />
+                                <!--<DataGridTextColumn Header="Connection Node Name" Binding="{Binding ConnectionNodeName}" />-->
                                 <DataGridTextColumn Header="Installed Capacity (MW)" Binding="{Binding InstalledCapacityMW}" />
                                 <DataGridTextColumn Header="Marginal Cost" Binding="{Binding MarginalCost}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
                     <GroupBox x:Name="groupBox2" Grid.Column="2" Header="Consumers" Margin="1.785,4,0,0">
-                        <DataGrid x:Name="dgConsumers" Margin="0.999,10,4,4" AutoGenerateColumns="False">
+                        <DataGrid x:Name="dgConsumers" ItemsSource="{Binding}" Margin="0.999,10,4,4" AutoGenerateColumns="False">
                             <DataGrid.AlternatingRowBackground>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
@@ -132,6 +128,7 @@
                                 <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                                 <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeId}" />
+                                <!--<DataGridTextColumn Header="Connection Node Name" Binding="{Binding ConnectionNodeName}" />-->
                                 <DataGridTextColumn Header="Consumption (MW)" Binding="{Binding ConsumptionMW}" />
                             </DataGrid.Columns>
                         </DataGrid>
@@ -139,15 +136,17 @@
                 </Grid>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
                 <GroupBox x:Name="groupBox3" Header="Transmission Lines" Margin="0.19,-0.385,0,0" Grid.Row="2">
-                    <DataGrid x:Name="dgTransmissionLines" Margin="0,10,4,4" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" Margin="0,10,4,4" AutoGenerateColumns="False">
                         <DataGrid.AlternatingRowBackground>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                         </DataGrid.AlternatingRowBackground>
                         <DataGrid.Columns>
                             <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="From Node" Binding="{Binding NodeToID}" />
-                            <DataGridTextColumn Header="To Node" Binding="{Binding NodeFromID}" />
+                            <DataGridTextColumn Header="From Node ID" Binding="{Binding NodeFromID}" />
+                            <!--<DataGridTextColumn Header="From Node Name" Binding="{Binding NodeFromName}" />-->
+                            <DataGridTextColumn Header="To Node ID" Binding="{Binding NodeToID}" />
+                            <!--<DataGridTextColumn Header="To Node Name" Binding="{Binding NodeToName}" />-->
                             <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacityMW}" />
                             <DataGridTextColumn Header="Reactance (ohm)" Binding="{Binding ReactanceOhm}" />
                         </DataGrid.Columns>

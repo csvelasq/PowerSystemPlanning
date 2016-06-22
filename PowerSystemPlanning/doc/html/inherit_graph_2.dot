@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="PowerSystemPlanning.Power\lSystem",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_power_system_planning_1_1_power_system.html",tooltip="Represents the technical and economic model of a Power System for the objectives of medium to long te..."];
+}

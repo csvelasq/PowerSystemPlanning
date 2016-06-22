@@ -11,7 +11,7 @@ namespace PowerSystemPlanning
     /// </summary>
     public class InelasticLoad : NodeElement
     {
-        private double consumptionMW;
+        private double _ConsumptionMW;
 
         /// <summary>
         /// Consumption of the load (in MW).
@@ -20,18 +20,22 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return consumptionMW;
+                return _ConsumptionMW;
             }
 
             set
             {
-                consumptionMW = value;
+                _ConsumptionMW = value;
             }
         }
+        
+        /// <summary>
+        /// Empty constructor, not meant to be used but rather included only to allow serialization.
+        /// </summary>
+        public InelasticLoad() : base() { }
 
-        public InelasticLoad()
+        public InelasticLoad(PowerSystem power_system) : base(power_system)
         {
-
         }
     }
 }

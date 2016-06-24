@@ -15,6 +15,11 @@ namespace PowerSystemPlanning
     /// </summary>
     public class PowerSystem
     {
+        // TODO Linear DC OPF
+        // TODO Linear DC OPF LDC
+        // TODO Linear DC OPF LDC with generation and transmission binary parameters
+
+
         private string name;
 
         /// <summary>

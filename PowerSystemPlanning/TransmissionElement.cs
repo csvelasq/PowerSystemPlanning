@@ -80,10 +80,12 @@ namespace PowerSystemPlanning
             }
             set
             {
-                if (this.NodeTo != null && this.NodeTo.Id != value)
+                if (this.NodeTo != null)
                 {
-                    this.NodeTo = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
+                    if (this.NodeTo.Id != value)
+                        this.NodeTo = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
                 }
+                else this.NodeTo = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
             }
         }
 

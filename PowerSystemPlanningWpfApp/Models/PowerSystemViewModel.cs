@@ -1,4 +1,6 @@
-﻿using PowerSystemPlanning;
+﻿using NLog;
+using PowerSystemPlanning;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +13,18 @@ namespace PowerSystemPlanningWpfApp.Models
 {
     public class PowerSystemViewModel
     {
+        // TODO Pegar desde excel
+        // TODO Copy to excel including headers
+        // TODO Configuracion del programa
+        // TODO Memoria de archivos abiertos recientemente
+        // TODO Validacion de entradas en datagrid
+        // TODO Logger to UI
+
+        /// <summary>
+        /// NLog Logger for this class.
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private PowerSystem _PowerSystem;
         public BindingList<Node> nodes;
         public BindingList<GeneratingUnit> generatingUnits;
@@ -31,11 +45,21 @@ namespace PowerSystemPlanningWpfApp.Models
         public string full_fileName;
         public bool isSaved { get { return File.Exists(this.full_fileName); } }
 
+        public DelegateCommand RunLDC { get; private set; }
+
         public PowerSystemViewModel()
         {
             this._PowerSystem = new PowerSystem("Unnamed Power System");
             this.bindToPowerSystem();
+            this.RunLDC = new DelegateCommand(OnSubmit, CanSubmit);
         }
+
+        private void OnSubmit()
+        {
+            ControlUtils.DatagridTest dgtest = new ControlUtils.DatagridTest();
+            dgtest.Show();
+        }
+        private bool CanSubmit() { return true; }
 
         public PowerSystemViewModel(PowerSystem pws)
         {
@@ -72,6 +96,7 @@ namespace PowerSystemPlanningWpfApp.Models
                 // Save document
                 this._PowerSystem.saveToXMLFile(myStream);
             }
+            logger.Info("Current power system (named '{0}') saved in {1}.", this.powerSystemName, this.full_fileName);
         }
 
         public void loadModel(string fileName)
@@ -82,6 +107,7 @@ namespace PowerSystemPlanningWpfApp.Models
                 this.full_fileName = fileName;
             }
             this.bindToPowerSystem();
+            logger.Info("Current power system (named '{0}') loaded from {1}.", this.powerSystemName, this.full_fileName);
         }
     }
 }

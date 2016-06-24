@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['transmissionelement',['TransmissionElement',['../class_power_system_planning_1_1_transmission_element.html',1,'PowerSystemPlanning']]],
-  ['transmissionline',['TransmissionLine',['../class_power_system_planning_1_1_transmission_line.html',1,'PowerSystemPlanning']]]
+  ['opfmodel',['OPFModel',['../class_power_system_planning_1_1_o_p_f_1_1_o_p_f_model.html',1,'PowerSystemPlanning::OPF']]]
 ];

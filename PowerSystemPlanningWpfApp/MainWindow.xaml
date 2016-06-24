@@ -17,7 +17,7 @@
         <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAsCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Close" Executed="CloseCommandBinding_Executed" />
     </Window.CommandBindings>
-    <Grid Background="{DynamicResource LightBrush}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
@@ -55,7 +55,7 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Models">
-                    <MenuItem Header="_Load Duration Curve (LDC) Model" />
+                    <MenuItem Header="_Load Duration Curve (LDC) Model" Command="{Binding Path=RunLDC}" />
                     <MenuItem Header="_LDC for Static TEP" />
                     <MenuItem Header="_LDC for TEP under Scenarios" />
                     <!--<MenuItem Header="_Show groups" IsCheckable="True" IsChecked="True" />-->

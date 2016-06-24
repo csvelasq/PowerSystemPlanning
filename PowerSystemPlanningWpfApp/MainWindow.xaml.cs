@@ -16,15 +16,26 @@ using PowerSystemPlanning;
 using System.Collections.ObjectModel;
 using PowerSystemPlanningWpfApp.Models;
 using System.IO;
+using NLog;
 
 namespace PowerSystemPlanningWpfApp
 {
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        // TODO Avalondock for logging and other windows
+        // TODO fix expander http://stackoverflow.com/questions/19516904/wpf-expander-with-gridsplitter
+
+        /// <summary>
+        /// NLog Logger for this class.
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// Viewmodel of this application.
+        /// </summary>
         PowerSystemViewModel backend;
 
         public MainWindow()
@@ -33,14 +44,13 @@ namespace PowerSystemPlanningWpfApp
             InitializeComponent();
             this.backend = new PowerSystemViewModel();
             this.setDataContext();
+            this.RecentFileList.MenuClick += (s, e) => OpenModelFile(e.Filepath);
         }
-
-        /// <summary>
-        /// Sets the DataContext of datagrids and other UI components to corresponding objects in the backend.
-        /// This method is called when starting and also when opening a file.
-        /// </summary>
+        
         private void setDataContext()
         {
+            // Sets the DataContext of datagrids and other UI components to corresponding objects in the backend.
+            // This method is called when starting and also when opening a file.
             this.DataContext = backend;
             this.dgNodes.DataContext = this.backend.nodes;
             this.dgGenerators.DataContext = this.backend.generatingUnits;
@@ -65,17 +75,34 @@ namespace PowerSystemPlanningWpfApp
             // Get the selected file name and display in a TextBox 
             if (result == true)
             {
-                this.backend.loadModel(dlg.FileName);
-                this.setDataContext();
+                this.OpenModelFile(dlg.FileName);
             }
         }
 
-        private void SaveModel()
+        private void OpenModelFile(string filename)
+        {
+            try
+            {
+                this.backend.loadModel(filename);
+                this.setDataContext();
+                this.RecentFileList.InsertFile(filename);
+            }
+            catch (Exception e)
+            {
+                // TODO Move this to backend, find out how to show a messagebox from the backend
+                string msgBoxTitle = "Error opening file";
+                string msgBoxMsg = String.Format("An error occurred while opening file '{0}'.\nException: {1}", filename, e.Message);
+                MainWindow.logger.Error(msgBoxMsg);
+                MessageBox.Show(this, msgBoxMsg, msgBoxTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (!backend.isSaved)
             {
                 Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                dlg.FileName = "Document"; // Default file name
+                dlg.FileName = backend.powerSystemName; // Default file name
                 dlg.DefaultExt = ".xml"; // Default file extension
                 dlg.Filter = "XML file (.xml)|*.xml"; // Filter files by extension
                                                       // Show save file dialog box
@@ -89,15 +116,10 @@ namespace PowerSystemPlanningWpfApp
             else this.backend.saveModel();
         }
 
-        private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.SaveModel();
-        }
-
         private void SaveAsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "Document"; // Default file name
+            dlg.FileName = backend.powerSystemName; // Default file name
             dlg.DefaultExt = ".xml"; // Default file extension
             dlg.Filter = "XML file (.xml)|*.xml"; // Filter files by extension
             // Show save file dialog box
@@ -124,7 +146,7 @@ namespace PowerSystemPlanningWpfApp
                 case MessageBoxResult.Yes:
                     // User pressed Yes button: save and then close
                     Application.Current.Shutdown();
-                    this.SaveModel();
+                    backend.saveModel();
                     break;
                 case MessageBoxResult.No:
                     // User pressed No button: close immediately
@@ -134,6 +156,31 @@ namespace PowerSystemPlanningWpfApp
                     // User pressed Cancel button: do not close nor save
                     break;
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Configures the richtextbox target for showing log
+            Dispatcher.Invoke(() =>
+            {
+                var target = new Helper.WpfRichTextBoxTarget
+                {
+                    Name = "RichText",
+                    Layout =
+                        "[${longdate:useUTC=false}] :: [${level:uppercase=true}] :: ${logger}:${callsite} :: ${message} ${exception:innerFormat=tostring:maxInnerExceptionLevel=10:separator=,:format=tostring}",
+                    ControlName = LogRichTextBox.Name,
+                    FormName = GetType().Name,
+                    AutoScroll = true,
+                    MaxLines = 100000,
+                    UseDefaultRowColoringRules = true,
+                };
+                var asyncWrapper = new NLog.Targets.Wrappers.AsyncTargetWrapper { Name = "RichTextAsync", WrappedTarget = target };
+
+                LogManager.Configuration.AddTarget(asyncWrapper.Name, asyncWrapper);
+                LogManager.Configuration.LoggingRules.Insert(0, new NLog.Config.LoggingRule("*", NLog.LogLevel.Info, asyncWrapper));
+                LogManager.ReconfigExistingLoggers();
+
+            });
         }
     }
 }

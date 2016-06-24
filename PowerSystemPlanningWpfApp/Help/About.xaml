@@ -1,0 +1,16 @@
+﻿<Window x:Class="PowerSystemPlanningWpfApp.Help.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Help"
+        mc:Ignorable="d"
+        Title="About Power System Planning" Height="215.414" Width="346.241">
+    <StackPanel>
+        <TextBlock TextWrapping="WrapWithOverflow" Padding="5,10,5,10">
+            Software to model and solve power system planning optimization problems.<LineBreak />
+            No user manual is currently available.<LineBreak />
+            <Hyperlink NavigateUri="https://github.com/csvelasq/PowerSystemPlanning" RequestNavigate="Hyperlink_RequestNavigate">GitHub website of the project</Hyperlink>
+        </TextBlock>
+    </StackPanel>
+</Window>

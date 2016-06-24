@@ -13,12 +13,9 @@ namespace PowerSystemPlanningWpfApp.Models
 {
     public class PowerSystemViewModel
     {
-        // TODO Pegar desde excel
         // TODO Copy to excel including headers
-        // TODO Configuracion del programa
-        // TODO Memoria de archivos abiertos recientemente
-        // TODO Validacion de entradas en datagrid
-        // TODO Logger to UI
+        // TODO Datagrid validation
+        // TODO Program Configuration
 
         /// <summary>
         /// NLog Logger for this class.
@@ -45,26 +42,47 @@ namespace PowerSystemPlanningWpfApp.Models
         public string full_fileName;
         public bool isSaved { get { return File.Exists(this.full_fileName); } }
 
+        #region DelegateCommands
+        // TODO separate these delegates to another class?
+        /// <summary>
+        /// Shows the window for running the LDC OPF model.
+        /// </summary>
         public DelegateCommand RunLDC { get; private set; }
+        private void OnSubmitRunLDC()
+        {
+            ControlUtils.WindowDatagridTest dgtest = new ControlUtils.WindowDatagridTest();
+            dgtest.Show();
+        }
+        private bool CanSubmitRunLDC() { return true; }
+        /// <summary>
+        /// Shows the about window of this application.
+        /// </summary>
+        public DelegateCommand ShowAboutWindow { get; private set; }
+        private void OnSubmitShowAboutWindow()
+        {
+            Help.About about = new Help.About();
+            about.Show();
+        }
+        private bool CanSubmitShowAboutWindow() { return true; }
+        /// <summary>
+        /// Shows the window to run an Optimal Power Flow.
+        /// </summary>
+        public DelegateCommand ShowOPFWindow { get; private set; }
+        private void OnSubmitShowOPFWindow()
+        {
+            OPF.RunOPFWindow runOPFWindow = new OPF.RunOPFWindow();
+            runOPFWindow.Show();
+        }
+        private bool CanSubmitShowOPFWindow() { return true; }
+        #endregion
 
         public PowerSystemViewModel()
         {
             this._PowerSystem = new PowerSystem("Unnamed Power System");
             this.bindToPowerSystem();
-            this.RunLDC = new DelegateCommand(OnSubmit, CanSubmit);
-        }
-
-        private void OnSubmit()
-        {
-            ControlUtils.DatagridTest dgtest = new ControlUtils.DatagridTest();
-            dgtest.Show();
-        }
-        private bool CanSubmit() { return true; }
-
-        public PowerSystemViewModel(PowerSystem pws)
-        {
-            this._PowerSystem = pws;
-            this.bindToPowerSystem();
+            this.RunLDC = new DelegateCommand(OnSubmitRunLDC, CanSubmitRunLDC);
+            this.ShowAboutWindow = new DelegateCommand(OnSubmitShowAboutWindow, CanSubmitShowAboutWindow);
+            this.ShowOPFWindow = new DelegateCommand(OnSubmitShowOPFWindow, CanSubmitShowOPFWindow);
         }
 
         /// <summary>
@@ -83,12 +101,21 @@ namespace PowerSystemPlanningWpfApp.Models
             this.transmissionLines.AddingNew += (sender, e) => { e.NewObject = new TransmissionLine(this._PowerSystem); };
         }
 
+        /// <summary>
+        /// Saves the power system model to the given location.
+        /// </summary>
+        /// <param name="fileName">The XML filename (path included) to which the model is saved.</param>
         public void saveModel(string fileName)
         {
             this.full_fileName = fileName;
             this.saveModel();
         }
 
+        /// <summary>
+        /// Saves the power system model to the previously set location (in 'this.full_fileName').
+        /// The location is set when a call to saveModel(string) is made.
+        /// This overload should not be called if fileName has not been properly set.
+        /// </summary>
         public void saveModel()
         {
             using (TextWriter myStream = new StreamWriter(this.full_fileName))
@@ -99,6 +126,10 @@ namespace PowerSystemPlanningWpfApp.Models
             logger.Info("Current power system (named '{0}') saved in {1}.", this.powerSystemName, this.full_fileName);
         }
 
+        /// <summary>
+        /// Loads a power system model from the given XML file.
+        /// </summary>
+        /// <param name="fileName">The filename (path included) of the XML file with the serialized power system.</param>
         public void loadModel(string fileName)
         {
             using (StreamReader file = new System.IO.StreamReader(fileName))

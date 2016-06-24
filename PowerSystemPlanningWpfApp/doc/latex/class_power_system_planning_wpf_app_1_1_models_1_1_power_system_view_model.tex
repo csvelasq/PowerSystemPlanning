@@ -1,0 +1,119 @@
+\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model}{}\section{Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model Class Reference}
+\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model}\index{Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_abda279482100378e9dba53ad4f741c1c}{save\+Model} (string file\+Name)
+\begin{DoxyCompactList}\small\item\em Saves the power system model to the given location. \end{DoxyCompactList}\item 
+void \hyperlink{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_addc9f5e96c8838056a1abe5d619b9d7e}{save\+Model} ()
+\begin{DoxyCompactList}\small\item\em Saves the power system model to the previously set location (in \textquotesingle{}this.\+full\+\_\+file\+Name\textquotesingle{}). The location is set when a call to \hyperlink{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_abda279482100378e9dba53ad4f741c1c}{save\+Model(string)} is made. This overload should not be called if file\+Name has not been properly set. \end{DoxyCompactList}\item 
+void \hyperlink{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_aa64bb0e541cc576eb77355958376915e}{load\+Model} (string file\+Name)
+\begin{DoxyCompactList}\small\item\em Loads a power system model from the given X\+ML file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Binding\+List$<$ Node $>$ {\bfseries nodes}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_ac88273023ca52cea359b2b425e113244}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_ac88273023ca52cea359b2b425e113244}
+
+\item 
+Binding\+List$<$ Generating\+Unit $>$ {\bfseries generating\+Units}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a447554a98320dfefc26cc3c772dc92d2}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a447554a98320dfefc26cc3c772dc92d2}
+
+\item 
+Binding\+List$<$ Inelastic\+Load $>$ {\bfseries inelastic\+Loads}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_aa8e11c0e4d35a00d4bdcf4c5c84d02db}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_aa8e11c0e4d35a00d4bdcf4c5c84d02db}
+
+\item 
+Binding\+List$<$ Transmission\+Line $>$ {\bfseries transmission\+Lines}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a00c6666eafdaaac0a83cfefb81ae1ee4}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a00c6666eafdaaac0a83cfefb81ae1ee4}
+
+\item 
+string {\bfseries full\+\_\+file\+Name}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_af0713680b0205a80cb143c7be9e65e8d}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_af0713680b0205a80cb143c7be9e65e8d}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string {\bfseries power\+System\+Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a92f80f60ede4570a75be00afcb80fad0}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a92f80f60ede4570a75be00afcb80fad0}
+
+\item 
+bool {\bfseries is\+Saved}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a0c12e1a579772829f5d338323ed3fd8e}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a0c12e1a579772829f5d338323ed3fd8e}
+
+\item 
+Delegate\+Command \hyperlink{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a823b557451c5d1919795bd7f66cae55f}{Run\+L\+DC}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Shows the window for running the L\+DC \hyperlink{namespace_power_system_planning_wpf_app_1_1_o_p_f}{O\+PF} model. \end{DoxyCompactList}\item 
+Delegate\+Command \hyperlink{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a18f9d1046adb9bfd67bcdc5c07cfcc2b}{Show\+About\+Window}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Shows the about window of this application. \end{DoxyCompactList}\item 
+Delegate\+Command \hyperlink{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a1a0b9565c51f953742c9ce376eaa1f88}{Show\+O\+P\+F\+Window}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Shows the window to run an Optimal Power Flow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}!load\+Model@{load\+Model}}
+\index{load\+Model@{load\+Model}!Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}}
+\subsubsection[{\texorpdfstring{load\+Model(string file\+Name)}{loadModel(string fileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model.\+load\+Model (
+\begin{DoxyParamCaption}
+\item[{string}]{file\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_aa64bb0e541cc576eb77355958376915e}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_aa64bb0e541cc576eb77355958376915e}
+
+
+Loads a power system model from the given X\+ML file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & The filename (path included) of the X\+ML file with the serialized power system.\\
+\hline
+\end{DoxyParams}
+\index{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}!save\+Model@{save\+Model}}
+\index{save\+Model@{save\+Model}!Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}}
+\subsubsection[{\texorpdfstring{save\+Model(string file\+Name)}{saveModel(string fileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model.\+save\+Model (
+\begin{DoxyParamCaption}
+\item[{string}]{file\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_abda279482100378e9dba53ad4f741c1c}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_abda279482100378e9dba53ad4f741c1c}
+
+
+Saves the power system model to the given location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & The X\+ML filename (path included) to which the model is saved.\\
+\hline
+\end{DoxyParams}
+\index{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}!save\+Model@{save\+Model}}
+\index{save\+Model@{save\+Model}!Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}}
+\subsubsection[{\texorpdfstring{save\+Model()}{saveModel()}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model.\+save\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_addc9f5e96c8838056a1abe5d619b9d7e}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_addc9f5e96c8838056a1abe5d619b9d7e}
+
+
+Saves the power system model to the previously set location (in \textquotesingle{}this.\+full\+\_\+file\+Name\textquotesingle{}). The location is set when a call to \hyperlink{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_abda279482100378e9dba53ad4f741c1c}{save\+Model(string)} is made. This overload should not be called if file\+Name has not been properly set. 
+
+
+
+\subsection{Property Documentation}
+\index{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}!Run\+L\+DC@{Run\+L\+DC}}
+\index{Run\+L\+DC@{Run\+L\+DC}!Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}}
+\subsubsection[{\texorpdfstring{Run\+L\+DC}{RunLDC}}]{\setlength{\rightskip}{0pt plus 5cm}Delegate\+Command Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model.\+Run\+L\+DC\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a823b557451c5d1919795bd7f66cae55f}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a823b557451c5d1919795bd7f66cae55f}
+
+
+Shows the window for running the L\+DC \hyperlink{namespace_power_system_planning_wpf_app_1_1_o_p_f}{O\+PF} model. 
+
+\index{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}!Show\+About\+Window@{Show\+About\+Window}}
+\index{Show\+About\+Window@{Show\+About\+Window}!Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}}
+\subsubsection[{\texorpdfstring{Show\+About\+Window}{ShowAboutWindow}}]{\setlength{\rightskip}{0pt plus 5cm}Delegate\+Command Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model.\+Show\+About\+Window\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a18f9d1046adb9bfd67bcdc5c07cfcc2b}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a18f9d1046adb9bfd67bcdc5c07cfcc2b}
+
+
+Shows the about window of this application. 
+
+\index{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}!Show\+O\+P\+F\+Window@{Show\+O\+P\+F\+Window}}
+\index{Show\+O\+P\+F\+Window@{Show\+O\+P\+F\+Window}!Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model@{Power\+System\+Planning\+Wpf\+App\+::\+Models\+::\+Power\+System\+View\+Model}}
+\subsubsection[{\texorpdfstring{Show\+O\+P\+F\+Window}{ShowOPFWindow}}]{\setlength{\rightskip}{0pt plus 5cm}Delegate\+Command Power\+System\+Planning\+Wpf\+App.\+Models.\+Power\+System\+View\+Model.\+Show\+O\+P\+F\+Window\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a1a0b9565c51f953742c9ce376eaa1f88}{}\label{class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model_a1a0b9565c51f953742c9ce376eaa1f88}
+
+
+Shows the window to run an Optimal Power Flow. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Models/Power\+System\+View\+Model.\+cs\end{DoxyCompactItemize}

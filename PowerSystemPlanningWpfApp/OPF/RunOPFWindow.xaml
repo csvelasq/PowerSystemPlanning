@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.OPF"
         mc:Ignorable="d"
-        Title="Run Optimal Power Flow" Height="300" Width="300">
+        Title="Run Optimal Power Flow" Height="395.865" Width="649.624">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -15,7 +15,19 @@
         <Button x:Name="btnRunOPF" Content="Run Optimal Power Flow" Grid.Row="0" Width="140" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2.5" Click="btnRunOPF_Click" />
         <Label Content="Total Generation Cost:" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
         <TextBox x:Name="tbTotalCost" Grid.Row="1" Width="75" Height="25" Margin="131.67,0,0,0" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right" />
-        <ListView x:Name="lvPowerGenerated" Grid.Row="2" Margin="0,30,0,10" />
-        <Label Content="Power generated:" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Power generated:" Grid.Column="0">
+                <ListView x:Name="lvPowerGenerated" />
+            </GroupBox>
+            <GridSplitter Grid.Column="1" Width="5" />
+            <GroupBox Header="Power flow in branches:" Grid.Column="2">
+                <ListView x:Name="lvPowerFlow" />
+            </GroupBox>
+        </Grid>
     </Grid>
 </Window>

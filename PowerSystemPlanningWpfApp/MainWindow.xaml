@@ -9,7 +9,7 @@
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
-        Title="Power System Planning" Height="497.27" Width="778.621" WindowState="Maximized">
+        Title="Power System Planning" Height="497.27" Width="778.621" WindowState="Maximized" Loaded="Window_Loaded">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="NewCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommandBinding_Executed" />
@@ -22,7 +22,8 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="300*" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Menu DockPanel.Dock="Left" Background="White">
@@ -47,7 +48,8 @@
                             <Image Source="pack://application:,,,/Resources/SaveAs_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <Separator />
+                    <localUtils:RecentFileList x:Name="RecentFileList" />
+                    <!--<Separator />-->
                     <MenuItem x:Name="menubtnExit" Header="_Exit" Command="ApplicationCommands.Close">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/CloseSolution_16x.png" />
@@ -56,21 +58,27 @@
                 </MenuItem>
                 <MenuItem Header="_Models">
                     <MenuItem Header="_Load Duration Curve (LDC) Model" Command="{Binding Path=RunLDC}" />
-                    <MenuItem Header="_LDC for Static TEP" />
-                    <MenuItem Header="_LDC for TEP under Scenarios" />
+                    <MenuItem Header="_LDC for Static TEP" IsEnabled="False" />
+                    <MenuItem Header="_LDC for TEP under Scenarios" IsEnabled="False" />
                     <!--<MenuItem Header="_Show groups" IsCheckable="True" IsChecked="True" />-->
                 </MenuItem>
                 <MenuItem Header="_Optimization">
-                    <MenuItem Header="_Economic Dispatch" />
-                    <MenuItem Header="_Optimal Power Flow" />
-                    <MenuItem Header="_Two-stage stochastic TEP" />
-                    <MenuItem Header="_Minimax regret TEP" />
+                    <MenuItem Header="_Optimal Power Flow" Command="{Binding Path=ShowOPFWindow}" />
+                    <MenuItem Header="_Two-stage stochastic TEP" IsEnabled="False" />
+                    <MenuItem Header="_Minimax regret TEP" IsEnabled="False" />
+                </MenuItem>
+                <MenuItem Header="Configuration">
+                    <MenuItem Header="_Configuration" IsEnabled="False" />
+                    <MenuItem Header="_Settings" IsEnabled="False" />
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="_About" Command="{Binding Path=ShowAboutWindow}" />
                 </MenuItem>
             </Menu>
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Grid.Row="1" VerticalAlignment="Center">
             <Label x:Name="label" Content="Power System Name:" HorizontalAlignment="Left"/>
-            <TextBox x:Name="tbPowerSystemName" Width="200" Text="{Binding Path=powerSystemName}" />
+            <TextBox x:Name="tbPowerSystemName" Width="200" Padding="0" Text="{Binding Path=powerSystemName}" />
         </DockPanel>
         <Grid Margin="0,0,0,0" Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -154,8 +162,17 @@
                 </GroupBox>
             </Grid>
         </Grid>
-        <GroupBox Header="Output" Grid.Row="3">
-            <localUtils:SimpleTerminal />
-        </GroupBox>
+        <GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" />
+        <Expander Name="logExpander"  Header="Log" Grid.Row="4" IsExpanded="True" ExpandDirection="Down">
+            <ScrollViewer>
+                <RichTextBox x:Name="LogRichTextBox" />
+            </ScrollViewer>
+        </Expander>
+        <!--<GroupBox Header="Log" Grid.Row="3">
+            --><!--<localUtils:SimpleTerminal />--><!--
+            <ScrollViewer>
+                <RichTextBox x:Name="LogRichTextBox" />
+            </ScrollViewer>
+        </GroupBox>-->
     </Grid>
 </Window>

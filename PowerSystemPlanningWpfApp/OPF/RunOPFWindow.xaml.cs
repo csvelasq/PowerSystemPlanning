@@ -1,5 +1,5 @@
 ﻿using PowerSystemPlanning;
-using PowerSystemPlanning.OPF;
+using PowerSystemPlanning.Solvers.OPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;

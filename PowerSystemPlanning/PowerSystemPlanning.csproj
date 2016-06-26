@@ -56,12 +56,13 @@
     <Compile Include="InelasticLoad.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="NodeElement.cs" />
-    <Compile Include="OPF\EconomicDispatch.cs" />
-    <Compile Include="OPF\OPFModel.cs" />
+    <Compile Include="Solvers\OPF\OPFModel.cs" />
     <Compile Include="PlanningModels\GeneratingUnitCandidate.cs" />
     <Compile Include="PlanningModels\TransmissionLineCandidate.cs" />
     <Compile Include="PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solvers\IPowerSystemSolver.cs" />
+    <Compile Include="Solvers\PowerSystemSolveResults.cs" />
     <Compile Include="TransmissionElement.cs" />
     <Compile Include="TransmissionLine.cs" />
   </ItemGroup>

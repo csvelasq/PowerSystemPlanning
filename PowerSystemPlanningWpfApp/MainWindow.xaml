@@ -89,7 +89,7 @@
             </Grid.ColumnDefinitions>
             <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Stretch" Margin="0,0,-0.001,0" />
             <GroupBox x:Name="groupBox" Header="Nodes" Grid.ColumnSpan="2">
-                <DataGrid x:Name="dgNodes" ItemsSource="{Binding}" Margin="4,10,4,4" AutoGenerateColumns="False">
+                <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding}" Margin="4,10,4,4" AutoGenerateColumns="False">
                     <DataGrid.AlternatingRowBackground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                     </DataGrid.AlternatingRowBackground>
@@ -97,7 +97,7 @@
                         <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                     </DataGrid.Columns>
-                </DataGrid>
+                </localUtils:CustomDataGrid>
             </GroupBox>
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
@@ -113,7 +113,7 @@
                     </Grid.ColumnDefinitions>
                     <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
                     <GroupBox x:Name="groupBox1" Header="Generators" Margin="1.19,5,0,0">
-                        <DataGrid x:Name="dgGenerators" ItemsSource="{Binding}" Margin="-1,10,4,4" AutoGenerateColumns="False">
+                        <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding}" Margin="-1,10,4,4" AutoGenerateColumns="False">
                             <DataGrid.AlternatingRowBackground>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
@@ -125,10 +125,10 @@
                                 <DataGridTextColumn Header="Installed Capacity (MW)" Binding="{Binding InstalledCapacityMW}" />
                                 <DataGridTextColumn Header="Marginal Cost" Binding="{Binding MarginalCost}" />
                             </DataGrid.Columns>
-                        </DataGrid>
+                        </localUtils:CustomDataGrid>
                     </GroupBox>
                     <GroupBox x:Name="groupBox2" Grid.Column="2" Header="Consumers" Margin="1.785,4,0,0">
-                        <DataGrid x:Name="dgConsumers" ItemsSource="{Binding}" Margin="0.999,10,4,4" AutoGenerateColumns="False">
+                        <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding}" Margin="0.999,10,4,4" AutoGenerateColumns="False">
                             <DataGrid.AlternatingRowBackground>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
@@ -139,12 +139,12 @@
                                 <!--<DataGridTextColumn Header="Connection Node Name" Binding="{Binding ConnectionNodeName}" />-->
                                 <DataGridTextColumn Header="Consumption (MW)" Binding="{Binding ConsumptionMW}" />
                             </DataGrid.Columns>
-                        </DataGrid>
+                        </localUtils:CustomDataGrid>
                     </GroupBox>
                 </Grid>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
                 <GroupBox x:Name="groupBox3" Header="Transmission Lines" Margin="0.19,-0.385,0,0" Grid.Row="2">
-                    <DataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" Margin="0,10,4,4" AutoGenerateColumns="False">
+                    <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" Margin="0,10,4,4" AutoGenerateColumns="False">
                         <DataGrid.AlternatingRowBackground>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                         </DataGrid.AlternatingRowBackground>
@@ -158,7 +158,7 @@
                             <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacityMW}" />
                             <DataGridTextColumn Header="Reactance (ohm)" Binding="{Binding ReactanceOhm}" />
                         </DataGrid.Columns>
-                    </DataGrid>
+                    </localUtils:CustomDataGrid>
                 </GroupBox>
             </Grid>
         </Grid>

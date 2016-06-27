@@ -1,11 +1,12 @@
 var indexSectionsWithContent =
 {
-  0: "cegimnoprst",
-  1: "eginopt",
+  0: "cdegimnoprstv",
+  1: "ginopt",
   2: "p",
-  3: "ginrst",
+  3: "dginorst",
   4: "cgint",
-  5: "cimnprt"
+  5: "ps",
+  6: "cegimnoprstv"
 };
 
 var indexSectionNames =
@@ -15,7 +16,8 @@ var indexSectionNames =
   2: "namespaces",
   3: "functions",
   4: "variables",
-  5: "properties"
+  5: "enums",
+  6: "properties"
 };
 
 var indexSectionLabels =
@@ -25,6 +27,7 @@ var indexSectionLabels =
   2: "Namespaces",
   3: "Functions",
   4: "Variables",
-  5: "Properties"
+  5: "Enumerations",
+  6: "Properties"
 };
 

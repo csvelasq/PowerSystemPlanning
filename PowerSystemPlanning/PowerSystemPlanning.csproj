@@ -62,6 +62,7 @@
     <Compile Include="PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\IPowerSystemSolver.cs" />
+    <Compile Include="Solvers\PowerSystemSolverConfiguration.cs" />
     <Compile Include="Solvers\PowerSystemSolveResults.cs" />
     <Compile Include="TransmissionElement.cs" />
     <Compile Include="TransmissionLine.cs" />

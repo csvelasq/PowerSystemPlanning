@@ -20,7 +20,7 @@ Collaboration diagram for Power\+System\+Planning.\+Node\+Element\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=225pt]{class_power_system_planning_1_1_node_element__coll__graph}
+\includegraphics[width=350pt]{class_power_system_planning_1_1_node_element__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -36,6 +36,15 @@ Collaboration diagram for Power\+System\+Planning.\+Node\+Element\+:\nopagebreak
 \item 
 \hyperlink{class_power_system_planning_1_1_node}{Node} \hyperlink{class_power_system_planning_1_1_node_element_ade5e2883dbd6d8676a8572c827f6b60a}{Connection\+Node}
 \begin{DoxyCompactList}\small\item\em The node to which this element is connected. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_power_system_planning_1_1_power_system}{Power\+System} {\bfseries \+\_\+\+Power\+System}\hypertarget{class_power_system_planning_1_1_node_element_a7ebfa39bd19233c8661b0a665dc6733e}{}\label{class_power_system_planning_1_1_node_element_a7ebfa39bd19233c8661b0a665dc6733e}
+
+\item 
+int {\bfseries \+\_\+\+Id}\hypertarget{class_power_system_planning_1_1_node_element_a9d8d503e705d7884c6a59bf59ce7b355}{}\label{class_power_system_planning_1_1_node_element_a9d8d503e705d7884c6a59bf59ce7b355}
+
+\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
@@ -100,7 +109,7 @@ Name of the node to which this element is connected
 
 ID of this element (unique within the given power system). 
 
-\index{Power\+System\+Planning\+::\+Node\+Element@{Power\+System\+Planning\+::\+Node\+Element}!Name@{Name}}
+ID starts from 0 and increments until N. ID\textquotesingle{}s must be unique. The ID must also indicate the position of the element in the containing list in the Power System object. \index{Power\+System\+Planning\+::\+Node\+Element@{Power\+System\+Planning\+::\+Node\+Element}!Name@{Name}}
 \index{Name@{Name}!Power\+System\+Planning\+::\+Node\+Element@{Power\+System\+Planning\+::\+Node\+Element}}
 \subsubsection[{\texorpdfstring{Name}{Name}}]{\setlength{\rightskip}{0pt plus 5cm}string Power\+System\+Planning.\+Node\+Element.\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\hypertarget{class_power_system_planning_1_1_node_element_a07a0b254e0ac3b4b97dd45bde0a44291}{}\label{class_power_system_planning_1_1_node_element_a07a0b254e0ac3b4b97dd45bde0a44291}
 

@@ -1,11 +1,5 @@
 var searchData=
 [
-  ['controlutils',['ControlUtils',['../namespace_power_system_planning_wpf_app_1_1_control_utils.html',1,'PowerSystemPlanningWpfApp']]],
-  ['help',['Help',['../namespace_power_system_planning_wpf_app_1_1_help.html',1,'PowerSystemPlanningWpfApp']]],
-  ['helper',['Helper',['../namespace_power_system_planning_wpf_app_1_1_helper.html',1,'PowerSystemPlanningWpfApp']]],
-  ['models',['Models',['../namespace_power_system_planning_wpf_app_1_1_models.html',1,'PowerSystemPlanningWpfApp']]],
-  ['opf',['OPF',['../namespace_power_system_planning_wpf_app_1_1_o_p_f.html',1,'PowerSystemPlanningWpfApp']]],
-  ['powersystemplanningwpfapp',['PowerSystemPlanningWpfApp',['../namespace_power_system_planning_wpf_app.html',1,'']]],
-  ['powersystemviewmodel',['PowerSystemViewModel',['../class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model.html',1,'PowerSystemPlanningWpfApp::Models']]],
-  ['properties',['Properties',['../namespace_power_system_planning_wpf_app_1_1_properties.html',1,'PowerSystemPlanningWpfApp']]]
+  ['oncanexecutepaste',['OnCanExecutePaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#ad62754f9382daa406815f7965d6af785',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
+  ['onexecutedpaste',['OnExecutedPaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#a7a8455f1c46a856165914960a0e60418',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]]
 ];

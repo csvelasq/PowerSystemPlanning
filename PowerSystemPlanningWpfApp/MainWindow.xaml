@@ -118,7 +118,7 @@
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
                             <DataGrid.Columns>
-                                <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                                 <DataGridTextColumn Header="Connection Node ID" Binding="{Binding ConnectionNodeId}" />
                                 <!--<DataGridTextColumn Header="Connection Node Name" Binding="{Binding ConnectionNodeName}" />-->
@@ -133,7 +133,7 @@
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
                             <DataGrid.Columns>
-                                <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                                 <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeId}" />
                                 <!--<DataGridTextColumn Header="Connection Node Name" Binding="{Binding ConnectionNodeName}" />-->
@@ -149,14 +149,14 @@
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                         </DataGrid.AlternatingRowBackground>
                         <DataGrid.Columns>
-                            <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />-->
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                             <DataGridTextColumn Header="From Node ID" Binding="{Binding NodeFromID}" />
                             <!--<DataGridTextColumn Header="From Node Name" Binding="{Binding NodeFromName}" />-->
                             <DataGridTextColumn Header="To Node ID" Binding="{Binding NodeToID}" />
                             <!--<DataGridTextColumn Header="To Node Name" Binding="{Binding NodeToName}" />-->
                             <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacityMW}" />
-                            <DataGridTextColumn Header="Reactance (ohm)" Binding="{Binding ReactanceOhm}" />
+                            <DataGridTextColumn Header="Susceptance (mho)" Binding="{Binding SusceptanceMho}" />
                         </DataGrid.Columns>
                     </localUtils:CustomDataGrid>
                 </GroupBox>

@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['recentfilelist',['RecentFileList',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
-  ['runeconomicdispatch',['RunEconomicDispatch',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_run_economic_dispatch.html',1,'PowerSystemPlanningWpfApp::OPF']]],
-  ['runldc',['RunLDC',['../class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model.html#a823b557451c5d1919795bd7f66cae55f',1,'PowerSystemPlanningWpfApp::Models::PowerSystemViewModel']]],
-  ['runopfwindow',['RunOPFWindow',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_run_o_p_f_window.html',1,'PowerSystemPlanningWpfApp::OPF']]]
+  ['controlutils',['ControlUtils',['../namespace_power_system_planning_wpf_app_1_1_control_utils.html',1,'PowerSystemPlanningWpfApp']]],
+  ['help',['Help',['../namespace_power_system_planning_wpf_app_1_1_help.html',1,'PowerSystemPlanningWpfApp']]],
+  ['helper',['Helper',['../namespace_power_system_planning_wpf_app_1_1_helper.html',1,'PowerSystemPlanningWpfApp']]],
+  ['models',['Models',['../namespace_power_system_planning_wpf_app_1_1_models.html',1,'PowerSystemPlanningWpfApp']]],
+  ['opf',['OPF',['../namespace_power_system_planning_wpf_app_1_1_o_p_f.html',1,'PowerSystemPlanningWpfApp']]],
+  ['powersystemplanningwpfapp',['PowerSystemPlanningWpfApp',['../namespace_power_system_planning_wpf_app.html',1,'']]],
+  ['powersystemviewmodel',['PowerSystemViewModel',['../class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model.html',1,'PowerSystemPlanningWpfApp::Models']]],
+  ['properties',['Properties',['../namespace_power_system_planning_wpf_app_1_1_properties.html',1,'PowerSystemPlanningWpfApp']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['node',['Node',['../class_power_system_planning_1_1_node.html',1,'PowerSystemPlanning']]],
-  ['nodeelement',['NodeElement',['../class_power_system_planning_1_1_node_element.html',1,'PowerSystemPlanning']]]
+  ['opfmodel',['OPFModel',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html',1,'PowerSystemPlanning::Solvers::OPF']]],
+  ['opfmodelresult',['OPFModelResult',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_result.html',1,'PowerSystemPlanning::Solvers::OPF']]]
 ];

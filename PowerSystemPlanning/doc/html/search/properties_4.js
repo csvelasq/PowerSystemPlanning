@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['pgen_5fsolution',['PGen_Solution',['../class_power_system_planning_1_1_o_p_f_1_1_economic_dispatch.html#a87529a0c2bfca452a6d18f8e5e8a61d3',1,'PowerSystemPlanning.OPF.EconomicDispatch.PGen_Solution()'],['../class_power_system_planning_1_1_o_p_f_1_1_o_p_f_model.html#a04b209c96af2cfad809a07d42363fd2e',1,'PowerSystemPlanning.OPF.OPFModel.PGen_Solution()']]]
+  ['marginalcost',['MarginalCost',['../class_power_system_planning_1_1_generating_unit.html#aec21179f99b2060e9c30ca59b0beab44',1,'PowerSystemPlanning::GeneratingUnit']]],
+  ['messages',['Messages',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_results.html#a197e9a21bef880c0b3a273991e2b23da',1,'PowerSystemPlanning::Solvers::PowerSystemSolverResults']]]
 ];

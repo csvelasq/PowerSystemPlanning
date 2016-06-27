@@ -157,4 +157,12 @@ namespace PowerSystemPlanning.Solvers
         Paused,
         Processing
     }
+
+    public enum OptimizationResultStatus
+    {
+        Optimal,
+        Infeasible,
+        Unbounded,
+        Other
+    }
 }

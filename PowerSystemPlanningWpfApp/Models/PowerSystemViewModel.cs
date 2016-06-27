@@ -70,7 +70,7 @@ namespace PowerSystemPlanningWpfApp.Models
         public DelegateCommand ShowOPFWindow { get; private set; }
         private void OnSubmitShowOPFWindow()
         {
-            OPF.RunOPFWindow runOPFWindow = new OPF.RunOPFWindow();
+            OPF.RunOPFWindow runOPFWindow = new OPF.RunOPFWindow(this._PowerSystem);
             runOPFWindow.Show();
         }
         private bool CanSubmitShowOPFWindow() { return true; }
@@ -86,13 +86,14 @@ namespace PowerSystemPlanningWpfApp.Models
         }
 
         /// <summary>
-        /// Connects the BindingLists exposed in this class, to the PowerSystem backend, 
-        /// and adds a custom event handler to create new objects for each list
+        /// Connects the BindingLists exposed in this class, to the PowerSystem backend
         /// </summary>
+        /// <remarks>
+        /// Adds a custom event handler to create new objects for each list, so as to automatically manage IDs.</remarks>
         private void bindToPowerSystem()
         {
             this.nodes = this._PowerSystem.nodes;
-            this.nodes.AddingNew += (sender, e) => { e.NewObject = new Node(this._PowerSystem.NumberOfNodes); };
+            this.nodes.AddingNew += (sender, e) => { e.NewObject = new Node(this._PowerSystem); };
             this.generatingUnits = this._PowerSystem.generatingUnits;
             this.generatingUnits.AddingNew += (sender, e) => { e.NewObject = new GeneratingUnit(this._PowerSystem); };
             this.inelasticLoads = this._PowerSystem.inelasticLoads;
@@ -113,9 +114,10 @@ namespace PowerSystemPlanningWpfApp.Models
 
         /// <summary>
         /// Saves the power system model to the previously set location (in 'this.full_fileName').
-        /// The location is set when a call to saveModel(string) is made.
-        /// This overload should not be called if fileName has not been properly set.
         /// </summary>
+        /// <remarks>
+        /// The location is set when a call to saveModel(string) is made.
+        /// This overload should not be called if fileName has not been properly set.</remarks>
         public void saveModel()
         {
             using (TextWriter myStream = new StreamWriter(this.full_fileName))

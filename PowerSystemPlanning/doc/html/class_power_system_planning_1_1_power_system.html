@@ -109,13 +109,13 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PowerSystem</b> (string name, BindingList&lt; <a class="el" href="class_power_system_planning_1_1_generating_unit.html">GeneratingUnit</a> &gt; <a class="el" href="class_power_system_planning_1_1_power_system.html#a899692153e8c860b54745c503f8af765">generatingUnits</a>, BindingList&lt; <a class="el" href="class_power_system_planning_1_1_inelastic_load.html">InelasticLoad</a> &gt; <a class="el" href="class_power_system_planning_1_1_power_system.html#a0445fbb84b2deb936cfc1b7b38d8f5ed">inelasticLoads</a>, BindingList&lt; <a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a> &gt; <a class="el" href="class_power_system_planning_1_1_power_system.html#a1394f9c3a23efcc0cd93acb46611c102">transmissionLines</a>)</td></tr>
 <tr class="separator:a127fe1b1817e0e5b8060210dcf6490a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f3c09d821634b02e79b54c82297e9f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_power_system.html#a0f3c09d821634b02e79b54c82297e9f6">saveToXMLFile</a> (TextWriter saveStream)</td></tr>
-<tr class="memdesc:a0f3c09d821634b02e79b54c82297e9f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the current power sysem to an XML file, provided the stream. The provided stream must is not closed within this method. IOException and other exceptions are not managed.  <a href="#a0f3c09d821634b02e79b54c82297e9f6">More...</a><br /></td></tr>
+<tr class="memdesc:a0f3c09d821634b02e79b54c82297e9f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the current power sysem to an XML file, provided the stream.  <a href="#a0f3c09d821634b02e79b54c82297e9f6">More...</a><br /></td></tr>
 <tr class="separator:a0f3c09d821634b02e79b54c82297e9f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad61746fe7b02b94761abec0f022d106a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_power_system_planning_1_1_power_system.html">PowerSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_power_system.html#ad61746fe7b02b94761abec0f022d106a">readFromXMLFile</a> (StreamReader xmlStream)</td></tr>
-<tr class="memdesc:ad61746fe7b02b94761abec0f022d106a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Power System by reading an XML file, provided the stream. The provided stream must is not closed within this method. IOException and other exceptions are not managed.  <a href="#ad61746fe7b02b94761abec0f022d106a">More...</a><br /></td></tr>
+<tr class="memdesc:ad61746fe7b02b94761abec0f022d106a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Power System by reading an XML file, provided the stream.  <a href="#ad61746fe7b02b94761abec0f022d106a">More...</a><br /></td></tr>
 <tr class="separator:ad61746fe7b02b94761abec0f022d106a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -179,7 +179,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumberOfTransmissionLi
 </table>
 </div><div class="memdoc">
 
-<p>Creates a Power System by reading an XML file, provided the stream. The provided stream must is not closed within this method. IOException and other exceptions are not managed. </p>
+<p>Creates a Power System by reading an XML file, provided the stream. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">xmlStream</td><td>Full file path of the XML file where the power system was stored.</td></tr>
@@ -187,6 +187,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumberOfTransmissionLi
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new power system object with the contents serialized in the XML file.</dd></dl>
+<p>The provided stream must is not closed within this method. IOException and other exceptions are not managed.</p>
 
 </div>
 </div>
@@ -212,13 +213,14 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumberOfTransmissionLi
 </table>
 </div><div class="memdoc">
 
-<p>Saves the current power sysem to an XML file, provided the stream. The provided stream must is not closed within this method. IOException and other exceptions are not managed. </p>
+<p>Saves the current power sysem to an XML file, provided the stream. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">saveStream</td><td></td></tr>
   </table>
   </dd>
 </dl>
+<p>The provided stream must is not closed within this method. IOException and other exceptions are not managed.</p>
 
 </div>
 </div>

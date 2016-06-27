@@ -13,8 +13,12 @@
             <RowDefinition Height="210*"/>
         </Grid.RowDefinitions>
         <Button x:Name="btnRunOPF" Content="Run Optimal Power Flow" Grid.Row="0" Width="140" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2.5" Click="btnRunOPF_Click" />
-        <Label Content="Total Generation Cost:" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <TextBox x:Name="tbTotalCost" Grid.Row="1" Width="75" Height="25" Margin="131.67,0,0,0" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="Total Generation Cost:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox x:Name="tbTotalCost" Width="75" Height="25" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right" />
+            <CheckBox Content="Model solved?" VerticalAlignment="Center" Margin="20,0,0,0" />
+            <CheckBox Content="Model infeasible?" VerticalAlignment="Center" Margin="20,0,0,0" />
+        </StackPanel>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />

@@ -1,4 +1,5 @@
 ﻿using PowerSystemPlanning;
+using PowerSystemPlanning.Solvers;
 using PowerSystemPlanning.Solvers.OPF;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace PowerSystemPlanningWpfApp.OPF
     {
         PowerSystem powerSystem;
         OPFModel opf;
+        PowerSystemSolverResults OPFSolverResults;
+        OPFModelResult OPFResults;
 
         public RunOPFWindow()
         {
@@ -38,8 +41,11 @@ namespace PowerSystemPlanningWpfApp.OPF
         {
             opf = new OPFModel(this.powerSystem);
             opf.Solve();
-            tbTotalCost.Text = opf.TotalGenerationCost.ToString();
-            lvPowerGenerated.ItemsSource = opf.PGen_Solution;
+            this.OPFSolverResults = opf.getResults();
+            this.OPFResults = (this.OPFSolverResults.Result as OPFModelResult);
+            tbTotalCost.Text = this.OPFResults.TotalGenerationCost.ToString();
+            lvPowerGenerated.ItemsSource = this.OPFResults.PowerGenerated;
+            lvPowerFlow.ItemsSource = this.OPFResults.PowerFlows;
         }
     }
 }

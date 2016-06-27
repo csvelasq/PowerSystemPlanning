@@ -18,8 +18,7 @@ namespace PowerSystemPlanning
         // TODO Linear DC OPF
         // TODO Linear DC OPF LDC
         // TODO Linear DC OPF LDC with generation and transmission binary parameters
-
-
+        
         private string name;
 
         /// <summary>
@@ -46,6 +45,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// Number of nodes in the power system.
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public int NumberOfNodes
         {
             get
@@ -59,6 +59,7 @@ namespace PowerSystemPlanning
         /// </summary>
         public BindingList<GeneratingUnit> generatingUnits;
 
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public int NumberOfGeneratingUnits
         {
             get
@@ -72,6 +73,7 @@ namespace PowerSystemPlanning
         /// </summary>
         public BindingList<InelasticLoad> inelasticLoads;
 
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public int NumberOfInelasticLoads
         {
             get
@@ -83,6 +85,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// Total MW of inelastic loads.
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public double TotalMWInelasticLoads
         {
             get
@@ -96,6 +99,7 @@ namespace PowerSystemPlanning
         /// </summary>
         public BindingList<TransmissionLine> transmissionLines;
 
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public int NumberOfTransmissionLines
         {
             get
@@ -125,13 +129,14 @@ namespace PowerSystemPlanning
             this.inelasticLoads = inelasticLoads;
             this.transmissionLines = transmissionLines;
         }
-        
+
         /// <summary>
         /// Saves the current power sysem to an XML file, provided the stream.
-        /// The provided stream must is not closed within this method.
-        /// IOException and other exceptions are not managed.
         /// </summary>
         /// <param name="saveStream"></param>
+        /// <remarks>
+        /// The provided stream must is not closed within this method.
+        /// IOException and other exceptions are not managed.</remarks>
         public void saveToXMLFile(TextWriter saveStream)
         {
             System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));
@@ -140,11 +145,12 @@ namespace PowerSystemPlanning
 
         /// <summary>
         /// Creates a Power System by reading an XML file, provided the stream.
-        /// The provided stream must is not closed within this method.
-        /// IOException and other exceptions are not managed.
         /// </summary>
         /// <param name="xmlStream">Full file path of the XML file where the power system was stored.</param>
         /// <returns>A new power system object with the contents serialized in the XML file.</returns>
+        /// <remarks>
+        /// The provided stream must is not closed within this method.
+        /// IOException and other exceptions are not managed.</remarks>
         public static PowerSystem readFromXMLFile(StreamReader xmlStream)
         {
             System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));

@@ -5,28 +5,47 @@
 A node in a given power system. A node is an element to which generators and loads are connected. Transmission lines are connected between two nodes.  
 
 
+
+
+Collaboration diagram for Power\+System\+Planning.\+Node\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{class_power_system_planning_1_1_node__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{class_power_system_planning_1_1_node_a7c7b4c8b9e85f023e7cc2c4ea9548bcc}{Node} ()
 \begin{DoxyCompactList}\small\item\em Empty constructor, not meant to be used but rather included only to allow serialization. \end{DoxyCompactList}\item 
-{\bfseries Node} (int id)\hypertarget{class_power_system_planning_1_1_node_ac50142b7f7bbed2ab7ebd645596a0d03}{}\label{class_power_system_planning_1_1_node_ac50142b7f7bbed2ab7ebd645596a0d03}
-
-\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
+\hyperlink{class_power_system_planning_1_1_node_ae780d904bb5294448298e5537c747ff2}{Node} (\hyperlink{class_power_system_planning_1_1_power_system}{Power\+System} power\+\_\+system)
+\begin{DoxyCompactList}\small\item\em Creates a new node in the given power system \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-List$<$ \hyperlink{class_power_system_planning_1_1_generating_unit}{Generating\+Unit} $>$ \hyperlink{class_power_system_planning_1_1_node_a8b0943967935c496d57afbd76b12706c}{generating\+Units}
-\begin{DoxyCompactList}\small\item\em Generating units connected to this node. \end{DoxyCompactList}\item 
-List$<$ \hyperlink{class_power_system_planning_1_1_inelastic_load}{Inelastic\+Load} $>$ \hyperlink{class_power_system_planning_1_1_node_a4cc33a77151060a8eb42d879017733da}{inelastic\+Loads}
-\begin{DoxyCompactList}\small\item\em Inelastic loads connected to this node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hyperlink{class_power_system_planning_1_1_power_system}{Power\+System} {\bfseries \+\_\+\+Power\+System}\hypertarget{class_power_system_planning_1_1_node_acc4b86b1144ad6c954c6b2b2b1d02d4e}{}\label{class_power_system_planning_1_1_node_acc4b86b1144ad6c954c6b2b2b1d02d4e}
+
+\end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{class_power_system_planning_1_1_node_abd72649e4b2b83daa0980ab87a90034a}{Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em The unique ID of this node within the power system. \end{DoxyCompactList}\item 
 string \hyperlink{class_power_system_planning_1_1_node_ac793185992fc6c55ca5e1880f4947e57}{Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\begin{DoxyCompactList}\small\item\em Name of the node (arbitrarily assigned by the user). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Name of the node (arbitrarily assigned by the user). \end{DoxyCompactList}\item 
+List$<$ \hyperlink{class_power_system_planning_1_1_generating_unit}{Generating\+Unit} $>$ \hyperlink{class_power_system_planning_1_1_node_a8b0943967935c496d57afbd76b12706c}{generating\+Units}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Generating units connected to this node. \end{DoxyCompactList}\item 
+List$<$ \hyperlink{class_power_system_planning_1_1_inelastic_load}{Inelastic\+Load} $>$ \hyperlink{class_power_system_planning_1_1_node_a4cc33a77151060a8eb42d879017733da}{inelastic\+Loads}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Inelastic loads connected to this node. \end{DoxyCompactList}\item 
+double \hyperlink{class_power_system_planning_1_1_node_a5ad80ac9ed391e904c9cf4011c7ba00d}{Total\+Load}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Total consumption (in MW) of all inelastic loads connected to this node. \end{DoxyCompactList}\item 
+List$<$ \hyperlink{class_power_system_planning_1_1_transmission_line}{Transmission\+Line} $>$ \hyperlink{class_power_system_planning_1_1_node_a2c8bd0b05dfcb3cb54e143a6cff2b52f}{transmission\+Lines}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Transmission lines connected to this node (incoming and outgoing). \end{DoxyCompactList}\item 
+List$<$ \hyperlink{class_power_system_planning_1_1_transmission_line}{Transmission\+Line} $>$ \hyperlink{class_power_system_planning_1_1_node_a37a2e9e5e0ac761f6b85814764b41ef3}{incoming\+Transmission\+Lines}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Transmission lines incoming to this node. \end{DoxyCompactList}\item 
+List$<$ \hyperlink{class_power_system_planning_1_1_transmission_line}{Transmission\+Line} $>$ \hyperlink{class_power_system_planning_1_1_node_a7b48ca310aba50314020d2ac1ea071f9}{outgoing\+Transmission\+Lines}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Transmission lines outgoing from this node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -46,26 +65,34 @@ A node in a given power system. A node is an element to which generators and loa
 
 Empty constructor, not meant to be used but rather included only to allow serialization. 
 
+\index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!Node@{Node}}
+\index{Node@{Node}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
+\subsubsection[{\texorpdfstring{Node(\+Power\+System power\+\_\+system)}{Node(PowerSystem power_system)}}]{\setlength{\rightskip}{0pt plus 5cm}Power\+System\+Planning.\+Node.\+Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Power\+System}}]{power\+\_\+system}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_power_system_planning_1_1_node_ae780d904bb5294448298e5537c747ff2}{}\label{class_power_system_planning_1_1_node_ae780d904bb5294448298e5537c747ff2}
 
 
-\subsection{Member Data Documentation}
+Creates a new node in the given power system 
+
+
+\begin{DoxyParams}{Parameters}
+{\em power\+\_\+system} & The power system to which this node is being added\\
+\hline
+\end{DoxyParams}
+
+
+The ID of the new node is set to he number of nodes in the given power system. However, the nely created node is not added to the list of nodes in the provided power system.
+
+\subsection{Property Documentation}
 \index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!generating\+Units@{generating\+Units}}
 \index{generating\+Units@{generating\+Units}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
-\subsubsection[{\texorpdfstring{generating\+Units}{generatingUnits}}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Generating\+Unit}$>$ Power\+System\+Planning.\+Node.\+generating\+Units}\hypertarget{class_power_system_planning_1_1_node_a8b0943967935c496d57afbd76b12706c}{}\label{class_power_system_planning_1_1_node_a8b0943967935c496d57afbd76b12706c}
+\subsubsection[{\texorpdfstring{generating\+Units}{generatingUnits}}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Generating\+Unit}$>$ Power\+System\+Planning.\+Node.\+generating\+Units\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_node_a8b0943967935c496d57afbd76b12706c}{}\label{class_power_system_planning_1_1_node_a8b0943967935c496d57afbd76b12706c}
 
 
 Generating units connected to this node. 
 
-\index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!inelastic\+Loads@{inelastic\+Loads}}
-\index{inelastic\+Loads@{inelastic\+Loads}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
-\subsubsection[{\texorpdfstring{inelastic\+Loads}{inelasticLoads}}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Inelastic\+Load}$>$ Power\+System\+Planning.\+Node.\+inelastic\+Loads}\hypertarget{class_power_system_planning_1_1_node_a4cc33a77151060a8eb42d879017733da}{}\label{class_power_system_planning_1_1_node_a4cc33a77151060a8eb42d879017733da}
-
-
-Inelastic loads connected to this node. 
-
-
-
-\subsection{Property Documentation}
 \index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!Id@{Id}}
 \index{Id@{Id}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
 \subsubsection[{\texorpdfstring{Id}{Id}}]{\setlength{\rightskip}{0pt plus 5cm}int Power\+System\+Planning.\+Node.\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\hypertarget{class_power_system_planning_1_1_node_abd72649e4b2b83daa0980ab87a90034a}{}\label{class_power_system_planning_1_1_node_abd72649e4b2b83daa0980ab87a90034a}
@@ -73,12 +100,47 @@ Inelastic loads connected to this node.
 
 The unique ID of this node within the power system. 
 
+\index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!incoming\+Transmission\+Lines@{incoming\+Transmission\+Lines}}
+\index{incoming\+Transmission\+Lines@{incoming\+Transmission\+Lines}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
+\subsubsection[{\texorpdfstring{incoming\+Transmission\+Lines}{incomingTransmissionLines}}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Transmission\+Line}$>$ Power\+System\+Planning.\+Node.\+incoming\+Transmission\+Lines\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_node_a37a2e9e5e0ac761f6b85814764b41ef3}{}\label{class_power_system_planning_1_1_node_a37a2e9e5e0ac761f6b85814764b41ef3}
+
+
+Transmission lines incoming to this node. 
+
+\index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!inelastic\+Loads@{inelastic\+Loads}}
+\index{inelastic\+Loads@{inelastic\+Loads}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
+\subsubsection[{\texorpdfstring{inelastic\+Loads}{inelasticLoads}}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Inelastic\+Load}$>$ Power\+System\+Planning.\+Node.\+inelastic\+Loads\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_node_a4cc33a77151060a8eb42d879017733da}{}\label{class_power_system_planning_1_1_node_a4cc33a77151060a8eb42d879017733da}
+
+
+Inelastic loads connected to this node. 
+
 \index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!Name@{Name}}
 \index{Name@{Name}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
 \subsubsection[{\texorpdfstring{Name}{Name}}]{\setlength{\rightskip}{0pt plus 5cm}string Power\+System\+Planning.\+Node.\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\hypertarget{class_power_system_planning_1_1_node_ac793185992fc6c55ca5e1880f4947e57}{}\label{class_power_system_planning_1_1_node_ac793185992fc6c55ca5e1880f4947e57}
 
 
 Name of the node (arbitrarily assigned by the user). 
+
+\index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!outgoing\+Transmission\+Lines@{outgoing\+Transmission\+Lines}}
+\index{outgoing\+Transmission\+Lines@{outgoing\+Transmission\+Lines}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
+\subsubsection[{\texorpdfstring{outgoing\+Transmission\+Lines}{outgoingTransmissionLines}}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Transmission\+Line}$>$ Power\+System\+Planning.\+Node.\+outgoing\+Transmission\+Lines\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_node_a7b48ca310aba50314020d2ac1ea071f9}{}\label{class_power_system_planning_1_1_node_a7b48ca310aba50314020d2ac1ea071f9}
+
+
+Transmission lines outgoing from this node. 
+
+\index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!Total\+Load@{Total\+Load}}
+\index{Total\+Load@{Total\+Load}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
+\subsubsection[{\texorpdfstring{Total\+Load}{TotalLoad}}]{\setlength{\rightskip}{0pt plus 5cm}double Power\+System\+Planning.\+Node.\+Total\+Load\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_node_a5ad80ac9ed391e904c9cf4011c7ba00d}{}\label{class_power_system_planning_1_1_node_a5ad80ac9ed391e904c9cf4011c7ba00d}
+
+
+Total consumption (in MW) of all inelastic loads connected to this node. 
+
+\index{Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}!transmission\+Lines@{transmission\+Lines}}
+\index{transmission\+Lines@{transmission\+Lines}!Power\+System\+Planning\+::\+Node@{Power\+System\+Planning\+::\+Node}}
+\subsubsection[{\texorpdfstring{transmission\+Lines}{transmissionLines}}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Transmission\+Line}$>$ Power\+System\+Planning.\+Node.\+transmission\+Lines\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_node_a2c8bd0b05dfcb3cb54e143a6cff2b52f}{}\label{class_power_system_planning_1_1_node_a2c8bd0b05dfcb3cb54e143a6cff2b52f}
+
+
+Transmission lines connected to this node (incoming and outgoing). 
 
 
 

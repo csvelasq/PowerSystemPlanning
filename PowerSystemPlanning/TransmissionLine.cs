@@ -29,8 +29,9 @@ namespace PowerSystemPlanning
         private double _ReactanceOhm;
 
         /// <summary>
-        /// Series reactance of the transmission line, in ohms.
+        /// Serie reactance of the transmission line, in ohms.
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public double ReactanceOhm
         {
             get
@@ -41,6 +42,26 @@ namespace PowerSystemPlanning
             set
             {
                 _ReactanceOhm = value;
+                _SusceptanceMho = 1 / value;
+            }
+        }
+
+        private double _SusceptanceMho;
+
+        /// <summary>
+        /// Serie sucsceptance of the transmission line, in mhos.
+        /// </summary>
+        public double SusceptanceMho
+        {
+            get
+            {
+                return _SusceptanceMho;
+            }
+
+            set
+            {
+                _SusceptanceMho = value;
+                _ReactanceOhm = 1 / value;
             }
         }
 
@@ -51,6 +72,7 @@ namespace PowerSystemPlanning
 
         public TransmissionLine(PowerSystem power_system) : base(power_system)
         {
+            this.Id = this._PowerSystem.NumberOfTransmissionLines;
         }
     }
 }

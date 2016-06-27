@@ -11,7 +11,7 @@ namespace PowerSystemPlanning
     /// </summary>
     public class TransmissionElement
     {
-        private PowerSystem _PowerSystem;
+        protected PowerSystem _PowerSystem;
 
         /// <summary>
         /// The origin node to which this transmission element is connected.
@@ -21,6 +21,9 @@ namespace PowerSystemPlanning
         /// <summary>
         /// ID of the node from which this transmission element begins.
         /// </summary>
+        /// <remarks>
+        /// ID starts from 0 and increments until N. ID's must be unique. The ID must also indicate the position of the element in the containing list in the Power System object.
+        /// </remarks
         public int NodeFromID
         {
             get
@@ -43,6 +46,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// Name of the node from which this transmission element begins.
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public string NodeFromName
         {
             get
@@ -92,6 +96,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// Name of the node from which this transmission element begins.
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public string NodeToName
         {
             get

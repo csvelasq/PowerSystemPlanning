@@ -11,13 +11,16 @@ namespace PowerSystemPlanning
     /// </summary>
     public abstract class NodeElement
     {
-        private PowerSystem _PowerSystem;
+        protected PowerSystem _PowerSystem;
 
-        private int _Id;
+        protected int _Id;
 
         /// <summary>
         /// ID of this element (unique within the given power system).
         /// </summary>
+        /// <remarks>
+        /// ID starts from 0 and increments until N. ID's must be unique. The ID must also indicate the position of the element in the containing list in the Power System object.
+        /// </remarks>
         public int Id
         {
             get

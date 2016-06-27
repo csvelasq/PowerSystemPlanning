@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['inelasticload',['InelasticLoad',['../class_power_system_planning_1_1_inelastic_load.html#a47abae64f9f66d537230cdff873d9efa',1,'PowerSystemPlanning::InelasticLoad']]]
+  ['generatingunit',['GeneratingUnit',['../class_power_system_planning_1_1_generating_unit.html#a854983fe68a7dc98636d454977d90ca2',1,'PowerSystemPlanning::GeneratingUnit']]],
+  ['getresults',['getResults',['../interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html#a8a7248fc6f8aab31fec3b975ab4794bb',1,'PowerSystemPlanning.Solvers.IPowerSystemSolver.getResults()'],['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a7164ae279b3f34a44e8573e783d1defc',1,'PowerSystemPlanning.Solvers.OPF.OPFModel.getResults()']]]
 ];

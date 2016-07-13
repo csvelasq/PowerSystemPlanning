@@ -11,9 +11,14 @@ using System.Xml.Serialization;
 namespace PowerSystemPlanning
 {
     /// <summary>
-    /// Represents the technical and economic model of a Power System for the objectives of medium to long term planning.
+    /// Represents the technical and economic model of a Power System for medium to long term planning.
     /// </summary>
-    public class PowerSystem
+    /// <remarks>
+    /// Basic object model of a power system for the purpose of solving planning models in the medium to long term, with DC power flow.
+    /// The purpose of this class is to provide for easy end-user manipulation and edition of the power system model.
+    /// The decorator <see cref="PowerSystemDecorator"/> should be used instead of this class in order to build optimization models, so as to enable dynamic flexibility of the resulting optimization models (e.g. allowing to deactivate transmission lines, changing the maximum output of a generator, and so on).
+    /// </remarks>
+    public class PowerSystem : IPowerSystem
     {
         // TODO Linear DC OPF
         // TODO Linear DC OPF LDC
@@ -38,9 +43,15 @@ namespace PowerSystemPlanning
         }
 
         /// <summary>
+        /// Nodes of the power system, bindable to GUI.
+        /// </summary>
+        public BindingList<Node> _Nodes;
+
+        /// <summary>
         /// Nodes of the power system.
         /// </summary>
-        public BindingList<Node> nodes;
+        [System.Xml.Serialization.XmlIgnoreAttribute]
+        public IList<Node> Nodes { get { return this._Nodes; } }
 
         /// <summary>
         /// Number of nodes in the power system.
@@ -50,35 +61,47 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return nodes.Count;
+                return _Nodes.Count;
             }
         }
 
         /// <summary>
-        /// All Generating units in the power system.
+        /// All Generating units in the power system, bindable to GUI.
         /// </summary>
-        public BindingList<GeneratingUnit> generatingUnits;
+        public BindingList<GeneratingUnit> _GeneratingUnits;
+
+        /// <summary>
+        /// All Generating units in the power system
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
+        public IList<GeneratingUnit> GeneratingUnits { get { return this._GeneratingUnits; } }
 
         [System.Xml.Serialization.XmlIgnoreAttribute]
         public int NumberOfGeneratingUnits
         {
             get
             {
-                return this.generatingUnits.Count;
+                return this._GeneratingUnits.Count;
             }
         }
 
         /// <summary>
-        /// All Inelastic loads in the power system.
+        /// All Inelastic loads in the power system, bindable to GUI.
         /// </summary>
-        public BindingList<InelasticLoad> inelasticLoads;
+        public BindingList<InelasticLoad> _InelasticLoads;
+
+        /// <summary>
+        /// All inelastic loads in the power system.
+        /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
+        public IList<InelasticLoad> InelasticLoads { get { return this._InelasticLoads; } }
 
         [System.Xml.Serialization.XmlIgnoreAttribute]
         public int NumberOfInelasticLoads
         {
             get
             {
-                return this.inelasticLoads.Count;
+                return this._InelasticLoads.Count;
             }
         }
 
@@ -90,30 +113,36 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return (from load in this.inelasticLoads select load.ConsumptionMW).Sum();
+                return (from load in this._InelasticLoads select load.ConsumptionMW).Sum();
             }
         }
 
         /// <summary>
+        /// All Transmission lines in the power sytem, bindable to GUI.
+        /// </summary>
+        public BindingList<TransmissionLine> _TransmissionLines;
+
+        /// <summary>
         /// All Transmission lines in the power sytem.
         /// </summary>
-        public BindingList<TransmissionLine> transmissionLines;
+        [System.Xml.Serialization.XmlIgnoreAttribute]
+        public IList<TransmissionLine> TransmissionLines { get { return this._TransmissionLines; } }
 
         [System.Xml.Serialization.XmlIgnoreAttribute]
         public int NumberOfTransmissionLines
         {
             get
             {
-                return this.transmissionLines.Count;
+                return this._TransmissionLines.Count;
             }
         }
 
         public PowerSystem()
         {
-            this.nodes = new BindingList<Node>();
-            this.generatingUnits = new BindingList<GeneratingUnit>();
-            this.inelasticLoads = new BindingList<InelasticLoad>();
-            this.transmissionLines = new BindingList<TransmissionLine>();
+            this._Nodes = new BindingList<Node>();
+            this._GeneratingUnits = new BindingList<GeneratingUnit>();
+            this._InelasticLoads = new BindingList<InelasticLoad>();
+            this._TransmissionLines = new BindingList<TransmissionLine>();
         }
 
         public PowerSystem(string name) : this()
@@ -125,9 +154,9 @@ namespace PowerSystemPlanning
             BindingList<TransmissionLine> transmissionLines)
             : this(name)
         {
-            this.generatingUnits = generatingUnits;
-            this.inelasticLoads = inelasticLoads;
-            this.transmissionLines = transmissionLines;
+            this._GeneratingUnits = generatingUnits;
+            this._InelasticLoads = inelasticLoads;
+            this._TransmissionLines = transmissionLines;
         }
 
         /// <summary>

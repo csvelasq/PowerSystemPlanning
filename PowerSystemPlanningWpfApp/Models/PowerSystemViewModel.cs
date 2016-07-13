@@ -92,13 +92,13 @@ namespace PowerSystemPlanningWpfApp.Models
         /// Adds a custom event handler to create new objects for each list, so as to automatically manage IDs.</remarks>
         private void bindToPowerSystem()
         {
-            this.nodes = this._PowerSystem.nodes;
+            this.nodes = this._PowerSystem._Nodes;
             this.nodes.AddingNew += (sender, e) => { e.NewObject = new Node(this._PowerSystem); };
-            this.generatingUnits = this._PowerSystem.generatingUnits;
+            this.generatingUnits = this._PowerSystem._GeneratingUnits;
             this.generatingUnits.AddingNew += (sender, e) => { e.NewObject = new GeneratingUnit(this._PowerSystem); };
-            this.inelasticLoads = this._PowerSystem.inelasticLoads;
+            this.inelasticLoads = this._PowerSystem._InelasticLoads;
             this.inelasticLoads.AddingNew += (sender, e) => { e.NewObject = new InelasticLoad(this._PowerSystem); };
-            this.transmissionLines = this._PowerSystem.transmissionLines;
+            this.transmissionLines = this._PowerSystem._TransmissionLines;
             this.transmissionLines.AddingNew += (sender, e) => { e.NewObject = new TransmissionLine(this._PowerSystem); };
         }
 

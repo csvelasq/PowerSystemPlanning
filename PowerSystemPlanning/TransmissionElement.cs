@@ -37,9 +37,9 @@ namespace PowerSystemPlanning
                 if (this.NodeFrom!=null)
                 {
                     if (this.NodeFrom.Id != value)
-                        this.NodeFrom = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
+                        this.NodeFrom = _PowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
                 }
-                else this.NodeFrom = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
+                else this.NodeFrom = _PowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
             }
         }
 
@@ -59,9 +59,9 @@ namespace PowerSystemPlanning
             {
                 if (this.NodeFrom != null)
                 {
-                    if (this.NodeFrom.Name != value) this.NodeFrom = _PowerSystem.nodes.SingleOrDefault(x => x.Name == value);
+                    if (this.NodeFrom.Name != value) this.NodeFrom = _PowerSystem._Nodes.SingleOrDefault(x => x.Name == value);
                 }
-                else this.NodeFrom = _PowerSystem.nodes.SingleOrDefault(x => x.Name == value);
+                else this.NodeFrom = _PowerSystem._Nodes.SingleOrDefault(x => x.Name == value);
             }
         }
 
@@ -87,9 +87,9 @@ namespace PowerSystemPlanning
                 if (this.NodeTo != null)
                 {
                     if (this.NodeTo.Id != value)
-                        this.NodeTo = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
+                        this.NodeTo = _PowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
                 }
-                else this.NodeTo = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
+                else this.NodeTo = _PowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
             }
         }
 
@@ -109,9 +109,9 @@ namespace PowerSystemPlanning
             {
                 if (this.NodeTo != null)
                 {
-                    if (this.NodeTo.Name != value) this.NodeTo = _PowerSystem.nodes.SingleOrDefault(x => x.Name == value);
+                    if (this.NodeTo.Name != value) this.NodeTo = _PowerSystem._Nodes.SingleOrDefault(x => x.Name == value);
                 }
-                else this.NodeTo = _PowerSystem.nodes.SingleOrDefault(x => x.Name == value);
+                else this.NodeTo = _PowerSystem._Nodes.SingleOrDefault(x => x.Name == value);
             }
         }
 

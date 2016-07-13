@@ -54,11 +54,11 @@
   <ItemGroup>
     <Compile Include="GeneratingUnit.cs" />
     <Compile Include="InelasticLoad.cs" />
+    <Compile Include="IPowerSystem.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="NodeElement.cs" />
+    <Compile Include="PlanningModels\PowerSystemDecorator.cs" />
     <Compile Include="Solvers\OPF\OPFModel.cs" />
-    <Compile Include="PlanningModels\GeneratingUnitCandidate.cs" />
-    <Compile Include="PlanningModels\TransmissionLineCandidate.cs" />
     <Compile Include="PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\IPowerSystemSolver.cs" />
@@ -76,6 +76,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

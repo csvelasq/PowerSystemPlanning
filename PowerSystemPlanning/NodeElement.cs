@@ -67,9 +67,9 @@ namespace PowerSystemPlanning
             {
                 if (this.ConnectionNode!=null)
                 {
-                    if (this.ConnectionNode.Id != value) this.ConnectionNode = _PowerSystem.nodes.SingleOrDefault(x=> x.Id==value);
+                    if (this.ConnectionNode.Id != value) this.ConnectionNode = _PowerSystem._Nodes.SingleOrDefault(x=> x.Id==value);
                 }
-                else this.ConnectionNode = _PowerSystem.nodes.SingleOrDefault(x => x.Id == value);
+                else this.ConnectionNode = _PowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
             }
         }
 
@@ -88,9 +88,9 @@ namespace PowerSystemPlanning
             {
                 if (this.ConnectionNode != null)
                 {
-                    if (this.ConnectionNode.Name != value) this.ConnectionNode = _PowerSystem.nodes.SingleOrDefault(x => x.Name == value);
+                    if (this.ConnectionNode.Name != value) this.ConnectionNode = _PowerSystem._Nodes.SingleOrDefault(x => x.Name == value);
                 }
-                else this.ConnectionNode = _PowerSystem.nodes.SingleOrDefault(x => x.Name == value);
+                else this.ConnectionNode = _PowerSystem._Nodes.SingleOrDefault(x => x.Name == value);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using PowerSystemPlanning;
+using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.Solvers;
 using PowerSystemPlanning.Solvers.OPF;
 using System;
@@ -39,7 +40,7 @@ namespace PowerSystemPlanningWpfApp.OPF
 
         private void btnRunOPF_Click(object sender, RoutedEventArgs e)
         {
-            opf = new OPFModel(this.powerSystem);
+            opf = new OPFModel(new PowerSystemDecorator(this.powerSystem));
             opf.Solve();
             this.OPFSolverResults = opf.getResults();
             this.OPFResults = (this.OPFSolverResults.Result as OPFModelResult);

@@ -59,7 +59,7 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return (from gen in this._PowerSystem.generatingUnits where gen.ConnectionNodeId == this.Id select gen).ToList<GeneratingUnit>();
+                return (from gen in this._PowerSystem._GeneratingUnits where gen.ConnectionNodeId == this.Id select gen).ToList<GeneratingUnit>();
             }
         }
 
@@ -71,7 +71,7 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return (from load in this._PowerSystem.inelasticLoads where load.ConnectionNodeId == this.Id select load).ToList<InelasticLoad>();
+                return (from load in this._PowerSystem._InelasticLoads where load.ConnectionNodeId == this.Id select load).ToList<InelasticLoad>();
             }
         }
 
@@ -83,7 +83,7 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return (from load in this._PowerSystem.inelasticLoads where load.ConnectionNodeId == this.Id select load.ConsumptionMW).Sum();
+                return (from load in this._PowerSystem._InelasticLoads where load.ConnectionNodeId == this.Id select load.ConsumptionMW).Sum();
             }
         }
 
@@ -109,7 +109,7 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return (from tl in this._PowerSystem.transmissionLines where tl.NodeToID == this.Id select tl).ToList<TransmissionLine>();
+                return (from tl in this._PowerSystem._TransmissionLines where tl.NodeToID == this.Id select tl).ToList<TransmissionLine>();
             }
         }
 
@@ -121,7 +121,7 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return (from tl in this._PowerSystem.transmissionLines where tl.NodeFromID == this.Id select tl).ToList<TransmissionLine>();
+                return (from tl in this._PowerSystem._TransmissionLines where tl.NodeFromID == this.Id select tl).ToList<TransmissionLine>();
             }
         }
 

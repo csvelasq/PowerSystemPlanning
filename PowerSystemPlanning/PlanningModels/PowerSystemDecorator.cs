@@ -101,6 +101,14 @@ namespace PowerSystemPlanning.PlanningModels
             }
         }
 
+        public double LoadSheddingCost
+        {
+            get
+            {
+                return this.powerSystem.LoadSheddingCost;
+            }
+        }
+
         public IList<TransmissionLine> TransmissionLines
         {
             get

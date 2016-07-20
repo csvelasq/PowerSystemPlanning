@@ -6,6 +6,7 @@ namespace PowerSystemPlanning
     {
         IList<GeneratingUnit> GeneratingUnits { get; }
         IList<InelasticLoad> InelasticLoads { get; }
+        double LoadSheddingCost { get; }
         string Name { get; set; }
         IList<Node> Nodes { get; }
         int NumberOfGeneratingUnits { get; }

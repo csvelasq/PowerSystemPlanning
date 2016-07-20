@@ -23,7 +23,7 @@ namespace PowerSystemPlanning
         // TODO Linear DC OPF
         // TODO Linear DC OPF LDC
         // TODO Linear DC OPF LDC with generation and transmission binary parameters
-        
+
         private string name;
 
         /// <summary>
@@ -114,6 +114,23 @@ namespace PowerSystemPlanning
             get
             {
                 return (from load in this._InelasticLoads select load.ConsumptionMW).Sum();
+            }
+        }
+
+        private double _LoadSheddingCost;
+
+        /// <summary>
+        /// The cost (in US$) of shedding 1 MW of any load.
+        /// </summary>
+        public double LoadSheddingCost
+        {
+            get
+            {
+                return this._LoadSheddingCost;
+            }
+            set
+            {
+                this._LoadSheddingCost = value;
             }
         }
 

@@ -52,20 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneratingUnit.cs" />
-    <Compile Include="InelasticLoad.cs" />
-    <Compile Include="IPowerSystem.cs" />
-    <Compile Include="Node.cs" />
-    <Compile Include="NodeElement.cs" />
+    <Compile Include="PlanningModels\GeneratingUnit.cs" />
+    <Compile Include="PlanningModels\InelasticLoad.cs" />
+    <Compile Include="PlanningModels\IPowerSystem.cs" />
+    <Compile Include="PlanningModels\Node.cs" />
+    <Compile Include="PlanningModels\NodeElement.cs" />
     <Compile Include="PlanningModels\PowerSystemDecorator.cs" />
+    <Compile Include="Solvers\OPF\IGRBOptimizationModelResult.cs" />
     <Compile Include="Solvers\OPF\OPFModel.cs" />
-    <Compile Include="PowerSystem.cs" />
+    <Compile Include="PlanningModels\PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\IPowerSystemSolver.cs" />
+    <Compile Include="Solvers\OPF\OPFModelResult.cs" />
     <Compile Include="Solvers\PowerSystemSolverConfiguration.cs" />
     <Compile Include="Solvers\PowerSystemSolveResults.cs" />
-    <Compile Include="TransmissionElement.cs" />
-    <Compile Include="TransmissionLine.cs" />
+    <Compile Include="PlanningModels\TransmissionElement.cs" />
+    <Compile Include="PlanningModels\TransmissionLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">

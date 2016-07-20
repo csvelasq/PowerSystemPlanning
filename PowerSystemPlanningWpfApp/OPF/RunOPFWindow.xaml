@@ -9,29 +9,74 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="210*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnRunOPF" Content="Run Optimal Power Flow" Grid.Row="0" Width="140" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,2.5" Click="btnRunOPF_Click" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Label Content="Total Generation Cost:" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBox x:Name="tbTotalCost" Width="75" Height="25" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right" />
             <CheckBox Content="Model solved?" VerticalAlignment="Center" Margin="20,0,0,0" />
             <CheckBox Content="Model infeasible?" VerticalAlignment="Center" Margin="20,0,0,0" />
+            <CheckBox Content="Model unbounded?" VerticalAlignment="Center" Margin="20,0,0,0" />
         </StackPanel>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="400" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Power generated:" Grid.Column="0">
-                <ListView x:Name="lvPowerGenerated" />
+            <GroupBox Header="Nodal results" Grid.Column="0">
+                <DataGrid Name="dgNodalResults" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                    <DataGrid.AlternatingRowBackground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                    </DataGrid.AlternatingRowBackground>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Node ID" Binding="{Binding NodeId}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Node Name" Binding="{Binding NodeName}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Angle (rad)" Binding="{Binding Angle}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Total Power Generated (MW)" Binding="{Binding TotalPowerGenerated}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Total Power Consumed (MW)" Binding="{Binding TotalPowerConsumed}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Load Shedding (MW)" Binding="{Binding LoadShedding}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Spot Price (US$/MW)" Binding="{Binding SpotPrice}" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </GroupBox>
             <GridSplitter Grid.Column="1" Width="5" />
-            <GroupBox Header="Power flow in branches:" Grid.Column="2">
-                <ListView x:Name="lvPowerFlow" />
-            </GroupBox>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <GroupBox Header="Power generated" Grid.Row="0">
+                    <DataGrid Name="dgGeneratorResults" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                        <DataGrid.AlternatingRowBackground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                        </DataGrid.AlternatingRowBackground>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Connection Node ID" Binding="{Binding GeneratingUnit.ConnectionNodeId}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Power Generated (MW)" Binding="{Binding Output}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Maximum Output (MW)" Binding="{Binding GeneratingUnit.InstalledCapacityMW}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Marginal Cost (US$/MW)" Binding="{Binding GeneratingUnit.MarginalCost}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Total Generation Cost (US$)" Binding="{Binding TotalGenerationCost}" IsReadOnly="True" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+                <GroupBox Header="Power flow in branches" Grid.Row="2">
+                    <DataGrid Name="dgTransmissionLineResults" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                        <DataGrid.AlternatingRowBackground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                        </DataGrid.AlternatingRowBackground>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Node From ID" Binding="{Binding NodeFromID}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Node To ID" Binding="{Binding NodeToID}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Node To ID" Binding="{Binding NodeToID}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Power Flow (MW)" Binding="{Binding PowerFlow}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Thermal Capacity (MW)" Binding="{Binding TransmissionLine.ThermalCapacityMW}" IsReadOnly="True" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

@@ -55,7 +55,7 @@ namespace PowerSystemPlanning
         /// Generating units connected to this node.
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
-        public List<GeneratingUnit> generatingUnits
+        public List<GeneratingUnit> GeneratingUnits
         {
             get
             {
@@ -67,7 +67,7 @@ namespace PowerSystemPlanning
         /// Inelastic loads connected to this node.
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
-        public List<InelasticLoad> inelasticLoads
+        public List<InelasticLoad> InelasticLoads
         {
             get
             {
@@ -91,12 +91,12 @@ namespace PowerSystemPlanning
         /// Transmission lines connected to this node (incoming and outgoing).
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
-        public List<TransmissionLine> transmissionLines
+        public List<TransmissionLine> TransmissionLines
         {
             get
             {
-                var tls = this.incomingTransmissionLines;
-                tls.AddRange(this.outgoingTransmissionLines);
+                var tls = this.IncomingTransmissionLines;
+                tls.AddRange(this.OutgoingTransmissionLines);
                 return tls;
             }
         }
@@ -105,7 +105,7 @@ namespace PowerSystemPlanning
         /// Transmission lines incoming to this node.
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
-        public List<TransmissionLine> incomingTransmissionLines
+        public List<TransmissionLine> IncomingTransmissionLines
         {
             get
             {
@@ -117,7 +117,7 @@ namespace PowerSystemPlanning
         /// Transmission lines outgoing from this node.
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
-        public List<TransmissionLine> outgoingTransmissionLines
+        public List<TransmissionLine> OutgoingTransmissionLines
         {
             get
             {

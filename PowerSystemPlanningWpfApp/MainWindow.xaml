@@ -77,8 +77,10 @@
             </Menu>
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Grid.Row="1" VerticalAlignment="Center">
-            <Label x:Name="label" Content="Power System Name:" HorizontalAlignment="Left"/>
+            <Label Content="Power System Name:" HorizontalAlignment="Left"/>
             <TextBox x:Name="tbPowerSystemName" Width="200" Padding="0" Text="{Binding Path=powerSystemName}" />
+            <Label Content="Load Shedding Cost:" HorizontalAlignment="Left"/>
+            <TextBox x:Name="tbLoadSheddingCost" Width="200" Padding="0" Text="{Binding Path=LoadSheddingCost}" />
         </DockPanel>
         <Grid Margin="0,0,0,0" Grid.Row="2">
             <Grid.ColumnDefinitions>

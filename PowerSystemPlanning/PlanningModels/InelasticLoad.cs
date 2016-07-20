@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 namespace PowerSystemPlanning
 {
     /// <summary>
-    /// An inelastic load connected to a given power system (i.e. with fixed consumption regardless of the price of electricity).
+    /// An inelastic load connected to a given power system.
     /// </summary>
+    /// <remarks>
+    /// An inelastic load has fixed consumption (in MW) regardless of the price of electricity.
+    /// A high cost is incurred if the load is to be shed.
+    /// </remarks>
     public class InelasticLoad : NodeElement
     {
         private double _ConsumptionMW;

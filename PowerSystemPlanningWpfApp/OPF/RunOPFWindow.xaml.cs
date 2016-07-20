@@ -36,17 +36,14 @@ namespace PowerSystemPlanningWpfApp.OPF
         public RunOPFWindow(PowerSystem powerSystem) : this()
         {
             this.powerSystem = powerSystem;
-        }
-
-        private void btnRunOPF_Click(object sender, RoutedEventArgs e)
-        {
             opf = new OPFModel(new PowerSystemDecorator(this.powerSystem));
             opf.Solve();
             this.OPFSolverResults = opf.getResults();
             this.OPFResults = (this.OPFSolverResults.Result as OPFModelResult);
             tbTotalCost.Text = this.OPFResults.TotalGenerationCost.ToString();
-            lvPowerGenerated.ItemsSource = this.OPFResults.PowerGenerated;
-            lvPowerFlow.ItemsSource = this.OPFResults.PowerFlows;
+            dgNodalResults.DataContext = OPFResults.NodeOPFResults;
+            dgGeneratorResults.DataContext = OPFResults.GeneratingUnitOPFResults;
+            dgTransmissionLineResults.DataContext = OPFResults.TransmissionLineOPFResults;
         }
     }
 }

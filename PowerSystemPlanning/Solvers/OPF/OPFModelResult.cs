@@ -310,7 +310,7 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         public int Id { get { return this._TransmissionLine.Id; } }
         public int NodeFromId { get { return this._TransmissionLine.NodeFromID; } }
-        public int NodeToID { get { return this._TransmissionLine.NodeToID; } }
+        public int NodeToId { get { return this._TransmissionLine.NodeToID; } }
 
         public double PowerFlow
         {

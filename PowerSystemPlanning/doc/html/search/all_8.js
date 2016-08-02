@@ -1,15 +1,17 @@
 var searchData=
 [
-  ['opf',['OPF',['../namespace_power_system_planning_1_1_solvers_1_1_o_p_f.html',1,'PowerSystemPlanning::Solvers']]],
-  ['pflow_5fsolution',['PFlow_Solution',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a42cd352e50a3a3602652c3dd9974615e',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
-  ['pgen_5fsolution',['PGen_Solution',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a2ed4ccf11d87a4a642a87875228e7c10',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
-  ['planningmodels',['PlanningModels',['../namespace_power_system_planning_1_1_planning_models.html',1,'PowerSystemPlanning']]],
-  ['powerflows',['PowerFlows',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_result.html#a2896eb6966cfbb87baece961ff72487c',1,'PowerSystemPlanning::Solvers::OPF::OPFModelResult']]],
-  ['powergenerated',['PowerGenerated',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_result.html#ab3df5ac98d6c49a3f1b6143c53381271',1,'PowerSystemPlanning::Solvers::OPF::OPFModelResult']]],
-  ['powersystem',['PowerSystem',['../class_power_system_planning_1_1_power_system.html',1,'PowerSystemPlanning']]],
-  ['powersystemplanning',['PowerSystemPlanning',['../namespace_power_system_planning.html',1,'']]],
-  ['powersystemsolverconfiguration',['PowerSystemSolverConfiguration',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_configuration.html',1,'PowerSystemPlanning::Solvers']]],
-  ['powersystemsolveresultstate',['PowerSystemSolveResultState',['../namespace_power_system_planning_1_1_solvers.html#abab281800bf0cb59933d3721663b3964',1,'PowerSystemPlanning::Solvers']]],
-  ['powersystemsolverresults',['PowerSystemSolverResults',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_results.html',1,'PowerSystemPlanning::Solvers']]],
-  ['solvers',['Solvers',['../namespace_power_system_planning_1_1_solvers.html',1,'PowerSystemPlanning']]]
+  ['name',['Name',['../class_power_system_planning_1_1_node.html#ac793185992fc6c55ca5e1880f4947e57',1,'PowerSystemPlanning.Node.Name()'],['../class_power_system_planning_1_1_node_element.html#a07a0b254e0ac3b4b97dd45bde0a44291',1,'PowerSystemPlanning.NodeElement.Name()'],['../class_power_system_planning_1_1_power_system.html#ae511d3a9d7c871726037041b9fdabe14',1,'PowerSystemPlanning.PowerSystem.Name()'],['../class_power_system_planning_1_1_transmission_element.html#a5147d0e7710dbb8d28988a40c9e8ac3c',1,'PowerSystemPlanning.TransmissionElement.Name()']]],
+  ['node',['Node',['../class_power_system_planning_1_1_node.html',1,'PowerSystemPlanning']]],
+  ['node',['Node',['../class_power_system_planning_1_1_node.html#a7c7b4c8b9e85f023e7cc2c4ea9548bcc',1,'PowerSystemPlanning.Node.Node()'],['../class_power_system_planning_1_1_node.html#ae780d904bb5294448298e5537c747ff2',1,'PowerSystemPlanning.Node.Node(PowerSystem power_system)']]],
+  ['nodeelement',['NodeElement',['../class_power_system_planning_1_1_node_element.html',1,'PowerSystemPlanning']]],
+  ['nodeelement',['NodeElement',['../class_power_system_planning_1_1_node_element.html#ab6f2652d513f4c2395586e51b3bdacca',1,'PowerSystemPlanning::NodeElement']]],
+  ['nodefrom',['NodeFrom',['../class_power_system_planning_1_1_transmission_element.html#a361691d8c6720d32ab4e2be4e77233b3',1,'PowerSystemPlanning::TransmissionElement']]],
+  ['nodefromid',['NodeFromID',['../class_power_system_planning_1_1_transmission_element.html#a050027a75710ba42d4d742cf78889f29',1,'PowerSystemPlanning::TransmissionElement']]],
+  ['nodefromname',['NodeFromName',['../class_power_system_planning_1_1_transmission_element.html#a6595ed8a111ff217d5437cc747b3a7c3',1,'PowerSystemPlanning::TransmissionElement']]],
+  ['nodeopfresult',['NodeOPFResult',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_node_o_p_f_result.html',1,'PowerSystemPlanning::Solvers::OPF']]],
+  ['nodes',['Nodes',['../class_power_system_planning_1_1_power_system.html#aa51d9c68a12cae03acd530e9ceff58f9',1,'PowerSystemPlanning::PowerSystem']]],
+  ['nodeto',['NodeTo',['../class_power_system_planning_1_1_transmission_element.html#adfffaeb9dab17f7f2bafec0f319b2fe5',1,'PowerSystemPlanning::TransmissionElement']]],
+  ['nodetoid',['NodeToID',['../class_power_system_planning_1_1_transmission_element.html#a670796e35f8f4af35326cfc1dd1b104f',1,'PowerSystemPlanning::TransmissionElement']]],
+  ['nodetoname',['NodeToName',['../class_power_system_planning_1_1_transmission_element.html#ad6028ae3c8e7ac1527cfde854c81dedd',1,'PowerSystemPlanning::TransmissionElement']]],
+  ['numberofnodes',['NumberOfNodes',['../class_power_system_planning_1_1_power_system.html#a3d7abefe87bb1621c5d61644b83ae3d5',1,'PowerSystemPlanning::PowerSystem']]]
 ];

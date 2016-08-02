@@ -51,6 +51,7 @@ namespace PowerSystemPlanningWpfApp
         {
             // Sets the DataContext of datagrids and other UI components to corresponding objects in the backend.
             // This method is called when starting and also when opening a file.
+            this.DataContext = null;
             this.DataContext = backend;
             this.dgNodes.DataContext = this.backend.nodes;
             this.dgGenerators.DataContext = this.backend.generatingUnits;

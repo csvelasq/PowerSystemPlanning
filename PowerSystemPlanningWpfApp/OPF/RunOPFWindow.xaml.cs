@@ -40,10 +40,11 @@ namespace PowerSystemPlanningWpfApp.OPF
             opf.Solve();
             this.OPFSolverResults = opf.getResults();
             this.OPFResults = (this.OPFSolverResults.Result as OPFModelResult);
-            tbTotalCost.Text = this.OPFResults.TotalGenerationCost.ToString();
-            dgNodalResults.DataContext = OPFResults.NodeOPFResults;
-            dgGeneratorResults.DataContext = OPFResults.GeneratingUnitOPFResults;
-            dgTransmissionLineResults.DataContext = OPFResults.TransmissionLineOPFResults;
+            this.DataContext = this.OPFResults;
+            //tbTotalCost.Text = this.OPFResults.TotalGenerationCost.ToString();
+            //dgNodalResults.DataContext = OPFResults.NodeOPFResults;
+            //dgGeneratorResults.DataContext = OPFResults.GeneratingUnitOPFResults;
+            //dgTransmissionLineResults.DataContext = OPFResults.TransmissionLineOPFResults;
         }
     }
 }

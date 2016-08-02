@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PowerSystemPlanningWpfApp.Models
 {
-    public class PowerSystemViewModel
+    public class PowerSystemViewModel : INotifyPropertyChanged
     {
         // TODO Copy to excel including headers
         // TODO Datagrid validation
@@ -21,6 +21,16 @@ namespace PowerSystemPlanningWpfApp.Models
         /// NLog Logger for this class.
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
 
         private PowerSystem _PowerSystem;
         public BindingList<Node> nodes;
@@ -35,11 +45,32 @@ namespace PowerSystemPlanningWpfApp.Models
             }
             set
             {
-                this._PowerSystem.Name = value;
+                if (this._PowerSystem.Name != value)
+                {
+                    this._PowerSystem.Name = value;
+                    NotifyPropertyChanged("powerSystemName");
+                }
+            }
+        }
+
+        public double LoadSheddingCost
+        {
+            get
+            {
+                return _PowerSystem.LoadSheddingCost;
+            }
+            set
+            {
+                if (_PowerSystem.LoadSheddingCost != value)
+                {
+                    _PowerSystem.LoadSheddingCost = value;
+                    NotifyPropertyChanged("LoadSheddingCost");
+                }
             }
         }
 
         public string full_fileName;
+
         public bool isSaved { get { return File.Exists(this.full_fileName); } }
 
         #region DelegateCommands

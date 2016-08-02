@@ -201,6 +201,10 @@ namespace PowerSystemPlanning
         {
             System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));
             PowerSystem retval = (PowerSystem)reader.Deserialize(xmlStream);
+            foreach (Node node in retval.Nodes)
+            {
+                node.PowerSystem = retval;
+            }
             return retval;
         }
     }

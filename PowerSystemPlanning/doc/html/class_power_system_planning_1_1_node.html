@@ -103,7 +103,8 @@ Collaboration diagram for PowerSystemPlanning.Node:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_power_system_planning_1_1_node__coll__graph.png" border="0" usemap="#_power_system_planning_8_node_coll__map" alt="Collaboration graph"/></div>
 <map name="_power_system_planning_8_node_coll__map" id="_power_system_planning_8_node_coll__map">
-<area shape="rect" id="node2" href="class_power_system_planning_1_1_power_system.html" title="Represents the technical and economic model of a Power System for the objectives of medium to long te..." alt="" coords="5,5,199,47"/>
+<area shape="rect" id="node2" href="class_power_system_planning_1_1_power_system.html" title="Represents the technical and economic model of a Power System for medium to long term planning..." alt="" coords="5,81,199,123"/>
+<area shape="rect" id="node3" href="interface_power_system_planning_1_1_i_power_system.html" title="IPowerSystem" alt="" coords="49,5,155,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -124,30 +125,33 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
+<tr class="memitem:a20e0f4c3910799d62e610fd10c4623a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20e0f4c3910799d62e610fd10c4623a8"></a>
+<a class="el" href="class_power_system_planning_1_1_power_system.html">PowerSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PowerSystem</b><code> [get, set]</code></td></tr>
+<tr class="separator:a20e0f4c3910799d62e610fd10c4623a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd72649e4b2b83daa0980ab87a90034a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#abd72649e4b2b83daa0980ab87a90034a">Id</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:abd72649e4b2b83daa0980ab87a90034a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique ID of this node within the power system.  <a href="#abd72649e4b2b83daa0980ab87a90034a">More...</a><br /></td></tr>
 <tr class="separator:abd72649e4b2b83daa0980ab87a90034a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac793185992fc6c55ca5e1880f4947e57"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#ac793185992fc6c55ca5e1880f4947e57">Name</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:ac793185992fc6c55ca5e1880f4947e57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the node (arbitrarily assigned by the user).  <a href="#ac793185992fc6c55ca5e1880f4947e57">More...</a><br /></td></tr>
 <tr class="separator:ac793185992fc6c55ca5e1880f4947e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b0943967935c496d57afbd76b12706c"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_generating_unit.html">GeneratingUnit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a8b0943967935c496d57afbd76b12706c">generatingUnits</a><code> [get]</code></td></tr>
-<tr class="memdesc:a8b0943967935c496d57afbd76b12706c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generating units connected to this node.  <a href="#a8b0943967935c496d57afbd76b12706c">More...</a><br /></td></tr>
-<tr class="separator:a8b0943967935c496d57afbd76b12706c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cc33a77151060a8eb42d879017733da"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_inelastic_load.html">InelasticLoad</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a4cc33a77151060a8eb42d879017733da">inelasticLoads</a><code> [get]</code></td></tr>
-<tr class="memdesc:a4cc33a77151060a8eb42d879017733da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inelastic loads connected to this node.  <a href="#a4cc33a77151060a8eb42d879017733da">More...</a><br /></td></tr>
-<tr class="separator:a4cc33a77151060a8eb42d879017733da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae781a2962ffb2beaba540f4b2f439963"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_generating_unit.html">GeneratingUnit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#ae781a2962ffb2beaba540f4b2f439963">GeneratingUnits</a><code> [get]</code></td></tr>
+<tr class="memdesc:ae781a2962ffb2beaba540f4b2f439963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generating units connected to this node.  <a href="#ae781a2962ffb2beaba540f4b2f439963">More...</a><br /></td></tr>
+<tr class="separator:ae781a2962ffb2beaba540f4b2f439963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a242eb347ec0e73927cfcba3ddacc8153"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_inelastic_load.html">InelasticLoad</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a242eb347ec0e73927cfcba3ddacc8153">InelasticLoads</a><code> [get]</code></td></tr>
+<tr class="memdesc:a242eb347ec0e73927cfcba3ddacc8153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inelastic loads connected to this node.  <a href="#a242eb347ec0e73927cfcba3ddacc8153">More...</a><br /></td></tr>
+<tr class="separator:a242eb347ec0e73927cfcba3ddacc8153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ad80ac9ed391e904c9cf4011c7ba00d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a5ad80ac9ed391e904c9cf4011c7ba00d">TotalLoad</a><code> [get]</code></td></tr>
 <tr class="memdesc:a5ad80ac9ed391e904c9cf4011c7ba00d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total consumption (in MW) of all inelastic loads connected to this node.  <a href="#a5ad80ac9ed391e904c9cf4011c7ba00d">More...</a><br /></td></tr>
 <tr class="separator:a5ad80ac9ed391e904c9cf4011c7ba00d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c8bd0b05dfcb3cb54e143a6cff2b52f"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a2c8bd0b05dfcb3cb54e143a6cff2b52f">transmissionLines</a><code> [get]</code></td></tr>
-<tr class="memdesc:a2c8bd0b05dfcb3cb54e143a6cff2b52f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmission lines connected to this node (incoming and outgoing).  <a href="#a2c8bd0b05dfcb3cb54e143a6cff2b52f">More...</a><br /></td></tr>
-<tr class="separator:a2c8bd0b05dfcb3cb54e143a6cff2b52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37a2e9e5e0ac761f6b85814764b41ef3"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a37a2e9e5e0ac761f6b85814764b41ef3">incomingTransmissionLines</a><code> [get]</code></td></tr>
-<tr class="memdesc:a37a2e9e5e0ac761f6b85814764b41ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmission lines incoming to this node.  <a href="#a37a2e9e5e0ac761f6b85814764b41ef3">More...</a><br /></td></tr>
-<tr class="separator:a37a2e9e5e0ac761f6b85814764b41ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b48ca310aba50314020d2ac1ea071f9"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a7b48ca310aba50314020d2ac1ea071f9">outgoingTransmissionLines</a><code> [get]</code></td></tr>
-<tr class="memdesc:a7b48ca310aba50314020d2ac1ea071f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmission lines outgoing from this node.  <a href="#a7b48ca310aba50314020d2ac1ea071f9">More...</a><br /></td></tr>
-<tr class="separator:a7b48ca310aba50314020d2ac1ea071f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99a60d0b8c6efda899676fd86417162f"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a99a60d0b8c6efda899676fd86417162f">TransmissionLines</a><code> [get]</code></td></tr>
+<tr class="memdesc:a99a60d0b8c6efda899676fd86417162f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmission lines connected to this node (incoming and outgoing).  <a href="#a99a60d0b8c6efda899676fd86417162f">More...</a><br /></td></tr>
+<tr class="separator:a99a60d0b8c6efda899676fd86417162f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b851f2b0cce15e7d245b40b43424a2d"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a6b851f2b0cce15e7d245b40b43424a2d">IncomingTransmissionLines</a><code> [get]</code></td></tr>
+<tr class="memdesc:a6b851f2b0cce15e7d245b40b43424a2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmission lines incoming to this node.  <a href="#a6b851f2b0cce15e7d245b40b43424a2d">More...</a><br /></td></tr>
+<tr class="separator:a6b851f2b0cce15e7d245b40b43424a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a125dc1d83ad828b71783bd1b2f77687a"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_power_system_planning_1_1_node.html#a125dc1d83ad828b71783bd1b2f77687a">OutgoingTransmissionLines</a><code> [get]</code></td></tr>
+<tr class="memdesc:a125dc1d83ad828b71783bd1b2f77687a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmission lines outgoing from this node.  <a href="#a125dc1d83ad828b71783bd1b2f77687a">More...</a><br /></td></tr>
+<tr class="separator:a125dc1d83ad828b71783bd1b2f77687a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A node in a given power system. A node is an element to which generators and loads are connected. Transmission lines are connected between two nodes. </p>
@@ -211,7 +215,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
-<a class="anchor" id="a8b0943967935c496d57afbd76b12706c"></a>
+<a class="anchor" id="ae781a2962ffb2beaba540f4b2f439963"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -219,7 +223,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_generating_unit.html">GeneratingUnit</a>&gt; PowerSystemPlanning.Node.generatingUnits</td>
+          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_generating_unit.html">GeneratingUnit</a>&gt; PowerSystemPlanning.Node.GeneratingUnits</td>
         </tr>
       </table>
   </td>
@@ -255,7 +259,7 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a37a2e9e5e0ac761f6b85814764b41ef3"></a>
+<a class="anchor" id="a6b851f2b0cce15e7d245b40b43424a2d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -263,7 +267,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a>&gt; PowerSystemPlanning.Node.incomingTransmissionLines</td>
+          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a>&gt; PowerSystemPlanning.Node.IncomingTransmissionLines</td>
         </tr>
       </table>
   </td>
@@ -277,7 +281,7 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4cc33a77151060a8eb42d879017733da"></a>
+<a class="anchor" id="a242eb347ec0e73927cfcba3ddacc8153"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -285,7 +289,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_inelastic_load.html">InelasticLoad</a>&gt; PowerSystemPlanning.Node.inelasticLoads</td>
+          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_inelastic_load.html">InelasticLoad</a>&gt; PowerSystemPlanning.Node.InelasticLoads</td>
         </tr>
       </table>
   </td>
@@ -321,7 +325,7 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7b48ca310aba50314020d2ac1ea071f9"></a>
+<a class="anchor" id="a125dc1d83ad828b71783bd1b2f77687a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -329,7 +333,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a>&gt; PowerSystemPlanning.Node.outgoingTransmissionLines</td>
+          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a>&gt; PowerSystemPlanning.Node.OutgoingTransmissionLines</td>
         </tr>
       </table>
   </td>
@@ -365,7 +369,7 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2c8bd0b05dfcb3cb54e143a6cff2b52f"></a>
+<a class="anchor" id="a99a60d0b8c6efda899676fd86417162f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -373,7 +377,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a>&gt; PowerSystemPlanning.Node.transmissionLines</td>
+          <td class="memname">List&lt;<a class="el" href="class_power_system_planning_1_1_transmission_line.html">TransmissionLine</a>&gt; PowerSystemPlanning.Node.TransmissionLines</td>
         </tr>
       </table>
   </td>
@@ -388,7 +392,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Node.cs</li>
+<li>PlanningModels/Node.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

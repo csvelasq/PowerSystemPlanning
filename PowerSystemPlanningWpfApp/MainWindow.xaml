@@ -78,9 +78,9 @@
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Grid.Row="1" VerticalAlignment="Center">
             <Label Content="Power System Name:" HorizontalAlignment="Left"/>
-            <TextBox x:Name="tbPowerSystemName" Width="200" Padding="0" Text="{Binding Path=powerSystemName}" />
+            <TextBox x:Name="tbPowerSystemName" Width="200" Height="20" Padding="0" Text="{Binding Path=powerSystemName, UpdateSourceTrigger=PropertyChanged}" />
             <Label Content="Load Shedding Cost:" HorizontalAlignment="Left"/>
-            <TextBox x:Name="tbLoadSheddingCost" Width="200" Padding="0" Text="{Binding Path=LoadSheddingCost}" />
+            <TextBox x:Name="tbLoadSheddingCost" Width="200" Height="20" Padding="0" Text="{Binding Path=LoadSheddingCost, StringFormat=C, UpdateSourceTrigger=LostFocus}" />
         </DockPanel>
         <Grid Margin="0,0,0,0" Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -125,7 +125,7 @@
                                 <DataGridTextColumn Header="Connection Node ID" Binding="{Binding ConnectionNodeId}" />
                                 <!--<DataGridTextColumn Header="Connection Node Name" Binding="{Binding ConnectionNodeName}" />-->
                                 <DataGridTextColumn Header="Installed Capacity (MW)" Binding="{Binding InstalledCapacityMW}" />
-                                <DataGridTextColumn Header="Marginal Cost" Binding="{Binding MarginalCost}" />
+                                <DataGridTextColumn Header="Marginal Cost" Binding="{Binding MarginalCost, StringFormat=C}" />
                             </DataGrid.Columns>
                         </localUtils:CustomDataGrid>
                     </GroupBox>

@@ -8,39 +8,54 @@
         Title="Run Optimal Power Flow" Height="395.865" Width="649.624">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="210*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Label Content="Total Generation Cost:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBox x:Name="tbTotalCost" Width="75" Height="25" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right" />
-            <CheckBox Content="Model solved?" VerticalAlignment="Center" Margin="20,0,0,0" />
-            <CheckBox Content="Model infeasible?" VerticalAlignment="Center" Margin="20,0,0,0" />
-            <CheckBox Content="Model unbounded?" VerticalAlignment="Center" Margin="20,0,0,0" />
+            <TextBox x:Name="tbTotalCost" Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
+                     Text="{Binding Path=TotalGenerationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+            <CheckBox Content="Model solved?" VerticalAlignment="Center" Margin="20,0,0,0"
+                      IsChecked="{Binding Path=IsModelSolved, Mode=OneTime}" />
+            <CheckBox Content="Model infeasible?" VerticalAlignment="Center" Margin="20,0,0,0" 
+                      IsChecked="{Binding Path=IsModelInfeasible, Mode=OneTime}" />
+            <CheckBox Content="Model unbounded?" VerticalAlignment="Center" Margin="20,0,0,0" 
+                      IsChecked="{Binding Path=IsModelUnbounded, Mode=OneTime}" />
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="100*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100*" />
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Nodal results" Grid.Column="0">
-                <DataGrid Name="dgNodalResults" ItemsSource="{Binding}" AutoGenerateColumns="False">
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <GroupBox Header="Nodal results" >
+                <DataGrid Name="dgNodalResults" ItemsSource="{Binding Path=NodeOPFResults}" AutoGenerateColumns="False" ColumnHeaderHeight="50">
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
                     <DataGrid.AlternatingRowBackground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                     </DataGrid.AlternatingRowBackground>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Node ID" Binding="{Binding NodeId}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Node Name" Binding="{Binding NodeName}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Angle (rad)" Binding="{Binding Angle}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Total Power Generated (MW)" Binding="{Binding TotalPowerGenerated}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Total Power Consumed (MW)" Binding="{Binding TotalPowerConsumed}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Load Shedding (MW)" Binding="{Binding LoadShedding}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Spot Price (US$/MW)" Binding="{Binding SpotPrice}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Node ID" Binding="{Binding NodeId}" IsReadOnly="True" Width="50" />
+                        <DataGridTextColumn Header="Node Name" Binding="{Binding NodeName}" IsReadOnly="True" Width="50" />
+                        <DataGridTextColumn Header="Angle (rad)" Binding="{Binding Angle}" IsReadOnly="True" Width="50" />
+                        <DataGridTextColumn Header="Total Power Generated (MW)" Binding="{Binding TotalPowerGenerated}" IsReadOnly="True" Width="100" />
+                        <DataGridTextColumn Header="Total Power Consumed (MW)" Binding="{Binding TotalPowerConsumed}" IsReadOnly="True" Width="100" />
+                        <DataGridTextColumn Header="Load Shedding (MW)" Binding="{Binding LoadShedding}" IsReadOnly="True" Width="100" />
+                        <DataGridTextColumn Header="Spot Price (US$/MW)" Binding="{Binding SpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
-            <GridSplitter Grid.Column="1" Width="5" />
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -48,7 +63,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <GroupBox Header="Power generated" Grid.Row="0">
-                    <DataGrid Name="dgGeneratorResults" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                    <DataGrid Name="dgGeneratorResults" ItemsSource="{Binding Path=GeneratingUnitOPFResults}" AutoGenerateColumns="False">
                         <DataGrid.AlternatingRowBackground>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                         </DataGrid.AlternatingRowBackground>
@@ -56,21 +71,20 @@
                             <DataGridTextColumn Header="Connection Node ID" Binding="{Binding GeneratingUnit.ConnectionNodeId}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Power Generated (MW)" Binding="{Binding Output}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Maximum Output (MW)" Binding="{Binding GeneratingUnit.InstalledCapacityMW}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Marginal Cost (US$/MW)" Binding="{Binding GeneratingUnit.MarginalCost}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Total Generation Cost (US$)" Binding="{Binding TotalGenerationCost}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Marginal Cost (US$/MW)" Binding="{Binding GeneratingUnit.MarginalCost, StringFormat=C}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Total Generation Cost (US$)" Binding="{Binding TotalGenerationCost, StringFormat=C}" IsReadOnly="True" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
                 <GroupBox Header="Power flow in branches" Grid.Row="2">
-                    <DataGrid Name="dgTransmissionLineResults" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                    <DataGrid Name="dgTransmissionLineResults" ItemsSource="{Binding Path=TransmissionLineOPFResults}" AutoGenerateColumns="False">
                         <DataGrid.AlternatingRowBackground>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                         </DataGrid.AlternatingRowBackground>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Node From ID" Binding="{Binding NodeFromID}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Node To ID" Binding="{Binding NodeToID}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Node To ID" Binding="{Binding NodeToID}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Node From ID" Binding="{Binding NodeFromId}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Node To ID" Binding="{Binding NodeToId}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Power Flow (MW)" Binding="{Binding PowerFlow}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Thermal Capacity (MW)" Binding="{Binding TransmissionLine.ThermalCapacityMW}" IsReadOnly="True" />
                         </DataGrid.Columns>

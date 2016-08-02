@@ -13,7 +13,21 @@ namespace PowerSystemPlanning
     /// </summary>
     public class Node
     {
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         protected PowerSystem _PowerSystem;
+
+        [System.Xml.Serialization.XmlIgnoreAttribute]
+        public PowerSystem PowerSystem
+        {
+            get
+            {
+                return this._PowerSystem;
+            }
+            set
+            {
+                this._PowerSystem = value;
+            }
+        }
 
         private int id;
 

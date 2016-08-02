@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>An inelastic load connected to a given power system (i.e. with fixed consumption regardless of the price of electricity).  
+<p>An inelastic load connected to a given power system.  
  <a href="class_power_system_planning_1_1_inelastic_load.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PowerSystemPlanning.InelasticLoad:</div>
@@ -110,9 +110,10 @@ Collaboration diagram for PowerSystemPlanning.InelasticLoad:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_power_system_planning_1_1_inelastic_load__coll__graph.png" border="0" usemap="#_power_system_planning_8_inelastic_load_coll__map" alt="Collaboration graph"/></div>
 <map name="_power_system_planning_8_inelastic_load_coll__map" id="_power_system_planning_8_inelastic_load_coll__map">
-<area shape="rect" id="node2" href="class_power_system_planning_1_1_node_element.html" title="Represents any element that is connected to a single node. " alt="" coords="72,199,172,225"/>
-<area shape="rect" id="node3" href="class_power_system_planning_1_1_power_system.html" title="Represents the technical and economic model of a Power System for the objectives of medium to long te..." alt="" coords="67,5,260,47"/>
-<area shape="rect" id="node4" href="class_power_system_planning_1_1_node.html" title="A node in a given power system. A node is an element to which generators and loads are connected..." alt="" coords="218,109,405,136"/>
+<area shape="rect" id="node2" href="class_power_system_planning_1_1_node_element.html" title="Represents any element that is connected to a single node. " alt="" coords="93,275,193,301"/>
+<area shape="rect" id="node3" href="class_power_system_planning_1_1_power_system.html" title="Represents the technical and economic model of a Power System for medium to long term planning..." alt="" coords="5,81,199,123"/>
+<area shape="rect" id="node5" href="class_power_system_planning_1_1_node.html" title="A node in a given power system. A node is an element to which generators and loads are connected..." alt="" coords="198,185,385,212"/>
+<area shape="rect" id="node4" href="interface_power_system_planning_1_1_i_power_system.html" title="IPowerSystem" alt="" coords="49,5,155,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -166,7 +167,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_Id</b></td></tr>
 <tr class="separator:a9d8d503e705d7884c6a59bf59ce7b355 inherit pro_attribs_class_power_system_planning_1_1_node_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An inelastic load connected to a given power system (i.e. with fixed consumption regardless of the price of electricity). </p>
+<div class="textblock"><p>An inelastic load connected to a given power system. </p>
+<p>An inelastic load has fixed consumption (in MW) regardless of the price of electricity. A high cost is incurred if the load is to be shed. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a47abae64f9f66d537230cdff873d9efa"></a>
 <div class="memitem">
@@ -217,7 +219,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_Id</b></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>InelasticLoad.cs</li>
+<li>PlanningModels/InelasticLoad.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

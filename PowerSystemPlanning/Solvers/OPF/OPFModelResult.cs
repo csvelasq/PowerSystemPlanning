@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PowerSystemPlanning.PlanningModels;
 
 namespace PowerSystemPlanning.Solvers.OPF
 {
@@ -13,7 +12,7 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// </summary>
     public class OPFModelResult : IGRBOptimizationModelResult
     {
-        PowerSystemDecorator PowerSystem;
+        PowerSystem PowerSystem;
         double _TotalGenerationCost;
         List<GeneratingUnitOPFResult> _GeneratingUnitOPFResults;
         List<NodeOPFResult> _NodeOPFResults;
@@ -67,9 +66,6 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         public double ObjVal { get { return this._TotalGenerationCost; } }
 
-        /// <summary>
-        /// Status of the Gurobi optimization (defined in GRB.Status)
-        /// </summary>
         public int GRBStatus
         {
             get
@@ -83,20 +79,26 @@ namespace PowerSystemPlanning.Solvers.OPF
             }
         }
 
-        /// <summary>
-        /// True if the model was solved to optimality, false otherwise.
-        /// </summary>
         public bool IsModelSolved { get { return _GRBStatus == GRB.Status.OPTIMAL; } }
 
-        /// <summary>
-        /// True if the model was proved to be infeasible, false otherwise.
-        /// </summary>
         public bool IsModelInfeasible { get { return _GRBStatus == GRB.Status.INFEASIBLE; } }
 
-        /// <summary>
-        /// True if the model was proved to be unbounded, false otherwise.
-        /// </summary>
         public bool IsModelUnbounded { get { return _GRBStatus == GRB.Status.UNBOUNDED; } }
+
+        public string CurrentStateMessage
+        {
+            get
+            {
+                string retmsg = "";
+                if (IsModelSolved)
+                    retmsg = "Model solved to optimality.";
+                if (IsModelInfeasible)
+                    retmsg = "Model infeasible.";
+                if (IsModelUnbounded)
+                    retmsg = "Model unbounded.";
+                return retmsg;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -109,7 +111,7 @@ namespace PowerSystemPlanning.Solvers.OPF
             this._GRBStatus = status;
         }
 
-        public OPFModelResult(PowerSystemDecorator powerSystem, int status, double totalGenerationCost, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
+        public OPFModelResult(PowerSystem powerSystem, int status, double totalGenerationCost, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
             : this(status)
         {
             this.PowerSystem = powerSystem;

@@ -57,7 +57,6 @@
     <Compile Include="PlanningModels\IPowerSystem.cs" />
     <Compile Include="PlanningModels\Node.cs" />
     <Compile Include="PlanningModels\NodeElement.cs" />
-    <Compile Include="PlanningModels\PowerSystemDecorator.cs" />
     <Compile Include="Solvers\OPF\IGRBOptimizationModelResult.cs" />
     <Compile Include="Solvers\OPF\OPFModel.cs" />
     <Compile Include="PlanningModels\PowerSystem.cs" />

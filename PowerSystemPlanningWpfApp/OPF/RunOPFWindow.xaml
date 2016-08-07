@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.OPF"
         mc:Ignorable="d"
-        Title="Run Optimal Power Flow" Height="395.865" Width="649.624">
+        Title="Run Optimal Power Flow" Height="395.865" Width="649.624" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -15,12 +15,8 @@
             <Label Content="Total Generation Cost:" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBox x:Name="tbTotalCost" Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
                      Text="{Binding Path=TotalGenerationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
-            <CheckBox Content="Model solved?" VerticalAlignment="Center" Margin="20,0,0,0"
-                      IsChecked="{Binding Path=IsModelSolved, Mode=OneTime}" />
-            <CheckBox Content="Model infeasible?" VerticalAlignment="Center" Margin="20,0,0,0" 
-                      IsChecked="{Binding Path=IsModelInfeasible, Mode=OneTime}" />
-            <CheckBox Content="Model unbounded?" VerticalAlignment="Center" Margin="20,0,0,0" 
-                      IsChecked="{Binding Path=IsModelUnbounded, Mode=OneTime}" />
+            <Label Content="{Binding Path=CurrentStateMessage, Mode=OneTime}" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" />
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['powersystem',['powerSystem',['../class_power_system_planning_1_1_planning_models_1_1_power_system_decorator.html#a3c5f5fdf34dfe4271ed1b1010db6f994',1,'PowerSystemPlanning::PlanningModels::PowerSystemDecorator']]]
+  ['opfresults',['OPFResults',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver.html#ac8d5dee6aa34a6bd664533762d09d9da',1,'PowerSystemPlanning::Solvers::OPF::OPFModelSolver']]]
 ];

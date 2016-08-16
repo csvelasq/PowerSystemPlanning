@@ -56,16 +56,11 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="_Models">
+                <MenuItem Header="_Transmission Planning">
+                    <MenuItem Header="_Optimal Power Flow" Command="{Binding Path=ShowOPFWindow}" />
                     <MenuItem Header="_Load Duration Curve (LDC) Model" Command="{Binding Path=RunLDC}" />
                     <MenuItem Header="_LDC for Static TEP" IsEnabled="False" />
                     <MenuItem Header="_LDC for TEP under Scenarios" IsEnabled="False" />
-                    <!--<MenuItem Header="_Show groups" IsCheckable="True" IsChecked="True" />-->
-                </MenuItem>
-                <MenuItem Header="_Optimization">
-                    <MenuItem Header="_Optimal Power Flow" Command="{Binding Path=ShowOPFWindow}" />
-                    <MenuItem Header="_Two-stage stochastic TEP" IsEnabled="False" />
-                    <MenuItem Header="_Minimax regret TEP" IsEnabled="False" />
                 </MenuItem>
                 <MenuItem Header="Configuration">
                     <MenuItem Header="_Configuration" IsEnabled="False" />
@@ -79,7 +74,7 @@
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Grid.Row="1" VerticalAlignment="Center">
             <Label Content="Power System Name:" HorizontalAlignment="Left"/>
             <TextBox x:Name="tbPowerSystemName" Width="200" Height="20" Padding="0" Text="{Binding Path=powerSystemName, UpdateSourceTrigger=PropertyChanged}" />
-            <Label Content="Load Shedding Cost:" HorizontalAlignment="Left"/>
+            <Label Content="Load Shedding Cost:" HorizontalAlignment="Left" Margin="20,0,0,0" />
             <TextBox x:Name="tbLoadSheddingCost" Width="200" Height="20" Padding="0" Text="{Binding Path=LoadSheddingCost, StringFormat=C, UpdateSourceTrigger=LostFocus}" />
         </DockPanel>
         <Grid Margin="0,0,0,0" Grid.Row="2">

@@ -1,5 +1,6 @@
 ﻿using NLog;
 using PowerSystemPlanning;
+using PowerSystemPlanningWpfApp.LDC;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace PowerSystemPlanningWpfApp.Models
 {
     public class PowerSystemViewModel : INotifyPropertyChanged
     {
+        // TODO Remove this middleman, interact directly with backend
         // TODO Copy to excel including headers
         // TODO Datagrid validation
         // TODO Program Configuration
@@ -81,8 +83,8 @@ namespace PowerSystemPlanningWpfApp.Models
         public DelegateCommand RunLDC { get; private set; }
         private void OnSubmitRunLDC()
         {
-            ControlUtils.WindowDatagridTest dgtest = new ControlUtils.WindowDatagridTest();
-            dgtest.Show();
+            OptimizeOPFLDC optOPFLDC = new OptimizeOPFLDC();
+            optOPFLDC.Show();
         }
         private bool CanSubmitRunLDC() { return true; }
         /// <summary>

@@ -23,7 +23,7 @@ namespace PowerSystemPlanningWpfApp.OPF
     public partial class RunOPFWindow : Window
     {
         PowerSystem powerSystem;
-        OPFModel opf;
+        OPFModelSolver opf;
         PowerSystemSolverResults OPFSolverResults;
         OPFModelResult OPFResults;
 
@@ -35,7 +35,7 @@ namespace PowerSystemPlanningWpfApp.OPF
         public RunOPFWindow(PowerSystem powerSystem) : this()
         {
             this.powerSystem = powerSystem;
-            opf = new OPFModel(this.powerSystem);
+            opf = new OPFModelSolver(this.powerSystem);
             opf.Solve();
             this.OPFSolverResults = opf.getResults();
             this.OPFResults = (this.OPFSolverResults.Result as OPFModelResult);

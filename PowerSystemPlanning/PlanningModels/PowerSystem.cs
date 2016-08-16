@@ -156,24 +156,20 @@ namespace PowerSystemPlanning
 
         public PowerSystem()
         {
+            //new objects are added directly by the GUI
             this._Nodes = new BindingList<Node>();
+            this._Nodes.AddingNew += (sender, e) => { e.NewObject = new Node(this); };
             this._GeneratingUnits = new BindingList<GeneratingUnit>();
+            this._GeneratingUnits.AddingNew += (sender, e) => { e.NewObject = new GeneratingUnit(this); };
             this._InelasticLoads = new BindingList<InelasticLoad>();
+            this._InelasticLoads.AddingNew += (sender, e) => { e.NewObject = new InelasticLoad(this); };
             this._TransmissionLines = new BindingList<TransmissionLine>();
+            this._TransmissionLines.AddingNew += (sender, e) => { e.NewObject = new TransmissionLine(this); };
         }
 
         public PowerSystem(string name) : this()
         {
             this.Name = name;
-        }
-
-        public PowerSystem(string name, BindingList<GeneratingUnit> generatingUnits, BindingList<InelasticLoad> inelasticLoads,
-            BindingList<TransmissionLine> transmissionLines)
-            : this(name)
-        {
-            this._GeneratingUnits = generatingUnits;
-            this._InelasticLoads = inelasticLoads;
-            this._TransmissionLines = transmissionLines;
         }
 
         /// <summary>

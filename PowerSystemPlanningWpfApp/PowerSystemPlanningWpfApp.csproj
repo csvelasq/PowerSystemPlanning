@@ -192,7 +192,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\PowerSystemViewModel.cs" />
     <Compile Include="OPF\RunOPFWindow.xaml.cs">
       <DependentUpon>RunOPFWindow.xaml</DependentUpon>
     </Compile>
@@ -254,6 +253,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+
+"C:\Program Files\doxygen\bin\doxygen.exe" "$(ProjectDir)PowerSystemPlanningWpfAppDoxy.conf"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

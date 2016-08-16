@@ -57,8 +57,8 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Transmission Planning">
-                    <MenuItem Header="_Optimal Power Flow" Command="{Binding Path=ShowOPFWindow}" />
-                    <MenuItem Header="_Load Duration Curve (LDC) Model" Command="{Binding Path=RunLDC}" />
+                    <MenuItem x:Name="opfMenuItem" Header="_Optimal Power Flow" Click="opfMenuItem_Click" />
+                    <MenuItem x:Name="ldcOpfMenuItem" Header="_Load Duration Curve (LDC) Model" Click="ldcOpfMenuItem_Click" />
                     <MenuItem Header="_LDC for Static TEP" IsEnabled="False" />
                     <MenuItem Header="_LDC for TEP under Scenarios" IsEnabled="False" />
                 </MenuItem>
@@ -67,13 +67,13 @@
                     <MenuItem Header="_Settings" IsEnabled="False" />
                 </MenuItem>
                 <MenuItem Header="Help">
-                    <MenuItem Header="_About" Command="{Binding Path=ShowAboutWindow}" />
+                    <MenuItem x:Name="aboutMenuItem" Header="_About" Click="aboutMenuItem_Click" />
                 </MenuItem>
             </Menu>
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Grid.Row="1" VerticalAlignment="Center">
             <Label Content="Power System Name:" HorizontalAlignment="Left"/>
-            <TextBox x:Name="tbPowerSystemName" Width="200" Height="20" Padding="0" Text="{Binding Path=powerSystemName, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="tbPowerSystemName" Width="200" Height="20" Padding="0" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
             <Label Content="Load Shedding Cost:" HorizontalAlignment="Left" Margin="20,0,0,0" />
             <TextBox x:Name="tbLoadSheddingCost" Width="200" Height="20" Padding="0" Text="{Binding Path=LoadSheddingCost, StringFormat=C, UpdateSourceTrigger=LostFocus}" />
         </DockPanel>
@@ -85,8 +85,8 @@
                 <ColumnDefinition Width="284*" />
             </Grid.ColumnDefinitions>
             <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Stretch" Margin="0,0,-0.001,0" />
-            <GroupBox x:Name="groupBox" Header="Nodes" Grid.ColumnSpan="2">
-                <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding}" Margin="4,10,4,4" AutoGenerateColumns="False">
+            <GroupBox Header="Nodes" Grid.ColumnSpan="2">
+                <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding Path=_Nodes}" Margin="4,10,4,4" AutoGenerateColumns="False">
                     <DataGrid.AlternatingRowBackground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                     </DataGrid.AlternatingRowBackground>
@@ -109,8 +109,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-                    <GroupBox x:Name="groupBox1" Header="Generators" Margin="1.19,5,0,0">
-                        <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding}" Margin="-1,10,4,4" AutoGenerateColumns="False">
+                    <GroupBox Header="Generators" Margin="1.19,5,0,0">
+                        <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding Path=_Generators}" Margin="-1,10,4,4" AutoGenerateColumns="False">
                             <DataGrid.AlternatingRowBackground>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
@@ -124,8 +124,8 @@
                             </DataGrid.Columns>
                         </localUtils:CustomDataGrid>
                     </GroupBox>
-                    <GroupBox x:Name="groupBox2" Grid.Column="2" Header="Consumers" Margin="1.785,4,0,0">
-                        <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding}" Margin="0.999,10,4,4" AutoGenerateColumns="False">
+                    <GroupBox Grid.Column="2" Header="Consumers" Margin="1.785,4,0,0">
+                        <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding Path=_InelasticLoads}" Margin="0.999,10,4,4" AutoGenerateColumns="False">
                             <DataGrid.AlternatingRowBackground>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
@@ -140,8 +140,8 @@
                     </GroupBox>
                 </Grid>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-                <GroupBox x:Name="groupBox3" Header="Transmission Lines" Margin="0.19,-0.385,0,0" Grid.Row="2">
-                    <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" Margin="0,10,4,4" AutoGenerateColumns="False">
+                <GroupBox Header="Transmission Lines" Margin="0.19,-0.385,0,0" Grid.Row="2">
+                    <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding Path=_TransmissionLines}" Margin="0,10,4,4" AutoGenerateColumns="False">
                         <DataGrid.AlternatingRowBackground>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                         </DataGrid.AlternatingRowBackground>

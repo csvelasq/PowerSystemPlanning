@@ -84,7 +84,7 @@
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)
 
-"C:\Program Files\doxygen\bin\doxygen.exe" $(ProjectDir)PowerSystemPlanningDoxy.conf</PostBuildEvent>
+"C:\Program Files\doxygen\bin\doxygen.exe" "$(ProjectDir)PowerSystemPlanningDoxy.conf"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

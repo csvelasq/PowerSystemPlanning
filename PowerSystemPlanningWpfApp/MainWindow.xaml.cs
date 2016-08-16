@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PowerSystemPlanning;
 using System.Collections.ObjectModel;
-using PowerSystemPlanningWpfApp.Models;
 using System.IO;
 using NLog;
 
@@ -34,29 +33,26 @@ namespace PowerSystemPlanningWpfApp
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// Viewmodel of this application.
+        /// Backend of this application.
         /// </summary>
-        PowerSystemViewModel backend;
+        PowerSystem _PowerSystem;
+
+        PowerSystem PowerSystem
+        {
+            get { return this._PowerSystem; }
+            set
+            {
+                this._PowerSystem = value;
+                this.DataContext = this._PowerSystem;
+            }
+        }
 
         public MainWindow()
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
-            this.backend = new PowerSystemViewModel();
-            this.setDataContext();
+            this.PowerSystem = new PowerSystem();
             this.RecentFileList.MenuClick += (s, e) => OpenModelFile(e.Filepath);
-        }
-        
-        private void setDataContext()
-        {
-            // Sets the DataContext of datagrids and other UI components to corresponding objects in the backend.
-            // This method is called when starting and also when opening a file.
-            this.DataContext = null;
-            this.DataContext = backend;
-            this.dgNodes.DataContext = this.backend.nodes;
-            this.dgGenerators.DataContext = this.backend.generatingUnits;
-            this.dgConsumers.DataContext = this.backend.inelasticLoads;
-            this.dgTransmissionLines.DataContext = this.backend.transmissionLines;
         }
 
         private void NewCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -84,8 +80,7 @@ namespace PowerSystemPlanningWpfApp
         {
             try
             {
-                this.backend.loadModel(filename);
-                this.setDataContext();
+                this.PowerSystem = PowerSystem.readFromXMLFile(filename);
                 this.RecentFileList.InsertFile(filename);
             }
             catch (Exception e)
@@ -100,10 +95,10 @@ namespace PowerSystemPlanningWpfApp
 
         private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!backend.isSaved)
+            if (!PowerSystem.IsSaved)
             {
                 Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                dlg.FileName = backend.powerSystemName; // Default file name
+                dlg.FileName = PowerSystem.Name; // Default file name
                 dlg.DefaultExt = ".xml"; // Default file extension
                 dlg.Filter = "XML file (.xml)|*.xml"; // Filter files by extension
                                                       // Show save file dialog box
@@ -111,16 +106,16 @@ namespace PowerSystemPlanningWpfApp
                 // Process save file dialog box results
                 if (result == true)
                 {
-                    this.backend.saveModel(dlg.FileName);
+                    this.PowerSystem.saveToXMLFile(dlg.FileName);
                 }
             }
-            else this.backend.saveModel();
+            else this.PowerSystem.saveToXMLFile();
         }
 
         private void SaveAsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = backend.powerSystemName; // Default file name
+            dlg.FileName = PowerSystem.Name; // Default file name
             dlg.DefaultExt = ".xml"; // Default file extension
             dlg.Filter = "XML file (.xml)|*.xml"; // Filter files by extension
             // Show save file dialog box
@@ -128,7 +123,7 @@ namespace PowerSystemPlanningWpfApp
             // Process save file dialog box results
             if (result == true)
             {
-                this.backend.saveModel(dlg.FileName);
+                this.PowerSystem.saveToXMLFile(dlg.FileName);
             }
         }
 
@@ -147,7 +142,7 @@ namespace PowerSystemPlanningWpfApp
                 case MessageBoxResult.Yes:
                     // User pressed Yes button: save and then close
                     Application.Current.Shutdown();
-                    backend.saveModel();
+                    PowerSystem.saveToXMLFile();
                     break;
                 case MessageBoxResult.No:
                     // User pressed No button: close immediately
@@ -182,6 +177,24 @@ namespace PowerSystemPlanningWpfApp
                 LogManager.ReconfigExistingLoggers();
 
             });
+        }
+
+        private void opfMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            OPF.RunOPFWindow runOPFWindow = new OPF.RunOPFWindow(this._PowerSystem);
+            runOPFWindow.Show();
+        }
+
+        private void ldcOpfMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            LDC.OptimizeOPFLDC optOPFLDC = new LDC.OptimizeOPFLDC();
+            optOPFLDC.Show();
+        }
+
+        private void aboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Help.About about = new Help.About();
+            about.Show();
         }
     }
 }

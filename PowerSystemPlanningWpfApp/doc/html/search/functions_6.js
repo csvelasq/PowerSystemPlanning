@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['oncanexecutepaste',['OnCanExecutePaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#ad62754f9382daa406815f7965d6af785',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
-  ['onexecutedpaste',['OnExecutedPaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#a7a8455f1c46a856165914960a0e60418',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]]
+  ['setpropertyvalue',['SetPropertyValue',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#ade0f04c0f7b18dd5b170e071d5534d38',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]],
+  ['shortenpathname',['ShortenPathname',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html#a98ebf9d14956e17f7973efde04d5281b',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]]
 ];

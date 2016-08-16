@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['controlutils',['ControlUtils',['../namespace_power_system_planning_wpf_app_1_1_control_utils.html',1,'PowerSystemPlanningWpfApp']]],
-  ['help',['Help',['../namespace_power_system_planning_wpf_app_1_1_help.html',1,'PowerSystemPlanningWpfApp']]],
-  ['helper',['Helper',['../namespace_power_system_planning_wpf_app_1_1_helper.html',1,'PowerSystemPlanningWpfApp']]],
-  ['models',['Models',['../namespace_power_system_planning_wpf_app_1_1_models.html',1,'PowerSystemPlanningWpfApp']]],
-  ['opf',['OPF',['../namespace_power_system_planning_wpf_app_1_1_o_p_f.html',1,'PowerSystemPlanningWpfApp']]],
-  ['powersystemplanningwpfapp',['PowerSystemPlanningWpfApp',['../namespace_power_system_planning_wpf_app.html',1,'']]],
-  ['powersystemviewmodel',['PowerSystemViewModel',['../class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model.html',1,'PowerSystemPlanningWpfApp::Models']]],
-  ['properties',['Properties',['../namespace_power_system_planning_wpf_app_1_1_properties.html',1,'PowerSystemPlanningWpfApp']]]
+  ['setpropertyvalue',['SetPropertyValue',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#ade0f04c0f7b18dd5b170e071d5534d38',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]],
+  ['shortenpathname',['ShortenPathname',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html#a98ebf9d14956e17f7973efde04d5281b',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]],
+  ['simplebackendmodel',['SimpleBackendModel',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_simple_backend_model.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
+  ['simplebackendobject',['SimpleBackendObject',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_simple_backend_object.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
+  ['simpleterminal',['SimpleTerminal',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_simple_terminal.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]]
 ];

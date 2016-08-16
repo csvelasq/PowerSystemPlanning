@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loadmodel',['loadModel',['../class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model.html#aa64bb0e541cc576eb77355958376915e',1,'PowerSystemPlanningWpfApp::Models::PowerSystemViewModel']]]
+  ['main',['Main',['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()'],['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()']]]
 ];

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -18,13 +19,28 @@ namespace PowerSystemPlanning
     /// The purpose of this class is to provide for easy end-user manipulation and edition of the power system model.
     /// The decorator <see cref="PowerSystemDecorator"/> should be used instead of this class in order to build optimization models, so as to enable dynamic flexibility of the resulting optimization models (e.g. allowing to deactivate transmission lines, changing the maximum output of a generator, and so on).
     /// </remarks>
-    public class PowerSystem : IPowerSystem
+    public class PowerSystem : IPowerSystem, INotifyPropertyChanged
     {
         // TODO Linear DC OPF
         // TODO Linear DC OPF LDC
         // TODO Linear DC OPF LDC with generation and transmission binary parameters
 
-        private string name;
+        /// <summary>
+        /// NLog Logger for this class.
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        private string _Name;
 
         /// <summary>
         /// Name of the power system.
@@ -33,12 +49,16 @@ namespace PowerSystemPlanning
         {
             get
             {
-                return name;
+                return _Name;
             }
 
             set
             {
-                name = value;
+                if (this._Name != value)
+                {
+                    this._Name = value;
+                    NotifyPropertyChanged("Name");
+                }
             }
         }
 
@@ -130,7 +150,11 @@ namespace PowerSystemPlanning
             }
             set
             {
-                this._LoadSheddingCost = value;
+                if (this._LoadSheddingCost != value)
+                {
+                    this._LoadSheddingCost = value;
+                    NotifyPropertyChanged("LoadSheddingCost");
+                }
             }
         }
 
@@ -154,6 +178,33 @@ namespace PowerSystemPlanning
             }
         }
 
+        private string _FullFileName;
+
+        /// <summary>
+        /// The full file name (including path) of the target XML file for saving this power system.
+        /// </summary>
+        public string FullFileName
+        {
+            get
+            {
+                return _FullFileName;
+            }
+
+            set
+            {
+                if (this._FullFileName != value)
+                {
+                    this._FullFileName = value;
+                    NotifyPropertyChanged("FullFileName");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Indicates whether the target XML file for saving this power system exists.
+        /// </summary>
+        public bool IsSaved { get { return File.Exists(this.FullFileName); } }
+
         public PowerSystem()
         {
             //new objects are added directly by the GUI
@@ -172,17 +223,21 @@ namespace PowerSystemPlanning
             this.Name = name;
         }
 
-        /// <summary>
-        /// Saves the current power sysem to an XML file, provided the stream.
-        /// </summary>
-        /// <param name="saveStream"></param>
-        /// <remarks>
-        /// The provided stream must is not closed within this method.
-        /// IOException and other exceptions are not managed.</remarks>
-        public void saveToXMLFile(TextWriter saveStream)
+        public void saveToXMLFile()
         {
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));
-            writer.Serialize(saveStream, this);
+            using (TextWriter saveStream = new StreamWriter(this.FullFileName))
+            {
+                // Save document
+                System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));
+                writer.Serialize(saveStream, this);
+            }
+            logger.Info("Current power system (named '{0}') saved in {1}.", this.Name, this.FullFileName);
+        }
+
+        public void saveToXMLFile(string file_name)
+        {
+            this.FullFileName = file_name;
+            this.saveToXMLFile();
         }
 
         /// <summary>
@@ -193,13 +248,17 @@ namespace PowerSystemPlanning
         /// <remarks>
         /// The provided stream must is not closed within this method.
         /// IOException and other exceptions are not managed.</remarks>
-        public static PowerSystem readFromXMLFile(StreamReader xmlStream)
+        public static PowerSystem readFromXMLFile(string filename)
         {
-            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));
-            PowerSystem retval = (PowerSystem)reader.Deserialize(xmlStream);
-            foreach (Node node in retval.Nodes)
+            PowerSystem retval = null;
+            using (StreamReader xmlStream = new StreamReader(filename))
             {
-                node.PowerSystem = retval;
+                System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));
+                retval = (PowerSystem)reader.Deserialize(xmlStream);
+                foreach (Node node in retval.Nodes)
+                {
+                    node.PowerSystem = retval;
+                }
             }
             return retval;
         }

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['loadmodel',['loadModel',['../class_power_system_planning_wpf_app_1_1_models_1_1_power_system_view_model.html#aa64bb0e541cc576eb77355958376915e',1,'PowerSystemPlanningWpfApp::Models::PowerSystemViewModel']]]
+  ['oncanexecutepaste',['OnCanExecutePaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#ad62754f9382daa406815f7965d6af785',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
+  ['onexecutedpaste',['OnExecutedPaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#a7a8455f1c46a856165914960a0e60418',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
+  ['optimizeopfldc',['OptimizeOPFLDC',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_optimize_o_p_f_l_d_c.html',1,'PowerSystemPlanningWpfApp::LDC']]]
 ];

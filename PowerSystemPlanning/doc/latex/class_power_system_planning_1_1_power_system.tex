@@ -11,7 +11,7 @@ Inheritance diagram for Power\+System\+Planning.\+Power\+System\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=225pt]{class_power_system_planning_1_1_power_system__inherit__graph}
+\includegraphics[width=298pt]{class_power_system_planning_1_1_power_system__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -20,7 +20,7 @@ Collaboration diagram for Power\+System\+Planning.\+Power\+System\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=225pt]{class_power_system_planning_1_1_power_system__coll__graph}
+\includegraphics[width=298pt]{class_power_system_planning_1_1_power_system__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -29,15 +29,16 @@ Collaboration diagram for Power\+System\+Planning.\+Power\+System\+:\nopagebreak
 {\bfseries Power\+System} (string name)\hypertarget{class_power_system_planning_1_1_power_system_a6892a52047756c1fc3cf988695e1b787}{}\label{class_power_system_planning_1_1_power_system_a6892a52047756c1fc3cf988695e1b787}
 
 \item 
-{\bfseries Power\+System} (string name, Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_generating_unit}{Generating\+Unit} $>$ generating\+Units, Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_inelastic_load}{Inelastic\+Load} $>$ inelastic\+Loads, Binding\+List$<$ \hyperlink{class_power_system_planning_1_1_transmission_line}{Transmission\+Line} $>$ transmission\+Lines)\hypertarget{class_power_system_planning_1_1_power_system_a127fe1b1817e0e5b8060210dcf6490a6}{}\label{class_power_system_planning_1_1_power_system_a127fe1b1817e0e5b8060210dcf6490a6}
+void {\bfseries save\+To\+X\+M\+L\+File} ()\hypertarget{class_power_system_planning_1_1_power_system_a1dcf959a68f094d9a1ca93170684e87f}{}\label{class_power_system_planning_1_1_power_system_a1dcf959a68f094d9a1ca93170684e87f}
 
 \item 
-void \hyperlink{class_power_system_planning_1_1_power_system_a0f3c09d821634b02e79b54c82297e9f6}{save\+To\+X\+M\+L\+File} (Text\+Writer save\+Stream)
-\begin{DoxyCompactList}\small\item\em Saves the current power sysem to an X\+ML file, provided the stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void {\bfseries save\+To\+X\+M\+L\+File} (string file\+\_\+name)\hypertarget{class_power_system_planning_1_1_power_system_a0dc662149c054524af6e58bc3b96fbd8}{}\label{class_power_system_planning_1_1_power_system_a0dc662149c054524af6e58bc3b96fbd8}
+
+\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{class_power_system_planning_1_1_power_system}{Power\+System} \hyperlink{class_power_system_planning_1_1_power_system_ad61746fe7b02b94761abec0f022d106a}{read\+From\+X\+M\+L\+File} (Stream\+Reader xml\+Stream)
+static \hyperlink{class_power_system_planning_1_1_power_system}{Power\+System} \hyperlink{class_power_system_planning_1_1_power_system_a6e4503f2559b1073a140555ecd6093b0}{read\+From\+X\+M\+L\+File} (string filename)
 \begin{DoxyCompactList}\small\item\em Creates a Power System by reading an X\+ML file, provided the stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -77,6 +78,16 @@ I\+List$<$ \hyperlink{class_power_system_planning_1_1_transmission_line}{Transmi
 \begin{DoxyCompactList}\small\item\em All Transmission lines in the power sytem. \end{DoxyCompactList}\item 
 int {\bfseries Number\+Of\+Transmission\+Lines}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{class_power_system_planning_1_1_power_system_aec138fa5496014f03d2511d62f19ce1f}{}\label{class_power_system_planning_1_1_power_system_aec138fa5496014f03d2511d62f19ce1f}
 
+\item 
+string \hyperlink{class_power_system_planning_1_1_power_system_abf9f7281d0dd5e23a567c6ddef5f8b91}{Full\+File\+Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The full file name (including path) of the target X\+ML file for saving this power system. \end{DoxyCompactList}\item 
+bool \hyperlink{class_power_system_planning_1_1_power_system_a3c5e0bcb79c013e7ed5bdc2acda52d2d}{Is\+Saved}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Indicates whether the target X\+ML file for saving this power system exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Property\+Changed\+Event\+Handler {\bfseries Property\+Changed}\hypertarget{class_power_system_planning_1_1_power_system_a400c9ff42ee997f4cda3942b77ba6c5b}{}\label{class_power_system_planning_1_1_power_system_a400c9ff42ee997f4cda3942b77ba6c5b}
+
 \end{DoxyCompactItemize}
 
 
@@ -88,11 +99,11 @@ Basic object model of a power system for the purpose of solving planning models 
 \subsection{Member Function Documentation}
 \index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!read\+From\+X\+M\+L\+File@{read\+From\+X\+M\+L\+File}}
 \index{read\+From\+X\+M\+L\+File@{read\+From\+X\+M\+L\+File}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
-\subsubsection[{\texorpdfstring{read\+From\+X\+M\+L\+File(\+Stream\+Reader xml\+Stream)}{readFromXMLFile(StreamReader xmlStream)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Power\+System} Power\+System\+Planning.\+Power\+System.\+read\+From\+X\+M\+L\+File (
+\subsubsection[{\texorpdfstring{read\+From\+X\+M\+L\+File(string filename)}{readFromXMLFile(string filename)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Power\+System} Power\+System\+Planning.\+Power\+System.\+read\+From\+X\+M\+L\+File (
 \begin{DoxyParamCaption}
-\item[{Stream\+Reader}]{xml\+Stream}
+\item[{string}]{filename}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_power_system_planning_1_1_power_system_ad61746fe7b02b94761abec0f022d106a}{}\label{class_power_system_planning_1_1_power_system_ad61746fe7b02b94761abec0f022d106a}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_power_system_planning_1_1_power_system_a6e4503f2559b1073a140555ecd6093b0}{}\label{class_power_system_planning_1_1_power_system_a6e4503f2559b1073a140555ecd6093b0}
 
 
 Creates a Power System by reading an X\+ML file, provided the stream. 
@@ -105,24 +116,6 @@ Creates a Power System by reading an X\+ML file, provided the stream.
 \begin{DoxyReturn}{Returns}
 A new power system object with the contents serialized in the X\+ML file.
 \end{DoxyReturn}
-
-
-The provided stream must is not closed within this method. I\+O\+Exception and other exceptions are not managed.\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!save\+To\+X\+M\+L\+File@{save\+To\+X\+M\+L\+File}}
-\index{save\+To\+X\+M\+L\+File@{save\+To\+X\+M\+L\+File}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
-\subsubsection[{\texorpdfstring{save\+To\+X\+M\+L\+File(\+Text\+Writer save\+Stream)}{saveToXMLFile(TextWriter saveStream)}}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+System\+Planning.\+Power\+System.\+save\+To\+X\+M\+L\+File (
-\begin{DoxyParamCaption}
-\item[{Text\+Writer}]{save\+Stream}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_power_system_planning_1_1_power_system_a0f3c09d821634b02e79b54c82297e9f6}{}\label{class_power_system_planning_1_1_power_system_a0f3c09d821634b02e79b54c82297e9f6}
-
-
-Saves the current power sysem to an X\+ML file, provided the stream. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em save\+Stream} & \\
-\hline
-\end{DoxyParams}
 
 
 The provided stream must is not closed within this method. I\+O\+Exception and other exceptions are not managed.
@@ -159,6 +152,13 @@ All Transmission lines in the power sytem, bindable to G\+UI.
 
 
 \subsection{Property Documentation}
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!Full\+File\+Name@{Full\+File\+Name}}
+\index{Full\+File\+Name@{Full\+File\+Name}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{Full\+File\+Name}{FullFileName}}]{\setlength{\rightskip}{0pt plus 5cm}string Power\+System\+Planning.\+Power\+System.\+Full\+File\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}\hypertarget{class_power_system_planning_1_1_power_system_abf9f7281d0dd5e23a567c6ddef5f8b91}{}\label{class_power_system_planning_1_1_power_system_abf9f7281d0dd5e23a567c6ddef5f8b91}
+
+
+The full file name (including path) of the target X\+ML file for saving this power system. 
+
 \index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!Generating\+Units@{Generating\+Units}}
 \index{Generating\+Units@{Generating\+Units}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
 \subsubsection[{\texorpdfstring{Generating\+Units}{GeneratingUnits}}]{\setlength{\rightskip}{0pt plus 5cm}I\+List$<${\bf Generating\+Unit}$>$ Power\+System\+Planning.\+Power\+System.\+Generating\+Units\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_power_system_aee8ba3b28d3f43e64484359f71cb35fd}{}\label{class_power_system_planning_1_1_power_system_aee8ba3b28d3f43e64484359f71cb35fd}
@@ -172,6 +172,13 @@ All Generating units in the power system
 
 
 All inelastic loads in the power system. 
+
+\index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!Is\+Saved@{Is\+Saved}}
+\index{Is\+Saved@{Is\+Saved}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}
+\subsubsection[{\texorpdfstring{Is\+Saved}{IsSaved}}]{\setlength{\rightskip}{0pt plus 5cm}bool Power\+System\+Planning.\+Power\+System.\+Is\+Saved\hspace{0.3cm}{\ttfamily [get]}}\hypertarget{class_power_system_planning_1_1_power_system_a3c5e0bcb79c013e7ed5bdc2acda52d2d}{}\label{class_power_system_planning_1_1_power_system_a3c5e0bcb79c013e7ed5bdc2acda52d2d}
+
+
+Indicates whether the target X\+ML file for saving this power system exists. 
 
 \index{Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}!Load\+Shedding\+Cost@{Load\+Shedding\+Cost}}
 \index{Load\+Shedding\+Cost@{Load\+Shedding\+Cost}!Power\+System\+Planning\+::\+Power\+System@{Power\+System\+Planning\+::\+Power\+System}}

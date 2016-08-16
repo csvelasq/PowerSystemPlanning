@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['mainwindow',['MainWindow',['../class_power_system_planning_wpf_app_1_1_main_window.html',1,'PowerSystemPlanningWpfApp']]],
-  ['menuclickeventargs',['MenuClickEventArgs',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list_1_1_menu_click_event_args.html',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]]
+  ['optimizeopfldc',['OptimizeOPFLDC',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_optimize_o_p_f_l_d_c.html',1,'PowerSystemPlanningWpfApp::LDC']]]
 ];

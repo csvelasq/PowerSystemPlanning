@@ -59,8 +59,8 @@
                 <MenuItem Header="_Transmission Planning">
                     <MenuItem x:Name="opfMenuItem" Header="_Optimal Power Flow" Click="opfMenuItem_Click" />
                     <MenuItem x:Name="ldcOpfMenuItem" Header="_Load Duration Curve (LDC) Model" Click="ldcOpfMenuItem_Click" />
-                    <MenuItem Header="_LDC for Static TEP" IsEnabled="False" />
-                    <MenuItem Header="_LDC for TEP under Scenarios" IsEnabled="False" />
+                    <MenuItem x:Name="staticTepMenuItem" Header="_Static TEP (based on LDC-OPF)" Click="staticTepMenuItem_Click"  />
+                    <MenuItem x:Name="scenarioTepMenuItem" Header="_TEP under Scenarios (based on LDC-OPF)" Click="scenarioTepMenuItem_Click" />
                 </MenuItem>
                 <MenuItem Header="Configuration">
                     <MenuItem Header="_Configuration" IsEnabled="False" />

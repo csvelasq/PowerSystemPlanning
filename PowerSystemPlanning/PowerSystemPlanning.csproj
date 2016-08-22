@@ -57,6 +57,7 @@
     <Compile Include="PlanningModels\IPowerSystem.cs" />
     <Compile Include="PlanningModels\Node.cs" />
     <Compile Include="PlanningModels\NodeElement.cs" />
+    <Compile Include="Solvers\LDCOPF\DurationCurveBlocks.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModel.cs" />
     <Compile Include="Solvers\OPF\IGRBOptimizationModelResult.cs" />
     <Compile Include="Solvers\OPF\OPFModel.cs" />

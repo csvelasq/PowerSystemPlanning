@@ -16,6 +16,8 @@ using PowerSystemPlanning;
 using System.Collections.ObjectModel;
 using System.IO;
 using NLog;
+using PowerSystemPlanning.Solvers.OPF;
+using PowerSystemPlanning.Solvers;
 
 namespace PowerSystemPlanningWpfApp
 {
@@ -181,13 +183,16 @@ namespace PowerSystemPlanningWpfApp
 
         private void opfMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            OPF.RunOPFWindow runOPFWindow = new OPF.RunOPFWindow(this._PowerSystem);
-            runOPFWindow.Show();
+            OPF.OPFResultsWindow opfResultsWindow = new OPF.OPFResultsWindow();
+            OPFModelSolver opf = new OPFModelSolver(this.PowerSystem);
+            opf.Solve();
+            OPFModelResult OPFResults = opf.OPFResults;
+            opfResultsWindow.Show();
         }
 
         private void ldcOpfMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            LDC.OptimizeOPFLDC optOPFLDC = new LDC.OptimizeOPFLDC();
+            LDC.OPFLDCResultsWindow optOPFLDC = new LDC.OPFLDCResultsWindow();
             optOPFLDC.Show();
         }
 
@@ -195,6 +200,18 @@ namespace PowerSystemPlanningWpfApp
         {
             Help.About about = new Help.About();
             about.Show();
+        }
+
+        private void staticTepMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            StaticTEP.StaticTEPWindow staticTEPWindow = new StaticTEP.StaticTEPWindow();
+            staticTEPWindow.Show();
+        }
+
+        private void scenarioTepMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ScenarioTEP.ScenarioTEPWindow scenarioTEPWindow = new ScenarioTEP.ScenarioTEPWindow();
+            scenarioTEPWindow.Show();
         }
     }
 }

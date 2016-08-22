@@ -1,6 +1,7 @@
 var searchData=
 [
   ['objval',['ObjVal',['../interface_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_i_g_r_b_optimization_model_result.html#a346f2636450eca7ef00ce57ff4eea7ab',1,'PowerSystemPlanning::Solvers::OPF::IGRBOptimizationModelResult']]],
+  ['opfbyblock',['OpfByBlock',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model.html#ac834018d940f3974f9268f3942e9d408',1,'PowerSystemPlanning::Solvers::LDCOPF::LDCOPFModel']]],
   ['opfmodel',['OPFModel',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html',1,'PowerSystemPlanning::Solvers::OPF']]],
   ['opfmodel',['OPFModel',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a27033b1f3bb63bb49b6dd5cea8d302a5',1,'PowerSystemPlanning.Solvers.OPF.OPFModel.OPFModel(PowerSystem powerSystem)'],['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a58d3a3449e960de4efb1f7c340e457f4',1,'PowerSystemPlanning.Solvers.OPF.OPFModel.OPFModel(PowerSystem powerSystem, GRBEnv env, GRBModel model)']]],
   ['opfmodelloadchange',['OPFModelLoadChange',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_load_change.html',1,'PowerSystemPlanning::Solvers::OPF']]],

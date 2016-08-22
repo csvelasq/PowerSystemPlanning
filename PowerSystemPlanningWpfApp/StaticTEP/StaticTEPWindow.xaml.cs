@@ -12,16 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.LDC
+namespace PowerSystemPlanningWpfApp.StaticTEP
 {
     /// <summary>
-    /// Interaction logic for OptimizeOPFLDC.xaml
+    /// Interaction logic for StaticTEPWindow.xaml
     /// </summary>
-    public partial class OptimizeOPFLDC : Window
+    public partial class StaticTEPWindow : Window
     {
-
-
-        public OptimizeOPFLDC()
+        public StaticTEPWindow()
         {
             InitializeComponent();
         }

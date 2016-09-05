@@ -86,7 +86,7 @@
             </Grid.ColumnDefinitions>
             <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Stretch" Margin="0,0,-0.001,0" />
             <GroupBox Header="Nodes" Grid.ColumnSpan="2">
-                <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding Path=_Nodes}" Margin="4,10,4,4" AutoGenerateColumns="False">
+                <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding}" Margin="4,10,4,4" AutoGenerateColumns="False">
                     <DataGrid.AlternatingRowBackground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                     </DataGrid.AlternatingRowBackground>
@@ -109,8 +109,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-                    <GroupBox Header="Generators" Margin="1.19,5,0,0">
-                        <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding Path=_Generators}" Margin="-1,10,4,4" AutoGenerateColumns="False">
+                    <GroupBox Header="Generators">
+                        <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding}" AutoGenerateColumns="False">
                             <DataGrid.AlternatingRowBackground>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
@@ -124,8 +124,8 @@
                             </DataGrid.Columns>
                         </localUtils:CustomDataGrid>
                     </GroupBox>
-                    <GroupBox Grid.Column="2" Header="Consumers" Margin="1.785,4,0,0">
-                        <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding Path=_InelasticLoads}" Margin="0.999,10,4,4" AutoGenerateColumns="False">
+                    <GroupBox Grid.Column="2" Header="Consumers">
+                        <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding}" AutoGenerateColumns="False">
                             <DataGrid.AlternatingRowBackground>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                             </DataGrid.AlternatingRowBackground>
@@ -140,8 +140,8 @@
                     </GroupBox>
                 </Grid>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-                <GroupBox Header="Transmission Lines" Margin="0.19,-0.385,0,0" Grid.Row="2">
-                    <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding Path=_TransmissionLines}" Margin="0,10,4,4" AutoGenerateColumns="False">
+                <GroupBox Header="Transmission Lines" Grid.Row="2">
+                    <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" Margin="0,10,4,4" AutoGenerateColumns="False">
                         <DataGrid.AlternatingRowBackground>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
                         </DataGrid.AlternatingRowBackground>

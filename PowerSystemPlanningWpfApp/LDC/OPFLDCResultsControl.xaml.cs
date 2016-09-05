@@ -43,7 +43,9 @@ namespace PowerSystemPlanningWpfApp.LDC
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            int selected_index = this.dgLDC.SelectedIndex;
             OPF.OPFResultsWindow opfResultsWindow = new OPF.OPFResultsWindow();
+            opfResultsWindow.OPFResults = this.LDCOPFModel.OpfByBlock[selected_index].BuildOPFModelResults();
             opfResultsWindow.Show();
         }
     }

@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['oncanexecutepaste',['OnCanExecutePaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#ad62754f9382daa406815f7965d6af785',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
-  ['onexecutedpaste',['OnExecutedPaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#a7a8455f1c46a856165914960a0e60418',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
-  ['opfldcresultscontrol',['OPFLDCResultsControl',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_o_p_f_l_d_c_results_control.html',1,'PowerSystemPlanningWpfApp::LDC']]],
-  ['opfldcresultswindow',['OPFLDCResultsWindow',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_o_p_f_l_d_c_results_window.html',1,'PowerSystemPlanningWpfApp::LDC']]],
-  ['opfresultscontrol',['OPFResultsControl',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_o_p_f_results_control.html',1,'PowerSystemPlanningWpfApp::OPF']]],
-  ['opfresultswindow',['OPFResultsWindow',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_o_p_f_results_window.html',1,'PowerSystemPlanningWpfApp::OPF']]],
-  ['optimizeopfldc',['OptimizeOPFLDC',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_optimize_o_p_f_l_d_c.html',1,'PowerSystemPlanningWpfApp::LDC']]]
+  ['main',['Main',['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()'],['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()']]],
+  ['mainwindow',['MainWindow',['../class_power_system_planning_wpf_app_1_1_main_window.html',1,'PowerSystemPlanningWpfApp']]],
+  ['menuclickeventargs',['MenuClickEventArgs',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list_1_1_menu_click_event_args.html',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]],
+  ['menuitemformatonetonine',['MenuItemFormatOneToNine',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html#aae95e2ccda33122a193e35af9bf6aa0e',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]],
+  ['menuitemformattenplus',['MenuItemFormatTenPlus',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html#a27d7ee892ff4ad876fcee4e8b6f7c076',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]]
 ];

@@ -46,6 +46,10 @@ namespace PowerSystemPlanningWpfApp
             {
                 this._PowerSystem = value;
                 this.DataContext = this._PowerSystem;
+                this.dgNodes.DataContext = this._PowerSystem._Nodes;
+                this.dgConsumers.DataContext = this._PowerSystem._InelasticLoads;
+                this.dgGenerators.DataContext = this._PowerSystem._GeneratingUnits;
+                this.dgTransmissionLines.DataContext = this._PowerSystem._TransmissionLines;
             }
         }
 
@@ -59,7 +63,7 @@ namespace PowerSystemPlanningWpfApp
 
         private void NewCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            //New file
         }
 
         private void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -183,10 +187,13 @@ namespace PowerSystemPlanningWpfApp
 
         private void opfMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            OPF.OPFResultsWindow opfResultsWindow = new OPF.OPFResultsWindow();
+            //Solve the opf model
             OPFModelSolver opf = new OPFModelSolver(this.PowerSystem);
             opf.Solve();
             OPFModelResult OPFResults = opf.OPFResults;
+            //Show results window
+            OPF.OPFResultsWindow opfResultsWindow = new OPF.OPFResultsWindow();
+            opfResultsWindow.OPFResults = OPFResults;
             opfResultsWindow.Show();
         }
 

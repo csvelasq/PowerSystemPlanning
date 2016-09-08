@@ -7,6 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp"
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
+        xmlns:modelControls="clr-namespace:PowerSystemPlanningWpfApp.Model"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
         Title="Power System Planning" Height="610.27" Width="986.621" WindowState="Maximized" Loaded="Window_Loaded">
@@ -19,7 +20,6 @@
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="300*" />
             <RowDefinition Height="5" />
@@ -56,9 +56,13 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="_Transmission Planning">
+                <MenuItem Header="_Model">
+                    <MenuItem x:Name="menuLDC" Header="_Load Duration Curve" />
+                    <MenuItem x:Name="menuCandidateLines" Header="_Candidate Transmission Lines" />
+                </MenuItem>
+                <MenuItem Header="_Analysis">
                     <MenuItem x:Name="opfMenuItem" Header="_Optimal Power Flow" Click="opfMenuItem_Click" />
-                    <MenuItem x:Name="ldcOpfMenuItem" Header="_Load Duration Curve (LDC) Model" Click="ldcOpfMenuItem_Click" />
+                    <MenuItem x:Name="ldcOpfMenuItem" Header="_Load Duration Curve (LDC) OPF Model" Click="ldcOpfMenuItem_Click" />
                     <MenuItem x:Name="staticTepMenuItem" Header="_Static TEP (based on LDC-OPF)" Click="staticTepMenuItem_Click"  />
                     <MenuItem x:Name="scenarioTepMenuItem" Header="_TEP under Scenarios (based on LDC-OPF)" Click="scenarioTepMenuItem_Click" />
                 </MenuItem>
@@ -71,107 +75,20 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <DockPanel HorizontalAlignment="Left" LastChildFill="False" Grid.Row="1" VerticalAlignment="Center">
-            <Label Content="Power System Name:" HorizontalAlignment="Left"/>
-            <TextBox x:Name="tbPowerSystemName" Width="200" Height="20" Padding="0" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
-            <Label Content="Load Shedding Cost:" HorizontalAlignment="Left" Margin="20,0,0,0" />
-            <TextBox x:Name="tbLoadSheddingCost" Width="200" Height="20" Padding="0" Text="{Binding Path=LoadSheddingCost, StringFormat=C, UpdateSourceTrigger=LostFocus}" />
-        </DockPanel>
-        <Grid Margin="0,0,0,0" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*" />
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="284*" />
-            </Grid.ColumnDefinitions>
-            <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Stretch" Margin="0,0,-0.001,0" />
-            <GroupBox Header="Nodes" Grid.ColumnSpan="2">
-                <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding}" Margin="4,10,4,4" AutoGenerateColumns="False">
-                    <DataGrid.AlternatingRowBackground>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-                    </DataGrid.AlternatingRowBackground>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                    </DataGrid.Columns>
-                </localUtils:CustomDataGrid>
-            </GroupBox>
-            <Grid Grid.Column="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-                    <GroupBox Header="Generators">
-                        <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding}" AutoGenerateColumns="False">
-                            <DataGrid.AlternatingRowBackground>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-                            </DataGrid.AlternatingRowBackground>
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                                <DataGridTextColumn Header="Connection Node ID" Binding="{Binding ConnectionNodeId}" />
-                                <!--<DataGridTextColumn Header="Connection Node Name" Binding="{Binding ConnectionNodeName}" />-->
-                                <DataGridTextColumn Header="Installed Capacity (MW)" Binding="{Binding InstalledCapacityMW}" />
-                                <DataGridTextColumn Header="Marginal Cost" Binding="{Binding MarginalCost, StringFormat=C}" />
-                            </DataGrid.Columns>
-                        </localUtils:CustomDataGrid>
-                    </GroupBox>
-                    <GroupBox Grid.Column="2" Header="Consumers">
-                        <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding}" AutoGenerateColumns="False">
-                            <DataGrid.AlternatingRowBackground>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-                            </DataGrid.AlternatingRowBackground>
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                                <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeId}" />
-                                <!--<DataGridTextColumn Header="Connection Node Name" Binding="{Binding ConnectionNodeName}" />-->
-                                <DataGridTextColumn Header="Consumption (MW)" Binding="{Binding ConsumptionMW}" />
-                            </DataGrid.Columns>
-                        </localUtils:CustomDataGrid>
-                    </GroupBox>
-                </Grid>
-                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-                <GroupBox Header="Transmission Lines" Grid.Row="2">
-                    <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" Margin="0,10,4,4" AutoGenerateColumns="False">
-                        <DataGrid.AlternatingRowBackground>
-                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-                        </DataGrid.AlternatingRowBackground>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="From Node ID" Binding="{Binding NodeFromID}" />
-                            <!--<DataGridTextColumn Header="From Node Name" Binding="{Binding NodeFromName}" />-->
-                            <DataGridTextColumn Header="To Node ID" Binding="{Binding NodeToID}" />
-                            <!--<DataGridTextColumn Header="To Node Name" Binding="{Binding NodeToName}" />-->
-                            <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacityMW}" />
-                            <DataGridTextColumn Header="Susceptance (mho)" Binding="{Binding SusceptanceMho, StringFormat=N3}" />
-                        </DataGrid.Columns>
-                    </localUtils:CustomDataGrid>
-                </GroupBox>
-            </Grid>
-        </Grid>
-        <GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" />
-        <Expander Name="logExpander"  Header="Log" Grid.Row="4" IsExpanded="True" ExpandDirection="Down">
+        <TabControl Grid.Row="1">
+            <TabItem Header="Power System Model">
+                <modelControls:PowerSystemEditorControl x:Name="powerSystemEditor" />
+            </TabItem>
+            <TabItem Header="Load Duration Curve">
+            </TabItem>
+            <TabItem Header="Candidate Transmission Lines">
+            </TabItem>
+        </TabControl>
+        <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />
+        <GroupBox Name="logExpander"  Header="Log" Grid.Row="3">
             <ScrollViewer>
                 <RichTextBox x:Name="LogRichTextBox" />
             </ScrollViewer>
-        </Expander>
-        <!--<GroupBox Header="Log" Grid.Row="3">
-            -->
-        <!--<localUtils:SimpleTerminal />-->
-        <!--
-            <ScrollViewer>
-                <RichTextBox x:Name="LogRichTextBox" />
-            </ScrollViewer>
-        </GroupBox>-->
+        </GroupBox>
     </Grid>
 </Window>

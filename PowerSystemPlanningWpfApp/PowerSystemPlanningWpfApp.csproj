@@ -135,22 +135,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="LDC\OPFLDCResultsControl.xaml.cs">
+    <Compile Include="Analysis\LDC\OPFLDCResultsControl.xaml.cs">
       <DependentUpon>OPFLDCResultsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LDC\OPFLDCResultsWindow.xaml.cs">
+    <Compile Include="Analysis\LDC\OPFLDCResultsWindow.xaml.cs">
       <DependentUpon>OPFLDCResultsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OPF\OPFResultsControl.xaml.cs">
+    <Compile Include="Model\LoadDurationCurveEditorControl.xaml.cs">
+      <DependentUpon>LoadDurationCurveEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PowerSystemEditorControl.xaml.cs">
+      <DependentUpon>PowerSystemEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\OPF\OPFResultsControl.xaml.cs">
       <DependentUpon>OPFResultsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OPF\OPFRunWindow.xaml.cs">
+    <Compile Include="Analysis\OPF\OPFRunWindow.xaml.cs">
       <DependentUpon>OPFRunWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScenarioTEP\ScenarioTEPWindow.xaml.cs">
+    <Compile Include="Analysis\ScenarioTEP\ScenarioTEPWindow.xaml.cs">
       <DependentUpon>ScenarioTEPWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StaticTEP\StaticTEPWindow.xaml.cs">
+    <Compile Include="Analysis\StaticTEP\StaticTEPWindow.xaml.cs">
       <DependentUpon>StaticTEPWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="ControlUtils\SimpleTerminal.xaml">
@@ -165,11 +171,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LDC\OPFLDCResultsControl.xaml">
+    <Page Include="Analysis\LDC\OPFLDCResultsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LDC\OPFLDCResultsWindow.xaml">
+    <Page Include="Analysis\LDC\OPFLDCResultsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,19 +207,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="OPF\OPFResultsControl.xaml">
+    <Page Include="Model\LoadDurationCurveEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OPF\OPFResultsWindow.xaml">
+    <Page Include="Model\PowerSystemEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OPF\OPFRunWindow.xaml">
+    <Page Include="Analysis\OPF\OPFResultsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ScenarioTEP\ScenarioTEPWindow.xaml">
+    <Page Include="Analysis\OPF\OPFResultsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\OPF\OPFRunWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\ScenarioTEP\ScenarioTEPWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,13 +235,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="StaticTEP\StaticTEPWindow.xaml">
+    <Page Include="Analysis\StaticTEP\StaticTEPWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OPF\OPFResultsWindow.xaml.cs">
+    <Compile Include="Analysis\OPF\OPFResultsWindow.xaml.cs">
       <DependentUpon>OPFResultsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">

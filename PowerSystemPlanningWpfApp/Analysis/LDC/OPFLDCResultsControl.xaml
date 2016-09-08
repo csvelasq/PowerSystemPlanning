@@ -26,8 +26,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <GroupBox Header="Load Duration Curve">
-                <!--<DataGrid Name="dgLDC" ItemsSource="{Binding}" AutoGenerateColumns="True">
-                </DataGrid>-->
                 <localUtils:CustomDataGrid Grid.Row="1" x:Name="dgLDC" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="40">
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">

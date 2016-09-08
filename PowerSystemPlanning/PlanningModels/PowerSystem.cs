@@ -64,7 +64,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// Nodes of the power system, bindable to GUI.
         /// </summary>
-        public BindingList<Node> _Nodes;
+        public BindingList<Node> _Nodes { get; protected set; }
 
         /// <summary>
         /// Nodes of the power system.
@@ -87,7 +87,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// All Generating units in the power system, bindable to GUI.
         /// </summary>
-        public BindingList<GeneratingUnit> _GeneratingUnits;
+        public BindingList<GeneratingUnit> _GeneratingUnits { get; protected set; }
 
         /// <summary>
         /// All Generating units in the power system
@@ -107,7 +107,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// All Inelastic loads in the power system, bindable to GUI.
         /// </summary>
-        public BindingList<InelasticLoad> _InelasticLoads;
+        public BindingList<InelasticLoad> _InelasticLoads { get; protected set; }
 
         /// <summary>
         /// All inelastic loads in the power system.
@@ -160,7 +160,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// All Transmission lines in the power sytem, bindable to GUI.
         /// </summary>
-        public BindingList<TransmissionLine> _TransmissionLines;
+        public BindingList<TransmissionLine> _TransmissionLines { get; protected set; }
 
         /// <summary>
         /// All Transmission lines in the power sytem.

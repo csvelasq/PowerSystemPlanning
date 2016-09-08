@@ -34,23 +34,16 @@ namespace PowerSystemPlanningWpfApp
         /// NLog Logger for this class.
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        
+        PowerSystem _MyPowerSystem;
 
-        /// <summary>
-        /// Backend of this application.
-        /// </summary>
-        PowerSystem _PowerSystem;
-
-        PowerSystem PowerSystem
+        PowerSystem MyPowerSystem
         {
-            get { return this._PowerSystem; }
+            get { return this._MyPowerSystem; }
             set
             {
-                this._PowerSystem = value;
-                this.DataContext = this._PowerSystem;
-                this.dgNodes.DataContext = this._PowerSystem._Nodes;
-                this.dgConsumers.DataContext = this._PowerSystem._InelasticLoads;
-                this.dgGenerators.DataContext = this._PowerSystem._GeneratingUnits;
-                this.dgTransmissionLines.DataContext = this._PowerSystem._TransmissionLines;
+                this._MyPowerSystem = value;
+                this.powerSystemEditor.MyPowerSystem = this._MyPowerSystem;
             }
         }
 
@@ -58,7 +51,7 @@ namespace PowerSystemPlanningWpfApp
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
-            this.PowerSystem = new PowerSystem();
+            this.MyPowerSystem = new PowerSystem();
             this.RecentFileList.MenuClick += (s, e) => OpenModelFile(e.Filepath);
         }
 
@@ -87,7 +80,7 @@ namespace PowerSystemPlanningWpfApp
         {
             try
             {
-                this.PowerSystem = PowerSystem.readFromXMLFile(filename);
+                this.MyPowerSystem = PowerSystem.readFromXMLFile(filename);
                 this.RecentFileList.InsertFile(filename);
                 MainWindow.logger.Info(String.Format("Loaded file '{0}'", filename));
             }
@@ -103,10 +96,10 @@ namespace PowerSystemPlanningWpfApp
 
         private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!PowerSystem.IsSaved)
+            if (!MyPowerSystem.IsSaved)
             {
                 Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                dlg.FileName = PowerSystem.Name; // Default file name
+                dlg.FileName = MyPowerSystem.Name; // Default file name
                 dlg.DefaultExt = ".xml"; // Default file extension
                 dlg.Filter = "XML file (.xml)|*.xml"; // Filter files by extension
                                                       // Show save file dialog box
@@ -114,17 +107,17 @@ namespace PowerSystemPlanningWpfApp
                 // Process save file dialog box results
                 if (result == true)
                 {
-                    this.PowerSystem.saveToXMLFile(dlg.FileName);
+                    this.MyPowerSystem.saveToXMLFile(dlg.FileName);
                 }
             }
-            else this.PowerSystem.saveToXMLFile();
-            MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", this.PowerSystem.FullFileName, this.PowerSystem.Name));
+            else this.MyPowerSystem.saveToXMLFile();
+            MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", this.MyPowerSystem.FullFileName, this.MyPowerSystem.Name));
         }
 
         private void SaveAsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = PowerSystem.Name; // Default file name
+            dlg.FileName = MyPowerSystem.Name; // Default file name
             dlg.DefaultExt = ".xml"; // Default file extension
             dlg.Filter = "XML file (.xml)|*.xml"; // Filter files by extension
             // Show save file dialog box
@@ -132,9 +125,9 @@ namespace PowerSystemPlanningWpfApp
             // Process save file dialog box results
             if (result == true)
             {
-                this.PowerSystem.saveToXMLFile(dlg.FileName);
+                this.MyPowerSystem.saveToXMLFile(dlg.FileName);
             }
-            MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", this.PowerSystem.FullFileName, this.PowerSystem.Name));
+            MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", this.MyPowerSystem.FullFileName, this.MyPowerSystem.Name));
         }
 
         private void CloseCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -152,7 +145,7 @@ namespace PowerSystemPlanningWpfApp
                 case MessageBoxResult.Yes:
                     // User pressed Yes button: save and then close
                     Application.Current.Shutdown();
-                    PowerSystem.saveToXMLFile();
+                    MyPowerSystem.saveToXMLFile();
                     break;
                 case MessageBoxResult.No:
                     // User pressed No button: close immediately
@@ -192,14 +185,14 @@ namespace PowerSystemPlanningWpfApp
         private void opfMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //Show OPF run window
-            OPF.OPFRunWindow opfRunWindow = new OPF.OPFRunWindow(PowerSystem);
+            OPF.OPFRunWindow opfRunWindow = new OPF.OPFRunWindow(MyPowerSystem);
             opfRunWindow.Show();
         }
 
         private void ldcOpfMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //Show results window
-            LDC.OPFLDCResultsWindow optOPFLDC = new LDC.OPFLDCResultsWindow(this.PowerSystem);
+            LDC.OPFLDCResultsWindow optOPFLDC = new LDC.OPFLDCResultsWindow(this.MyPowerSystem);
             optOPFLDC.Show();
         }
 

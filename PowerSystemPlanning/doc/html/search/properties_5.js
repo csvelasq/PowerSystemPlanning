@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fullfilename',['FullFileName',['../class_power_system_planning_1_1_power_system.html#abf9f7281d0dd5e23a567c6ddef5f8b91',1,'PowerSystemPlanning::PowerSystem']]]
+  ['executiontime',['ExecutionTime',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_results.html#ac3a889253eb8ab993b16a054f968b9c1',1,'PowerSystemPlanning::Solvers::PowerSystemSolverResults']]]
 ];

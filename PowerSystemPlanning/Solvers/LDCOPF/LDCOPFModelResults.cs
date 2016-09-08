@@ -45,8 +45,8 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
                 {
                     NodeOPFResultForLDC nodeResultsInThisBlock = opfResultsByBlock[i].NodeOPFResultsForLDC[node.Id];
                     TotalEnergyGenerated += nodeResultsInThisBlock.TotalPowerGenerated * BlockDurations[i];
-                    TotalEnergyConsumed += nodeResultsInThisBlock.TotalPowerConsumed * BlockDurations[i];
-                    LoadShedding += nodeResultsInThisBlock.LoadShedding * BlockDurations[i];
+                    TotalEnergyConsumed += nodeResultsInThisBlock.TotalPowerConsumed * BlockDurations[i] * DurationCurveBlocks.DurationBlocks[i].LoadMultiplier;
+                    LoadShedding += nodeResultsInThisBlock.LoadShedding * BlockDurations[i] * DurationCurveBlocks.DurationBlocks[i].LoadMultiplier;
                     AverageSpotPrice += nodeResultsInThisBlock.SpotPrice * RelativeBlockDuration[i];
                 }
                 NodeLDCOPFResult nodeResultsLDCOPF = new NodeLDCOPFResult(node, TotalEnergyGenerated, TotalEnergyConsumed, LoadShedding, AverageSpotPrice);

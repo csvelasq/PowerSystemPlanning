@@ -108,9 +108,9 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         public double TotalEnergyGenerated { get { return TotalPowerGenerated * MyLoadBlock.Duration; } }
 
-        public double TotalEnergyConsumed { get { return TotalPowerConsumed * MyLoadBlock.Duration; } }
+        public double TotalEnergyConsumed { get { return TotalPowerConsumed * MyLoadBlock.Duration * MyLoadBlock.LoadMultiplier; } }
 
-        public double EnergyLoadShedding { get { return LoadShedding * MyLoadBlock.Duration; } }
+        public double EnergyLoadShedding { get { return LoadShedding * MyLoadBlock.Duration * MyLoadBlock.LoadMultiplier; } }
 
         public NodeOPFResultForLDC(Node node, double angle, double totalPowerGenerated, double totalPowerConsumed, double loadShed, double spotPrice,
             LoadBlock loadBlock)

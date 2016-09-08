@@ -1,7 +1,7 @@
-﻿namespace PowerSystemPlanning.Solvers.OPF
+﻿namespace PowerSystemPlanning.Solvers
 {
     /// <summary>
-    /// Encapsulates the results of a "solved" optimization model.
+    /// Encapsulates the specific results of a "solved" optimization model.
     /// </summary>
     /// <remarks>
     /// This class is instantiated once the optimization model is solved.

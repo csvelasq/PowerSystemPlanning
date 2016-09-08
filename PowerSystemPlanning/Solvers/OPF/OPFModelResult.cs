@@ -10,10 +10,9 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// <summary>
     /// Encapsulates results of the OPF model.
     /// </summary>
-    public class OPFModelResult : IGRBOptimizationModelResult
+    public class OPFModelResult : BaseGRBOptimizationModelResult
     {
         PowerSystem PowerSystem;
-        double _TotalGenerationCost;
         List<GeneratingUnitOPFResult> _GeneratingUnitOPFResults;
         List<NodeOPFResult> _NodeOPFResults;
         List<TransmissionLineOPFResult> _TransmissionLineOPFResults;
@@ -21,11 +20,11 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <summary>
         /// Gets the total generation cost (the model's objective value) in the current solution.
         /// </summary>
-        public double TotalGenerationCost
+        public double TotalOperationCost
         {
             get
             {
-                return _TotalGenerationCost;
+                return this._ObjVal;
             }
         }
 
@@ -60,62 +59,18 @@ namespace PowerSystemPlanning.Solvers.OPF
                 _TransmissionLineOPFResults = value;
             }
         }
-
-        #region Implementation of IGRBOptimizationModelResult
-        int _GRBStatus;
-
-        public double ObjVal { get { return this._TotalGenerationCost; } }
-
-        public int GRBStatus
-        {
-            get
-            {
-                return _GRBStatus;
-            }
-
-            set
-            {
-                _GRBStatus = value;
-            }
-        }
-
-        public bool IsModelSolved { get { return _GRBStatus == GRB.Status.OPTIMAL; } }
-
-        public bool IsModelInfeasible { get { return _GRBStatus == GRB.Status.INFEASIBLE; } }
-
-        public bool IsModelUnbounded { get { return _GRBStatus == GRB.Status.UNBOUNDED; } }
-
-        public string CurrentStateMessage
-        {
-            get
-            {
-                string retmsg = "";
-                if (IsModelSolved)
-                    retmsg = "Model solved to optimality.";
-                if (IsModelInfeasible)
-                    retmsg = "Model infeasible.";
-                if (IsModelUnbounded)
-                    retmsg = "Model unbounded.";
-                return retmsg;
-            }
-        }
-        #endregion
-
+        
         /// <summary>
         /// Initializes the result container with the given Gurobi status.
         /// </summary>
         /// <param name="status">The Gurobi status of the optimization</param>
         /// <remarks>This constructor can be used to find out if the model was correctly solved by means of the <see cref="IsModelSolved"/> property.</remarks>
-        public OPFModelResult(int status)
-        {
-            this._GRBStatus = status;
-        }
+        public OPFModelResult(int status) : base(status) { }
 
-        public OPFModelResult(PowerSystem powerSystem, int status, double totalGenerationCost, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
-            : this(status)
+        public OPFModelResult(PowerSystem powerSystem, int status, double totalOperationCost, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
+            : base(status, totalOperationCost)
         {
             this.PowerSystem = powerSystem;
-            this._TotalGenerationCost = totalGenerationCost;
             //Generating units
             this._GeneratingUnitOPFResults = new List<GeneratingUnitOPFResult>();
             foreach (GeneratingUnit gen in this.PowerSystem.GeneratingUnits)

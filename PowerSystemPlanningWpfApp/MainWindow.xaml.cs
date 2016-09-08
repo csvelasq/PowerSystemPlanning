@@ -18,6 +18,7 @@ using System.IO;
 using NLog;
 using PowerSystemPlanning.Solvers.OPF;
 using PowerSystemPlanning.Solvers;
+using PowerSystemPlanning.Solvers.LDCOPF;
 
 namespace PowerSystemPlanningWpfApp
 {
@@ -187,7 +188,7 @@ namespace PowerSystemPlanningWpfApp
 
         private void opfMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            //Solve the opf model
+            //Build and solve the opf model
             OPFModelSolver opf = new OPFModelSolver(this.PowerSystem);
             opf.Solve();
             OPFModelResult OPFResults = opf.OPFResults;
@@ -199,7 +200,8 @@ namespace PowerSystemPlanningWpfApp
 
         private void ldcOpfMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            LDC.OPFLDCResultsWindow optOPFLDC = new LDC.OPFLDCResultsWindow();
+            //Show results window
+            LDC.OPFLDCResultsWindow optOPFLDC = new LDC.OPFLDCResultsWindow(this.PowerSystem);
             optOPFLDC.Show();
         }
 

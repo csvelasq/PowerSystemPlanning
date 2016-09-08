@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PowerSystemPlanning.Solvers
 {
     /// <summary>
-    /// Encapsulates the results of a solver (e.g. Optimal Power Flow, Transmission Expansion Planning).
+    /// Encapsulates the overall results of a solver, including specific optimization results.
     /// </summary>
     public class PowerSystemSolverResults
     {
@@ -117,7 +117,7 @@ namespace PowerSystemPlanning.Solvers
         }
 
         /// <summary>
-        /// The result of the solver, can be of various types.
+        /// The result of the solver's internal process (e.g. the optimization).
         /// </summary>
         public object Result
         {

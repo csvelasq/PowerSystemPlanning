@@ -8,77 +8,93 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="750" Background="White">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <GroupBox Header="Load Duration Curve" Grid.Column="0">
-            <localUtils:CustomDataGrid Grid.Row="1" x:Name="dgLDC" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="40">
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="ContentTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-                <DataGrid.AlternatingRowBackground>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-                </DataGrid.AlternatingRowBackground>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Duration [hours]" Binding="{Binding Duration, StringFormat=N0}" Width="70" />
-                    <DataGridTextColumn Header="Load multiplier" Binding="{Binding LoadMultiplier, StringFormat=p0}" Width="70" />
-                </DataGrid.Columns>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="View Detailed OPF Results" Click="MenuItem_Click" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-            </localUtils:CustomDataGrid>
-        </GroupBox>
-        <GroupBox Header="Results" Grid.Column="1">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Label Content="Total Operation Cost:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBox x:Name="tbTotalCost" Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding Path=TotalGenerationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
-                    <Label Content="{Binding Path=CurrentStateMessage, Mode=OneTime}" 
-                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" HorizontalAlignment="Left" LastChildFill="False" >
+            <Button x:Name="btnRunLdcOpf" Click="btnRunLdcOpf_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/Run_32x.png" Width="16" />
+                    <TextBlock Margin="5,0,0,0">Solve LDC OPF</TextBlock>
                 </StackPanel>
-                <GroupBox Header="Nodal results" Grid.Row="1">
-                    <DataGrid Name="dgNodalResults" ItemsSource="{Binding Path=NodeOPFResults}" AutoGenerateColumns="False" ColumnHeaderHeight="60">
-                        <DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="ContentTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.ColumnHeaderStyle>
-                        <DataGrid.AlternatingRowBackground>
-                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-                        </DataGrid.AlternatingRowBackground>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Node ID" Binding="{Binding NodeId}" IsReadOnly="True" Width="50" />
-                            <DataGridTextColumn Header="Node Name" Binding="{Binding NodeName}" IsReadOnly="True" Width="50" />
-                            <DataGridTextColumn Header="Total Energy Generated (MWh)" Binding="{Binding TotalPowerGenerated}" IsReadOnly="True" Width="100" />
-                            <DataGridTextColumn Header="Total Energy Consumed (MWh)" Binding="{Binding TotalPowerConsumed}" IsReadOnly="True" Width="100" />
-                            <DataGridTextColumn Header="Load Shedding (MWh)" Binding="{Binding LoadShedding}" IsReadOnly="True" Width="100" />
-                            <DataGridTextColumn Header="Average Spot Price (US$/MW)" Binding="{Binding SpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </GroupBox>
-            </Grid>
-        </GroupBox>
+            </Button>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Load Duration Curve">
+                <!--<DataGrid Name="dgLDC" ItemsSource="{Binding}" AutoGenerateColumns="True">
+                </DataGrid>-->
+                <localUtils:CustomDataGrid Grid.Row="1" x:Name="dgLDC" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="40">
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.AlternatingRowBackground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                    </DataGrid.AlternatingRowBackground>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Duration [hours]" Binding="{Binding Duration, StringFormat=N0}" Width="70" IsReadOnly="False" />
+                        <DataGridTextColumn Header="Load multiplier" Binding="{Binding LoadMultiplier, StringFormat=p0}" Width="70" />
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="View Detailed OPF Results" Click="dgLDCMenuItem_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </localUtils:CustomDataGrid>
+            </GroupBox>
+            <GroupBox Header="Results" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Label Content="Total Operation Cost:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBox x:Name="tbTotalCost" Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
+                         Text="{Binding StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+                        <Label x:Name="lblCurrStateMsg" Content="{Binding Path=CurrentStateMessage, Mode=OneTime}" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" />
+                    </StackPanel>
+                    <GroupBox Header="Nodal results" Grid.Row="1">
+                        <DataGrid Name="dgNodalResults" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="60">
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.AlternatingRowBackground>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+                            </DataGrid.AlternatingRowBackground>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Node ID" Binding="{Binding NodeId}" IsReadOnly="True" Width="50" />
+                                <DataGridTextColumn Header="Node Name" Binding="{Binding NodeName}" IsReadOnly="True" Width="50" />
+                                <DataGridTextColumn Header="Total Energy Generated (MWh)" Binding="{Binding TotalEnergyGenerated, StringFormat=N1}" IsReadOnly="True" Width="100" />
+                                <DataGridTextColumn Header="Total Energy Consumed (MWh)" Binding="{Binding TotalEnergyConsumed, StringFormat=N1}" IsReadOnly="True" Width="100" />
+                                <DataGridTextColumn Header="Load Shedding (MWh)" Binding="{Binding LoadShedding, StringFormat=N1}" IsReadOnly="True" Width="100" />
+                                <DataGridTextColumn Header="Average Spot Price (US$/MW)" Binding="{Binding AverageSpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+        </Grid>
     </Grid>
 </UserControl>

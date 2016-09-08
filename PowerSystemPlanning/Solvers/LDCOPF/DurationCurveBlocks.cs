@@ -7,33 +7,90 @@ using System.Threading.Tasks;
 
 namespace PowerSystemPlanning.Solvers.LDCOPF
 {
-
-    public class DurationCurveBlocks
+    /// <summary>
+    /// 
+    /// </summary>
+    public class LoadDurationCurveByBlocks
     {
-        BindingList<DurationBlock> _DurationBlocks;
+        /// <summary>
+        /// A list detailing each block which approximate the load duration curve.
+        /// </summary>
+        public BindingList<LoadBlock> DurationBlocks;
 
-        public BindingList<DurationBlock> DurationBlocks
+        /// <summary>
+        /// Duration of each block (in hours, is a number between 0 and 8760).
+        /// </summary>
+        public List<double> BlockDurations
         {
             get
             {
-                return _DurationBlocks;
+                return (from DurationBlock in this.DurationBlocks select DurationBlock.Duration).ToList<double>();
+            }
+        }
+
+        /// <summary>
+        /// Relative duration of each block (hours / 8760, is a number between 0 and 1).
+        /// </summary>
+        public List<double> RelativeBlockDurations
+        {
+            get
+            {
+                return (from DurationBlock in this.DurationBlocks select (DurationBlock.Duration / 8760)).ToList<double>();
+            }
+        }
+
+        public LoadDurationCurveByBlocks()
+        {
+            this.DurationBlocks = new BindingList<LoadBlock>();
+        }
+    }
+
+    public class LoadBlock
+    {
+        double _Duration;
+        /// <summary>
+        /// The duration of this block (in hours).
+        /// </summary>
+        public double Duration
+        {
+            get
+            {
+                return _Duration;
             }
 
             set
             {
-                _DurationBlocks = value;
+                _Duration = value;
             }
         }
 
-        public DurationCurveBlocks()
+        double _LoadMultiplier;
+        /// <summary>
+        /// The factor which multiplies peak demand in this block (a number between 0 and 1).
+        /// </summary>
+        public double LoadMultiplier
         {
-            this.DurationBlocks = new BindingList<DurationBlock>();
-        }
-    }
+            get
+            {
+                return _LoadMultiplier;
+            }
 
-    public struct DurationBlock
-    {
-        public double Duration;
-        public double LoadMultiplier;
+            set
+            {
+                _LoadMultiplier = value;
+            }
+        }
+
+        public LoadBlock()
+        {
+            this.Duration = 0;
+            this.LoadMultiplier = 0;
+        }
+
+        public LoadBlock(double duration, double loadMultiplier)
+        {
+            this.Duration = duration;
+            this.LoadMultiplier = loadMultiplier;
+        }
     }
 }

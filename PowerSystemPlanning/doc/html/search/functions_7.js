@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['readfromxmlfile',['readFromXMLFile',['../class_power_system_planning_1_1_power_system.html#a6e4503f2559b1073a140555ecd6093b0',1,'PowerSystemPlanning::PowerSystem']]]
+  ['solve',['Solve',['../class_power_system_planning_1_1_solvers_1_1_base_optimization_power_system_solver.html#a6569b84027dbafd7cccfe42a14bbd716',1,'PowerSystemPlanning.Solvers.BaseOptimizationPowerSystemSolver.Solve()'],['../interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html#a8c296a6bf289a4f39d63cbbb87e52565',1,'PowerSystemPlanning.Solvers.IPowerSystemSolver.Solve()'],['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver.html#aaba0f70ab387776bfbde9193a7748371',1,'PowerSystemPlanning.Solvers.OPF.OPFModelSolver.Solve()']]],
+  ['solveasync',['SolveAsync',['../class_power_system_planning_1_1_solvers_1_1_base_optimization_power_system_solver.html#a8b2ca2b6e2b107b1eeeb3f574e3373ea',1,'PowerSystemPlanning.Solvers.BaseOptimizationPowerSystemSolver.SolveAsync()'],['../interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html#acaee56f3c9c709712ff33008d0869d91',1,'PowerSystemPlanning.Solvers.IPowerSystemSolver.SolveAsync()'],['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver.html#a2565c01a253db45dcbe0e28a12d57274',1,'PowerSystemPlanning.Solvers.OPF.OPFModelSolver.SolveAsync()']]]
 ];

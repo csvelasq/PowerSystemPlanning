@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace PowerSystemPlanning.Solvers.OPF
 {
+    /// <summary>
+    /// Builder and solver of the simple OPF model.
+    /// </summary>
     public class OPFModelSolver : IPowerSystemSolver
     {
         PowerSystem powerSystem;
 
-        GRBEnv env;
-        GRBModel model;
+        GRBEnv grbEnv;
+        GRBModel grbModel;
 
         OPFModel opfModel;
         
@@ -27,9 +30,9 @@ namespace PowerSystemPlanning.Solvers.OPF
         public OPFModelSolver(PowerSystem powerSystem)
         {
             this.powerSystem = powerSystem;
-            this.env = new GRBEnv();
-            this.model = new GRBModel(env);
-            this.opfModel = new OPFModel(this.powerSystem, this.env, this.model);
+            this.grbEnv = new GRBEnv();
+            this.grbModel = new GRBModel(grbEnv);
+            this.opfModel = new OPFModel(this.powerSystem, this.grbEnv, this.grbModel);
         }
 
         /// <summary>
@@ -39,15 +42,16 @@ namespace PowerSystemPlanning.Solvers.OPF
         {
             // Initializes result reporting
             this.SolverResults = new PowerSystemSolverResults();
-            this.SolverResults.SolverName = OPFModel.OPFModelName;
+            this.SolverResults.SolverName = this.opfModel.GRBOptimizationModelName;
             this.SolverResults.StartTime = DateTime.Now;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
+            // Builds the model
+            this.opfModel.BuildGRBOptimizationModel();
             // Solves the model
-            this.opfModel.BuildOPFModel();
-            this.model.Optimize();
+            this.grbModel.Optimize();
             // Finalizes result reporting
-            int status = this.model.Get(GRB.IntAttr.Status);
+            int status = this.grbModel.Get(GRB.IntAttr.Status);
             if (status == GRB.Status.OPTIMAL)
             {
                 this.OPFResults = opfModel.BuildOPFModelResults();
@@ -77,8 +81,8 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// </summary>
         public void Dispose()
         {
-            model.Dispose();
-            env.Dispose();
+            this.grbModel.Dispose();
+            this.grbEnv.Dispose();
         }
     }
 }

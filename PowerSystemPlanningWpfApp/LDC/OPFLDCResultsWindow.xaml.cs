@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PowerSystemPlanning.Solvers.LDCOPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,15 @@ namespace PowerSystemPlanningWpfApp.LDC
     /// </summary>
     public partial class OPFLDCResultsWindow : Window
     {
+
         public OPFLDCResultsWindow()
         {
             InitializeComponent();
+        }
+        
+        public OPFLDCResultsWindow(PowerSystemPlanning.PowerSystem powerSystem) : this()
+        {
+            this.opfLdcResultsControl.PowerSystem = powerSystem;
         }
     }
 }

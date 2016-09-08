@@ -153,7 +153,7 @@
                             <DataGridTextColumn Header="To Node ID" Binding="{Binding NodeToID}" />
                             <!--<DataGridTextColumn Header="To Node Name" Binding="{Binding NodeToName}" />-->
                             <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacityMW}" />
-                            <DataGridTextColumn Header="Susceptance (mho)" Binding="{Binding SusceptanceMho}" />
+                            <DataGridTextColumn Header="Susceptance (mho)" Binding="{Binding SusceptanceMho, StringFormat=N3}" />
                         </DataGrid.Columns>
                     </localUtils:CustomDataGrid>
                 </GroupBox>

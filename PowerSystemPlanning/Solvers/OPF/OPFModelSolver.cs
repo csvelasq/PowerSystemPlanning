@@ -22,7 +22,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         
         PowerSystemSolverResults SolverResults;
 
-        /// <summary>
+/// <summary>
         /// The detailed results of this OPF model (per node, generator, and transmission line).
         /// </summary>
         public OPFModelResult OPFResults;

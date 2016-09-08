@@ -22,11 +22,11 @@ namespace PowerSystemPlanningWpfApp.OPF
     /// </summary>
     public partial class OPFResultsWindow : Window
     {
-        public OPFModelResult OPFResults
+        public OPFModelResultForLDC OPFResults
         {
             set
             {
-                this.opfResultsControl.OPFResults = value;
+                this.opfResultsControl.OPFResultsForLDC = value;
             }
         }
 

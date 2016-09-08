@@ -23,14 +23,14 @@ namespace PowerSystemPlanningWpfApp.OPF
     /// </summary>
     public partial class OPFResultsControl : UserControl
     {
-        OPFModelResult _OPFResults;
+        OPFModelResultForLDC _OPFResultsForLDC;
 
-        public OPFModelResult OPFResults
+        public OPFModelResultForLDC OPFResultsForLDC
         {
             set
             {
-                this._OPFResults = value;
-                this.DataContext = this._OPFResults;
+                this._OPFResultsForLDC = value;
+                this.DataContext = this._OPFResultsForLDC;
             }
         }
         

@@ -9,14 +9,14 @@
              d:DesignHeight="500" d:DesignWidth="750" Background="White">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" HorizontalAlignment="Left" LastChildFill="False" >
+        <DockPanel Grid.Row="0" HorizontalAlignment="Left" LastChildFill="False" Margin="5,5,0,5" >
             <Button x:Name="btnRunLdcOpf" Click="btnRunLdcOpf_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/Resources/Run_32x.png" Width="16" />
-                    <TextBlock Margin="5,0,0,0">Solve LDC OPF</TextBlock>
+                    <TextBlock Margin="5,0,5,0">Solve LDC OPF</TextBlock>
                 </StackPanel>
             </Button>
         </DockPanel>
@@ -62,10 +62,10 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <Label Content="Total Operation Cost:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <TextBox x:Name="tbTotalCost" Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
+                        <TextBox x:Name="tbTotalCost" Width="100" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
                          Text="{Binding StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
                         <Label x:Name="lblCurrStateMsg" Content="{Binding Path=CurrentStateMessage, Mode=OneTime}" 
-                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" />
+                       HorizontalAlignment="Left" VerticalAlignment="Center" />
                     </StackPanel>
                     <GroupBox Header="Nodal results" Grid.Row="1">
                         <DataGrid Name="dgNodalResults" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="60">

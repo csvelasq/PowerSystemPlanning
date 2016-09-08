@@ -12,54 +12,64 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// </summary>
     public class OPFModelResult : BaseGRBOptimizationModelResult
     {
-        PowerSystem PowerSystem;
-        List<GeneratingUnitOPFResult> _GeneratingUnitOPFResults;
-        List<NodeOPFResult> _NodeOPFResults;
-        List<TransmissionLineOPFResult> _TransmissionLineOPFResults;
-
+        protected PowerSystem PowerSystem;
         /// <summary>
-        /// Gets the total generation cost (the model's objective value) in the current solution.
+        /// Gets the total operation cost (generation plus load shedding, the model's objective value).
         /// </summary>
-        public double TotalOperationCost
+        public virtual double TotalOperationCost
         {
             get
             {
-                return this._ObjVal;
+                return (TotalGenerationCost + TotalLoadSheddingCost);
+            }
+        }
+        /// <summary>
+        /// Gets the total generation (in MW) by all generators in the power system.
+        /// </summary>
+        public virtual double TotalGeneration
+        {
+            get
+            {
+                return (from genResults in this.GeneratingUnitOPFResults select genResults.Output).Sum();
+            }
+        }
+        /// <summary>
+        /// Gets the total generation cost (in US$).
+        /// </summary>
+        /// <remarks> Equals the sum over all generators of output (MW) multiplied by marginal cost (US$/MW).</remarks>
+        public virtual double TotalGenerationCost
+        {
+            get
+            {
+                return (from genResults in this.GeneratingUnitOPFResults select genResults.TotalGenerationCost).Sum();
+            }
+        }
+        /// <summary>
+        /// Geths the total load shedding in the system (in MW).
+        /// </summary>
+        public virtual double TotalLoadShedding
+        {
+            get
+            {
+                return (from node in this.NodeOPFResults select node.LoadShedding).Sum();
+            }
+        }
+        /// <summary>Gets the total load shedding cost (in US$).</summary>
+        /// <remarks> Equals the total load-shedding (MW) multiplied by the system's load shedding cost (US$/MW).</remarks>
+        public virtual double TotalLoadSheddingCost
+        {
+            get
+            {
+                return (this.PowerSystem.LoadSheddingCost * TotalLoadShedding);
             }
         }
 
-        public List<GeneratingUnitOPFResult> GeneratingUnitOPFResults
-        {
-            get
-            {
-                return _GeneratingUnitOPFResults;
-            }
-        }
+        public virtual List<GeneratingUnitOPFResult> GeneratingUnitOPFResults { get; protected set; }
 
-        public List<NodeOPFResult> NodeOPFResults
-        {
-            get
-            {
-                return _NodeOPFResults;
-            }
-            private set
-            {
-                _NodeOPFResults = value;
-            }
-        }
+        public virtual List<NodeOPFResult> NodeOPFResults { get; protected set; }
 
-        public List<TransmissionLineOPFResult> TransmissionLineOPFResults
-        {
-            get
-            {
-                return _TransmissionLineOPFResults;
-            }
-            private set
-            {
-                _TransmissionLineOPFResults = value;
-            }
-        }
-        
+        public virtual List<TransmissionLineOPFResult> TransmissionLineOPFResults { get; protected set; }
+
         /// <summary>
         /// Initializes the result container with the given Gurobi status.
         /// </summary>
@@ -67,30 +77,30 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <remarks>This constructor can be used to find out if the model was correctly solved by means of the <see cref="IsModelSolved"/> property.</remarks>
         public OPFModelResult(int status) : base(status) { }
 
-        public OPFModelResult(PowerSystem powerSystem, int status, double totalOperationCost, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
-            : base(status, totalOperationCost)
+        public OPFModelResult(PowerSystem powerSystem, int status, double objVal, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
+            : base(status, objVal)
         {
             this.PowerSystem = powerSystem;
             //Generating units
-            this._GeneratingUnitOPFResults = new List<GeneratingUnitOPFResult>();
+            this.GeneratingUnitOPFResults = new List<GeneratingUnitOPFResult>();
             foreach (GeneratingUnit gen in this.PowerSystem.GeneratingUnits)
             {
-                this._GeneratingUnitOPFResults.Add(new GeneratingUnitOPFResult(gen, pGen_Solution[gen.Id]));
+                this.GeneratingUnitOPFResults.Add(new GeneratingUnitOPFResult(gen, pGen_Solution[gen.Id]));
             }
             //Transmission lines
-            this._TransmissionLineOPFResults = new List<TransmissionLineOPFResult>();
+            this.TransmissionLineOPFResults = new List<TransmissionLineOPFResult>();
             foreach (TransmissionLine tl in this.PowerSystem.TransmissionLines)
             {
-                this._TransmissionLineOPFResults.Add(new TransmissionLineOPFResult(tl, pFlow_Solution[tl.Id]));
+                this.TransmissionLineOPFResults.Add(new TransmissionLineOPFResult(tl, pFlow_Solution[tl.Id]));
             }
             //Nodes
-            this._NodeOPFResults = new List<NodeOPFResult>();
+            this.NodeOPFResults = new List<NodeOPFResult>();
             foreach (Node node in this.PowerSystem.Nodes)
             {
                 double pgen = 0;
                 foreach (GeneratingUnit gen in node.GeneratingUnits)
                 {
-                    pgen += this._GeneratingUnitOPFResults[gen.Id].Output;
+                    pgen += this.GeneratingUnitOPFResults[gen.Id].Output;
                 }
                 double pcons = 0;
                 double lshed = 0;
@@ -109,37 +119,16 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// </summary>
     public class GeneratingUnitOPFResult
     {
-        GeneratingUnit _GeneratingUnit;
-        double _Output;
+        public GeneratingUnit GeneratingUnit { get; protected set; }
 
-        public GeneratingUnit GeneratingUnit
-        {
-            get
-            {
-                return _GeneratingUnit;
-            }
-        }
+        public double Output { get; protected set; }
 
-        public double Output
-        {
-            get
-            {
-                return _Output;
-            }
-        }
-
-        public double TotalGenerationCost
-        {
-            get
-            {
-                return this.Output * this.GeneratingUnit.MarginalCost;
-            }
-        }
+        public virtual double TotalGenerationCost { get { return this.Output * this.GeneratingUnit.MarginalCost; } }
 
         public GeneratingUnitOPFResult(GeneratingUnit generatingUnit, double output)
         {
-            this._GeneratingUnit = generatingUnit;
-            this._Output = output;
+            this.GeneratingUnit = generatingUnit;
+            this.Output = output;
         }
     }
 
@@ -148,91 +137,21 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// </summary>
     public class NodeOPFResult
     {
-        Node _Node;
-        double _Angle;
-        double _TotalPowerGenerated;
-        double _TotalPowerConsumed;
-        double _LoadShedding;
-        double _SpotPrice;
-
-        public Node Node
-        {
-            get
-            {
-                return _Node;
-            }
-            private set
-            {
-                _Node = value;
-            }
-        }
+        public Node Node { get; protected set; }
 
         public int NodeId { get { return this.Node.Id; } }
 
         public string NodeName { get { return this.Node.Name; } }
 
-        public double Angle
-        {
-            get
-            {
-                return _Angle;
-            }
-            private set
-            {
-                _Angle = value;
-            }
-        }
+        public double Angle { get; protected set; }
 
-        public double TotalPowerGenerated
-        {
-            get
-            {
-                return _TotalPowerGenerated;
-            }
+        public double TotalPowerGenerated { get; protected set; }
 
-            private set
-            {
-                _TotalPowerGenerated = value;
-            }
-        }
+        public double TotalPowerConsumed { get; protected set; }
 
-        public double TotalPowerConsumed
-        {
-            get
-            {
-                return _TotalPowerConsumed;
-            }
+        public double LoadShedding { get; protected set; }
 
-            private set
-            {
-                _TotalPowerConsumed = value;
-            }
-        }
-
-        public double LoadShedding
-        {
-            get
-            {
-                return _LoadShedding;
-            }
-            private set
-            {
-                _LoadShedding = value;
-            }
-        }
-
-        public double SpotPrice
-        {
-            get
-            {
-                return this._SpotPrice;
-            }
-
-            private set
-            {
-                this._SpotPrice = value;
-            }
-        }
+        public double SpotPrice { get; protected set; }
 
         public NodeOPFResult(Node node, double angle, double totalPowerGenerated, double totalPowerConsumed, double loadShed, double spotPrice)
         {
@@ -250,36 +169,13 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// </summary>
     public class TransmissionLineOPFResult
     {
-        TransmissionLine _TransmissionLine;
-        double _PowerFlow;
+        public TransmissionLine TransmissionLine { get; protected set; }
 
-        public TransmissionLine TransmissionLine
-        {
-            get
-            {
-                return _TransmissionLine;
-            }
-            private set
-            {
-                _TransmissionLine = value;
-            }
-        }
+        public int Id { get { return this.TransmissionLine.Id; } }
+        public int NodeFromId { get { return this.TransmissionLine.NodeFromID; } }
+        public int NodeToId { get { return this.TransmissionLine.NodeToID; } }
 
-        public int Id { get { return this._TransmissionLine.Id; } }
-        public int NodeFromId { get { return this._TransmissionLine.NodeFromID; } }
-        public int NodeToId { get { return this._TransmissionLine.NodeToID; } }
-
-        public double PowerFlow
-        {
-            get
-            {
-                return _PowerFlow;
-            }
-            private set
-            {
-                _PowerFlow = value;
-            }
-        }
+        public double PowerFlow { get; protected set; }
 
         public TransmissionLineOPFResult(TransmissionLine transmissionLine, double power_flow)
         {

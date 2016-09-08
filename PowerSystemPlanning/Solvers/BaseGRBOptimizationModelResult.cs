@@ -15,51 +15,31 @@ namespace PowerSystemPlanning.Solvers
     /// </remarks>
     public class BaseGRBOptimizationModelResult
     {
-        protected int _GRBStatus;
-
         /// <summary>
         /// Status of the Gurobi optimization (defined in GRB.Status)
         /// </summary>
-        public int GRBStatus
-        {
-            get
-            {
-                return _GRBStatus;
-            }
-
-            set
-            {
-                _GRBStatus = value;
-            }
-        }
+        public int GRBStatus { get; protected set; }
 
         /// <summary>
         /// True if the model was proved to be infeasible, false otherwise.
         /// </summary>
-        public bool IsModelInfeasible { get { return _GRBStatus == GRB.Status.INFEASIBLE; } }
+        public bool IsModelInfeasible { get { return GRBStatus == GRB.Status.INFEASIBLE; } }
 
         /// <summary>
         /// True if the model was solved to optimality, false otherwise.
         /// </summary>
-        public bool IsModelSolved { get { return _GRBStatus == GRB.Status.OPTIMAL; } }
+        public bool IsModelSolved { get { return GRBStatus == GRB.Status.OPTIMAL; } }
 
         /// <summary>
         /// True if the model was proved to be unbounded, false otherwise.
         /// </summary>
-        public bool IsModelUnbounded { get { return _GRBStatus == GRB.Status.UNBOUNDED; } }
-
-        protected double _ObjVal;
+        public bool IsModelUnbounded { get { return GRBStatus == GRB.Status.UNBOUNDED; } }
+        
 
         /// <summary>
         /// The value of the objective function.
         /// </summary>
-        public double ObjVal
-        {
-            get
-            {
-                return this._ObjVal;
-            }
-        }
+        public double ObjVal { get; protected set; }
 
         /// <summary>
         /// A message indicating the current state of the model (e.g. solved, infeasible).
@@ -81,14 +61,14 @@ namespace PowerSystemPlanning.Solvers
 
         public BaseGRBOptimizationModelResult(int status)
         {
-            this._GRBStatus = status;
-            this._ObjVal = Double.NaN;
+            this.GRBStatus = status;
+            this.ObjVal = Double.NaN;
         }
 
         public BaseGRBOptimizationModelResult(int status, double objVal)
         {
-            this._GRBStatus = status;
-            this._ObjVal = objVal;
+            this.GRBStatus = status;
+            this.ObjVal = objVal;
         }
     }
 }

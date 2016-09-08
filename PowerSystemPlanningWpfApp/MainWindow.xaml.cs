@@ -28,7 +28,7 @@ namespace PowerSystemPlanningWpfApp
     public partial class MainWindow : Window
     {
         // TODO Avalondock for logging and other windows
-        // TODO fix expander http://stackoverflow.com/questions/19516904/wpf-expander-with-gridsplitter
+        // TODO fix logging expander http://stackoverflow.com/questions/19516904/wpf-expander-with-gridsplitter
 
         /// <summary>
         /// NLog Logger for this class.
@@ -89,6 +89,7 @@ namespace PowerSystemPlanningWpfApp
             {
                 this.PowerSystem = PowerSystem.readFromXMLFile(filename);
                 this.RecentFileList.InsertFile(filename);
+                MainWindow.logger.Info(String.Format("Loaded file '{0}'", filename));
             }
             catch (Exception e)
             {
@@ -117,6 +118,7 @@ namespace PowerSystemPlanningWpfApp
                 }
             }
             else this.PowerSystem.saveToXMLFile();
+            MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", this.PowerSystem.FullFileName, this.PowerSystem.Name));
         }
 
         private void SaveAsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -132,6 +134,7 @@ namespace PowerSystemPlanningWpfApp
             {
                 this.PowerSystem.saveToXMLFile(dlg.FileName);
             }
+            MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", this.PowerSystem.FullFileName, this.PowerSystem.Name));
         }
 
         private void CloseCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -188,14 +191,9 @@ namespace PowerSystemPlanningWpfApp
 
         private void opfMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            //Build and solve the opf model
-            OPFModelSolver opf = new OPFModelSolver(this.PowerSystem);
-            opf.Solve();
-            OPFModelResult OPFResults = opf.OPFResults;
-            //Show results window
-            OPF.OPFResultsWindow opfResultsWindow = new OPF.OPFResultsWindow();
-            opfResultsWindow.OPFResults = OPFResults;
-            opfResultsWindow.Show();
+            //Show OPF run window
+            OPF.OPFRunWindow opfRunWindow = new OPF.OPFRunWindow(PowerSystem);
+            opfRunWindow.Show();
         }
 
         private void ldcOpfMenuItem_Click(object sender, RoutedEventArgs e)

@@ -69,8 +69,11 @@
     <Compile Include="PlanningModels\PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\IPowerSystemSolver.cs" />
+    <Compile Include="Solvers\OPF\OPFModelForLDC.cs" />
     <Compile Include="Solvers\OPF\OPFModelResult.cs" />
+    <Compile Include="Solvers\OPF\OPFModelResultForLDC.cs" />
     <Compile Include="Solvers\OPF\OPFModelSolver.cs" />
+    <Compile Include="Solvers\OPF\OPFModelSolverForLDC.cs" />
     <Compile Include="Solvers\PowerSystemSolverConfiguration.cs" />
     <Compile Include="Solvers\PowerSystemSolveResults.cs" />
     <Compile Include="PlanningModels\TransmissionElement.cs" />

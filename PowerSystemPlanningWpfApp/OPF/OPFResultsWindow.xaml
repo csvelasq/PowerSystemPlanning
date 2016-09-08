@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.OPF"
         mc:Ignorable="d"
-        Title="Run Optimal Power Flow" Height="400" Width="650" WindowState="Maximized">
+        Title="Optimal Power Flow Results" Height="400" Width="650" WindowState="Maximized">
     <Grid>
         <local:OPFResultsControl x:Name="opfResultsControl" />
     </Grid>

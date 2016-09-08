@@ -144,6 +144,9 @@
     <Compile Include="OPF\OPFResultsControl.xaml.cs">
       <DependentUpon>OPFResultsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OPF\OPFRunWindow.xaml.cs">
+      <DependentUpon>OPFRunWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScenarioTEP\ScenarioTEPWindow.xaml.cs">
       <DependentUpon>ScenarioTEPWindow.xaml</DependentUpon>
     </Compile>
@@ -203,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OPF\OPFResultsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OPF\OPFRunWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

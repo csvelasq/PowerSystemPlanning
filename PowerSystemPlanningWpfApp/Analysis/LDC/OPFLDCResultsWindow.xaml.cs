@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.LDC
+namespace PowerSystemPlanningWpfApp.Analysis.LDC
 {
     /// <summary>
     /// Interaction logic for OPFLDCResultsWindow.xaml

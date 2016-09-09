@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="900" Background="{DynamicResource WindowBackgroundBrush}">
+             d:DesignHeight="400" d:DesignWidth="900" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -20,7 +20,7 @@
         </DockPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="300*" />
             </Grid.ColumnDefinitions>

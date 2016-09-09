@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="600" Background="{DynamicResource WindowBackgroundBrush}">
+             d:DesignHeight="300" d:DesignWidth="600" Background="White">
     <GroupBox Header="Candidate Transmission Lines">
-        <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding _TransmissionLines}" AutoGenerateColumns="False" ColumnHeaderHeight="40">
+        <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="40">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="ContentTemplate">

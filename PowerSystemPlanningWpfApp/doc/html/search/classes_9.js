@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['scenariotep',['ScenarioTEP',['../class_power_system_planning_wpf_app_1_1_scenario_t_e_p_1_1_scenario_t_e_p.html',1,'PowerSystemPlanningWpfApp::ScenarioTEP']]],
-  ['scenariotepwindow',['ScenarioTEPWindow',['../class_power_system_planning_wpf_app_1_1_scenario_t_e_p_1_1_scenario_t_e_p_window.html',1,'PowerSystemPlanningWpfApp::ScenarioTEP']]],
-  ['scenariotepwindow',['ScenarioTEPWindow',['../class_power_system_planning_wpf_app_1_1_static_t_e_p_1_1_scenario_t_e_p_window.html',1,'PowerSystemPlanningWpfApp::StaticTEP']]],
-  ['simplebackendmodel',['SimpleBackendModel',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_simple_backend_model.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
-  ['simplebackendobject',['SimpleBackendObject',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_simple_backend_object.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
-  ['simpleterminal',['SimpleTerminal',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_simple_terminal.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
-  ['statictepwindow',['StaticTEPWindow',['../class_power_system_planning_wpf_app_1_1_static_t_e_p_1_1_static_t_e_p_window.html',1,'PowerSystemPlanningWpfApp::StaticTEP']]]
+  ['recentfilelist',['RecentFileList',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
+  ['runeconomicdispatch',['RunEconomicDispatch',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_run_economic_dispatch.html',1,'PowerSystemPlanningWpfApp::OPF']]],
+  ['runldc',['RunLDC',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_run_l_d_c.html',1,'PowerSystemPlanningWpfApp::LDC']]],
+  ['runopfwindow',['RunOPFWindow',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_run_o_p_f_window.html',1,'PowerSystemPlanningWpfApp::OPF']]]
 ];

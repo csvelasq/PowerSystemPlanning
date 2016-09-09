@@ -6,48 +6,102 @@ using System.Threading.Tasks;
 
 namespace PowerSystemPlanning
 {
-    public class TransmissionLine : TransmissionElement
+    public interface ITransmissionLine
     {
-        private double _ThermalCapacityMW;
+        //TODO only require a Node object, not the id and name as well
+        int Id { get; set; }
+        string Name { get; set; }
+        double ThermalCapacityMW { get; set; }
+        double ReactanceOhm { get; }
+        double SusceptanceMho { get; set; }
+        int NodeFromID { get; set; }
+        int NodeToID { get; set; }
+    }
+
+    public class TransmissionLine : ITransmissionLine
+    {
+        protected PowerSystem MyPowerSystem;
 
         /// <summary>
-        /// Maximum thermal capacity of the transmission line, in MW.
+        /// Unique identifier of this transmission element within a given power system.
         /// </summary>
-        public double ThermalCapacityMW
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Name of the transmission element (arbitrarily set by the user).
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The origin node to which this transmission element is connected.
+        /// </summary>
+        public Node NodeFrom;
+
+        /// <summary>
+        /// ID of the node from which this transmission element begins.
+        /// </summary>
+        /// <remarks>
+        /// ID starts from 0 and increments until N. ID's must be unique. The ID must also indicate the position of the element in the containing list in the Power System object.
+        /// </remarks
+        public int NodeFromID
         {
             get
             {
-                return _ThermalCapacityMW;
+                if (this.NodeFrom != null)
+                    return this.NodeFrom.Id;
+                else return -1;
             }
-
             set
             {
-                _ThermalCapacityMW = value;
+                if (this.NodeFrom != null)
+                {
+                    if (this.NodeFrom.Id != value)
+                        this.NodeFrom = MyPowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
+                }
+                else this.NodeFrom = MyPowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
             }
         }
+        
+        /// <summary>
+        /// The destination node to which this transmission element is connected.
+        /// </summary>
+        public Node NodeTo;
 
-        private double _ReactanceOhm;
+        /// <summary>
+        /// ID of the node to which this transmission element arrives.
+        /// </summary>
+        public int NodeToID
+        {
+            get
+            {
+                if (this.NodeTo != null)
+                    return this.NodeTo.Id;
+                else
+                    return -1;
+            }
+            set
+            {
+                if (this.NodeTo != null)
+                {
+                    if (this.NodeTo.Id != value)
+                        this.NodeTo = MyPowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
+                }
+                else this.NodeTo = MyPowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
+            }
+        }
+        
+        /// <summary>
+        /// Maximum thermal capacity of the transmission line, in MW.
+        /// </summary>
+        public double ThermalCapacityMW { get; set; }
 
         /// <summary>
         /// Serie reactance of the transmission line, in ohms.
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
-        public double ReactanceOhm
-        {
-            get
-            {
-                return _ReactanceOhm;
-            }
-
-            set
-            {
-                _ReactanceOhm = value;
-                _SusceptanceMho = 1 / value;
-            }
-        }
+        public double ReactanceOhm { get; set; }
 
         private double _SusceptanceMho;
-
         /// <summary>
         /// Serie sucsceptance of the transmission line, in mhos.
         /// </summary>
@@ -61,18 +115,19 @@ namespace PowerSystemPlanning
             set
             {
                 _SusceptanceMho = value;
-                _ReactanceOhm = 1 / value;
+                ReactanceOhm = 1 / value;
             }
         }
 
         /// <summary>
         /// Empty constructor, not meant to be used but rather included only to allow serialization.
         /// </summary>
-        public TransmissionLine() : base() { }
+        public TransmissionLine() { }
 
-        public TransmissionLine(PowerSystem power_system) : base(power_system)
+        public TransmissionLine(PowerSystem power_system)
         {
-            this.Id = this._PowerSystem.NumberOfTransmissionLines;
+            this.MyPowerSystem = power_system;
+            this.Id = this.MyPowerSystem.NumberOfTransmissionLines;
         }
     }
 }

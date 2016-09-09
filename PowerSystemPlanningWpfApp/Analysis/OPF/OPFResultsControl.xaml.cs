@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.OPF
+namespace PowerSystemPlanningWpfApp.Analysis.OPF
 {
     /// <summary>
     /// Interaction logic for OPFResultsControl.xaml

@@ -19,6 +19,7 @@ using NLog;
 using PowerSystemPlanning.Solvers.OPF;
 using PowerSystemPlanning.Solvers;
 using PowerSystemPlanning.Solvers.LDCOPF;
+using PowerSystemPlanning.PlanningModels;
 
 namespace PowerSystemPlanningWpfApp
 {
@@ -27,23 +28,32 @@ namespace PowerSystemPlanningWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        // TODO Avalondock for logging and other windows
-        // TODO fix logging expander http://stackoverflow.com/questions/19516904/wpf-expander-with-gridsplitter
-
         /// <summary>
         /// NLog Logger for this class.
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        PowerSystem _MyPowerSystem;
+        LDCPowerSystemPlanningModel _MyLDCPowerSystemPlanningModel;
 
-        PowerSystem MyPowerSystem
+        public LDCPowerSystemPlanningModel MyLDCPowerSystemPlanningModel
         {
-            get { return this._MyPowerSystem; }
+            get
+            {
+                return _MyLDCPowerSystemPlanningModel;
+            }
+
             set
             {
-                this._MyPowerSystem = value;
-                //this.powerSystemEditor.MyPowerSystem = this._MyPowerSystem;
+                _MyLDCPowerSystemPlanningModel = value;
+            }
+        }
+        PowerSystem MyPowerSystem
+        {
+            get { return MyLDCPowerSystemPlanningModel.MyPowerSystem; }
+            set
+            {
+                MyLDCPowerSystemPlanningModel = new LDCPowerSystemPlanningModel(value);
+                this.myPowerSystemEditorControl.MyPowerSystem = MyLDCPowerSystemPlanningModel.MyPowerSystem;
             }
         }
 
@@ -185,14 +195,14 @@ namespace PowerSystemPlanningWpfApp
         private void opfMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //Show OPF run window
-            OPF.OPFRunWindow opfRunWindow = new OPF.OPFRunWindow(MyPowerSystem);
+            Analysis.OPF.OPFRunWindow opfRunWindow = new Analysis.OPF.OPFRunWindow(MyPowerSystem);
             opfRunWindow.Show();
         }
 
         private void ldcOpfMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //Show results window
-            LDC.OPFLDCResultsWindow optOPFLDC = new LDC.OPFLDCResultsWindow(this.MyPowerSystem);
+            Analysis.LDC.OPFLDCResultsWindow optOPFLDC = new Analysis.LDC.OPFLDCResultsWindow(this.MyPowerSystem);
             optOPFLDC.Show();
         }
 

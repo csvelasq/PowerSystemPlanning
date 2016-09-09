@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.LDC
+namespace PowerSystemPlanningWpfApp.Analysis.LDC
 {
     /// <summary>
     /// Interaction logic for OPFLDCResultsControl.xaml
@@ -34,9 +34,7 @@ namespace PowerSystemPlanningWpfApp.LDC
             {
                 this._LDCOPFModelResults = this._LDCOPFModelSolver.LDCOPFResults;
                 //Databinding
-                this.tbTotalCost.DataContext = this.LDCOPFModelResults.ObjVal;
-                this.lblCurrStateMsg.DataContext = this.LDCOPFModelResults.CurrentStateMessage;
-                this.dgNodalResults.DataContext = this.LDCOPFModelResults.NodeLDCOPFResults;
+                DataContext = _LDCOPFModelResults;
             }
         }
         
@@ -63,7 +61,7 @@ namespace PowerSystemPlanningWpfApp.LDC
             _LoadDurationCurveByBlocks.DurationBlocks.Add(new LoadBlock(2000, 0.6));
             _LoadDurationCurveByBlocks.DurationBlocks.Add(new LoadBlock(760, 1));
             //Bind load blocks
-            this.dgLDC.DataContext = _LoadDurationCurveByBlocks.DurationBlocks;
+            //this.dgLDC.DataContext = _LoadDurationCurveByBlocks.DurationBlocks;
         }
 
         private void btnRunLdcOpf_Click(object sender, RoutedEventArgs e)
@@ -79,10 +77,10 @@ namespace PowerSystemPlanningWpfApp.LDC
         private void dgLDCMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //Menu item of the LDC datagrid, clicked to view detailed results for a single block of the LDC
-            int selected_index = this.dgLDC.SelectedIndex;
-            OPF.OPFResultsWindow opfResultsWindow = new OPF.OPFResultsWindow();
-            opfResultsWindow.OPFResults = this._LDCOPFModelResults.OpfResultsByBlock[selected_index];
-            opfResultsWindow.Show();
+            //int selected_index = this.dgLDC.SelectedIndex;
+            //Analysis.OPF.OPFResultsWindow opfResultsWindow = new Analysis.OPF.OPFResultsWindow();
+            //opfResultsWindow.OPFResults = this._LDCOPFModelResults.OpfResultsByBlock[selected_index];
+            //opfResultsWindow.Show();
         }
     }
 }

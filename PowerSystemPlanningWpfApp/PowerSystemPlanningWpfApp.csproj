@@ -141,6 +141,12 @@
     <Compile Include="Analysis\LDC\OPFLDCResultsWindow.xaml.cs">
       <DependentUpon>OPFLDCResultsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Analysis\LDC\OPFLDCRunControl.xaml.cs">
+      <DependentUpon>OPFLDCRunControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\OPF\OPFRunControl.xaml.cs">
+      <DependentUpon>OPFRunControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\CandidateTransmissionLinesEditorControl.xaml.cs">
       <DependentUpon>CandidateTransmissionLinesEditorControl.xaml</DependentUpon>
     </Compile>
@@ -165,6 +171,14 @@
     <Compile Include="Analysis\StaticTEP\StaticTEPWindow.xaml.cs">
       <DependentUpon>StaticTEPWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Analysis\LDC\OPFLDCRunControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\OPF\OPFRunControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ControlUtils\SimpleTerminal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -233,10 +247,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Analysis\OPF\OPFResultsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Analysis\OPF\OPFRunWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,9 +265,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analysis\OPF\OPFResultsWindow.xaml.cs">
-      <DependentUpon>OPFResultsWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -290,6 +297,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="PowerSystemPlanningWpfAppDoxy.conf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -121,6 +121,9 @@ namespace PowerSystemPlanning.Solvers.OPF
     {
         public GeneratingUnit GeneratingUnit { get; protected set; }
 
+        /// <summary>
+        /// The power output (MW) of this generator in the current OPF solution.
+        /// </summary>
         public double Output { get; protected set; }
 
         public virtual double TotalGenerationCost { get { return this.Output * this.GeneratingUnit.MarginalCost; } }
@@ -176,6 +179,8 @@ namespace PowerSystemPlanning.Solvers.OPF
         public int NodeToId { get { return this.TransmissionLine.NodeToID; } }
 
         public double PowerFlow { get; protected set; }
+
+        public double Utilization { get { return Math.Abs(PowerFlow) / TransmissionLine.ThermalCapacityMW; } }
 
         public TransmissionLineOPFResult(TransmissionLine transmissionLine, double power_flow)
         {

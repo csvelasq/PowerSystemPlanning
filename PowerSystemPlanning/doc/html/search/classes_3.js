@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['ldcopfmodel',['LDCOPFModel',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model.html',1,'PowerSystemPlanning::Solvers::LDCOPF']]],
-  ['ldcopfmodelresults',['LDCOPFModelResults',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model_results.html',1,'PowerSystemPlanning::Solvers::LDCOPF']]],
-  ['ldcopfmodelsolver',['LDCOPFModelSolver',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model_solver.html',1,'PowerSystemPlanning::Solvers::LDCOPF']]],
-  ['loadblock',['LoadBlock',['../class_power_system_planning_1_1_planning_models_1_1_load_block.html',1,'PowerSystemPlanning::PlanningModels']]],
-  ['loaddurationcurvebyblocks',['LoadDurationCurveByBlocks',['../class_power_system_planning_1_1_planning_models_1_1_load_duration_curve_by_blocks.html',1,'PowerSystemPlanning::PlanningModels']]]
+  ['igrboptimizationmodel',['IGRBOptimizationModel',['../interface_power_system_planning_1_1_solvers_1_1_i_g_r_b_optimization_model.html',1,'PowerSystemPlanning::Solvers']]],
+  ['igrboptimizationmodelresult',['IGRBOptimizationModelResult',['../interface_power_system_planning_1_1_solvers_1_1_i_g_r_b_optimization_model_result.html',1,'PowerSystemPlanning::Solvers']]],
+  ['inelasticload',['InelasticLoad',['../class_power_system_planning_1_1_inelastic_load.html',1,'PowerSystemPlanning']]],
+  ['ipowersystem',['IPowerSystem',['../interface_power_system_planning_1_1_i_power_system.html',1,'PowerSystemPlanning']]],
+  ['ipowersystemsolver',['IPowerSystemSolver',['../interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html',1,'PowerSystemPlanning::Solvers']]],
+  ['itransmissionline',['ITransmissionLine',['../interface_power_system_planning_1_1_i_transmission_line.html',1,'PowerSystemPlanning']]]
 ];

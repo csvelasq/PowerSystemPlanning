@@ -34,7 +34,7 @@ namespace PowerSystemPlanningWpfApp
         /// NLog Logger for this class.
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        
+
         PowerSystem _MyPowerSystem;
 
         PowerSystem MyPowerSystem
@@ -43,7 +43,7 @@ namespace PowerSystemPlanningWpfApp
             set
             {
                 this._MyPowerSystem = value;
-                this.powerSystemEditor.MyPowerSystem = this._MyPowerSystem;
+                //this.powerSystemEditor.MyPowerSystem = this._MyPowerSystem;
             }
         }
 

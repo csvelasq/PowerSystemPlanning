@@ -1,4 +1,5 @@
 ﻿using Gurobi;
+using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.Solvers.OPF;
 using System;
 using System.Collections.Generic;

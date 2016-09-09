@@ -141,8 +141,14 @@
     <Compile Include="Analysis\LDC\OPFLDCResultsWindow.xaml.cs">
       <DependentUpon>OPFLDCResultsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CandidateTransmissionLinesEditorControl.xaml.cs">
+      <DependentUpon>CandidateTransmissionLinesEditorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\LoadDurationCurveEditorControl.xaml.cs">
       <DependentUpon>LoadDurationCurveEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PlanningModelEditorControl.xaml.cs">
+      <DependentUpon>PlanningModelEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\PowerSystemEditorControl.xaml.cs">
       <DependentUpon>PowerSystemEditorControl.xaml</DependentUpon>
@@ -207,7 +213,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Model\CandidateTransmissionLinesEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Model\LoadDurationCurveEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\PlanningModelEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

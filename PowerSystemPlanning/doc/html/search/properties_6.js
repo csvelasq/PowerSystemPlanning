@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['marginalcost',['MarginalCost',['../class_power_system_planning_1_1_generating_unit.html#aec21179f99b2060e9c30ca59b0beab44',1,'PowerSystemPlanning::GeneratingUnit']]],
-  ['messages',['Messages',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_results.html#a197e9a21bef880c0b3a273991e2b23da',1,'PowerSystemPlanning::Solvers::PowerSystemSolverResults']]]
+  ['fullfilename',['FullFileName',['../class_power_system_planning_1_1_power_system.html#abf9f7281d0dd5e23a567c6ddef5f8b91',1,'PowerSystemPlanning::PowerSystem']]]
 ];

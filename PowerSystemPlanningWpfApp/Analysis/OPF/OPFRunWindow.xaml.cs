@@ -1,4 +1,5 @@
 ﻿using PowerSystemPlanning;
+using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.Solvers.LDCOPF;
 using PowerSystemPlanning.Solvers.OPF;
 using System;

@@ -8,9 +8,11 @@
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp"
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
         xmlns:modelControls="clr-namespace:PowerSystemPlanningWpfApp.Model"
+        xmlns:opfControls="clr-namespace:PowerSystemPlanningWpfApp.OPF"
+        xmlns:opfLdcControls="clr-namespace:PowerSystemPlanningWpfApp.LDC"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
-        Title="Power System Planning" Height="610.27" Width="986.621" WindowState="Maximized" Loaded="Window_Loaded">
+        Title="Power System Planning" Height="750" Width="900" WindowState="Maximized" Loaded="Window_Loaded">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="NewCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommandBinding_Executed" />
@@ -77,11 +79,15 @@
         </DockPanel>
         <TabControl Grid.Row="1">
             <TabItem Header="Power System Model">
-                <modelControls:PowerSystemEditorControl x:Name="powerSystemEditor" />
+                <modelControls:PlanningModelEditorControl />
             </TabItem>
-            <TabItem Header="Load Duration Curve">
+            <TabItem Header="OPF">
+                <opfControls:OPFResultsControl />
             </TabItem>
-            <TabItem Header="Candidate Transmission Lines">
+            <TabItem Header="LDC OPF">
+                <opfLdcControls:OPFLDCResultsControl />
+            </TabItem>
+            <TabItem Header="LDC TEP">
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.Solvers.LDCOPF
+namespace PowerSystemPlanning.PlanningModels
 {
     /// <summary>
     /// 

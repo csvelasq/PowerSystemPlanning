@@ -1,4 +1,5 @@
-﻿using PowerSystemPlanning.Solvers.LDCOPF;
+﻿using PowerSystemPlanning.PlanningModels;
+using PowerSystemPlanning.Solvers.LDCOPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;

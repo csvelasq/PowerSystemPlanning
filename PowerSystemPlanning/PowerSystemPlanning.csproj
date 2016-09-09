@@ -52,21 +52,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlanningModels\GeneratingUnit.cs" />
-    <Compile Include="PlanningModels\InelasticLoad.cs" />
-    <Compile Include="PlanningModels\IPowerSystem.cs" />
-    <Compile Include="PlanningModels\Node.cs" />
-    <Compile Include="PlanningModels\NodeElement.cs" />
+    <Compile Include="PlanningModels\PowerSystem\GeneratingUnit.cs" />
+    <Compile Include="PlanningModels\PowerSystem\InelasticLoad.cs" />
+    <Compile Include="PlanningModels\PowerSystem\IPowerSystem.cs" />
+    <Compile Include="PlanningModels\PowerSystem\Node.cs" />
+    <Compile Include="PlanningModels\PowerSystem\NodeElement.cs" />
     <Compile Include="Solvers\BaseGRBOptimizationModelResult.cs" />
     <Compile Include="Solvers\BaseOptimizationPowerSystemSolver.cs" />
     <Compile Include="Solvers\IGRBOptimizationModel.cs" />
-    <Compile Include="Solvers\LDCOPF\DurationCurveBlocks.cs" />
+    <Compile Include="PlanningModels\DurationCurveBlocks.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModel.cs" />
     <Compile Include="Solvers\IGRBOptimizationModelResult.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModelResults.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModelSolver.cs" />
     <Compile Include="Solvers\OPF\OPFModel.cs" />
-    <Compile Include="PlanningModels\PowerSystem.cs" />
+    <Compile Include="PlanningModels\PowerSystem\PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\IPowerSystemSolver.cs" />
     <Compile Include="Solvers\OPF\OPFModelForLDC.cs" />
@@ -76,8 +76,8 @@
     <Compile Include="Solvers\OPF\OPFModelSolverForLDC.cs" />
     <Compile Include="Solvers\PowerSystemSolverConfiguration.cs" />
     <Compile Include="Solvers\PowerSystemSolveResults.cs" />
-    <Compile Include="PlanningModels\TransmissionElement.cs" />
-    <Compile Include="PlanningModels\TransmissionLine.cs" />
+    <Compile Include="PlanningModels\PowerSystem\TransmissionElement.cs" />
+    <Compile Include="PlanningModels\PowerSystem\TransmissionLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">

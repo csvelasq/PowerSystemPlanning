@@ -138,11 +138,20 @@
     <Compile Include="Analysis\LDC\OPFLDCResultsControl.xaml.cs">
       <DependentUpon>OPFLDCResultsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analysis\LDC\OPFLDCResultsWindow.xaml.cs">
-      <DependentUpon>OPFLDCResultsWindow.xaml</DependentUpon>
+    <Compile Include="Analysis\LDC\OPFLDCRunControl.xaml.cs">
+      <DependentUpon>OPFLDCRunControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\OPF\OPFRunControl.xaml.cs">
+      <DependentUpon>OPFRunControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CandidateTransmissionLinesEditorControl.xaml.cs">
+      <DependentUpon>CandidateTransmissionLinesEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\LoadDurationCurveEditorControl.xaml.cs">
       <DependentUpon>LoadDurationCurveEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PlanningModelEditorControl.xaml.cs">
+      <DependentUpon>PlanningModelEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\PowerSystemEditorControl.xaml.cs">
       <DependentUpon>PowerSystemEditorControl.xaml</DependentUpon>
@@ -159,6 +168,14 @@
     <Compile Include="Analysis\StaticTEP\StaticTEPWindow.xaml.cs">
       <DependentUpon>StaticTEPWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Analysis\LDC\OPFLDCRunControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\OPF\OPFRunControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ControlUtils\SimpleTerminal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -172,10 +189,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Analysis\LDC\OPFLDCResultsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Analysis\LDC\OPFLDCResultsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,7 +220,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Model\CandidateTransmissionLinesEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Model\LoadDurationCurveEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\PlanningModelEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,10 +237,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Analysis\OPF\OPFResultsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Analysis\OPF\OPFResultsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -241,9 +258,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analysis\OPF\OPFResultsWindow.xaml.cs">
-      <DependentUpon>OPFResultsWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -257,6 +271,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\StatusInformation_16x.png" />
     <Resource Include="Resources\Run_32x.png" />
     <Resource Include="Resources\Search_16x.png" />
     <Resource Include="Resources\CloseSolution_16x.png" />
@@ -276,6 +291,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="PowerSystemPlanningWpfAppDoxy.conf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

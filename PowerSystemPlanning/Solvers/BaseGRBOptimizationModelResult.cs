@@ -34,7 +34,6 @@ namespace PowerSystemPlanning.Solvers
         /// True if the model was proved to be unbounded, false otherwise.
         /// </summary>
         public bool IsModelUnbounded { get { return GRBStatus == GRB.Status.UNBOUNDED; } }
-        
 
         /// <summary>
         /// The value of the objective function.

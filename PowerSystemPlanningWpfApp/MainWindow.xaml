@@ -8,9 +8,11 @@
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp"
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
         xmlns:modelControls="clr-namespace:PowerSystemPlanningWpfApp.Model"
+        xmlns:opfControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.OPF"
+        xmlns:opfLdcControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.LDC"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
-        Title="Power System Planning" Height="610.27" Width="986.621" WindowState="Maximized" Loaded="Window_Loaded">
+        Title="Power System Planning" Height="800" Width="900" WindowState="Maximized" Loaded="Window_Loaded">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="NewCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommandBinding_Executed" />
@@ -62,9 +64,6 @@
                 </MenuItem>
                 <MenuItem Header="_Analysis">
                     <MenuItem x:Name="opfMenuItem" Header="_Optimal Power Flow" Click="opfMenuItem_Click" />
-                    <MenuItem x:Name="ldcOpfMenuItem" Header="_Load Duration Curve (LDC) OPF Model" Click="ldcOpfMenuItem_Click" />
-                    <MenuItem x:Name="staticTepMenuItem" Header="_Static TEP (based on LDC-OPF)" Click="staticTepMenuItem_Click"  />
-                    <MenuItem x:Name="scenarioTepMenuItem" Header="_TEP under Scenarios (based on LDC-OPF)" Click="scenarioTepMenuItem_Click" />
                 </MenuItem>
                 <MenuItem Header="Configuration">
                     <MenuItem Header="_Configuration" IsEnabled="False" />
@@ -75,13 +74,17 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TabControl Grid.Row="1">
+        <TabControl x:Name="tabControlPowerSystems" Grid.Row="1">
             <TabItem Header="Power System Model">
-                <modelControls:PowerSystemEditorControl x:Name="powerSystemEditor" />
+                <modelControls:PlanningModelEditorControl x:Name="myPowerSystemEditorControl" />
             </TabItem>
-            <TabItem Header="Load Duration Curve">
+            <TabItem Header="OPF">
+                <opfControls:OPFResultsControl x:Name="myOPFResultsControl" />
             </TabItem>
-            <TabItem Header="Candidate Transmission Lines">
+            <TabItem Header="LDC OPF">
+                <opfLdcControls:OPFLDCRunControl x:Name="myOPFLDCRunControl" />
+            </TabItem>
+            <TabItem Header="LDC TEP">
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />

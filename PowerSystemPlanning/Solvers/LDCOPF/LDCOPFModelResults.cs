@@ -1,4 +1,5 @@
-﻿using PowerSystemPlanning.Solvers.OPF;
+﻿using PowerSystemPlanning.PlanningModels;
+using PowerSystemPlanning.Solvers.OPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,45 +13,90 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
     /// </summary>
     public class LDCOPFModelResults : BaseGRBOptimizationModelResult
     {
-        PowerSystem PowerSystem;
-        
+        protected PowerSystem MyPowerSystem;
+
         /// <summary>
         /// Summary of LDC OPF results for each node in the power system (total energy consumed, etc).
         /// </summary>
-        public List<NodeLDCOPFResult> NodeLDCOPFResults { get; protected set; }
+        public List<NodeLDCOPFResult> MyNodeLDCOPFResults { get; protected set; }
 
         /// <summary>
         /// The results of the OPF model in each block of the duration curve.
         /// </summary>
-        public List<OPFModelResultForLDC> OpfResultsByBlock { get; protected set; }
+        public List<OPFModelResultForLDC> MyOpfResultsByBlock { get; protected set; }
 
+        public double TotalOperationCost
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.TotalOperationCost).Sum();
+            }
+        }
+        public double TotalGenerationCost
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.TotalGenerationCost).Sum();
+            }
+        }
+        public double TotalEnergyGenerated
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.TotalGenerationEnergy).Sum();
+            }
+        }
+        public double TotalLoadSheddingCost
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.TotalLoadSheddingCost).Sum();
+            }
+        }
+        public double TotalEnergyLoadShed
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.TotalLoadSheddingEnergy).Sum();
+            }
+        }
+        public double AverageNodalSpotPrice
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.AverageNodalSpotPrice * opfBlockResult.MyLoadBlock.Duration
+                        ).Sum() / 8760.0;
+            }
+        }
+        public double PeakNodalSpotPrice
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.MaximumNodalSpotPrice).Max();
+            }
+        }
+        
         public LDCOPFModelResults(int status) : base(status) { }
 
-        public LDCOPFModelResults(PowerSystem powerSystem, int status, double objVal, LoadDurationCurveByBlocks DurationCurveBlocks, List<OPFModelResultForLDC> opfResultsByBlock)
+        public LDCOPFModelResults(PowerSystem powerSystem, int status, double objVal, LoadDurationCurveByBlocks durationCurveBlocks, List<OPFModelResultForLDC> opfResultsByBlock)
             : base(status, objVal)
         {
-            this.PowerSystem = powerSystem;
+            this.MyPowerSystem = powerSystem;
             this.ObjVal = objVal;
-            this.NodeLDCOPFResults = new List<NodeLDCOPFResult>();
-            this.OpfResultsByBlock = opfResultsByBlock;
-            List<double> BlockDurations = DurationCurveBlocks.BlockDurations;
-            List<double> RelativeBlockDuration = DurationCurveBlocks.RelativeBlockDurations;
-            foreach (Node node in this.PowerSystem.Nodes)
+            this.MyOpfResultsByBlock = opfResultsByBlock;
+            //Build results by node
+            this.MyNodeLDCOPFResults = new List<NodeLDCOPFResult>();
+            foreach (Node node in this.MyPowerSystem.Nodes)
             {
-                double TotalEnergyGenerated = 0;
-                double TotalEnergyConsumed = 0;
-                double LoadShedding = 0;
-                double AverageSpotPrice = 0;
-                for (int i = 0; i < opfResultsByBlock.Count; i++)
-                {
-                    NodeOPFResultForLDC nodeResultsInThisBlock = opfResultsByBlock[i].NodeOPFResultsForLDC[node.Id];
-                    TotalEnergyGenerated += nodeResultsInThisBlock.TotalPowerGenerated * BlockDurations[i];
-                    TotalEnergyConsumed += nodeResultsInThisBlock.TotalPowerConsumed * BlockDurations[i] * DurationCurveBlocks.DurationBlocks[i].LoadMultiplier;
-                    LoadShedding += nodeResultsInThisBlock.LoadShedding * BlockDurations[i] * DurationCurveBlocks.DurationBlocks[i].LoadMultiplier;
-                    AverageSpotPrice += nodeResultsInThisBlock.SpotPrice * RelativeBlockDuration[i];
-                }
-                NodeLDCOPFResult nodeResultsLDCOPF = new NodeLDCOPFResult(node, TotalEnergyGenerated, TotalEnergyConsumed, LoadShedding, AverageSpotPrice);
-                NodeLDCOPFResults.Add(nodeResultsLDCOPF);
+                NodeLDCOPFResult nodeResultsLDCOPF = new NodeLDCOPFResult(node, opfResultsByBlock);
+                MyNodeLDCOPFResults.Add(nodeResultsLDCOPF);
             }
         }
     }
@@ -66,37 +112,74 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
 
         public string NodeName { get { return this.Node.Name; } }
 
+        private List<OPFModelResultForLDC> MyOpfResultsByBlock { get; set; }
+
         /// <summary>
-        /// Total energy generated during the whole year (in GWh, sum of energy generated under each block).
+        /// Total energy generated in this node during the whole year (GWh, sum of energy generated in each block).
         /// </summary>
         /// <remarks>
         /// Energy generated in a particular block equals the dispatch of each generator (in MW) multiplied by the duration of the block (in hours).
         /// </remarks>
-        public double TotalEnergyGenerated { get; protected set; }
-
+        public double TotalEnergyGenerated
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.NodeOPFResultsForLDC[NodeId].TotalEnergyGenerated).Sum();
+            }
+        }
         /// <summary>
-        /// Total energy consumed during the whole year (in GWh, sum of energy consumed under each block).
+        /// Total energy consumed in this node during the whole year (GWh, sum of energy consumed in each block).
         /// </summary>
-        public double TotalEnergyConsumed { get; protected set; }
-
+        public double TotalEnergyConsumed
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.NodeOPFResultsForLDC[NodeId].TotalEnergyConsumed).Sum();
+            }
+        }
         /// <summary>
-        /// Total load shedding (in GWh) in this node.
+        /// Total load shedding (GWh) in this node.
         /// </summary>
-        public double LoadShedding { get; protected set; }
+        public double EnergyLoadShedding
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.NodeOPFResultsForLDC[NodeId].EnergyLoadShedding).Sum();
+            }
+        }
 
         /// <summary>
-        /// Average spot price (in US$/MW) during the whole year.
+        /// Average spot price in this node (US$/MWh) during the whole year (across all load blocks).
         /// </summary>
         /// <remarks>Average of the spot price in each block, weighted by the duration (in hours/8760) of the block.</remarks>
-        public double AverageSpotPrice { get; protected set; }
+        public double AverageNodalSpotPrice
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.NodeOPFResultsForLDC[NodeId].SpotPrice * opfBlockResult.MyLoadBlock.Duration).Sum() / 8760.0;
+            }
+        }
 
-        public NodeLDCOPFResult(Node node, double totalEnergyGenerated, double totalEnergyConsumed, double loadShed, double averageSpotPrice)
+        /// <summary>
+        /// Peak spot price in this node (US$/MWh) during the whole year (across all load blocks).
+        /// </summary>
+        public double PeakNodalSpotPrice
+        {
+            get
+            {
+                return (from opfBlockResult in MyOpfResultsByBlock
+                        select opfBlockResult.NodeOPFResultsForLDC[NodeId].SpotPrice).Max();
+            }
+        }
+
+        public NodeLDCOPFResult(Node node, List<OPFModelResultForLDC> opfResultsByBlock)
         {
             this.Node = node;
-            this.TotalEnergyGenerated = totalEnergyGenerated;
-            this.TotalEnergyConsumed = totalEnergyConsumed;
-            this.LoadShedding = loadShed;
-            this.AverageSpotPrice = averageSpotPrice;
+            this.MyOpfResultsByBlock = opfResultsByBlock;
         }
     }
 }

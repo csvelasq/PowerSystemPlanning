@@ -19,6 +19,7 @@ using NLog;
 using PowerSystemPlanning.Solvers.OPF;
 using PowerSystemPlanning.Solvers;
 using PowerSystemPlanning.Solvers.LDCOPF;
+using PowerSystemPlanning.PlanningModels;
 
 namespace PowerSystemPlanningWpfApp
 {
@@ -27,23 +28,51 @@ namespace PowerSystemPlanningWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        // TODO Avalondock for logging and other windows
-        // TODO fix logging expander http://stackoverflow.com/questions/19516904/wpf-expander-with-gridsplitter
-
         /// <summary>
         /// NLog Logger for this class.
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        
-        PowerSystem _MyPowerSystem;
+
+        LDCPowerSystemPlanningModel _MyLDCPowerSystemPlanningModel;
+        public LDCPowerSystemPlanningModel MyLDCPowerSystemPlanningModel
+        {
+            get
+            {
+                return _MyLDCPowerSystemPlanningModel;
+            }
+
+            set
+            {
+                _MyLDCPowerSystemPlanningModel = value;
+                myOPFLDCRunControl.MyLDCPowerSystemPlanningModel = value;
+            }
+        }
 
         PowerSystem MyPowerSystem
         {
-            get { return this._MyPowerSystem; }
+            get { return MyLDCPowerSystemPlanningModel.MyPowerSystem; }
             set
             {
-                this._MyPowerSystem = value;
-                this.powerSystemEditor.MyPowerSystem = this._MyPowerSystem;
+                MyLDCPowerSystemPlanningModel = new LDCPowerSystemPlanningModel(value);
+                myPowerSystemEditorControl.MyPowerSystem = MyLDCPowerSystemPlanningModel.MyPowerSystem;
+            }
+        }
+        
+        OPFModelResultForLDC _selectedLoadBlockInLDCOPFResults;
+        public OPFModelResultForLDC selectedLoadBlockInLDCOPFResults
+        {
+            get { return _selectedLoadBlockInLDCOPFResults; }
+            set
+            {
+                if (_selectedLoadBlockInLDCOPFResults != value)
+                {
+                    _selectedLoadBlockInLDCOPFResults = value;
+                    myOPFResultsControl.OPFResultsForLDC = value;
+                    if (value != null)
+                    {
+                        tabControlPowerSystems.SelectedIndex = 1;
+                    }
+                }
             }
         }
 
@@ -185,33 +214,14 @@ namespace PowerSystemPlanningWpfApp
         private void opfMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //Show OPF run window
-            OPF.OPFRunWindow opfRunWindow = new OPF.OPFRunWindow(MyPowerSystem);
+            Analysis.OPF.OPFRunWindow opfRunWindow = new Analysis.OPF.OPFRunWindow(MyPowerSystem);
             opfRunWindow.Show();
         }
-
-        private void ldcOpfMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            //Show results window
-            LDC.OPFLDCResultsWindow optOPFLDC = new LDC.OPFLDCResultsWindow(this.MyPowerSystem);
-            optOPFLDC.Show();
-        }
-
+        
         private void aboutMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Help.About about = new Help.About();
             about.Show();
-        }
-
-        private void staticTepMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            StaticTEP.StaticTEPWindow staticTEPWindow = new StaticTEP.StaticTEPWindow();
-            staticTEPWindow.Show();
-        }
-
-        private void scenarioTepMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            ScenarioTEP.ScenarioTEPWindow scenarioTEPWindow = new ScenarioTEP.ScenarioTEPWindow();
-            scenarioTEPWindow.Show();
         }
     }
 }

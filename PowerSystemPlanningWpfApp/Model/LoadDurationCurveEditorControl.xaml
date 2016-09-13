@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="300" d:DesignWidth="300"  Background="White">
+    <GroupBox Header="Load Duration Curve">
         <localUtils:CustomDataGrid Grid.Row="1" x:Name="dgLDC" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="40">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -24,14 +24,9 @@
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
             </DataGrid.AlternatingRowBackground>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Duration [hours]" Binding="{Binding Duration, StringFormat=N0}" Width="70" IsReadOnly="False" />
+                <DataGridTextColumn Header="Duration [hours]" Binding="{Binding Duration, StringFormat=N0}" Width="57" IsReadOnly="False" />
                 <DataGridTextColumn Header="Load multiplier" Binding="{Binding LoadMultiplier, StringFormat=p0}" Width="70" />
             </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="View Detailed OPF Results" Click="dgLDCMenuItem_Click" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>
         </localUtils:CustomDataGrid>
-    </Grid>
+    </GroupBox>
 </UserControl>

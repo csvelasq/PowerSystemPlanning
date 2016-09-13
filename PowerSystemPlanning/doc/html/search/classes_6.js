@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['powersystem',['PowerSystem',['../class_power_system_planning_1_1_power_system.html',1,'PowerSystemPlanning']]],
-  ['powersystemsolverconfiguration',['PowerSystemSolverConfiguration',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_configuration.html',1,'PowerSystemPlanning::Solvers']]],
-  ['powersystemsolverresults',['PowerSystemSolverResults',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_results.html',1,'PowerSystemPlanning::Solvers']]]
+  ['opfmodel',['OPFModel',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html',1,'PowerSystemPlanning::Solvers::OPF']]],
+  ['opfmodelforldc',['OPFModelForLDC',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_for_l_d_c.html',1,'PowerSystemPlanning::Solvers::OPF']]],
+  ['opfmodelresult',['OPFModelResult',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_result.html',1,'PowerSystemPlanning::Solvers::OPF']]],
+  ['opfmodelresultforldc',['OPFModelResultForLDC',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_result_for_l_d_c.html',1,'PowerSystemPlanning::Solvers::OPF']]],
+  ['opfmodelsolver',['OPFModelSolver',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver.html',1,'PowerSystemPlanning::Solvers::OPF']]],
+  ['opfmodelsolverforldc',['OPFModelSolverForLDC',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver_for_l_d_c.html',1,'PowerSystemPlanning::Solvers::OPF']]]
 ];

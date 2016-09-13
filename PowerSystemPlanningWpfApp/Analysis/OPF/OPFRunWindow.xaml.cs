@@ -1,4 +1,5 @@
 ﻿using PowerSystemPlanning;
+using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.Solvers.LDCOPF;
 using PowerSystemPlanning.Solvers.OPF;
 using System;
@@ -15,31 +16,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.OPF
+namespace PowerSystemPlanningWpfApp.Analysis.OPF
 {
     /// <summary>
     /// Interaction logic for OPFRunWindow.xaml
     /// </summary>
     public partial class OPFRunWindow : Window
     {
-        PowerSystem MyPowerSystem { get; set; }
-        LoadBlock MyLoadBlock { get; set; }
-        OPFModelSolverForLDC OPFSolverForLDC;
-
-        OPFModelResultForLDC _OPFResultsForLDC;
-        OPFModelResultForLDC OPFResultsForLDC
-        {
-            get
-            {
-                return _OPFResultsForLDC;
-            }
-
-            set
-            {
-                _OPFResultsForLDC = value;
-                this.opfResultsControl.OPFResultsForLDC = value;
-            }
-        }
+        public PowerSystem MyPowerSystem { set { opfRunControl.MyPowerSystem = value; } }
 
         public OPFRunWindow()
         {
@@ -50,19 +34,6 @@ namespace PowerSystemPlanningWpfApp.OPF
             : this()
         {
             MyPowerSystem = powerSystem;
-            MyLoadBlock = new LoadBlock(1, 1);
-            pnlRun.DataContext = MyLoadBlock;
-        }
-
-        private void btnRunOpf_Click(object sender, RoutedEventArgs e)
-        {
-            //builds the model
-            OPFSolverForLDC = new OPFModelSolverForLDC(this.MyPowerSystem, this.MyLoadBlock);
-            OPFSolverForLDC.Build();
-            //solves the model
-            OPFSolverForLDC.Solve();
-            //binds results
-            OPFResultsForLDC = OPFSolverForLDC.OPFModelResultsForLDC;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using PowerSystemPlanning;
+using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.Solvers.LDCOPF;
 using System;
 using System.Collections.Generic;
@@ -15,73 +16,28 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.LDC
+namespace PowerSystemPlanningWpfApp.Analysis.LDC
 {
     /// <summary>
     /// Interaction logic for OPFLDCResultsControl.xaml
     /// </summary>
     public partial class OPFLDCResultsControl : UserControl
     {
-        PowerSystem _PowerSystem;
-        LoadDurationCurveByBlocks _LoadDurationCurveByBlocks;
-        LDCOPFModelSolver _LDCOPFModelSolver;
-        LDCOPFModelResults _LDCOPFModelResults;
-        LDCOPFModelResults LDCOPFModelResults
+        LDCOPFModelResults _MyLDCOPFModelResults;
+        public LDCOPFModelResults MyLDCOPFModelResults
         {
-            get { return _LDCOPFModelResults; }
+            get { return _MyLDCOPFModelResults; }
             set
             {
-                this._LDCOPFModelResults = this._LDCOPFModelSolver.LDCOPFResults;
+                _MyLDCOPFModelResults = value;
                 //Databinding
-                this.tbTotalCost.DataContext = this.LDCOPFModelResults.ObjVal;
-                this.lblCurrStateMsg.DataContext = this.LDCOPFModelResults.CurrentStateMessage;
-                this.dgNodalResults.DataContext = this.LDCOPFModelResults.NodeLDCOPFResults;
-            }
-        }
-        
-        public PowerSystem PowerSystem
-        {
-            get
-            {
-                return _PowerSystem;
-            }
-
-            set
-            {
-                _PowerSystem = value;
-                this._LDCOPFModelSolver = new LDCOPFModelSolver(this.PowerSystem, _LoadDurationCurveByBlocks);
+                DataContext = _MyLDCOPFModelResults;
             }
         }
 
         public OPFLDCResultsControl()
         {
             InitializeComponent();
-            this._LoadDurationCurveByBlocks = new LoadDurationCurveByBlocks();
-            //Default load blocks
-            _LoadDurationCurveByBlocks.DurationBlocks.Add(new LoadBlock(6000, 0.4));
-            _LoadDurationCurveByBlocks.DurationBlocks.Add(new LoadBlock(2000, 0.6));
-            _LoadDurationCurveByBlocks.DurationBlocks.Add(new LoadBlock(760, 1));
-            //Bind load blocks
-            this.dgLDC.DataContext = _LoadDurationCurveByBlocks.DurationBlocks;
-        }
-
-        private void btnRunLdcOpf_Click(object sender, RoutedEventArgs e)
-        {
-            //builds the model
-            this._LDCOPFModelSolver.Build();
-            //solves the model
-            this._LDCOPFModelSolver.Solve();
-            //binds nodal results to the nodal datagrid
-            this.LDCOPFModelResults = this._LDCOPFModelSolver.LDCOPFResults;
-        }
-
-        private void dgLDCMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            //Menu item of the LDC datagrid, clicked to view detailed results for a single block of the LDC
-            int selected_index = this.dgLDC.SelectedIndex;
-            OPF.OPFResultsWindow opfResultsWindow = new OPF.OPFResultsWindow();
-            opfResultsWindow.OPFResults = this._LDCOPFModelResults.OpfResultsByBlock[selected_index];
-            opfResultsWindow.Show();
         }
     }
 }

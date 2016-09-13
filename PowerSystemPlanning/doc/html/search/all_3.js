@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['candidatetransmissionline',['CandidateTransmissionLine',['../class_power_system_planning_1_1_planning_models_1_1_candidate_transmission_line.html',1,'PowerSystemPlanning::PlanningModels']]],
   ['connectionnode',['ConnectionNode',['../class_power_system_planning_1_1_node_element.html#ade5e2883dbd6d8676a8572c827f6b60a',1,'PowerSystemPlanning::NodeElement']]],
   ['connectionnodeid',['ConnectionNodeId',['../class_power_system_planning_1_1_node_element.html#ad8330c198a514aa94bc329e89125796a',1,'PowerSystemPlanning::NodeElement']]],
   ['connectionnodename',['ConnectionNodeName',['../class_power_system_planning_1_1_node_element.html#a0649bf960bef5b6e95ab990de84caa66',1,'PowerSystemPlanning::NodeElement']]],

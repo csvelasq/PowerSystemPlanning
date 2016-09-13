@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['durationblock',['DurationBlock',['../struct_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_duration_block.html',1,'PowerSystemPlanning::Solvers::LDCOPF']]],
-  ['durationcurveblocks',['DurationCurveBlocks',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_duration_curve_blocks.html',1,'PowerSystemPlanning::Solvers::LDCOPF']]]
+  ['basegrboptimizationmodelresult',['BaseGRBOptimizationModelResult',['../class_power_system_planning_1_1_solvers_1_1_base_g_r_b_optimization_model_result.html',1,'PowerSystemPlanning::Solvers']]],
+  ['baseoptimizationpowersystemsolver',['BaseOptimizationPowerSystemSolver',['../class_power_system_planning_1_1_solvers_1_1_base_optimization_power_system_solver.html',1,'PowerSystemPlanning::Solvers']]]
 ];

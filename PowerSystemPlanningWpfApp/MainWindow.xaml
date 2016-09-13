@@ -76,15 +76,19 @@
         </DockPanel>
         <TabControl x:Name="tabControlPowerSystems" Grid.Row="1">
             <TabItem Header="Power System Model">
-                <modelControls:PlanningModelEditorControl x:Name="myPowerSystemEditorControl" />
+                <modelControls:PlanningModelEditorControl x:Name="myPowerSystemEditorControl" DataContext="{Binding MyScenarioTEPModel}" />
             </TabItem>
             <TabItem Header="OPF">
-                <opfControls:OPFResultsControl x:Name="myOPFResultsControl" />
+                <!--<opfControls:OPFResultsControl x:Name="myOPFResultsControl" />-->
             </TabItem>
             <TabItem Header="LDC OPF">
-                <opfLdcControls:OPFLDCRunControl x:Name="myOPFLDCRunControl" />
+                <!--<opfLdcControls:OPFLDCRunControl x:Name="myOPFLDCRunControl" DataContext="{Binding MyScenarioTEPModel}" />-->
             </TabItem>
-            <TabItem Header="LDC TEP">
+            <TabItem Header="Scenario LDC OPF">
+            </TabItem>
+            <TabItem Header="Scenario TEP Enumeration">
+            </TabItem>
+            <TabItem Header="Scenario TEP Enumeration - 2nd order">
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />

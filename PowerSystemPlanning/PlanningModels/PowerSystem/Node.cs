@@ -29,8 +29,7 @@ namespace PowerSystemPlanning
             }
         }
 
-        private int id;
-
+        protected int id;
         /// <summary>
         /// The unique ID of this node within the power system.
         /// </summary>
@@ -47,8 +46,7 @@ namespace PowerSystemPlanning
             }
         }
 
-        private string name;
-
+        protected string name;
         /// <summary>
         /// Name of the node (arbitrarily assigned by the user).
         /// </summary>
@@ -142,10 +140,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// Empty constructor, not meant to be used but rather included only to allow serialization.
         /// </summary>
-        public Node()
-        {
-
-        }
+        public Node() { }
 
         /// <summary>
         /// Creates a new node in the given power system
@@ -156,6 +151,11 @@ namespace PowerSystemPlanning
         {
             this._PowerSystem = power_system;
             this.id = this._PowerSystem.NumberOfNodes;
+        }
+
+        public Node(PowerSystem power_system, Node node) : this(power_system)
+        {
+            this.Name = node.Name;
         }
     }
 }

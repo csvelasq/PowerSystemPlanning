@@ -10,21 +10,54 @@
              d:DesignHeight="700" d:DesignWidth="900" Background="White">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
             <RowDefinition Height="300*" />
-            <RowDefinition Height="5" />
-            <RowDefinition Height="150*" />
         </Grid.RowDefinitions>
-        <modelControls:PowerSystemEditorControl x:Name="powerSystemEditor" Grid.Row="0" />
-        <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="300*" />
-            </Grid.ColumnDefinitions>
-            <modelControls:LoadDurationCurveEditorControl x:Name="ldcEditor" Grid.Row="0" />
-            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <modelControls:CandidateTransmissionLinesEditorControl x:Name="candidateTLsEditor" Grid.Column="2" />
-        </Grid>
+        <DockPanel LastChildFill="True">
+            <!--Model name, discount rate and scenarios-->
+            <DockPanel Grid.Row="0" LastChildFill="True">
+                <!--Model's name-->
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <Label Content="Model Name:" />
+                    <TextBox Text="{Binding Name}" Width="250" Height="20" VerticalAlignment="Center" />
+                </StackPanel>
+                <!--Discount rate-->
+                <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
+                    <Label Content="Yearly Discount Rate:" />
+                    <TextBox Text="{Binding YearlyDiscountRate, StringFormat=p2}" Width="50" Height="20" VerticalAlignment="Center" />
+                </StackPanel>
+                <!--Scenarios-->
+                <GroupBox Header="Scenarios">
+                    <DockPanel LastChildFill="True">
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" >
+                            <Image Source="pack://application:,,,/Resources/StatusInformation_16x.png" Width="16" />
+                            <TextBlock TextWrapping="WrapWithOverflow" Width="309" Height="Auto">
+                                Click a row to edit the power system data for each scenario in the form below.
+                            </TextBlock>
+                        </StackPanel>
+                        <localUtils:CustomDataGrid x:Name="dgScenarios" ItemsSource="{Binding MyScenarios}" AutoGenerateColumns="False"
+                          SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="True" Width="329">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150" />
+                            </DataGrid.Columns>
+                        </localUtils:CustomDataGrid>
+                    </DockPanel>
+                </GroupBox>
+            </DockPanel>
+            <!--LDC; Candidate Transmission Lines-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!--LDC-->
+                <modelControls:LoadDurationCurveEditorControl x:Name="ldcEditor" DataContext="{Binding MyLoadDurationCurve.DurationBlocks}" Grid.Row="0" />
+                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+                <!--Candidate Transmission Lines-->
+                <modelControls:CandidateTransmissionLinesEditorControl x:Name="candidateTLsEditor" DataContext="{Binding MyCandidateTransmissionLines}" Grid.Column="2" />
+            </Grid>
+        </DockPanel>
+        <modelControls:PowerSystemEditorControl x:Name="myPowerSystemEditor" DataContext="{Binding ElementName=dgScenarios, Path=SelectedItem}" Grid.Row="1" />
     </Grid>
 </UserControl>

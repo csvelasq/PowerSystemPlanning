@@ -4,12 +4,18 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 // Code from http://stackoverflow.com/questions/4118617/wpf-datagrid-pasting
 namespace PowerSystemPlanningWpfApp.ControlUtils
 {
     public class CustomDataGrid : DataGrid
     {
+        public CustomDataGrid() : base()
+        {
+            this.AlternatingRowBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightBlue"));
+        }
+
         public event ExecutedRoutedEventHandler ExecutePasteEvent;
         public event CanExecuteRoutedEventHandler CanExecutePasteEvent;
 
@@ -82,7 +88,7 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
             int displayIndexSelectedColumn = (target as CustomDataGrid).CurrentColumn.DisplayIndex;
 
             bool hasAddedNewRow = false;
-            
+
             int minRowIndex = Items.IndexOf(CurrentItem);
             int maxRowIndex = Items.Count - 1;
             int minColumnDisplayIndex = (SelectionUnit != DataGridSelectionUnit.FullRow) ? Columns.IndexOf(CurrentColumn) : 0;

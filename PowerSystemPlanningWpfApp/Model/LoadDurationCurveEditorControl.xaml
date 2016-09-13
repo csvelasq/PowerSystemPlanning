@@ -20,9 +20,6 @@
                     </Setter>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
-            <DataGrid.AlternatingRowBackground>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-            </DataGrid.AlternatingRowBackground>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Duration [hours]" Binding="{Binding Duration, StringFormat=N0}" Width="57" IsReadOnly="False" />
                 <DataGridTextColumn Header="Load multiplier" Binding="{Binding LoadMultiplier, StringFormat=p0}" Width="70" />

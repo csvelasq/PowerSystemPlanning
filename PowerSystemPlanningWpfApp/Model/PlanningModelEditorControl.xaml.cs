@@ -1,5 +1,6 @@
 ﻿using PowerSystemPlanning;
 using PowerSystemPlanning.PlanningModels;
+using PowerSystemPlanning.PlanningModels.Planning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,42 +23,9 @@ namespace PowerSystemPlanningWpfApp.Model
     /// </summary>
     public partial class PlanningModelEditorControl : UserControl
     {
-        PowerSystem _MyPowerSystem;
-        public PowerSystem MyPowerSystem
-        {
-            get
-            {
-                return _MyPowerSystem;
-            }
-
-            set
-            {
-                _MyPowerSystem = value;
-                DataContext = _MyPowerSystem;
-            }
-        }
-
-        LDCPowerSystemPlanningModel _MyLDCPowerSystemPlanningModel;
-        public LDCPowerSystemPlanningModel MyLDCPowerSystemPlanningModel
-        {
-            get
-            {
-                return _MyLDCPowerSystemPlanningModel;
-            }
-
-            set
-            {
-                _MyLDCPowerSystemPlanningModel = value;
-                DataContext = _MyLDCPowerSystemPlanningModel;
-                ldcEditor.DataContext = _MyLDCPowerSystemPlanningModel.MyLoadDurationCurve.DurationBlocks;
-                candidateTLsEditor.DataContext = _MyLDCPowerSystemPlanningModel._MyCandidateTransmissionLines;
-            }
-        }
-
         public PlanningModelEditorControl()
         {
             InitializeComponent();
-            MyLDCPowerSystemPlanningModel = new LDCPowerSystemPlanningModel();
         }
     }
 }

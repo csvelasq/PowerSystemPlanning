@@ -52,13 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlanningModels\LDCPowerSystemPlanningModel.cs" />
+    <Compile Include="PlanningModels\ScenarioPowerSystemPlanningModel.cs" />
     <Compile Include="PlanningModels\Planning\CandidateTransmissionLine.cs" />
+    <Compile Include="PlanningModels\Planning\PowerSystemScenario.cs" />
     <Compile Include="PlanningModels\PowerSystem\GeneratingUnit.cs" />
     <Compile Include="PlanningModels\PowerSystem\InelasticLoad.cs" />
     <Compile Include="PlanningModels\PowerSystem\IPowerSystem.cs" />
     <Compile Include="PlanningModels\PowerSystem\Node.cs" />
     <Compile Include="PlanningModels\PowerSystem\NodeElement.cs" />
+    <Compile Include="PlanningModels\ScenarioTEPModel.cs" />
     <Compile Include="Solvers\BaseGRBOptimizationModelResult.cs" />
     <Compile Include="Solvers\BaseOptimizationPowerSystemSolver.cs" />
     <Compile Include="Solvers\IGRBOptimizationModel.cs" />

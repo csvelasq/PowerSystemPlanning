@@ -21,14 +21,6 @@ namespace PowerSystemPlanning
     /// </remarks>
     public class PowerSystem : IPowerSystem, INotifyPropertyChanged
     {
-        // TODO Linear DC OPF LDC
-        // TODO Linear DC OPF LDC with generation and transmission binary parameters
-
-        /// <summary>
-        /// NLog Logger for this class.
-        /// </summary>
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged(String info)
@@ -38,29 +30,7 @@ namespace PowerSystemPlanning
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
-
-        private string _Name;
-
-        /// <summary>
-        /// Name of the power system.
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-
-            set
-            {
-                if (this._Name != value)
-                {
-                    this._Name = value;
-                    NotifyPropertyChanged("Name");
-                }
-            }
-        }
-
+        
         /// <summary>
         /// Nodes of the power system, bindable to GUI.
         /// </summary>
@@ -176,90 +146,19 @@ namespace PowerSystemPlanning
                 return this._TransmissionLines.Count;
             }
         }
-
-        private string _FullFileName;
-
-        /// <summary>
-        /// The full file name (including path) of the target XML file for saving this power system.
-        /// </summary>
-        public string FullFileName
-        {
-            get
-            {
-                return _FullFileName;
-            }
-
-            set
-            {
-                if (this._FullFileName != value)
-                {
-                    this._FullFileName = value;
-                    NotifyPropertyChanged("FullFileName");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Indicates whether the target XML file for saving this power system exists.
-        /// </summary>
-        public bool IsSaved { get { return File.Exists(this.FullFileName); } }
-
+        
         public PowerSystem()
         {
+            LoadSheddingCost = 10000; //default (arbitrary) value
             //new objects are added directly by the GUI
-            this._Nodes = new BindingList<Node>();
-            this._Nodes.AddingNew += (sender, e) => { e.NewObject = new Node(this); };
-            this._GeneratingUnits = new BindingList<GeneratingUnit>();
-            this._GeneratingUnits.AddingNew += (sender, e) => { e.NewObject = new GeneratingUnit(this); };
-            this._InelasticLoads = new BindingList<InelasticLoad>();
-            this._InelasticLoads.AddingNew += (sender, e) => { e.NewObject = new InelasticLoad(this); };
-            this._TransmissionLines = new BindingList<TransmissionLine>();
-            this._TransmissionLines.AddingNew += (sender, e) => { e.NewObject = new TransmissionLine(this); };
-        }
-
-        public PowerSystem(string name) : this()
-        {
-            this.Name = name;
-        }
-
-        public void saveToXMLFile()
-        {
-            using (TextWriter saveStream = new StreamWriter(this.FullFileName))
-            {
-                // Save document
-                System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));
-                writer.Serialize(saveStream, this);
-            }
-            logger.Info("Current power system (named '{0}') saved in {1}.", this.Name, this.FullFileName);
-        }
-
-        public void saveToXMLFile(string file_name)
-        {
-            this.FullFileName = file_name;
-            this.saveToXMLFile();
-        }
-
-        /// <summary>
-        /// Creates a Power System by reading an XML file, provided the stream.
-        /// </summary>
-        /// <param name="xmlStream">Full file path of the XML file where the power system was stored.</param>
-        /// <returns>A new power system object with the contents serialized in the XML file.</returns>
-        /// <remarks>
-        /// The provided stream must is not closed within this method.
-        /// IOException and other exceptions are not managed.</remarks>
-        public static PowerSystem readFromXMLFile(string filename)
-        {
-            PowerSystem retval = null;
-            using (StreamReader xmlStream = new StreamReader(filename))
-            {
-                System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(PowerSystem));
-                retval = (PowerSystem)reader.Deserialize(xmlStream);
-                foreach (Node node in retval.Nodes)
-                {
-                    node.PowerSystem = retval;
-                }
-            }
-            return retval;
+            _Nodes = new BindingList<Node>();
+            _Nodes.AddingNew += (sender, e) => { e.NewObject = new Node(this); };
+            _GeneratingUnits = new BindingList<GeneratingUnit>();
+            _GeneratingUnits.AddingNew += (sender, e) => { e.NewObject = new GeneratingUnit(this); };
+            _InelasticLoads = new BindingList<InelasticLoad>();
+            _InelasticLoads.AddingNew += (sender, e) => { e.NewObject = new InelasticLoad(this); };
+            _TransmissionLines = new BindingList<TransmissionLine>();
+            _TransmissionLines.AddingNew += (sender, e) => { e.NewObject = new TransmissionLine(this); };
         }
     }
 }

@@ -15,7 +15,7 @@ namespace PowerSystemPlanning.PlanningModels
         /// <summary>
         /// A list detailing each block which approximate the load duration curve.
         /// </summary>
-        public BindingList<LoadBlock> DurationBlocks;
+        public BindingList<LoadBlock> DurationBlocks { get; set; }
 
         /// <summary>
         /// Duration of each block (in hours, is a number between 0 and 8760).

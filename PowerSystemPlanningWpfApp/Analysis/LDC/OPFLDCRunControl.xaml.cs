@@ -23,21 +23,21 @@ namespace PowerSystemPlanningWpfApp.Analysis.LDC
     /// </summary>
     public partial class OPFLDCRunControl : UserControl
     {
-        public LDCPowerSystemPlanningModel MyLDCPowerSystemPlanningModel { get; set; }
-        PowerSystem MyPowerSystem
-        {
-            get
-            {
-                return MyLDCPowerSystemPlanningModel.MyPowerSystem;
-            }
-        }
-        LoadDurationCurveByBlocks MyLoadDurationCurve
-        {
-            get
-            {
-                return MyLDCPowerSystemPlanningModel.MyLoadDurationCurve;
-            }
-        }
+        public ScenarioPowerSystemPlanningModel MyScenarioPowerSystemPlanningModel { get; set; }
+        //PowerSystem MyPowerSystem
+        //{
+        //    get
+        //    {
+        //        return MyScenarioPowerSystemPlanningModel.MyPowerSystem;
+        //    }
+        //}
+        //LoadDurationCurveByBlocks MyLoadDurationCurve
+        //{
+        //    get
+        //    {
+        //        return MyLDCPowerSystemPlanningModel.MyLoadDurationCurve;
+        //    }
+        //}
 
         LDCOPFModelSolver MyLDCOPFModelSolver;
 
@@ -48,13 +48,13 @@ namespace PowerSystemPlanningWpfApp.Analysis.LDC
 
         private void btnRunLdcOpf_Click(object sender, RoutedEventArgs e)
         {
-            //builds the model
-            MyLDCOPFModelSolver = new LDCOPFModelSolver(MyPowerSystem, MyLoadDurationCurve);
-            MyLDCOPFModelSolver.Build();
-            //solves the model
-            MyLDCOPFModelSolver.Solve();
-            //binds results
-            myOpfLdcResultsControl.MyLDCOPFModelResults = MyLDCOPFModelSolver.LDCOPFResults;
+            ////builds the model
+            //MyLDCOPFModelSolver = new LDCOPFModelSolver(MyPowerSystem, MyLoadDurationCurve);
+            //MyLDCOPFModelSolver.Build();
+            ////solves the model
+            //MyLDCOPFModelSolver.Solve();
+            ////binds results
+            //myOpfLdcResultsControl.MyLDCOPFModelResults = MyLDCOPFModelSolver.LDCOPFResults;
         }
     }
 }

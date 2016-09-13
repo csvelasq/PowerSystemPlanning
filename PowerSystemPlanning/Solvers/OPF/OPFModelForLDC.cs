@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PowerSystemPlanning.Solvers.OPF
-{/// <summary>
- /// Linear programming OPF model considering a constant variation in load and duration (to be part of an LDC production cost simulation).
- /// </summary>
- /// <remarks>
- /// An OPF model (same as <see cref="OPFModel"/>) where each load is multiplied by the same constant factor, and the generation costs of each generator are multiplied by the duration of the block.
- /// </remarks>
+{
+    /// <summary>
+    /// Linear programming OPF model considering a constant variation in load and duration (to be part of an LDC production cost simulation).
+    /// </summary>
+    /// <remarks>
+    /// An OPF model (same as <see cref="OPFModel"/>) where each load is multiplied by the same constant factor, and the generation costs of each generator are multiplied by the duration of the block.
+    /// </remarks>
     public class OPFModelForLDC : OPFModel
     {
         protected LoadBlock LoadBlock { get; set; }

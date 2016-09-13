@@ -138,9 +138,6 @@
     <Compile Include="Analysis\LDC\OPFLDCResultsControl.xaml.cs">
       <DependentUpon>OPFLDCResultsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analysis\LDC\OPFLDCResultsWindow.xaml.cs">
-      <DependentUpon>OPFLDCResultsWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Analysis\LDC\OPFLDCRunControl.xaml.cs">
       <DependentUpon>OPFLDCRunControl.xaml</DependentUpon>
     </Compile>
@@ -192,10 +189,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Analysis\LDC\OPFLDCResultsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Analysis\LDC\OPFLDCResultsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

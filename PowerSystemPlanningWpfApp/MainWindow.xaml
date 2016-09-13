@@ -64,9 +64,6 @@
                 </MenuItem>
                 <MenuItem Header="_Analysis">
                     <MenuItem x:Name="opfMenuItem" Header="_Optimal Power Flow" Click="opfMenuItem_Click" />
-                    <MenuItem x:Name="ldcOpfMenuItem" Header="_Load Duration Curve (LDC) OPF Model" Click="ldcOpfMenuItem_Click" />
-                    <MenuItem x:Name="staticTepMenuItem" Header="_Static TEP (based on LDC-OPF)" Click="staticTepMenuItem_Click"  />
-                    <MenuItem x:Name="scenarioTepMenuItem" Header="_TEP under Scenarios (based on LDC-OPF)" Click="scenarioTepMenuItem_Click" />
                 </MenuItem>
                 <MenuItem Header="Configuration">
                     <MenuItem Header="_Configuration" IsEnabled="False" />
@@ -77,15 +74,15 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TabControl Grid.Row="1">
+        <TabControl x:Name="tabControlPowerSystems" Grid.Row="1">
             <TabItem Header="Power System Model">
                 <modelControls:PlanningModelEditorControl x:Name="myPowerSystemEditorControl" />
             </TabItem>
             <TabItem Header="OPF">
-                <opfControls:OPFResultsControl />
+                <opfControls:OPFResultsControl x:Name="myOPFResultsControl" />
             </TabItem>
             <TabItem Header="LDC OPF">
-                <opfLdcControls:OPFLDCResultsControl />
+                <opfLdcControls:OPFLDCRunControl x:Name="myOPFLDCRunControl" />
             </TabItem>
             <TabItem Header="LDC TEP">
             </TabItem>

@@ -68,5 +68,10 @@ namespace PowerSystemPlanning.PlanningModels
             this.Duration = duration;
             this.LoadMultiplier = loadMultiplier;
         }
+
+        public override string ToString()
+        {
+            return String.Format("Load block of {0:N0} hours and {1:p1} of demand", Duration, LoadMultiplier);
+        }
     }
 }

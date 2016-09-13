@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node2" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_results_control.html" title="Interaction logic for OPFLDCResultsControl.xaml " alt="" coords="206,479,449,520"/>
-<area shape="rect" id="node3" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_results_window.html" title="Interaction logic for OPFLDCResultsWindow.xaml " alt="" coords="204,1328,451,1369"/>
+<area shape="rect" id="node3" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_results_window.html" title="OPFLDCResultsWindow " alt="" coords="204,1328,451,1369"/>
 <area shape="rect" id="node4" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_run_control.html" title="Interaction logic for OPFLDCRunControl.xaml " alt="" coords="217,544,438,585"/>
 <area shape="rect" id="node5" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_o_p_f_1_1_o_p_f_results_control.html" title="Interaction logic for OPFResultsControl.xaml " alt="" coords="218,609,437,651"/>
 <area shape="rect" id="node6" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_o_p_f_1_1_o_p_f_run_control.html" title="Interaction logic for OPFRunControl.xaml " alt="" coords="226,675,429,716"/>

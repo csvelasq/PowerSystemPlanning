@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace PowerSystemPlanning.Solvers.OPF
 {
     /// <summary>
-    /// Encapsulates results of the OPF model for LDC representation of demand.
+    /// Encapsulates results of the LDC-OPF model for a single load block (LDC representation of demand).
     /// </summary>
     public class OPFModelResultForLDC : OPFModelResult
     {
-        public LoadBlock LoadBlock { get; protected set; }
+        public LoadBlock MyLoadBlock { get; protected set; }
 
-        //TODO: avoiding inheritance is beginning to smell...
+        //TODO: avoid inheritance, it is beginning to smell...
         public List<NodeOPFResultForLDC> NodeOPFResultsForLDC { get; protected set; }
         public List<GeneratingUnitOPFResultForLDC> GeneratingUnitOPFResultsForLDC { get; protected set; }
 
@@ -27,18 +27,25 @@ namespace PowerSystemPlanning.Solvers.OPF
         {
             get
             {
-                return (LoadBlock.Duration * (from genResults in this.GeneratingUnitOPFResults select genResults.Output).Sum()) / 1000.0;
+                return (MyLoadBlock.Duration * (from genResults in this.GeneratingUnitOPFResults select genResults.Output).Sum()) / 1000.0;
             }
         }
         /// <summary>
-        /// Gets the total generation cost (in US$) for suplying demand during the whole block's duration.
+        /// Gets the total generation cost (US$) for suplying demand during the whole block's duration.
         /// </summary>
         /// <remarks> Equals the sum over all generators of output (MW) multiplied by marginal cost (US$/MW), multiplied by the block duration (hours).</remarks>
         public override double TotalGenerationCost
         {
             get
             {
-                return (LoadBlock.Duration * (from genResults in this.GeneratingUnitOPFResults select genResults.TotalGenerationCost).Sum());
+                return (MyLoadBlock.Duration * (from genResults in this.GeneratingUnitOPFResults select genResults.TotalGenerationCost).Sum());
+            }
+        }
+        public double HourlyOperationCost
+        {
+            get
+            {
+                return TotalGenerationCost / MyLoadBlock.Duration;
             }
         }
         /// <summary>
@@ -52,6 +59,16 @@ namespace PowerSystemPlanning.Solvers.OPF
             }
         }
         /// <summary>
+        /// Gets the total energy consumed in the system (GWh, accounting for load shedding).
+        /// </summary>
+        public double TotalEnergyConsumed
+        {
+            get
+            {
+                return (from nodeResults in NodeOPFResultsForLDC select nodeResults.TotalEnergyConsumed).Sum();
+            }
+        }
+        /// <summary>
         /// Gets the total energy shed in the system (GWh).
         /// </summary>
         /// <remarks>Equals the total load-shedding (MW), multiplied by the block duration (hours).</remarks>
@@ -59,7 +76,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         {
             get
             {
-                return (LoadBlock.Duration * (from node in this.NodeOPFResults select node.LoadShedding).Sum()) / 1000.0;
+                return (from nodeResults in NodeOPFResultsForLDC select nodeResults.EnergyLoadShedding).Sum();
             }
         }
         /// <summary>
@@ -70,7 +87,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         {
             get
             {
-                return (LoadBlock.Duration * this.PowerSystem.LoadSheddingCost * TotalLoadShedding);
+                return (MyLoadBlock.Duration * this.PowerSystem.LoadSheddingCost * TotalLoadShedding);
             }
         }
 
@@ -118,12 +135,12 @@ namespace PowerSystemPlanning.Solvers.OPF
         public OPFModelResultForLDC(PowerSystem powerSystem, int status, double objVal, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice, LoadBlock loadBlock)
             : base(powerSystem, status, objVal, pGen_Solution, pFlow_Solution, lShed_Solution, busAng_Solution, nodalSpotPrice)
         {
-            this.LoadBlock = loadBlock;
+            this.MyLoadBlock = loadBlock;
             //Generating units results
             this.GeneratingUnitOPFResultsForLDC = new List<GeneratingUnitOPFResultForLDC>();
             foreach (GeneratingUnit gen in this.PowerSystem.GeneratingUnits)
             {
-                this.GeneratingUnitOPFResultsForLDC.Add(new GeneratingUnitOPFResultForLDC(gen, pGen_Solution[gen.Id], this.LoadBlock));
+                this.GeneratingUnitOPFResultsForLDC.Add(new GeneratingUnitOPFResultForLDC(gen, pGen_Solution[gen.Id], this.MyLoadBlock));
             }
             //Node results
             this.NodeOPFResultsForLDC = new List<NodeOPFResultForLDC>();
@@ -138,7 +155,7 @@ namespace PowerSystemPlanning.Solvers.OPF
                 double lshed = 0;
                 foreach (InelasticLoad load in node.InelasticLoads)
                 {
-                    pcons += load.ConsumptionMW - lShed_Solution[load.Id];
+                    pcons += load.ConsumptionMW * MyLoadBlock.LoadMultiplier - lShed_Solution[load.Id];
                     lshed += lShed_Solution[load.Id];
                 }
                 this.NodeOPFResultsForLDC.Add(new NodeOPFResultForLDC(node, busAng_Solution[node.Id], pgen, pcons, lshed, nodalSpotPrice[node.Id] / loadBlock.Duration, loadBlock));
@@ -150,12 +167,18 @@ namespace PowerSystemPlanning.Solvers.OPF
     public class NodeOPFResultForLDC : NodeOPFResult
     {
         public LoadBlock MyLoadBlock { get; protected set; }
-
+        /// <summary>
+        /// Total energy generated in this node (GWh).
+        /// </summary>
         public double TotalEnergyGenerated { get { return TotalPowerGenerated * MyLoadBlock.Duration / 1000.0; } }
-
-        public double TotalEnergyConsumed { get { return TotalPowerConsumed * MyLoadBlock.Duration * MyLoadBlock.LoadMultiplier / 1000.0; } }
-
-        public double EnergyLoadShedding { get { return LoadShedding * MyLoadBlock.Duration * MyLoadBlock.LoadMultiplier / 1000.0; } }
+        /// <summary>
+        /// Total energy consumed in this node (GWh), after accounting for load shedding.
+        /// </summary>
+        public double TotalEnergyConsumed { get { return TotalPowerConsumed * MyLoadBlock.Duration / 1000.0; } }
+        /// <summary>
+        /// Total energy shed in this node (GWh).
+        /// </summary>
+        public double EnergyLoadShedding { get { return LoadShedding * MyLoadBlock.Duration / 1000.0; } }
 
         public NodeOPFResultForLDC(Node node, double angle, double totalPowerGenerated, double totalPowerConsumed, double loadShed, double spotPrice,
             LoadBlock loadBlock)
@@ -167,15 +190,15 @@ namespace PowerSystemPlanning.Solvers.OPF
 
     public class GeneratingUnitOPFResultForLDC : GeneratingUnitOPFResult
     {
-        public LoadBlock LoadBlock { get; protected set; }
-        public double HourlyGenerationCost { get { return this.TotalGenerationCost / LoadBlock.Duration; } }
-        public double EnergyGenerated { get { return this.Output * LoadBlock.Duration / 1000.0; } }
-        public override double TotalGenerationCost { get { return Output * GeneratingUnit.MarginalCost * LoadBlock.Duration; } }
+        public LoadBlock MyLoadBlock { get; protected set; }
+        public double HourlyGenerationCost { get { return this.TotalGenerationCost / MyLoadBlock.Duration; } }
+        public double EnergyGenerated { get { return this.Output * MyLoadBlock.Duration / 1000.0; } }
+        public override double TotalGenerationCost { get { return Output * GeneratingUnit.MarginalCost * MyLoadBlock.Duration; } }
 
         public GeneratingUnitOPFResultForLDC(GeneratingUnit generatingUnit, double output, LoadBlock loadBlock)
             : base(generatingUnit, output)
         {
-            this.LoadBlock = loadBlock;
+            this.MyLoadBlock = loadBlock;
         }
     }
 }

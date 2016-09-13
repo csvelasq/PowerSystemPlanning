@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Analysis.OPF"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="650" Background="White">
+             d:DesignHeight="400" d:DesignWidth="750" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -23,34 +23,36 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <!-- TODO: customizable units for total costs (billion US$, US$, etc) -->
-            <Label Content="Total Operation Cost (US$):" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBox Grid.Row="0" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalOperationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
-            <Label Content="Objective function value:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBox Grid.Row="0" Grid.Column="3" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding ObjVal, StringFormat=N2, Mode=OneTime}" IsReadOnly="True" />
-            <Label Grid.Row="0" Grid.Column="4" Content="{Binding CurrentStateMessage, Mode=OneTime}" 
-                   HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Label Grid.Row="1" Grid.Column="0" Content="Total Generation Cost (US$):" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Label Content="{Binding MyLoadBlock}" Grid.Row="0" HorizontalAlignment="Left" />
+            <Label Content="Total Operation Cost (US$):" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBox Grid.Row="1" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalGenerationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
-            <Label Content="Total Generation (GWh):" Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBox Grid.Row="1" Grid.Column="3"  Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalGenerationEnergy, StringFormat=N1, Mode=OneTime}" IsReadOnly="True" />
-            <Label Content="Total Load Shedding Cost (US$):" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                     Text="{Binding TotalOperationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+            <Label Content="Objective function value:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox Grid.Row="1" Grid.Column="3" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
+                     Text="{Binding ObjVal, StringFormat=N2, Mode=OneTime}" IsReadOnly="True" />
+            <Label Grid.Row="1" Grid.Column="4" Content="{Binding CurrentStateMessage, Mode=OneTime}" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Total Generation Cost (US$):" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBox Grid.Row="2" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
+                     Text="{Binding TotalGenerationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+            <Label Content="Total Generation (GWh):" Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox Grid.Row="2" Grid.Column="3"  Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
+                     Text="{Binding TotalGenerationEnergy, StringFormat=N1, Mode=OneTime}" IsReadOnly="True" />
+            <Label Content="Total Load Shedding Cost (US$):" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox Grid.Row="3" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
                      Text="{Binding TotalLoadSheddingCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
-            <Label Content="Total Load Shedding (GWh):" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBox Grid.Row="2" Grid.Column="3" Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
+            <Label Content="Total Load Shedding (GWh):" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox Grid.Row="3" Grid.Column="3" Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
                      Text="{Binding TotalLoadSheddingEnergy, StringFormat=N1, Mode=OneTime}" IsReadOnly="True" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="White" />
             <GroupBox Header="Nodal results" >
@@ -124,7 +126,7 @@
                      Text="{Binding TotalGeneration, StringFormat=N1, Mode=OneTime}" IsReadOnly="True" />
                             <Label Content="Hourly Generation Cost (US$/h):" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center" />
                             <TextBox Grid.Row="1" Grid.Column="1"  Width="75" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalGeneration, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+                     Text="{Binding TotalHourlyGenerationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
                         </Grid>
                         <DataGrid Name="dgGeneratorResults" ItemsSource="{Binding Path=GeneratingUnitOPFResultsForLDC}" AutoGenerateColumns="False" ColumnHeaderHeight="60">
                             <DataGrid.ColumnHeaderStyle>
@@ -147,7 +149,7 @@
                                 <DataGridTextColumn Header="Maximum Output (MW)" Binding="{Binding GeneratingUnit.InstalledCapacityMW, StringFormat=N1}" IsReadOnly="True" Width="80"  />
                                 <DataGridTextColumn Header="Marginal Cost (US$/MW)" Binding="{Binding GeneratingUnit.MarginalCost, StringFormat=C}" IsReadOnly="True" Width="80"  />
                                 <DataGridTextColumn Header="Hourly Generation Cost (US$/h)" Binding="{Binding HourlyGenerationCost, StringFormat=C}" IsReadOnly="True" Width="80"  />
-                                <DataGridTextColumn Header="Energy Generated (MWh)" Binding="{Binding EnergyGenerated, StringFormat=N1}" IsReadOnly="True" Width="80" />
+                                <DataGridTextColumn Header="Energy Generated (GWh)" Binding="{Binding EnergyGenerated, StringFormat=N1}" IsReadOnly="True" Width="80" />
                                 <DataGridTextColumn Header="Total Generation Cost (US$)" Binding="{Binding TotalGenerationCost, StringFormat=C}" IsReadOnly="True" Width="80"  />
                             </DataGrid.Columns>
                         </DataGrid>

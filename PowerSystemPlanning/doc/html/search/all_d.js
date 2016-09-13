@@ -2,6 +2,7 @@ var searchData=
 [
   ['ldcopf',['LDCOPF',['../namespace_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f.html',1,'PowerSystemPlanning::Solvers']]],
   ['opf',['OPF',['../namespace_power_system_planning_1_1_solvers_1_1_o_p_f.html',1,'PowerSystemPlanning::Solvers']]],
+  ['peaknodalspotprice',['PeakNodalSpotPrice',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_node_l_d_c_o_p_f_result.html#a5ce84225ae5f9dc8b687eb37c4d9a34f',1,'PowerSystemPlanning::Solvers::LDCOPF::NodeLDCOPFResult']]],
   ['pflow',['PFlow',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#ae1bd525a2d2633a3c62c3e85b2ffa16e',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
   ['pflow_5fsolution',['PFlow_Solution',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a42cd352e50a3a3602652c3dd9974615e',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
   ['pgen',['PGen',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a7753aadc5568fd85710377fa770bc675',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],

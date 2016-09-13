@@ -23,9 +23,23 @@ namespace PowerSystemPlanningWpfApp.Analysis.LDC
     /// </summary>
     public partial class OPFLDCRunControl : UserControl
     {
+        public LDCPowerSystemPlanningModel MyLDCPowerSystemPlanningModel { get; set; }
+        PowerSystem MyPowerSystem
+        {
+            get
+            {
+                return MyLDCPowerSystemPlanningModel.MyPowerSystem;
+            }
+        }
+        LoadDurationCurveByBlocks MyLoadDurationCurve
+        {
+            get
+            {
+                return MyLDCPowerSystemPlanningModel.MyLoadDurationCurve;
+            }
+        }
+
         LDCOPFModelSolver MyLDCOPFModelSolver;
-        public LoadDurationCurveByBlocks MyLoadDurationCurve { get; set; }
-        public PowerSystem MyPowerSystem { get; set; }
 
         public OPFLDCRunControl()
         {
@@ -40,7 +54,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.LDC
             //solves the model
             MyLDCOPFModelSolver.Solve();
             //binds results
-            myOpfLdcResultsControl.DataContext = MyLDCOPFModelSolver.LDCOPFResults;
+            myOpfLdcResultsControl.MyLDCOPFModelResults = MyLDCOPFModelSolver.LDCOPFResults;
         }
     }
 }

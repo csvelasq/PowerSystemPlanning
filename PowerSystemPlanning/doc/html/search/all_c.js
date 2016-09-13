@@ -13,7 +13,7 @@ var searchData=
   ['opfmodelsolver',['OPFModelSolver',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver.html',1,'PowerSystemPlanning::Solvers::OPF']]],
   ['opfmodelsolverforldc',['OPFModelSolverForLDC',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver_for_l_d_c.html',1,'PowerSystemPlanning::Solvers::OPF']]],
   ['opfresults',['OPFResults',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver.html#ac8d5dee6aa34a6bd664533762d09d9da',1,'PowerSystemPlanning::Solvers::OPF::OPFModelSolver']]],
-  ['opfresultsbyblock',['OpfResultsByBlock',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model.html#a78c015a4e72fed89e0adb31fffd88e8a',1,'PowerSystemPlanning.Solvers.LDCOPF.LDCOPFModel.OpfResultsByBlock()'],['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model_results.html#aff73605f665385b3ad2161f9147c0491',1,'PowerSystemPlanning.Solvers.LDCOPF.LDCOPFModelResults.OpfResultsByBlock()']]],
+  ['opfresultsbyblock',['OpfResultsByBlock',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model.html#a78c015a4e72fed89e0adb31fffd88e8a',1,'PowerSystemPlanning::Solvers::LDCOPF::LDCOPFModel']]],
   ['outgoingtransmissionlines',['OutgoingTransmissionLines',['../class_power_system_planning_1_1_node.html#a125dc1d83ad828b71783bd1b2f77687a',1,'PowerSystemPlanning::Node']]],
   ['output',['Output',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_generating_unit_o_p_f_result.html#acd20a0c248cd593174d612d0e388a7f1',1,'PowerSystemPlanning::Solvers::OPF::GeneratingUnitOPFResult']]]
 ];

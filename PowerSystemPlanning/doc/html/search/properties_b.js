@@ -4,6 +4,5 @@ var searchData=
   ['nodalspotprice',['NodalSpotPrice',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#ae78e97f6fbb8b6404e2ea585a6ba1292',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
   ['nodefromid',['NodeFromID',['../class_power_system_planning_1_1_transmission_line.html#ad6ccdca478aee0f823d901a80a130421',1,'PowerSystemPlanning::TransmissionLine']]],
   ['nodes',['Nodes',['../class_power_system_planning_1_1_power_system.html#aa51d9c68a12cae03acd530e9ceff58f9',1,'PowerSystemPlanning::PowerSystem']]],
-  ['nodetoid',['NodeToID',['../class_power_system_planning_1_1_transmission_line.html#afcc77f004b21aa5f9c4080e202846136',1,'PowerSystemPlanning::TransmissionLine']]],
-  ['numberofnodes',['NumberOfNodes',['../class_power_system_planning_1_1_power_system.html#a3d7abefe87bb1621c5d61644b83ae3d5',1,'PowerSystemPlanning::PowerSystem']]]
+  ['nodetoid',['NodeToID',['../class_power_system_planning_1_1_transmission_line.html#afcc77f004b21aa5f9c4080e202846136',1,'PowerSystemPlanning::TransmissionLine']]]
 ];

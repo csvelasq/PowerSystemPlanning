@@ -150,7 +150,7 @@ namespace PowerSystemPlanning
         public Node(PowerSystem power_system)
         {
             this._PowerSystem = power_system;
-            this.id = this._PowerSystem.NumberOfNodes;
+            this.id = this._PowerSystem.Nodes.Count;
         }
 
         public Node(PowerSystem power_system, Node node) : this(power_system)

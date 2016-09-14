@@ -20,6 +20,7 @@ namespace PowerSystemPlanning.PlanningModels
         /// <summary>
         /// Duration of each block (in hours, is a number between 0 and 8760).
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public List<double> BlockDurations
         {
             get
@@ -31,6 +32,7 @@ namespace PowerSystemPlanning.PlanningModels
         /// <summary>
         /// Relative duration of each block (hours / 8760, is a number between 0 and 1).
         /// </summary>
+        [System.Xml.Serialization.XmlIgnoreAttribute]
         public List<double> RelativeBlockDurations
         {
             get

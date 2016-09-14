@@ -35,7 +35,7 @@ namespace PowerSystemPlanning.PlanningModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         /// <summary>
         /// The name of this test case
         /// </summary>
@@ -60,9 +60,15 @@ namespace PowerSystemPlanning.PlanningModels
         /// </summary>
         public LoadDurationCurveByBlocks MyLoadDurationCurve { get; set; }
         /// <summary>
+        /// The target planning year (i.e. the year in the future when the scenarios will be realized).
+        /// </summary>
+        public int TargetPlanningYear { get; set; }
+        /// <summary>
         /// The future scenarios being modeled (each scenario is a full power system data object).
         /// </summary>
         public BindingList<PowerSystemScenario> MyScenarios { get; set; }
+        // TODO define a basis power system from which scenarios will derive (shared Nodes, Generator ID/Name, etc)
+
         public double _YearlyDiscountRate;
         /// <summary>
         /// The rate used to discount future cash flows (often below 10%).
@@ -124,10 +130,10 @@ namespace PowerSystemPlanning.PlanningModels
         public ScenarioPowerSystemPlanningModel()
         {
             Name = "";
+            TargetPlanningYear = 0;
             YearlyDiscountRate = 0;
-            MyScenarios = new BindingList<PowerSystemScenario>();
-            //Default load duration curve
             MyLoadDurationCurve = new LoadDurationCurveByBlocks();
+            MyScenarios = new BindingList<PowerSystemScenario>();
         }
 
         public ScenarioPowerSystemPlanningModel(string name, double yearlyDiscountRate, LoadDurationCurveByBlocks myLoadDurationCurve) : this()

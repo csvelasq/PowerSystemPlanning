@@ -14,6 +14,5 @@ var searchData=
   ['nodeopfresultforldc',['NodeOPFResultForLDC',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_node_o_p_f_result_for_l_d_c.html',1,'PowerSystemPlanning::Solvers::OPF']]],
   ['nodes',['Nodes',['../class_power_system_planning_1_1_power_system.html#aa51d9c68a12cae03acd530e9ceff58f9',1,'PowerSystemPlanning::PowerSystem']]],
   ['nodeto',['NodeTo',['../class_power_system_planning_1_1_transmission_line.html#ad3d00d16e5f9bc8f33a6b3b30eeae132',1,'PowerSystemPlanning::TransmissionLine']]],
-  ['nodetoid',['NodeToID',['../class_power_system_planning_1_1_transmission_line.html#afcc77f004b21aa5f9c4080e202846136',1,'PowerSystemPlanning::TransmissionLine']]],
-  ['numberofnodes',['NumberOfNodes',['../class_power_system_planning_1_1_power_system.html#a3d7abefe87bb1621c5d61644b83ae3d5',1,'PowerSystemPlanning::PowerSystem']]]
+  ['nodetoid',['NodeToID',['../class_power_system_planning_1_1_transmission_line.html#afcc77f004b21aa5f9c4080e202846136',1,'PowerSystemPlanning::TransmissionLine']]]
 ];

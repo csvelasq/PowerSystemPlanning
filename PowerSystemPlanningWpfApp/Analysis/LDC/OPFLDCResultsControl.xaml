@@ -59,12 +59,8 @@
             </Grid>
             <GroupBox Header="LDC Results" Grid.Row="1">
                 <DockPanel LastChildFill="True">
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" >
-                        <Image Source="pack://application:,,,/Resources/StatusInformation_16x.png" Width="16" />
-                        <Label VerticalContentAlignment="Center">
-                            Click a row to inspect detailed OPF results of the selected load block (will redirect to the "OPF" tab).
-                        </Label>
-                    </StackPanel>
+                    <localUtils:ImageTextBlock DockPanel.Dock="Bottom"
+                            MessageForTextBlock="Click a row to inspect detailed OPF results of the selected load block (will redirect to the 'OPF' tab)."  />
                     <DataGrid Name="dgLDCResults" ItemsSource="{Binding MyOpfResultsByBlock}" AutoGenerateColumns="False" ColumnHeaderHeight="60"
                           SelectedItem="{Binding Path=selectedLoadBlockInLDCOPFResults, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}, Mode=OneWayToSource}" 
                           SelectionMode="Single" SelectionUnit="FullRow">

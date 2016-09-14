@@ -23,20 +23,18 @@
                 </StackPanel>
                 <!--Discount rate-->
                 <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
+                    <Label Content="Target Planning Year:" />
+                    <TextBox Text="{Binding TargetPlanningYear, StringFormat=N0}" Width="50" Height="20" VerticalAlignment="Center" />
                     <Label Content="Yearly Discount Rate:" />
                     <TextBox Text="{Binding YearlyDiscountRate, StringFormat=p2}" Width="50" Height="20" VerticalAlignment="Center" />
                 </StackPanel>
                 <!--Scenarios-->
-                <GroupBox Header="Scenarios">
+                <GroupBox Header="Scenarios"  Width="350">
                     <DockPanel LastChildFill="True">
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" >
-                            <Image Source="pack://application:,,,/Resources/StatusInformation_16x.png" Width="16" />
-                            <TextBlock TextWrapping="WrapWithOverflow" Width="309" Height="Auto">
-                                Click a row to edit the power system data for each scenario in the form below.
-                            </TextBlock>
-                        </StackPanel>
+                        <localUtils:ImageTextBlock DockPanel.Dock="Bottom"
+                            MessageForTextBlock="Click a row to edit the power system data for each scenario in the form below." />
                         <localUtils:CustomDataGrid x:Name="dgScenarios" ItemsSource="{Binding MyScenarios}" AutoGenerateColumns="False"
-                          SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="True" Width="329">
+                          SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150" />
                             </DataGrid.Columns>

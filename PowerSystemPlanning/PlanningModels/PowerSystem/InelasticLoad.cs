@@ -40,7 +40,7 @@ namespace PowerSystemPlanning
 
         public InelasticLoad(PowerSystem power_system) : base(power_system)
         {
-            this.Id = this._PowerSystem.NumberOfInelasticLoads;
+            this.Id = this._PowerSystem.InelasticLoads.Count;
         }
     }
 }

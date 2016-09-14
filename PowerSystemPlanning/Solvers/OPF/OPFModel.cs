@@ -164,8 +164,8 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected void AddGRBVarsPFlow()
         {
-            PFlow = new GRBVar[powerSystem.NumberOfTransmissionLines];
-            for (int i = 0; i < powerSystem.NumberOfTransmissionLines; i++)
+            PFlow = new GRBVar[powerSystem.TransmissionLines.Count];
+            for (int i = 0; i < powerSystem.TransmissionLines.Count; i++)
             {
                 TransmissionLine tl = powerSystem.TransmissionLines[i];
                 PFlow[i] = _grbModel.AddVar(-tl.ThermalCapacityMW, tl.ThermalCapacityMW, 0, GRB.CONTINUOUS, "PFlow" + tl.Id);
@@ -187,11 +187,11 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected void AddGRBVarsBusAngles()
         {
-            BusAngle = new GRBVar[powerSystem.NumberOfNodes];
+            BusAngle = new GRBVar[powerSystem.Nodes.Count];
             //Adds reference bus angle (equals 0)
             BusAngle[0] = _grbModel.AddVar(0, 0, 0, GRB.CONTINUOUS, "theta" + powerSystem.Nodes[0].Id);
             //Adds the rest of the bus angles
-            for (int i = 1; i < powerSystem.NumberOfNodes; i++)
+            for (int i = 1; i < powerSystem.Nodes.Count; i++)
             {
                 BusAngle[i] = _grbModel.AddVar(-GRB.INFINITY, GRB.INFINITY, 0, GRB.CONTINUOUS, "theta" + powerSystem.Nodes[i].Id);
             }
@@ -199,8 +199,8 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected virtual void AddGRBVarsPGen()
         {
-            PGen = new GRBVar[powerSystem.NumberOfGeneratingUnits];
-            for (int i = 0; i < powerSystem.NumberOfGeneratingUnits; i++)
+            PGen = new GRBVar[powerSystem.GeneratingUnits.Count];
+            for (int i = 0; i < powerSystem.GeneratingUnits.Count; i++)
             {
                 GeneratingUnit gen = powerSystem.GeneratingUnits[i];
                 PGen[i] = _grbModel.AddVar(0, gen.InstalledCapacityMW, gen.MarginalCost, GRB.CONTINUOUS, "PGen" + gen.Id);
@@ -209,9 +209,9 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected virtual void AddGRBConstrPowerBalance()
         {
-            this.NodalPowerBalance = new GRBConstr[powerSystem.NumberOfNodes];
+            this.NodalPowerBalance = new GRBConstr[powerSystem.Nodes.Count];
             int load_shed_counter = 0;
-            for (int i = 0; i < powerSystem.NumberOfNodes; i++)
+            for (int i = 0; i < powerSystem.Nodes.Count; i++)
             {
                 Node node = powerSystem.Nodes[i];
                 GRBLinExpr powerBalanceLHS = new GRBLinExpr();
@@ -240,8 +240,8 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected void AddGRBConstrDCPowerFlow()
         {
-            this.DCPowerFlow = new GRBConstr[powerSystem.NumberOfTransmissionLines];
-            for (int t = 0; t < powerSystem.NumberOfTransmissionLines; t++)
+            this.DCPowerFlow = new GRBConstr[powerSystem.TransmissionLines.Count];
+            for (int t = 0; t < powerSystem.TransmissionLines.Count; t++)
             {
                 TransmissionLine tl = powerSystem.TransmissionLines[t];
                 GRBLinExpr powerFlowLHS = new GRBLinExpr();

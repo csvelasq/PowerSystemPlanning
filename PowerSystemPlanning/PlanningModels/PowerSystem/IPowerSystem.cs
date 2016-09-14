@@ -4,15 +4,10 @@ namespace PowerSystemPlanning
 {
     public interface IPowerSystem
     {
+        IList<Node> Nodes { get; }
         IList<GeneratingUnit> GeneratingUnits { get; }
         IList<InelasticLoad> InelasticLoads { get; }
         double LoadSheddingCost { get; }
-        IList<Node> Nodes { get; }
-        int NumberOfGeneratingUnits { get; }
-        int NumberOfInelasticLoads { get; }
-        int NumberOfNodes { get; }
-        int NumberOfTransmissionLines { get; }
-        double TotalMWInelasticLoads { get; }
         IList<TransmissionLine> TransmissionLines { get; }
     }
 }

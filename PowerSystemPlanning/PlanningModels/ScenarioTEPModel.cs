@@ -12,10 +12,26 @@ namespace PowerSystemPlanning.PlanningModels
 {
     public class ScenarioTEPModel : ScenarioPowerSystemPlanningModel
     {
+        [System.Xml.Serialization.XmlIgnoreAttribute]
+        public BindingList<CandidateTransmissionLine> _MyCandidateTransmissionLines;
         /// <summary>
         /// The list of candidate transmission lines for TEP.
         /// </summary>
-        public BindingList<CandidateTransmissionLine> MyCandidateTransmissionLines { get; protected set; }
+        public BindingList<CandidateTransmissionLine> MyCandidateTransmissionLines
+        {
+            get { return _MyCandidateTransmissionLines; }
+            protected set
+            {
+                _MyCandidateTransmissionLines = value;
+                // New candidate transmission lines are bound to the power system in the first scenario 
+                // (in order to automatically assign a unique ID to each Candidate Transmission Line)
+                // TODO find better solution
+                _MyCandidateTransmissionLines.AddingNew += (sender, e) =>
+                {
+                    e.NewObject = new CandidateTransmissionLine(MyScenarios[0].MyPowerSystem.Nodes, MyCandidateTransmissionLines);
+                };
+            }
+        }
         /// <summary>
         /// XML serializer for this class.
         /// </summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,11 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// </summary>
         public PowerSystem MyPowerSystem { get; set; }
 
-        public PowerSystemScenario() { }
+        public PowerSystemScenario()
+        {
+            Name = "";
+            MyPowerSystem = new PowerSystem();
+        }
 
         public PowerSystemScenario(string name, PowerSystem scenarioPowerSystem)
         {

@@ -55,7 +55,7 @@ namespace PowerSystemPlanning
 
         public GeneratingUnit(PowerSystem power_system) : base(power_system)
         {
-            this.Id = this._PowerSystem.NumberOfGeneratingUnits;
+            this.Id = this._PowerSystem.GeneratingUnits.Count;
         }
     }
 }

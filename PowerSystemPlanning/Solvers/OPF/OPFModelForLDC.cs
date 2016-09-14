@@ -27,8 +27,8 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected override void AddGRBVarsPGen()
         {
-            PGen = new GRBVar[powerSystem.NumberOfGeneratingUnits];
-            for (int i = 0; i < powerSystem.NumberOfGeneratingUnits; i++)
+            PGen = new GRBVar[powerSystem.GeneratingUnits.Count];
+            for (int i = 0; i < powerSystem.GeneratingUnits.Count; i++)
             {
                 GeneratingUnit gen = powerSystem.GeneratingUnits[i];
                 PGen[i] = _grbModel.AddVar(0, gen.InstalledCapacityMW,
@@ -52,9 +52,9 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected override void AddGRBConstrPowerBalance()
         {
-            this.NodalPowerBalance = new GRBConstr[powerSystem.NumberOfNodes];
+            this.NodalPowerBalance = new GRBConstr[powerSystem.Nodes.Count];
             int load_shed_counter = 0;
-            for (int i = 0; i < powerSystem.NumberOfNodes; i++)
+            for (int i = 0; i < powerSystem.Nodes.Count; i++)
             {
                 Node node = powerSystem.Nodes[i];
                 GRBLinExpr powerBalanceLHS = new GRBLinExpr();

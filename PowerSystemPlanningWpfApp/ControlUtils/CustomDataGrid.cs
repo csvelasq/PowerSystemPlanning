@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -13,7 +14,10 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
     {
         public CustomDataGrid() : base()
         {
-            this.AlternatingRowBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightBlue"));
+            Margin = new Thickness(0, 3, 0, 3);
+            AlternatingRowBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightBlue"));
+            //ColumnHeaderStyle = new Style(typeof(DataGridColumnHeader));
+            //ColumnHeaderStyle.Setters.Add(new Setter());
         }
 
         public event ExecutedRoutedEventHandler ExecutePasteEvent;

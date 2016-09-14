@@ -8,7 +8,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" Background="White">
     <GroupBox Header="Candidate Transmission Lines">
-        <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="40">
+        <DockPanel LastChildFill="True">
+            <localUtils:ImageTextBlock DockPanel.Dock="Bottom" 
+                                       MessageForTextBlock="Candidate transmission line definition depends on the nodes in the first scenario. Define nodes in the first scenario before defining candidate transmission lines." />
+            <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding}" AutoGenerateColumns="False">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="ContentTemplate">
@@ -20,18 +23,16 @@
                     </Setter>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
-            <DataGrid.AlternatingRowBackground>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-            </DataGrid.AlternatingRowBackground>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="From Node ID" Binding="{Binding NodeFromID}" />
-                <DataGridTextColumn Header="To Node ID" Binding="{Binding NodeToID}" />
+                <DataGridTextColumn Header="From Node ID" Binding="{Binding NodeFromID}" Width="60" />
+                <DataGridTextColumn Header="To Node ID" Binding="{Binding NodeToID}" Width="60" />
                 <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacityMW}" Width="100" />
                 <DataGridTextColumn Header="Susceptance (mho)" Binding="{Binding SusceptanceMho, StringFormat=N5}" Width="80" />
                 <DataGridTextColumn Header="Investment cost (US$)" Binding="{Binding InvestmentCost, StringFormat=C}" Width="80" />
             </DataGrid.Columns>
         </localUtils:CustomDataGrid>
+        </DockPanel>
     </GroupBox>
 </UserControl>

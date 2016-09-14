@@ -93,6 +93,7 @@ namespace PowerSystemPlanningWpfApp.Model
             myLoadDurationCurve.DurationBlocks.Add(new LoadBlock(760, 1));
             //Default name and discount rate
             MyScenarioTEPModel = new ScenarioTEPModel("Unnamed power system model", 0.07, myLoadDurationCurve);
+            MyScenarioTEPModel.TargetPlanningYear = 10;
             //Adds an empty scenario
             MyScenarioTEPModel.MyScenarios.Add(new PowerSystemScenario("Unnamed scenario", new PowerSystem()));
         }

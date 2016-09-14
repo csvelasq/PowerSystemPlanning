@@ -144,6 +144,9 @@
     <Compile Include="Analysis\OPF\OPFRunControl.xaml.cs">
       <DependentUpon>OPFRunControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
+      <DependentUpon>ImageTextBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\CandidateTransmissionLinesEditorControl.xaml.cs">
       <DependentUpon>CandidateTransmissionLinesEditorControl.xaml</DependentUpon>
     </Compile>
@@ -176,11 +179,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ControlUtils\SimpleTerminal.xaml">
+    <Page Include="ControlUtils\ImageTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ControlUtils\WindowDatagridTest.xaml">
+    <Page Include="ControlUtils\SimpleTerminal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,9 +209,6 @@
     <Compile Include="ControlUtils\RecentFileList.cs" />
     <Compile Include="ControlUtils\SimpleTerminal.xaml.cs">
       <DependentUpon>SimpleTerminal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ControlUtils\WindowDatagridTest.xaml.cs">
-      <DependentUpon>WindowDatagridTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\WpfRichTextBoxRowColoringRule.cs" />
     <Compile Include="Helper\WpfRichTextBoxTarget.cs" />
@@ -272,6 +272,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\StatusWarning_16x.png" />
     <Resource Include="Resources\StatusInformation_16x.png" />
     <Resource Include="Resources\Run_32x.png" />
     <Resource Include="Resources\Search_16x.png" />

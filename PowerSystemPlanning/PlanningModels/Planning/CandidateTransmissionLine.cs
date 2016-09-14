@@ -13,8 +13,22 @@ namespace PowerSystemPlanning.PlanningModels
         /// </summary>
         public double InvestmentCost { get; set; }
 
+        IList<Node> PowerSystemNodes;
+        protected override IList<Node> Nodes
+        {
+            get { return PowerSystemNodes; }
+        }
+
+        IList<CandidateTransmissionLine> CandidateTransmissionLines;
+
         public CandidateTransmissionLine() : base() { }
 
-        public CandidateTransmissionLine(PowerSystem powerSystem) : base(powerSystem) { }
+        public CandidateTransmissionLine(IList<Node> powerSystemNodes, IList<CandidateTransmissionLine> candidateTransmissionLines)
+        {
+            PowerSystemNodes = powerSystemNodes;
+            CandidateTransmissionLines = candidateTransmissionLines;
+            MyPowerSystem = null;
+            Id = CandidateTransmissionLines.Count;
+        }
     }
 }

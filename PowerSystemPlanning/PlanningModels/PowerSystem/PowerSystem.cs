@@ -34,8 +34,7 @@ namespace PowerSystemPlanning
         /// <summary>
         /// Nodes of the power system, bindable to GUI.
         /// </summary>
-        public BindingList<Node> _Nodes { get; protected set; }
-
+        public BindingList<Node> _Nodes { get; set; }
         /// <summary>
         /// Nodes of the power system.
         /// </summary>
@@ -43,56 +42,24 @@ namespace PowerSystemPlanning
         public IList<Node> Nodes { get { return this._Nodes; } }
 
         /// <summary>
-        /// Number of nodes in the power system.
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnoreAttribute]
-        public int NumberOfNodes
-        {
-            get
-            {
-                return _Nodes.Count;
-            }
-        }
-
-        /// <summary>
         /// All Generating units in the power system, bindable to GUI.
         /// </summary>
         public BindingList<GeneratingUnit> _GeneratingUnits { get; protected set; }
-
         /// <summary>
         /// All Generating units in the power system
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
         public IList<GeneratingUnit> GeneratingUnits { get { return this._GeneratingUnits; } }
 
-        [System.Xml.Serialization.XmlIgnoreAttribute]
-        public int NumberOfGeneratingUnits
-        {
-            get
-            {
-                return this._GeneratingUnits.Count;
-            }
-        }
-
         /// <summary>
         /// All Inelastic loads in the power system, bindable to GUI.
         /// </summary>
         public BindingList<InelasticLoad> _InelasticLoads { get; protected set; }
-
         /// <summary>
         /// All inelastic loads in the power system.
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
         public IList<InelasticLoad> InelasticLoads { get { return this._InelasticLoads; } }
-
-        [System.Xml.Serialization.XmlIgnoreAttribute]
-        public int NumberOfInelasticLoads
-        {
-            get
-            {
-                return this._InelasticLoads.Count;
-            }
-        }
 
         /// <summary>
         /// Total MW of inelastic loads.
@@ -107,9 +74,8 @@ namespace PowerSystemPlanning
         }
 
         private double _LoadSheddingCost;
-
         /// <summary>
-        /// The cost (in US$) of shedding 1 MW of any load.
+        /// The cost (in US$) of shedding 1 MWh of any load.
         /// </summary>
         public double LoadSheddingCost
         {
@@ -131,26 +97,17 @@ namespace PowerSystemPlanning
         /// All Transmission lines in the power sytem, bindable to GUI.
         /// </summary>
         public BindingList<TransmissionLine> _TransmissionLines { get; protected set; }
-
         /// <summary>
         /// All Transmission lines in the power sytem.
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute]
         public IList<TransmissionLine> TransmissionLines { get { return this._TransmissionLines; } }
-
-        [System.Xml.Serialization.XmlIgnoreAttribute]
-        public int NumberOfTransmissionLines
-        {
-            get
-            {
-                return this._TransmissionLines.Count;
-            }
-        }
         
         public PowerSystem()
         {
             LoadSheddingCost = 10000; //default (arbitrary) value
             //new objects are added directly by the GUI
+            // TODO attach addingnew handler directly in the setter for each of the following bindinglist (_Nodes, _GeneratingUnits, ...)
             _Nodes = new BindingList<Node>();
             _Nodes.AddingNew += (sender, e) => { e.NewObject = new Node(this); };
             _GeneratingUnits = new BindingList<GeneratingUnit>();

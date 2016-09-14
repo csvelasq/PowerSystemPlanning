@@ -60,7 +60,7 @@ namespace PowerSystemPlanningWpfApp
             //New file
             // Configure the message box to be displayed
             string caption = "Power system planning";
-            string messageBoxText = "Do you want to save changes to this document before creating a new model? Click Yes to save and close, No to close without saving, or Cancel to not close.";
+            string messageBoxText = "Do you want to save changes to this document before creating a new model? Click 'Yes' to save and close, 'No' to close without saving, or 'Cancel' to not close.";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;
             MessageBoxImage icon = MessageBoxImage.Warning;// Display message box
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
@@ -71,10 +71,12 @@ namespace PowerSystemPlanningWpfApp
                     // User pressed Yes button: save and then create new
                     MyScenarioTEPViewModel.MyScenarioTEPModel.saveToXMLFile();
                     MyScenarioTEPViewModel = new ScenarioTEPViewModel();
+                    MainWindow.logger.Info("New power system model created.");
                     break;
                 case MessageBoxResult.No:
                     // User pressed No button: create new immediately
                     MyScenarioTEPViewModel = new ScenarioTEPViewModel();
+                    MainWindow.logger.Info("New power system model created.");
                     break;
                 case MessageBoxResult.Cancel:
                     // User pressed Cancel button: don't do anythin
@@ -109,7 +111,6 @@ namespace PowerSystemPlanningWpfApp
             }
             catch (Exception e)
             {
-                // TODO Move this to backend, find out how to show a messagebox from the backend
                 string msgBoxTitle = "Error opening file";
                 string msgBoxMsg = String.Format("An error occurred while opening file '{0}'.\nException: {1}", filename, e.Message);
                 MainWindow.logger.Error(msgBoxMsg);
@@ -157,7 +158,7 @@ namespace PowerSystemPlanningWpfApp
         {
             // Configure the message box to be displayed
             string caption = "Power system planning";
-            string messageBoxText = "Do you want to save changes to this document before the application closes? Click Yes to save and close, No to close without saving, or Cancel to not close.";
+            string messageBoxText = "Do you want to save changes to this document before the application closes? Click 'Yes' to save and close, 'No' to close without saving, or 'Cancel' to not close.";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;
             MessageBoxImage icon = MessageBoxImage.Warning;// Display message box
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);

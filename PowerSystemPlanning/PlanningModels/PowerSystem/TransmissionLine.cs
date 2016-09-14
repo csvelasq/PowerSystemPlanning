@@ -21,6 +21,10 @@ namespace PowerSystemPlanning
     public class TransmissionLine : ITransmissionLine
     {
         protected PowerSystem MyPowerSystem;
+        protected virtual IList<Node> Nodes
+        {
+            get { return MyPowerSystem.Nodes; }
+        }
 
         /// <summary>
         /// Unique identifier of this transmission element within a given power system.
@@ -56,9 +60,9 @@ namespace PowerSystemPlanning
                 if (this.NodeFrom != null)
                 {
                     if (this.NodeFrom.Id != value)
-                        this.NodeFrom = MyPowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
+                        this.NodeFrom = Nodes.SingleOrDefault(x => x.Id == value);
                 }
-                else this.NodeFrom = MyPowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
+                else this.NodeFrom = Nodes.SingleOrDefault(x => x.Id == value);
             }
         }
         
@@ -84,9 +88,9 @@ namespace PowerSystemPlanning
                 if (this.NodeTo != null)
                 {
                     if (this.NodeTo.Id != value)
-                        this.NodeTo = MyPowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
+                        this.NodeTo = Nodes.SingleOrDefault(x => x.Id == value);
                 }
-                else this.NodeTo = MyPowerSystem._Nodes.SingleOrDefault(x => x.Id == value);
+                else this.NodeTo = Nodes.SingleOrDefault(x => x.Id == value);
             }
         }
         
@@ -127,7 +131,7 @@ namespace PowerSystemPlanning
         public TransmissionLine(PowerSystem power_system)
         {
             this.MyPowerSystem = power_system;
-            this.Id = this.MyPowerSystem.NumberOfTransmissionLines;
+            this.Id = this.MyPowerSystem.TransmissionLines.Count;
         }
     }
 }

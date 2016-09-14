@@ -25,13 +25,21 @@ namespace PowerSystemPlanning.PlanningModels
                 _MyCandidateTransmissionLines = value;
                 // New candidate transmission lines are bound to the power system in the first scenario 
                 // (in order to automatically assign a unique ID to each Candidate Transmission Line)
-                // TODO find better solution
+                // TODO find better solution for adding new candidate transmission lines
                 _MyCandidateTransmissionLines.AddingNew += (sender, e) =>
                 {
                     e.NewObject = new CandidateTransmissionLine(MyScenarios[0].MyPowerSystem.Nodes, MyCandidateTransmissionLines);
                 };
             }
         }
+        public long TransmissionExpansionPlansCount
+        {
+            get
+            {
+                return 2^MyCandidateTransmissionLines.Count;
+            }
+        }
+
         /// <summary>
         /// XML serializer for this class.
         /// </summary>

@@ -11,14 +11,21 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" HorizontalAlignment="Left" LastChildFill="False" Margin="5,5,0,5" >
-            <Button x:Name="btnRunLdcOpf" Click="btnRunLdcOpf_Click">
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Label Content="Scenario name:" HorizontalAlignment="Left" />
+                <!--<ComboBox Width="80" Height="20"></ComboBox>-->
+                <TextBox Text="{Binding Path=currentlySelectedScenario.Name, Mode=OneWay}" Width="200" Height="20" />
+            </StackPanel>
+            <Button Command="{Binding LDCOPFSolveCommand}" Width="110" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/Resources/Run_32x.png" Width="16" />
+                    <Image Source="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Run_32x.png" Width="16" />
                     <TextBlock Margin="5,0,5,0">Solve LDC OPF</TextBlock>
                 </StackPanel>
             </Button>
-        </DockPanel>
-        <local:OPFLDCResultsControl x:Name="myOpfLdcResultsControl" Grid.Row="1" />
+        </StackPanel>
+        <GroupBox Header="OPF LDC Results" Grid.Row="1">
+            <local:OPFLDCResultsControl x:Name="myOpfLdcResultsControl"/>
+        </GroupBox>
     </Grid>
 </UserControl>

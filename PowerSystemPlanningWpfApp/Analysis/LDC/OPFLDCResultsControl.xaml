@@ -7,7 +7,6 @@
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="750" Background="White">
-    <GroupBox Header="OPF LDC Results">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -32,37 +31,37 @@
                 <!-- TODO: customizable units for total costs (billion US$, US$, etc) -->
                 <Label Content="Total Operation Cost (US$):" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox x:Name="tbTotalCost" Grid.Row="0" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalOperationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+                     Text="{Binding MyLDCOPFModelResults.TotalOperationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
                 <Label Content="Objective function value:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox x:Name="tbObjVal" Grid.Row="0" Grid.Column="3" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding ObjVal, StringFormat=E3, Mode=OneTime}" IsReadOnly="True" />
-                <Label Grid.Row="0" Grid.Column="4" Content="{Binding CurrentStateMessage, Mode=OneTime}" 
+                     Text="{Binding MyLDCOPFModelResults.ObjVal, StringFormat=E3, Mode=OneTime}" IsReadOnly="True" />
+                <Label Grid.Row="0" Grid.Column="4" Content="{Binding MyLDCOPFModelResults.CurrentStateMessage, Mode=OneTime}" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <Label Grid.Row="1" Grid.Column="0" Content="Total Generation Cost (US$):" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox x:Name="tbTotalGenCost" Grid.Row="1" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalGenerationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+                     Text="{Binding MyLDCOPFModelResults.TotalGenerationCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
                 <Label Content="Total Energy Generated (GWh):" Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox x:Name="tbTotalEnergyGenerated" Grid.Row="1" Grid.Column="3"  Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalEnergyGenerated, StringFormat=N1, Mode=OneTime}" IsReadOnly="True" />
+                     Text="{Binding MyLDCOPFModelResults.TotalEnergyGenerated, StringFormat=N1, Mode=OneTime}" IsReadOnly="True" />
                 <Label Content="Total Load Shedding Cost (US$):" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox x:Name="tbTotalLoadShedCost" Grid.Row="2" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalLoadSheddingCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+                     Text="{Binding MyLDCOPFModelResults.TotalLoadSheddingCost, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
                 <Label Content="Total Load Shed (GWh):" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox x:Name="tbTotalEnergyLoadShed" Grid.Row="2" Grid.Column="3" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding TotalEnergyLoadShed, StringFormat=N1, Mode=OneTime}" IsReadOnly="True" />
+                     Text="{Binding MyLDCOPFModelResults.TotalEnergyLoadShed, StringFormat=N1, Mode=OneTime}" IsReadOnly="True" />
                 <Label Content="Average Nodal Spot Price (US$/MWh):" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox x:Name="tbAverageNodalSpotPrice" Grid.Row="3" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding AverageNodalSpotPrice, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+                     Text="{Binding MyLDCOPFModelResults.AverageNodalSpotPrice, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
                 <Label Content="Peak Nodal Spot Price (US$/MWh):" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBox x:Name="tbPeakNodalSpotPrice" Grid.Row="3" Grid.Column="3" Width="120" Height="20" HorizontalAlignment="Left" d:LayoutOverrides="Width" VerticalAlignment="Center" TextAlignment="Right"
-                     Text="{Binding PeakNodalSpotPrice, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
+                     Text="{Binding MyLDCOPFModelResults.PeakNodalSpotPrice, StringFormat=C, Mode=OneTime}" IsReadOnly="True" />
             </Grid>
             <GroupBox Header="LDC Results" Grid.Row="1">
                 <DockPanel LastChildFill="True">
                     <localUtils:ImageTextBlock DockPanel.Dock="Bottom"
                             MessageForTextBlock="Click a row to inspect detailed OPF results of the selected load block (will redirect to the 'OPF' tab)."  />
-                    <DataGrid Name="dgLDCResults" ItemsSource="{Binding MyOpfResultsByBlock}" AutoGenerateColumns="False" ColumnHeaderHeight="60"
-                          SelectedItem="{Binding Path=selectedLoadBlockInLDCOPFResults, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}, Mode=OneWayToSource}" 
+                    <localUtils:CustomDataGrid ItemsSource="{Binding MyLDCOPFModelResults.MyOpfResultsByBlock}" AutoGenerateColumns="False"
+                          SelectedItem="{Binding selectedLoadBlockInLDCOPFResults, Mode=OneWayToSource}" 
                           SelectionMode="Single" SelectionUnit="FullRow">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -75,9 +74,6 @@
                                 </Setter>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
-                        <DataGrid.AlternatingRowBackground>
-                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-                        </DataGrid.AlternatingRowBackground>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Duration [hours]" Binding="{Binding MyLoadBlock.Duration, StringFormat=N0}" Width="57" IsReadOnly="False" />
                             <DataGridTextColumn Header="Load multiplier" Binding="{Binding MyLoadBlock.LoadMultiplier, StringFormat=p0}" Width="70" />
@@ -90,12 +86,12 @@
                             <DataGridTextColumn Header="Maximum Nodal Spot Price (US$/MW)" Binding="{Binding MaximumNodalSpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
                             <DataGridTextColumn Header="Minimum Nodal Spot Price (US$/MW)" Binding="{Binding MinimumNodalSpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
                         </DataGrid.Columns>
-                    </DataGrid>
+                    </localUtils:CustomDataGrid>
                 </DockPanel>
             </GroupBox>
             <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />
             <GroupBox Header="Nodal results" Grid.Row="3">
-                <DataGrid Name="dgNodalResults" ItemsSource="{Binding MyNodeLDCOPFResults}" AutoGenerateColumns="False" ColumnHeaderHeight="60">
+                <localUtils:CustomDataGrid ItemsSource="{Binding MyLDCOPFModelResults.MyNodeLDCOPFResults}" AutoGenerateColumns="False">
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="ContentTemplate">
@@ -107,9 +103,6 @@
                             </Setter>
                         </Style>
                     </DataGrid.ColumnHeaderStyle>
-                    <DataGrid.AlternatingRowBackground>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
-                    </DataGrid.AlternatingRowBackground>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Node ID" Binding="{Binding NodeId}" IsReadOnly="True" Width="50" />
                         <DataGridTextColumn Header="Node Name" Binding="{Binding NodeName}" IsReadOnly="True" Width="50" />
@@ -119,8 +112,7 @@
                         <DataGridTextColumn Header="Average Nodal Spot Price (US$/MWh)" Binding="{Binding AverageNodalSpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
                         <DataGridTextColumn Header="Peak Nodal Spot Price (US$/MWh)" Binding="{Binding PeakNodalSpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
                     </DataGrid.Columns>
-                </DataGrid>
+                </localUtils:CustomDataGrid>
             </GroupBox>
         </Grid>
-    </GroupBox>
 </UserControl>

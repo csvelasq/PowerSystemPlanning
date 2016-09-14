@@ -8,11 +8,14 @@
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp"
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
         xmlns:modelControls="clr-namespace:PowerSystemPlanningWpfApp.Model"
+        xmlns:analysisControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis"
+        xmlns:staticTEPControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.StaticTEP"
+        xmlns:scenarioTEPControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP"
         xmlns:opfControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.OPF"
         xmlns:opfLdcControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.LDC"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
-        Title="Power System Planning" Height="800" Width="900" WindowState="Maximized" Loaded="Window_Loaded">
+        Title="Power System Planning" Height="1000" Width="1000" WindowState="Maximized" Loaded="Window_Loaded">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="NewCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommandBinding_Executed" />
@@ -63,7 +66,8 @@
                     <MenuItem x:Name="menuCandidateLines" Header="_Candidate Transmission Lines" />
                 </MenuItem>
                 <MenuItem Header="_Analysis">
-                    <MenuItem x:Name="opfMenuItem" Header="_Optimal Power Flow" Click="opfMenuItem_Click" />
+                    <MenuItem Header="_Optimal Power Flow" Click="opfMenuItem_Click" />
+                    <MenuItem Header="_Load Duration Curve OPF" />
                 </MenuItem>
                 <MenuItem Header="Configuration">
                     <MenuItem Header="_Configuration" IsEnabled="False" />
@@ -74,21 +78,27 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TabControl x:Name="tabControlPowerSystems" Grid.Row="1">
+        <TabControl Grid.Row="1" SelectedIndex="{Binding tabControlPowerSystem_SelectedIndex, Mode=TwoWay}">
             <TabItem Header="Power System Model">
                 <modelControls:PlanningModelEditorControl x:Name="myPowerSystemEditorControl" DataContext="{Binding MyScenarioTEPModel}" />
             </TabItem>
             <TabItem Header="OPF">
-                <!--<opfControls:OPFResultsControl x:Name="myOPFResultsControl" />-->
+                <opfControls:OPFResultsControl x:Name="myOPFResultsControl" />
             </TabItem>
             <TabItem Header="LDC OPF">
-                <!--<opfLdcControls:OPFLDCRunControl x:Name="myOPFLDCRunControl" DataContext="{Binding MyScenarioTEPModel}" />-->
+                <opfLdcControls:OPFLDCRunControl x:Name="myOPFLDCRunControl" />
             </TabItem>
-            <TabItem Header="Scenario LDC OPF">
+            <!--<TabItem Header="TEP LDC">
+                <staticTEPControls:TEPLDCInspectControl />
+            </TabItem>-->
+            <TabItem Header="Scenario TEP LDC">
+                <scenarioTEPControls:ScenarioTEPLDCInspectControl />
             </TabItem>
             <TabItem Header="Scenario TEP Enumeration">
+                <scenarioTEPControls:ScenarioTEPEnumerateControl />
             </TabItem>
-            <TabItem Header="Scenario TEP Enumeration - 2nd order">
+            <TabItem Header="Second Order Scenario TEP Enumeration">
+                <scenarioTEPControls:ScenarioTEP2ndOrderEnumerateControl />
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />

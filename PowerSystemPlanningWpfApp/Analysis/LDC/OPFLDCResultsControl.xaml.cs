@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 namespace PowerSystemPlanningWpfApp.Analysis.LDC
 {
     /// <summary>
-    /// Interaction logic for OPFLDCResultsControl.xaml
+    /// Interaction logic for OPFLDCResultsControl.xaml (meant to be bound to a LDCOPFModelResults)
     /// </summary>
     public partial class OPFLDCResultsControl : UserControl
     {

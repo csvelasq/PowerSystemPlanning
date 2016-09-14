@@ -18,6 +18,7 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
             AlternatingRowBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightBlue"));
             //ColumnHeaderStyle = new Style(typeof(DataGridColumnHeader));
             //ColumnHeaderStyle.Setters.Add(new Setter());
+            // TODO wrap column header; stop doing it in XAML each time the control is used
         }
 
         public event ExecutedRoutedEventHandler ExecutePasteEvent;

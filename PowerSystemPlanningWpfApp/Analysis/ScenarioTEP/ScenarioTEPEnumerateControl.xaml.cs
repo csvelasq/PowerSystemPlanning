@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.ScenarioTEP
+namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
 {
     /// <summary>
-    /// Interaction logic for ScenarioTEPWindow.xaml
+    /// Interaction logic for ScenarioTEPEnumerateControl.xaml
     /// </summary>
-    public partial class ScenarioTEPWindow : Window
+    public partial class ScenarioTEPEnumerateControl : UserControl
     {
-        public ScenarioTEPWindow()
+        public ScenarioTEPEnumerateControl()
         {
             InitializeComponent();
         }

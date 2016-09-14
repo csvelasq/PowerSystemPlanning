@@ -144,6 +144,21 @@
     <Compile Include="Analysis\OPF\OPFRunControl.xaml.cs">
       <DependentUpon>OPFRunControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Analysis\ScenarioTEP\ScenarioTEP2ndOrderEnumerateControl.xaml.cs">
+      <DependentUpon>ScenarioTEP2ndOrderEnumerateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ScenarioTEP\ScenarioTEPEnumerateControl.xaml.cs">
+      <DependentUpon>ScenarioTEPEnumerateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectControl.xaml.cs">
+      <DependentUpon>ScenarioTEPLDCInspectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\StaticTEP\TEPLDCInspectControl.xaml.cs">
+      <DependentUpon>TEPLDCInspectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\TransmissionExpansionPlanDetailsControl.xaml.cs">
+      <DependentUpon>TransmissionExpansionPlanDetailsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
     </Compile>
@@ -165,17 +180,31 @@
     <Compile Include="Analysis\OPF\OPFRunWindow.xaml.cs">
       <DependentUpon>OPFRunWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analysis\ScenarioTEP\ScenarioTEPWindow.xaml.cs">
-      <DependentUpon>ScenarioTEPWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Analysis\StaticTEP\StaticTEPWindow.xaml.cs">
-      <DependentUpon>StaticTEPWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="Analysis\LDC\OPFLDCRunControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Analysis\OPF\OPFRunControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\ScenarioTEP\ScenarioTEP2ndOrderEnumerateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\ScenarioTEP\ScenarioTEPEnumerateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\StaticTEP\TEPLDCInspectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\TransmissionExpansionPlanDetailsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,17 +273,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Analysis\ScenarioTEP\ScenarioTEPWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Analysis\StaticTEP\StaticTEPWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

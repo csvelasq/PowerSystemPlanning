@@ -1,7 +1,9 @@
 ﻿using PowerSystemPlanning;
 using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.PlanningModels.Planning;
+using PowerSystemPlanning.Solvers.LDCOPF;
 using PowerSystemPlanning.Solvers.OPF;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PowerSystemPlanningWpfApp.Model
 {
@@ -45,18 +48,41 @@ namespace PowerSystemPlanningWpfApp.Model
             }
         }
 
-        PowerSystemScenario _selectedScenarioForEditing;
+        PowerSystemScenario _currentlySelectedScenario;
         /// <summary>
-        /// Currently selected (in GUI) scenario for editing purposes.
+        /// Currently selected (in GUI) scenario (for editing and analysis purposes).
         /// </summary>
-        public PowerSystemScenario selectedScenarioForEditing
+        public PowerSystemScenario currentlySelectedScenario
         {
-            get { return _selectedScenarioForEditing; }
+            get { return _currentlySelectedScenario; }
             set
             {
-                if (_selectedScenarioForEditing != value)
+                if (_currentlySelectedScenario != value)
                 {
-                    _selectedScenarioForEditing = value;
+                    _currentlySelectedScenario = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Build and solve an LDC OPF on the currently selected scenario.
+        /// </summary>
+        public ICommand LDCOPFSolveCommand { get; private set; }
+
+        LDCOPFModelSolver _MyLDCOPFModelSolver;
+        LDCOPFModelResults _MyLDCOPFModelResults;
+        /// <summary>
+        /// LDC OPF results, to be bound to the corresponding results tab
+        /// </summary>
+        public LDCOPFModelResults MyLDCOPFModelResults
+        {
+            get { return _MyLDCOPFModelResults; }
+            set
+            {
+                if (_MyLDCOPFModelResults != value)
+                {
+                    _MyLDCOPFModelResults = value;
                     NotifyPropertyChanged();
                 }
             }
@@ -75,32 +101,75 @@ namespace PowerSystemPlanningWpfApp.Model
                 {
                     _selectedLoadBlockInLDCOPFResults = value;
                     NotifyPropertyChanged();
-                    //myOPFResultsControl.OPFResultsForLDC = value;
-                    //if (value != null)
-                    //{
-                    //    tabControlPowerSystems.SelectedIndex = 1;
-                    //}
+                    if (value != null)
+                    {
+                        // focuses the 'OPF' detailed results tab
+                        tabControlPowerSystem_SelectedIndex = 1;
+                    }
                 }
             }
         }
 
-        public ScenarioTEPViewModel()
-        {
-            //Default load duration curve
-            LoadDurationCurveByBlocks myLoadDurationCurve = new LoadDurationCurveByBlocks();
-            myLoadDurationCurve.DurationBlocks.Add(new LoadBlock(6000, 0.4));
-            myLoadDurationCurve.DurationBlocks.Add(new LoadBlock(2000, 0.6));
-            myLoadDurationCurve.DurationBlocks.Add(new LoadBlock(760, 1));
-            //Default name and discount rate
-            MyScenarioTEPModel = new ScenarioTEPModel("Unnamed power system model", 0.07, myLoadDurationCurve);
-            MyScenarioTEPModel.TargetPlanningYear = 10;
-            //Adds an empty scenario
-            MyScenarioTEPModel.MyScenarios.Add(new PowerSystemScenario("Unnamed scenario", new PowerSystem()));
-        }
+        /// <summary>
+        /// Currently selected tab in the frontend (allows changing the focused tab from within this view-model)
+        /// </summary>
+        public int tabControlPowerSystem_SelectedIndex { get; set; }
+
+        /// <summary>
+        /// Initializes a model with default (arbitrary) parameters
+        /// </summary>
+        public ScenarioTEPViewModel() : this(new ScenarioTEPModel()) { }
 
         public ScenarioTEPViewModel(ScenarioTEPModel myScenarioTEPModel)
         {
             MyScenarioTEPModel = myScenarioTEPModel;
+            LDCOPFSolveCommand = new DelegateCommand(RunLdcOpf, CanRunLdcOpf);
+        }
+
+        /// <summary>
+        /// Builds and solves an LDC OPF model based on the currently selected scenario
+        /// </summary>
+        public void RunLdcOpf()
+        {
+            //builds the model
+            _MyLDCOPFModelSolver = new LDCOPFModelSolver(currentlySelectedScenario.MyPowerSystem, MyScenarioTEPModel.MyLoadDurationCurve);
+            _MyLDCOPFModelSolver.Build();
+            //solves the model
+            _MyLDCOPFModelSolver.Solve();
+            //binds results
+            MyLDCOPFModelResults = _MyLDCOPFModelSolver.LDCOPFResults;
+        }
+        /// <summary>
+        /// Determines whether an LDC OPF model can be built and solved (depending on whether there is a selected power system).
+        /// </summary>
+        /// <returns></returns>
+        public bool CanRunLdcOpf()
+        {
+            // TODO should also verify internal consistency of the selected scenario
+            return (currentlySelectedScenario != null);
+        }
+
+        /// <summary>
+        /// Creates a new scenario tep view model with default (arbitrary) parameters for the power system data model.
+        /// </summary>
+        /// <returns></returns>
+        public static ScenarioTEPViewModel CreateDefaultScenarioTEPModel()
+        {
+            ScenarioTEPViewModel MyScenarioTEPViewModel = new ScenarioTEPViewModel();
+            ScenarioTEPModel MyScenarioTEPModel = MyScenarioTEPViewModel.MyScenarioTEPModel;
+            //Default load duration curve
+            LoadDurationCurveByBlocks defaultLoadDurationCurve = new LoadDurationCurveByBlocks();
+            defaultLoadDurationCurve.DurationBlocks.Add(new LoadBlock(6000, 0.4));
+            defaultLoadDurationCurve.DurationBlocks.Add(new LoadBlock(2000, 0.6));
+            defaultLoadDurationCurve.DurationBlocks.Add(new LoadBlock(760, 1));
+            //Default name and discount rate
+            MyScenarioTEPModel.Name = "Unnamed power system model";
+            MyScenarioTEPModel.YearlyDiscountRate = 0.07;
+            MyScenarioTEPModel.MyLoadDurationCurve = defaultLoadDurationCurve;
+            MyScenarioTEPModel.TargetPlanningYear = 10;
+            //Adds an empty scenario
+            MyScenarioTEPModel.MyScenarios.Add(new PowerSystemScenario("Unnamed scenario", new PowerSystem()));
+            return MyScenarioTEPViewModel;
         }
     }
 }

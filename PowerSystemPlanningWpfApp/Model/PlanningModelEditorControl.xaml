@@ -21,7 +21,7 @@
                     <Label Content="Model Name:" />
                     <TextBox Text="{Binding Name}" Width="250" Height="20" VerticalAlignment="Center" />
                 </StackPanel>
-                <!--Discount rate-->
+                <!--Target Planning Year; Discount rate-->
                 <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
                     <Label Content="Target Planning Year:" />
                     <TextBox Text="{Binding TargetPlanningYear, StringFormat=N0}" Width="50" Height="20" VerticalAlignment="Center" />
@@ -34,28 +34,22 @@
                         <localUtils:ImageTextBlock DockPanel.Dock="Bottom"
                             MessageForTextBlock="Click a row to edit the power system data for each scenario in the form below." />
                         <localUtils:CustomDataGrid x:Name="dgScenarios" ItemsSource="{Binding MyScenarios}" AutoGenerateColumns="False"
-                          SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="True">
+                          SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="True"
+                                                   SelectedItem="{Binding Path=MyScenarioTEPViewModel.currentlySelectedScenario, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150" />
+                                <DataGridTextColumn Header="Probability" Binding="{Binding Probability, StringFormat=p0}" Width="70" />
                             </DataGrid.Columns>
                         </localUtils:CustomDataGrid>
                     </DockPanel>
                 </GroupBox>
             </DockPanel>
-            <!--LDC; Candidate Transmission Lines-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <!--LDC-->
-                <modelControls:LoadDurationCurveEditorControl x:Name="ldcEditor" DataContext="{Binding MyLoadDurationCurve.DurationBlocks}" Grid.Row="0" />
-                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-                <!--Candidate Transmission Lines-->
-                <modelControls:CandidateTransmissionLinesEditorControl x:Name="candidateTLsEditor" DataContext="{Binding MyCandidateTransmissionLines}" Grid.Column="2" />
-            </Grid>
+            <!--LDC-->
+            <modelControls:LoadDurationCurveEditorControl DataContext="{Binding MyLoadDurationCurve.DurationBlocks}" DockPanel.Dock="Left" />
+            <!--Candidate Transmission Lines-->
+            <modelControls:CandidateTransmissionLinesEditorControl DataContext="{Binding MyCandidateTransmissionLines}" />
         </DockPanel>
-        <modelControls:PowerSystemEditorControl x:Name="myPowerSystemEditor" DataContext="{Binding ElementName=dgScenarios, Path=SelectedItem}" Grid.Row="1" />
+        <modelControls:PowerSystemEditorControl DataContext="{Binding ElementName=dgScenarios, Path=SelectedItem}" 
+                                                Grid.Row="1" />
     </Grid>
 </UserControl>

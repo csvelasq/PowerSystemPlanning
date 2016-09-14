@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.StaticTEP
+namespace PowerSystemPlanningWpfApp.Analysis
 {
     /// <summary>
-    /// Interaction logic for StaticTEPWindow.xaml
+    /// Interaction logic for TransmissionExpansionPlanDetailsControl.xaml
     /// </summary>
-    public partial class StaticTEPWindow : Window
+    public partial class TransmissionExpansionPlanDetailsControl : UserControl
     {
-        public StaticTEPWindow()
+        public TransmissionExpansionPlanDetailsControl()
         {
             InitializeComponent();
         }

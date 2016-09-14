@@ -30,7 +30,7 @@
                 <DataGridTextColumn Header="To Node ID" Binding="{Binding NodeToID}" Width="60" />
                 <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacityMW}" Width="100" />
                 <DataGridTextColumn Header="Susceptance (mho)" Binding="{Binding SusceptanceMho, StringFormat=N5}" Width="80" />
-                <DataGridTextColumn Header="Investment cost (US$)" Binding="{Binding InvestmentCost, StringFormat=C}" Width="80" />
+                <DataGridTextColumn Header="Investment cost (MUS$)" Binding="{Binding InvestmentCost, StringFormat=C}" Width="80" />
             </DataGrid.Columns>
         </localUtils:CustomDataGrid>
         </DockPanel>

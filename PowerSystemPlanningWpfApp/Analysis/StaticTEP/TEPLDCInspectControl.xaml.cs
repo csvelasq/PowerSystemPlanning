@@ -1,6 +1,4 @@
-﻿using PowerSystemPlanning.PlanningModels;
-using PowerSystemPlanning.Solvers.LDCOPF;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PowerSystemPlanning;
 
-namespace PowerSystemPlanningWpfApp.Analysis.LDC
+namespace PowerSystemPlanningWpfApp.Analysis.StaticTEP
 {
     /// <summary>
-    /// Interaction logic for OPFLDCRunControl.xaml
+    /// Interaction logic for TEPLDCInspectControl.xaml
     /// </summary>
-    public partial class OPFLDCRunControl : UserControl
+    public partial class TEPLDCInspectControl : UserControl
     {
-        // TODO combobox for choosing scenario
-
-        public OPFLDCRunControl()
+        public TEPLDCInspectControl()
         {
             InitializeComponent();
         }

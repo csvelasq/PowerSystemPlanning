@@ -51,8 +51,15 @@ namespace PowerSystemPlanningWpfApp
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
-            MyScenarioTEPViewModel = new ScenarioTEPViewModel();
+            CreateNewDefaultViewModel();
             this.RecentFileList.MenuClick += (s, e) => OpenModelFile(e.Filepath);
+        }
+
+        private void CreateNewDefaultViewModel()
+        {
+            MyScenarioTEPViewModel = ScenarioTEPViewModel.CreateDefaultScenarioTEPModel();
+            //Logs the creation of the default model
+            MainWindow.logger.Info("New power system model created with default (arbitrary) parameters).");
         }
 
         private void NewCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -70,13 +77,11 @@ namespace PowerSystemPlanningWpfApp
                 case MessageBoxResult.Yes:
                     // User pressed Yes button: save and then create new
                     MyScenarioTEPViewModel.MyScenarioTEPModel.saveToXMLFile();
-                    MyScenarioTEPViewModel = new ScenarioTEPViewModel();
-                    MainWindow.logger.Info("New power system model created.");
+                    CreateNewDefaultViewModel();
                     break;
                 case MessageBoxResult.No:
                     // User pressed No button: create new immediately
-                    MyScenarioTEPViewModel = new ScenarioTEPViewModel();
-                    MainWindow.logger.Info("New power system model created.");
+                    CreateNewDefaultViewModel();
                     break;
                 case MessageBoxResult.Cancel:
                     // User pressed Cancel button: don't do anythin
@@ -211,7 +216,7 @@ namespace PowerSystemPlanningWpfApp
             //Analysis.OPF.OPFRunWindow opfRunWindow = new Analysis.OPF.OPFRunWindow(MyPowerSystem);
             //opfRunWindow.Show();
         }
-        
+
         private void aboutMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Help.About about = new Help.About();

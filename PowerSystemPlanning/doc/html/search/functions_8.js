@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['transmissionline',['TransmissionLine',['../class_power_system_planning_1_1_transmission_line.html#a6031223d4ebe71e02ee01908b92f4789',1,'PowerSystemPlanning::TransmissionLine']]]
+  ['savetoxmlfile',['saveToXMLFile',['../class_power_system_planning_1_1_planning_models_1_1_scenario_power_system_planning_model.html#a613e11609748b819deed3637aa0b6af0',1,'PowerSystemPlanning.PlanningModels.ScenarioPowerSystemPlanningModel.saveToXMLFile()'],['../class_power_system_planning_1_1_planning_models_1_1_scenario_power_system_planning_model.html#a2dcedba300a0c6c7cc890aa6f073574c',1,'PowerSystemPlanning.PlanningModels.ScenarioPowerSystemPlanningModel.saveToXMLFile(string file_name)']]],
+  ['solve',['Solve',['../class_power_system_planning_1_1_solvers_1_1_base_optimization_power_system_solver.html#a6569b84027dbafd7cccfe42a14bbd716',1,'PowerSystemPlanning.Solvers.BaseOptimizationPowerSystemSolver.Solve()'],['../interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html#a8c296a6bf289a4f39d63cbbb87e52565',1,'PowerSystemPlanning.Solvers.IPowerSystemSolver.Solve()']]],
+  ['solveasync',['SolveAsync',['../class_power_system_planning_1_1_solvers_1_1_base_optimization_power_system_solver.html#a8b2ca2b6e2b107b1eeeb3f574e3373ea',1,'PowerSystemPlanning.Solvers.BaseOptimizationPowerSystemSolver.SolveAsync()'],['../interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html#acaee56f3c9c709712ff33008d0869d91',1,'PowerSystemPlanning.Solvers.IPowerSystemSolver.SolveAsync()']]]
 ];

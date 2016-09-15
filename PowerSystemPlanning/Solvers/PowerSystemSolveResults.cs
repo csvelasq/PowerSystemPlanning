@@ -7,15 +7,10 @@ using System.Threading.Tasks;
 namespace PowerSystemPlanning.Solvers
 {
     /// <summary>
-    /// Encapsulates the overall results of a solver, including specific optimization results.
+    /// Encapsulates the overall results of a solver (e.g. elapsed time, solver messages, etc).
     /// </summary>
-    public class PowerSystemSolverResults
+    public class SolverResults
     {
-        /// <summary>
-        /// The total execution time of this solver.
-        /// </summary>
-        public TimeSpan ExecutionTime { get; set; }
-
         /// <summary>
         /// The name of the solver whose results are encapsulated in this object.
         /// </summary>
@@ -24,65 +19,73 @@ namespace PowerSystemPlanning.Solvers
         /// <summary>
         /// The current state of the solution (e.g. successful, failed).
         /// </summary>
-        public PowerSystemSolveResultState State { get; set; }
+        public SolverResultState State { get; set; }
 
         /// <summary>
         /// Messages of the solution process.
         /// </summary>
-        public List<string> Messages { get; set; }
+        public List<string> SolverMessages { get; set; }
 
+        DateTime _StartTime;
         /// <summary>
         /// start time of the process
         /// </summary>
-        public DateTime StartTime { get; set; }
+        public DateTime StartTime
+        {
+            get { return _StartTime; }
+            set
+            {
+                _StartTime = value;
+                SolverMessages.Add(String.Format("Solver {0} started on {1}", SolverName, _StartTime));
+            }
+        }
+
+        TimeSpan _ExecutionTime;
+        /// <summary>
+        /// The total execution time of this solver.
+        /// </summary>
+        public TimeSpan ExecutionTime
+        {
+            get { return _ExecutionTime; }
+            set
+            {
+                _ExecutionTime = value;
+                SolverMessages.Add(String.Format("Finished on {0}", StopTime));
+                SolverMessages.Add(String.Format("Elapsed time: {0}", ExecutionTime));
+            }
+        }
 
         /// <summary>
         /// stop time of the process (upon completion, successful or not)
         /// Does not consider pauses
         /// </summary>
-        public DateTime StopTime { get; set; }
+        public DateTime StopTime { get { return _StartTime + _ExecutionTime; } }
 
         /// <summary>
         /// The result of the solver's internal process (e.g. the optimization).
         /// </summary>
         public object Result { get; set; }
 
-        public PowerSystemSolverResults() { }
-
-        public PowerSystemSolverResults(object result, PowerSystemSolveResultState state, string solverName, TimeSpan executionTime, DateTime startTime, DateTime stopTime, List<string> messages)
+        public SolverResults()
         {
-            this.Result = result;
-            this.State = state;
-            this.SolverName = SolverName;
-            this.ExecutionTime = executionTime;
-            this.StartTime = startTime;
-            this.StopTime = stopTime;
-            this.Messages = messages;
+            SolverMessages = new List<string>();
         }
 
         public override string ToString()
         {
-            return String.Format("Power system solver '{0}' {1}. Elapsed time: {2} (start: {3}; finish: {4}).", SolverName, State, ExecutionTime, StartTime, StopTime);
+            return String.Format("Solver '{0}' {1}. Elapsed time: {2} (start: {3}; finish: {4}).", SolverName, State, ExecutionTime, StartTime, StopTime);
         }
     }
 
     /// <summary>
     /// Represents the state of the result of a solver (e.g. successful, failed).
     /// </summary>
-    public enum PowerSystemSolveResultState
+    public enum SolverResultState
     {
         Successful,
         SuccessfulWithWarning,
         Failed,
         Paused,
         Processing
-    }
-
-    public enum OptimizationResultStatus
-    {
-        Optimal,
-        Infeasible,
-        Unbounded,
-        Other
     }
 }

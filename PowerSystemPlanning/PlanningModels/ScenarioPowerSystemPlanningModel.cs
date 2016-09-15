@@ -36,10 +36,10 @@ namespace PowerSystemPlanning.PlanningModels
             }
         }
 
+        string _Name;
         /// <summary>
         /// The name of this test case
         /// </summary>
-        string _Name;
         public string Name
         {
             get

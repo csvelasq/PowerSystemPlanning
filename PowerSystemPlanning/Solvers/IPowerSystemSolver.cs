@@ -23,6 +23,6 @@ namespace PowerSystemPlanning.Solvers
         /// Gets the results of the solution process.
         /// </summary>
         /// <returns>An object encapsulating results of the solution process (e.g. execution time, result).</returns>
-        PowerSystemSolverResults getResults();
+        SolverResults MySolverResults { get; }
     }
 }

@@ -9,21 +9,17 @@ using System.Threading.Tasks;
 
 namespace PowerSystemPlanning.Solvers.OPF
 {
+    /// <summary>
+    /// Solver wrapper for a simple OPF model for LDC. It simply provides the concrete implementation of the optimization solver with the corresponding types for the solver, the results, etc. Intended for detailed analysis of single OPF instances.
+    /// </summary>
     public class OPFModelSolverForLDC : BaseOptimizationPowerSystemSolver
     {
         public LoadBlock LoadBlock { get; protected set; }
 
         public OPFModelForLDC MyOPFModelForLDC { get; protected set; }
-        public override IGRBOptimizationModel GRBOptimizationModel
-        {
-            get { return MyOPFModelForLDC; }
-        }
+        public override BaseGRBOptimizationModel MyGRBOptimizationModel { get { return MyOPFModelForLDC; } }
 
-        public OPFModelResultForLDC OPFModelResultsForLDC { get; protected set; }
-        public override BaseGRBOptimizationModelResult GRBOptimizationModelResults
-        {
-            get { return OPFModelResultsForLDC; }
-        }
+        public OPFModelResultForLDC MyOPFModelResultsForLDC { get; protected set; }
 
         public OPFModelSolverForLDC(PowerSystem powerSystem, LoadBlock loadBlock)
             : base(powerSystem)
@@ -31,23 +27,9 @@ namespace PowerSystemPlanning.Solvers.OPF
             this.LoadBlock = loadBlock;
         }
 
-        public override void Build()
-        {
-            this.MyOPFModelForLDC = new OPFModelForLDC(powerSystem, _grbEnv, _grbModel, LoadBlock);
-            this.MyOPFModelForLDC.BuildGRBOptimizationModel();
-        }
-
         public override void BuildOptimizationModelResults()
         {
-            if (GRBModelStatus == GRB.Status.OPTIMAL)
-            {
-                this.OPFModelResultsForLDC = MyOPFModelForLDC.BuildOPFModelResultsForLDC();
-                //basegrb results are automatically pointing to the specific LDCOPF results
-            }
-            else
-            {
-                this.OPFModelResultsForLDC = new OPFModelResultForLDC(GRBModelStatus);
-            }
+            MyOPFModelResultsForLDC = MyOPFModelForLDC.BuildOPFModelResultsForLDC();
         }
     }
 }

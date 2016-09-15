@@ -10,23 +10,20 @@ using System.Threading.Tasks;
 
 namespace PowerSystemPlanning.Solvers.LDCOPF
 {
+    /// <summary>
+    /// Solver wrapper for a simple OPF model for LDC. It simply provides the concrete implementation of the optimization solver with the corresponding types for the solver, the results, etc. Intended for detailed analysis of single LDC OPF instances.
+    /// </summary>
     public class LDCOPFModelSolver : BaseOptimizationPowerSystemSolver
     {
-        LoadDurationCurveByBlocks _DurationCurveBlocks;
-        public LoadDurationCurveByBlocks DurationCurveBlocks
-        {
-            get { return this._DurationCurveBlocks; }
-            protected set { this._DurationCurveBlocks = value; }
-        }
+        public LoadDurationCurveByBlocks DurationCurveBlocks { get; protected set; }
         
-        public LDCOPFModel LDCOPFModel { get; protected set; }
-        public override IGRBOptimizationModel GRBOptimizationModel { get { return this.LDCOPFModel; } }
-        
+        public LDCOPFModel MyLDCOPFModel { get; protected set; }
+        public override BaseGRBOptimizationModel MyGRBOptimizationModel { get { return MyLDCOPFModel; } }
+
         /// <summary>
-        /// The detailed results of this OPF model (per node, generator, and transmission line).
+        /// The detailed results of this LDC OPF model (per node, generator, and transmission line).
         /// </summary>
-        public LDCOPFModelResults LDCOPFResults { get; protected set; }
-        public override BaseGRBOptimizationModelResult GRBOptimizationModelResults { get { return this.LDCOPFResults; } }
+        public LDCOPFModelResults MyLDCOPFResults { get; protected set; }
 
         public LDCOPFModelSolver(PowerSystem powerSystem, LoadDurationCurveByBlocks durationCurveBlocks)
             : base(powerSystem)
@@ -34,23 +31,9 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
             this.DurationCurveBlocks = durationCurveBlocks;
         }
 
-        public override void Build()
-        {
-            this.LDCOPFModel = new LDCOPFModel(this.powerSystem, this.DurationCurveBlocks, this._grbEnv, this._grbModel);
-            this.LDCOPFModel.BuildGRBOptimizationModel();
-        }
-
         public override void BuildOptimizationModelResults()
         {
-            if (GRBModelStatus == GRB.Status.OPTIMAL)
-            {
-                this.LDCOPFResults = LDCOPFModel.BuildLDCOPFModelResults();
-                //basegrb results are automatically pointing to the specific LDCOPF results
-            }
-            else
-            {
-                this.LDCOPFResults = new LDCOPFModelResults(GRBModelStatus);
-            }
+            MyLDCOPFResults = MyLDCOPFModel.BuildLDCOPFModelResults();
         }
     }
 }

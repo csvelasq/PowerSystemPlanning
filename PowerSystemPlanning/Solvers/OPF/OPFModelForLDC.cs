@@ -18,6 +18,11 @@ namespace PowerSystemPlanning.Solvers.OPF
     public class OPFModelForLDC : OPFModel
     {
         protected LoadBlock LoadBlock { get; set; }
+    
+        /// <summary>
+        /// The results of this OPF for LDC model (set by <see cref="BuildOPFModelResultsForLDC"/>).
+        /// </summary>
+        public OPFModelResultForLDC MyOPFModelResultForLDC { get; protected set; }
 
         public OPFModelForLDC(PowerSystem powerSystem, GRBEnv env, GRBModel model, LoadBlock loadBlock)
             : base(powerSystem, env, model)
@@ -27,11 +32,11 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected override void AddGRBVarsPGen()
         {
-            PGen = new GRBVar[powerSystem.GeneratingUnits.Count];
-            for (int i = 0; i < powerSystem.GeneratingUnits.Count; i++)
+            PGen = new GRBVar[MyPowerSystem.GeneratingUnits.Count];
+            for (int i = 0; i < MyPowerSystem.GeneratingUnits.Count; i++)
             {
-                GeneratingUnit gen = powerSystem.GeneratingUnits[i];
-                PGen[i] = _grbModel.AddVar(0, gen.InstalledCapacityMW,
+                GeneratingUnit gen = MyPowerSystem.GeneratingUnits[i];
+                PGen[i] = MyGrbModel.AddVar(0, gen.InstalledCapacityMW,
                     gen.MarginalCost * this.LoadBlock.Duration, GRB.CONTINUOUS, "PGen" + gen.Id);
             }
         }
@@ -39,12 +44,12 @@ namespace PowerSystemPlanning.Solvers.OPF
         protected override void AddGRBVarsLoadShed()
         {
             List<GRBVar> load_shed = new List<GRBVar>();
-            foreach (Node node in powerSystem.Nodes)
+            foreach (Node node in MyPowerSystem.Nodes)
             {
                 if (node.TotalLoad > 0)
                 {
-                    load_shed.Add(_grbModel.AddVar(0, node.TotalLoad * LoadBlock.LoadMultiplier,
-                        powerSystem.LoadSheddingCost * LoadBlock.Duration, GRB.CONTINUOUS, "LS" + node.Id));
+                    load_shed.Add(MyGrbModel.AddVar(0, node.TotalLoad * LoadBlock.LoadMultiplier,
+                        MyPowerSystem.LoadSheddingCost * LoadBlock.Duration, GRB.CONTINUOUS, "LS" + node.Id));
                 }
             }
             this.LoadShed = load_shed.ToArray<GRBVar>();
@@ -52,11 +57,11 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected override void AddGRBConstrPowerBalance()
         {
-            this.NodalPowerBalance = new GRBConstr[powerSystem.Nodes.Count];
+            this.NodalPowerBalance = new GRBConstr[MyPowerSystem.Nodes.Count];
             int load_shed_counter = 0;
-            for (int i = 0; i < powerSystem.Nodes.Count; i++)
+            for (int i = 0; i < MyPowerSystem.Nodes.Count; i++)
             {
-                Node node = powerSystem.Nodes[i];
+                Node node = MyPowerSystem.Nodes[i];
                 GRBLinExpr powerBalanceLHS = new GRBLinExpr();
                 foreach (GeneratingUnit gen in node.GeneratingUnits)
                 {
@@ -77,19 +82,14 @@ namespace PowerSystemPlanning.Solvers.OPF
                     powerBalanceRHS.AddTerm(-1, LoadShed[load_shed_counter]);
                     load_shed_counter++;
                 }
-                this.NodalPowerBalance[i] = this._grbModel.AddConstr(powerBalanceLHS, GRB.EQUAL, powerBalanceRHS, "PowerBalanceNode" + i);
+                this.NodalPowerBalance[i] = MyGrbModel.AddConstr(powerBalanceLHS, GRB.EQUAL, powerBalanceRHS, "PowerBalanceNode" + i);
             }
-        }
-
-        public override OPFModelResult BuildOPFModelResults()
-        {
-            return this.BuildOPFModelResultsForLDC();
         }
 
         public OPFModelResultForLDC BuildOPFModelResultsForLDC()
         {
-            int status = this._grbModel.Get(GRB.IntAttr.Status);
-            return new OPFModelResultForLDC(powerSystem, status, ObjVal_Solution, PGen_Solution, PFlow_Solution, LShed_Solution, BusAng_Solution, NodalSpotPrice, LoadBlock);
+            MyOPFModelResultForLDC = new OPFModelResultForLDC(MyPowerSystem, GRBModelStatus, ObjVal, PGen_Solution, PFlow_Solution, LShed_Solution, BusAng_Solution, NodalSpotPrice, LoadBlock);
+            return MyOPFModelResultForLDC;
         }
     }
 }

@@ -13,7 +13,7 @@ var searchData=
   ['powersystemplanning',['PowerSystemPlanning',['../namespace_power_system_planning.html',1,'']]],
   ['powersystemscenario',['PowerSystemScenario',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_power_system_scenario.html',1,'PowerSystemPlanning::PlanningModels::Planning']]],
   ['powersystemsolverconfiguration',['PowerSystemSolverConfiguration',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_configuration.html',1,'PowerSystemPlanning::Solvers']]],
-  ['powersystemsolveresultstate',['PowerSystemSolveResultState',['../namespace_power_system_planning_1_1_solvers.html#abab281800bf0cb59933d3721663b3964',1,'PowerSystemPlanning::Solvers']]],
-  ['powersystemsolverresults',['PowerSystemSolverResults',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_results.html',1,'PowerSystemPlanning::Solvers']]],
+  ['presentworthscenariosoperationcosts',['PresentWorthScenariosOperationCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan.html#a6f3d78f9be4d008a7d4c40b5214c6f1b',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlan']]],
+  ['presentworthscenariostotalcosts',['PresentWorthScenariosTotalCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan.html#ad9d04e4fa5ea2eec9a69f6f32845079b',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlan']]],
   ['solvers',['Solvers',['../namespace_power_system_planning_1_1_solvers.html',1,'PowerSystemPlanning']]]
 ];

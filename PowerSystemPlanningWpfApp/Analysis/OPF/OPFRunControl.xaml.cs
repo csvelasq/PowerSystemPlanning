@@ -63,11 +63,10 @@ namespace PowerSystemPlanningWpfApp.Analysis.OPF
         {
             //builds the model
             OPFSolverForLDC = new OPFModelSolverForLDC(this.MyPowerSystem, this.MyLoadBlock);
-            OPFSolverForLDC.Build();
             //solves the model
             OPFSolverForLDC.Solve();
             //binds results
-            OPFResultsForLDC = OPFSolverForLDC.OPFModelResultsForLDC;
+            OPFResultsForLDC = OPFSolverForLDC.MyOPFModelResultsForLDC;
         }
     }
 }

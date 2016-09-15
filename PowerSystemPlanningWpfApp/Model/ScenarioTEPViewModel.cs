@@ -133,11 +133,10 @@ namespace PowerSystemPlanningWpfApp.Model
         {
             //builds the model
             _MyLDCOPFModelSolver = new LDCOPFModelSolver(currentlySelectedScenario.MyPowerSystem, MyScenarioTEPModel.MyLoadDurationCurve);
-            _MyLDCOPFModelSolver.Build();
             //solves the model
             _MyLDCOPFModelSolver.Solve();
             //binds results
-            MyLDCOPFModelResults = _MyLDCOPFModelSolver.LDCOPFResults;
+            MyLDCOPFModelResults = _MyLDCOPFModelSolver.MyLDCOPFResults;
         }
         /// <summary>
         /// Determines whether an LDC OPF model can be built and solved (depending on whether there is a selected power system).

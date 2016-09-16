@@ -22,6 +22,18 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// The list of candidate transmission lines which are built in this transmission expansion plan.
         /// </summary>
         public IList<CandidateTransmissionLine> BuiltTransmissionLines { get; set; }
+        public string BuiltTransmissionLinesNames
+        {
+            get
+            {
+                string s = "[";
+                foreach (var t in BuiltTransmissionLines)
+                {
+                    s += t.Name + ",";
+                }
+                return s + "]";
+            }
+        }
         /// <summary>
         /// The total investment cost (in MMUS$) incurred by implementing this transmission expansion plan.
         /// </summary>

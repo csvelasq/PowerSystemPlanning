@@ -36,7 +36,7 @@ namespace PowerSystemPlanning.PlanningModels
         {
             get
             {
-                return 2^MyCandidateTransmissionLines.Count;
+                return (1 << MyCandidateTransmissionLines.Count) - 1; //2^N-1
             }
         }
 
@@ -54,6 +54,31 @@ namespace PowerSystemPlanning.PlanningModels
         public ScenarioTEPModel(string name, double yearlyDiscountRate, LoadDurationCurveByBlocks myLoadDurationCurve) : base(name, yearlyDiscountRate, myLoadDurationCurve)
         {
             MyCandidateTransmissionLines = new BindingList<CandidateTransmissionLine>();
+        }
+
+        /// <summary>
+        /// Enumerates all possible alternative transmission expansion plans (combining candidate transmission lines to be built).
+        /// </summary>
+        /// <returns>A list containing all possible alternative transmission expansion plans.</returns>
+        public List<TransmissionExpansionPlan> EnumerateAlternativeTransmissionExpansionPlans()
+        {
+            List<TransmissionExpansionPlan> alternatives = new List<TransmissionExpansionPlan>();
+            foreach (var builtLines in ScenarioTEPModel.GetPowerSet<CandidateTransmissionLine>(MyCandidateTransmissionLines))
+            {
+                TransmissionExpansionPlan alternative = new TransmissionExpansionPlan(builtLines.ToList(), this);
+                alternatives.Add(alternative);
+            }
+            return alternatives;
+        }
+
+        public static IEnumerable<IEnumerable<T>> GetPowerSet<T>(IList<T> list)
+        {
+            // code from https://rosettacode.org/wiki/Power_set#C.23
+            return from m in Enumerable.Range(0, 1 << list.Count) //range 0..2^N
+                   select
+                       from i in Enumerable.Range(0, list.Count) //range 0..N
+                       where (m & (1 << i)) != 0 //binary coding
+                       select list[i];
         }
 
         /// <summary>

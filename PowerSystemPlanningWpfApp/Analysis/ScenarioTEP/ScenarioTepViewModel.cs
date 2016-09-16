@@ -73,6 +73,10 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
 
         public ICommand SolveScenarioLDCOPFCommand { get; private set; }
 
+        public ICommand EnumerateTransmissionExpansionPlans { get; private set; }
+
+        public ICommand EvaluateEnumeratedTransmissionExpansionPlans { get; private set; }
+
         /// <summary>
         /// The results of evaluating the currently selected transmission expansion plan, under several future scenarios
         /// </summary>
@@ -92,8 +96,26 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
                 }
             }
         }
+        
         TransmissionExpansionPlanScenarioDetailedResults _MyTEPDetailedResults;
 
+        List<TransmissionExpansionPlan> _AllTEPAlternatives;
+        public List<TransmissionExpansionPlan> AllTEPAlternatives
+        {
+            get
+            {
+                return _AllTEPAlternatives;
+            }
+
+            set
+            {
+                if (_AllTEPAlternatives != value)
+                {
+                    _AllTEPAlternatives = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         // TODO binding to detailed opf ldc results for the selected scenario
         //public LDCOPFModelResults r;
@@ -101,6 +123,9 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         public ScenarioTepViewModel()
         {
             SolveScenarioLDCOPFCommand = new DelegateCommand(SolveScenarioLDCOPF);
+            TEPlansAreEnumerated = false;
+            EnumerateTransmissionExpansionPlans = new DelegateCommand(RunEnumerateTransmissionExpansionPlans);
+            //EvaluateEnumeratedTransmissionExpansionPlans = new DelegateCommand(RunEvaluateEnumeratedTransmissionExpansionPlans, CanExecuteEvaluateEnumeratedTransmissionExpansionPlans);
         }
 
         public ScenarioTepViewModel(ScenarioTEPModel s) : this()
@@ -116,6 +141,21 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
             MyTransmissionExpansionPlan.EvaluateObjectives();
             // Build detailed results for binding to GUI
             MyTEPDetailedResults = MyTransmissionExpansionPlan.BuildDetailedTEPScenariosResults();
+        }
+
+        bool TEPlansAreEnumerated;
+        public void RunEnumerateTransmissionExpansionPlans()
+        {
+            AllTEPAlternatives = MyScenarioTEPModel.EnumerateAlternativeTransmissionExpansionPlans();
+            TEPlansAreEnumerated = true;
+        }
+
+        public void RunEvaluateEnumeratedTransmissionExpansionPlans()
+        {
+        }
+        public bool CanExecuteEvaluateEnumeratedTransmissionExpansionPlans()
+        {
+            return TEPlansAreEnumerated;
         }
     }
 }

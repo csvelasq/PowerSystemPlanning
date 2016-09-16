@@ -28,7 +28,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// <remarks>Equals the sum of investment costs of each transmission line in this expansion plan.</remarks>
         public double TotalInvestmentCost
         {
-            get { return (from tl in BuiltTransmissionLines select tl.InvestmentCost).Sum(); }
+            get { return (from tl in BuiltTransmissionLines select tl.InvestmentCost).Sum() / 1e3; }
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
             foreach (PowerSystemScenario scenarioToEval in MyScenarioTEPModel.MyScenarios)
             {
                 //scenario operation costs
-                double opC = EvaluateScenarioOperationCosts(scenarioToEval);
+                double opC = EvaluateScenarioOperationCosts(scenarioToEval, false);
                 ScenariosOperationCosts.Add(opC);
                 //scenario total costs
                 double totC = discountFactor * opC + totalInvestmentCost;
@@ -109,14 +109,25 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// </summary>
         /// <param name="scenarioToEval">The scenario under which operation will be evaluated.</param>
         /// <returns>The total operation costs (by LDC OPF) in this scenario and implementing this expansion plan.</returns>
-        public double EvaluateScenarioOperationCosts(PowerSystemScenario scenarioToEval)
+        public double EvaluateScenarioOperationCosts(PowerSystemScenario scenarioToEval, bool buildDetailedResults)
         {
             //builds the model
             PowerSystemWithCandidateTransmissionLines MyPowerSystemWithCandidateTransmissionLines = new PowerSystemWithCandidateTransmissionLines(scenarioToEval.MyPowerSystem, BuiltTransmissionLines);
             LDCOPFModel model = new LDCOPFModel(MyPowerSystemWithCandidateTransmissionLines, MyScenarioTEPModel.MyLoadDurationCurve);
             MyLDCOPFModelEachScenario.Add(model);
             // TODO implement an OPF optimization model where single parameters can be modified (instead of rebuilding the whole model on each call) via GRB.ChgCoeff(constr,var,newvalue)
-            model.BuildSolveAndDisposeModel();
+            if (buildDetailedResults)
+            {
+                model.BuildSolveAndDisposeModel();
+            }
+            else
+            {
+                model.BuildGRBOptimizationModel();
+                model.OptimizeGRBModel();
+                model.BuildGRBOptimizationModelResults();
+                model.BuildLDCOPFModelResults();
+                model.Dispose();
+            }
             return model.MyBaseGRBOptimizationModelResult.ObjVal;
         }
 

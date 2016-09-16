@@ -1,4 +1,5 @@
-﻿<Window
+﻿<!--bind to MainWindowViewModel-->
+<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:t="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
@@ -15,7 +16,7 @@
         xmlns:opfLdcControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.LDC"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
-        Title="Power System Planning" Height="1000" Width="1000" WindowState="Maximized" Loaded="Window_Loaded">
+        Title="Power System Planning" Height="1000" Width="1200" WindowState="Maximized" Loaded="Window_Loaded">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="NewCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommandBinding_Executed" />

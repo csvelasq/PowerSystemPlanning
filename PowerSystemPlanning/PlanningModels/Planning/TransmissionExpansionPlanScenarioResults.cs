@@ -24,7 +24,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         {
             get
             {
-                return (from x in MyDetailedTEPResultsForEachScenario select x.PresentValueScenarioTotalCosts).Sum();
+                return PVExpectedOperationCosts + MyTransmissionExpansionPlan.TotalInvestmentCost;
             }
         }
         /// <summary>
@@ -34,7 +34,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         {
             get
             {
-                return (from x in MyDetailedTEPResultsForEachScenario select x.PresentValueScenarioOperationCosts).Sum();
+                return (from x in MyDetailedTEPResultsForEachScenario select x.ProbabilityWeightedPVScenarioOperationCosts).Sum();
             }
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
                     invCost, 
                     MyTransmissionExpansionPlan.ScenariosOperationCosts[s], 
                     MyTransmissionExpansionPlan.DiscountFactor, 
-                    MyTransmissionExpansionPlan.MyLDCOPFModelEachScenario[s]
+                    MyTransmissionExpansionPlan.MyLDCOPFModelEachScenario[s].MyDetailedLDCOPFModelResults
                     );
                 MyDetailedTEPResultsForEachScenario.Add(t);
             }
@@ -125,19 +125,19 @@ namespace PowerSystemPlanning.PlanningModels.Planning
 
         public TransmissionExpansionPlanLDCResultsForOneScenario() { }
 
-        public TransmissionExpansionPlanLDCResultsForOneScenario(PowerSystemScenario scenarioEvaluated, double totalInvestmentCost, double scenarioOperationCosts, double discountFactor, LDCOPFModel opfModel)
+        public TransmissionExpansionPlanLDCResultsForOneScenario(PowerSystemScenario scenarioEvaluated, double totalInvestmentCost, double scenarioOperationCosts, double discountFactor, LDCOPFModelResults opfModelResults)
         {
             ScenarioEvaluated = scenarioEvaluated;
             TotalInvestmentCost = totalInvestmentCost;
             // TODO build these detailed results
-            //DetailedLDCOPFModelResults = opfModel.BuildLDCOPFModelResults();
+            DetailedLDCOPFModelResults = opfModelResults;
             ScenarioOperationCosts = scenarioOperationCosts;
             PresentValueScenarioOperationCosts = discountFactor * scenarioOperationCosts;
-            PresentValueScenarioTotalCosts = PresentValueScenarioOperationCosts + TotalInvestmentCost;
+            PresentValueScenarioTotalCosts = TotalInvestmentCost + PresentValueScenarioOperationCosts;
             //probability weighted results
             ProbabilityWeightedScenarioOperationCosts = ScenarioEvaluated.Probability * ScenarioOperationCosts;
             ProbabilityWeightedPVScenarioOperationCosts = ScenarioEvaluated.Probability * PresentValueScenarioOperationCosts;
-            ProbabilityWeightedPVScenarioTotalCosts = discountFactor * PresentValueScenarioTotalCosts;
+            ProbabilityWeightedPVScenarioTotalCosts = TotalInvestmentCost + ProbabilityWeightedPVScenarioOperationCosts;
         }
     }
 }

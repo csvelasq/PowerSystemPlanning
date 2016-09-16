@@ -13,7 +13,14 @@ namespace PowerSystemPlanning.Solvers
     /// <remarks>
     /// Provides basic and common functionality for solving a gurobi optimization model. This class should be overwritten by any particular gurobi optimization model. Once <see cref="GRBOptimizationModelName"/> and <see cref="BuildGRBOptimizationModel"/> are overwritten, there are two options for using the resulting concrete implementation:
     ///     1. If only the objective value is required, call <see cref="BuildSolveAndDisposeModel"/> immediately after initializing the concrete object.
-    ///     2. If more detailed results are required, implement a wrapper by extending <see cref="BaseOptimizationPowerSystemSolver"/>, and use that wrapper to solve the wrapped optimization model.
+    ///     2. If more detailed results are required, proceed as following:
+    ///         +Call <see cref="BuildGRBOptimizationModel"/>
+    ///         +Call <see cref="OptimizeGRBModel"/>
+    ///         +Call <see cref="BuildGRBOptimizationModelResults"/>
+    ///         +Build detailed optimization results (custom process)
+    ///         +Call <see cref="Dispose"/>
+    /// 
+    /// To easily get detailed results you can also implement a wrapper by extending <see cref="BaseOptimizationPowerSystemSolver"/>, and use that wrapper to solve the wrapped optimization model.
     /// </remarks>
     public abstract class BaseGRBOptimizationModel
     {

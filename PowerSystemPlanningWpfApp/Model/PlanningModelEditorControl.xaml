@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="PowerSystemPlanningWpfApp.Model.PlanningModelEditorControl"
+﻿<!--Bind to ScenarioTEPModel-->
+<UserControl x:Class="PowerSystemPlanningWpfApp.Model.PlanningModelEditorControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -35,7 +36,7 @@
                             MessageForTextBlock="Click a row to edit the power system data for each scenario in the form below." />
                         <localUtils:CustomDataGrid x:Name="dgScenarios" ItemsSource="{Binding MyScenarios}" AutoGenerateColumns="False"
                           SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="True"
-                                                   SelectedItem="{Binding Path=MyScenarioTEPViewModel.currentlySelectedScenario, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}">
+                                                   SelectedItem="{Binding Path=MyMainWindowViewModel.currentlySelectedScenario, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150" />
                                 <DataGridTextColumn Header="Probability" Binding="{Binding Probability, StringFormat=p0}" Width="70" />

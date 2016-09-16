@@ -40,9 +40,9 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Is Built?" Binding="{Binding IsBuilt}" IsThreeState="False" />
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100" />
-                <DataGridTextColumn Header="Investment cost (MUS$)" Binding="{Binding InvestmentCost, StringFormat=C}" Width="80" />
+                <DataGridCheckBoxColumn Header="Is Built?" Binding="{Binding IsBuilt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsThreeState="False" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=OneWay}" Width="100" />
+                <DataGridTextColumn Header="Investment cost (MUS$)" Binding="{Binding InvestmentCost, StringFormat=C, Mode=OneWay}" Width="80" />
             </DataGrid.Columns>
         </localUtils:CustomDataGrid>
     </DockPanel>

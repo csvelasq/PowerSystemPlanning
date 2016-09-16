@@ -16,6 +16,13 @@ namespace PowerSystemPlanning.Solvers.OPF
     public class OPFModel : BaseGRBOptimizationModel
     {
         public override string GRBOptimizationModelName { get { return "Linear Optimal (DC) Power Flow"; } }
+        /// <summary>
+        /// A constant which multiplies the objective function.
+        /// </summary>
+        /// <remarks>
+        /// Used to change the unit of the objective function. For example, setting to 1e-6 results in objective values in MMUS$ instead of US$.
+        /// </remarks>
+        public double ObjectiveFunctionMultiplier { get; set; } = 1;
 
         protected IPowerSystem MyPowerSystem;
 
@@ -168,7 +175,7 @@ namespace PowerSystemPlanning.Solvers.OPF
             {
                 if (node.TotalLoad > 0)
                 {
-                    load_shed.Add(MyGrbModel.AddVar(0, node.TotalLoad, MyPowerSystem.LoadSheddingCost, GRB.CONTINUOUS, "LS" + node.Id));
+                    load_shed.Add(MyGrbModel.AddVar(0, node.TotalLoad, MyPowerSystem.LoadSheddingCost * ObjectiveFunctionMultiplier, GRB.CONTINUOUS, "LS" + node.Id));
                 }
             }
             this.LoadShed = load_shed.ToArray<GRBVar>();
@@ -192,7 +199,7 @@ namespace PowerSystemPlanning.Solvers.OPF
             for (int i = 0; i < MyPowerSystem.GeneratingUnits.Count; i++)
             {
                 GeneratingUnit gen = MyPowerSystem.GeneratingUnits[i];
-                PGen[i] = MyGrbModel.AddVar(0, gen.InstalledCapacityMW, gen.MarginalCost, GRB.CONTINUOUS, "PGen" + gen.Id);
+                PGen[i] = MyGrbModel.AddVar(0, gen.InstalledCapacityMW, gen.MarginalCost * ObjectiveFunctionMultiplier, GRB.CONTINUOUS, "PGen" + gen.Id);
             }
         }
 

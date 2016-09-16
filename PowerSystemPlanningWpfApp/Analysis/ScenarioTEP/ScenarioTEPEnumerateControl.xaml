@@ -10,8 +10,8 @@
     <DockPanel LastChildFill="True">
         <!--Number of possible alternatives-->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <Label Content="{Binding MyScenarioTEPModel.TransmissionExpansionPlansCount}" />
-            <Label Content="possible transmission expansion plans." />
+            <TextBlock Text="{Binding MyScenarioTEPModel.TransmissionExpansionPlansCount}" />
+            <TextBlock Text=" possible transmission expansion plans." />
         </StackPanel>
         <!--<TextBlock DockPanel.Dock="Top">
             <TextBlock.Text>

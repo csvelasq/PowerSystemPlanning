@@ -11,7 +11,7 @@ namespace PowerSystemPlanning.PlanningModels
         // TODO should implement INPC
 
         /// <summary>
-        /// The investment cost (US$) in this candidate transmission line
+        /// The investment cost (MUS$) in this candidate transmission line
         /// </summary>
         public double InvestmentCost { get; set; }
 

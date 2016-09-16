@@ -31,6 +31,11 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         /// </summary>
         public List<OPFModelResultForLDC> OpfResultsByBlock { get; protected set; }
 
+        /// <summary>
+        /// Detailed results for this LDCOPF, set by calling <see cref="BuildLDCOPFModelResults"/> (after the model is solved).
+        /// </summary>
+        public LDCOPFModelResults MyDetailedLDCOPFModelResults { get; protected set; }
+
         public LDCOPFModel(IPowerSystem powerSystem, LoadDurationCurveByBlocks durationCurveBlocks)
             : base()
         {
@@ -69,8 +74,8 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
             {
                 OpfResultsByBlock.Add(opfModel.BuildOPFModelResultsForLDC());
             }
-            LDCOPFModelResults LDCOPFModelResults = new LDCOPFModelResults(MyPowerSystem, status, ObjVal, DurationCurveBlocks, OpfResultsByBlock);
-            return LDCOPFModelResults;
+            LDCOPFModelResults MyDetailedLDCOPFModelResults = new LDCOPFModelResults(MyPowerSystem, status, ObjVal, DurationCurveBlocks, OpfResultsByBlock);
+            return MyDetailedLDCOPFModelResults;
         }
     }
 }

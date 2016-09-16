@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_t_e_p_1_1_candidate_transmission_line_for_binding.html" title="A wrapper of CandidateTransmissionLine to be used by WPF GUI in order to view and edit a candidate tr..." alt="" coords="5,5,245,61"/>
+<area shape="rect" id="node2" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p_1_1_scenario_tep_view_model.html" title="PowerSystemPlanningWpfApp.\lAnalysis.ScenarioTEP.ScenarioTep\lViewModel" alt="" coords="219,5,447,61"/>
+<area shape="rect" id="node3" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_t_e_p_1_1_candidate_transmission_line_for_binding.html" title="A wrapper of CandidateTransmissionLine to be used by WPF GUI in order to view and edit a candidate tr..." alt="" coords="213,85,453,141"/>
+<area shape="rect" id="node4" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_t_e_p_1_1_transmission_expansion_plan_detail_view_model.html" title="PowerSystemPlanningWpfApp.\lAnalysis.TEP.TransmissionExpansion\lPlanDetailViewModel" alt="" coords="212,165,455,221"/>
+<area shape="rect" id="node5" href="$class_power_system_planning_wpf_app_1_1_model_1_1_main_window_view_model.html" title="PowerSystemPlanningWpfApp.\lModel.MainWindowViewModel" alt="" coords="232,246,435,287"/>
 </map>

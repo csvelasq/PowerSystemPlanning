@@ -17,7 +17,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
     {
         public override string GRBOptimizationModelName { get { return "Linear Optimal (DC) Power Flow, with Load Duration Curve Representation of Demand"; } }
 
-        public PowerSystem MyPowerSystem { get; protected set; }
+        public IPowerSystem MyPowerSystem { get; protected set; }
 
         public LoadDurationCurveByBlocks DurationCurveBlocks { get; protected set; }
 
@@ -31,14 +31,14 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         /// </summary>
         public List<OPFModelResultForLDC> OpfResultsByBlock { get; protected set; }
 
-        public LDCOPFModel(PowerSystem powerSystem, LoadDurationCurveByBlocks durationCurveBlocks)
+        public LDCOPFModel(IPowerSystem powerSystem, LoadDurationCurveByBlocks durationCurveBlocks)
             : base()
         {
             this.MyPowerSystem = powerSystem;
             this.DurationCurveBlocks = durationCurveBlocks;
         }
 
-        public LDCOPFModel(PowerSystem powerSystem, LoadDurationCurveByBlocks durationCurveBlocks, GRBEnv grbEnv, GRBModel grbModel)
+        public LDCOPFModel(IPowerSystem powerSystem, LoadDurationCurveByBlocks durationCurveBlocks, GRBEnv grbEnv, GRBModel grbModel)
             : base(grbEnv, grbModel)
         {
             this.MyPowerSystem = powerSystem;

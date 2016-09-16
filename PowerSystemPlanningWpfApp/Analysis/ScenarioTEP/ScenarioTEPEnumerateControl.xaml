@@ -9,13 +9,17 @@
              d:DesignHeight="400" d:DesignWidth="600" Background="White">
     <DockPanel LastChildFill="True">
         <!--Number of possible alternatives-->
-        <TextBlock DockPanel.Dock="Top">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Content="{Binding MyScenarioTEPModel.TransmissionExpansionPlansCount}" />
+            <Label Content="possible transmission expansion plans." />
+        </StackPanel>
+        <!--<TextBlock DockPanel.Dock="Top">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} possible transmission expansion plans.">
                     <Binding Path="MyScenarioTEPModel.TransmissionExpansionPlansCount" />
                 </MultiBinding>
             </TextBlock.Text>
-        </TextBlock>
+        </TextBlock>-->
         <!--Action buttons: enumerate; evaluate-->
         <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
             <Button Command="{Binding EnumerateTransmissionExpansionPlans}" HorizontalAlignment="Left">

@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace PowerSystemPlanningWpfApp.Model
 {
-    public class ScenarioTEPViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -118,9 +118,9 @@ namespace PowerSystemPlanningWpfApp.Model
         /// <summary>
         /// Initializes a model with default (arbitrary) parameters
         /// </summary>
-        public ScenarioTEPViewModel() : this(new ScenarioTEPModel()) { }
+        public MainWindowViewModel() : this(new ScenarioTEPModel()) { }
 
-        public ScenarioTEPViewModel(ScenarioTEPModel myScenarioTEPModel)
+        public MainWindowViewModel(ScenarioTEPModel myScenarioTEPModel)
         {
             MyScenarioTEPModel = myScenarioTEPModel;
             LDCOPFSolveCommand = new DelegateCommand(RunLdcOpf, CanRunLdcOpf);
@@ -152,9 +152,9 @@ namespace PowerSystemPlanningWpfApp.Model
         /// Creates a new scenario tep view model with default (arbitrary) parameters for the power system data model.
         /// </summary>
         /// <returns></returns>
-        public static ScenarioTEPViewModel CreateDefaultScenarioTEPModel()
+        public static MainWindowViewModel CreateDefaultScenarioTEPModel()
         {
-            ScenarioTEPViewModel MyScenarioTEPViewModel = new ScenarioTEPViewModel();
+            MainWindowViewModel MyScenarioTEPViewModel = new MainWindowViewModel();
             ScenarioTEPModel MyScenarioTEPModel = MyScenarioTEPViewModel.MyScenarioTEPModel;
             //Default load duration curve
             LoadDurationCurveByBlocks defaultLoadDurationCurve = new LoadDurationCurveByBlocks();

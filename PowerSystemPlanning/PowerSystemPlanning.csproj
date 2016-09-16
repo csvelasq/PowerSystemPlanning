@@ -54,14 +54,16 @@
   <ItemGroup>
     <Compile Include="PlanningModels\Planning\IMultiObjectiveIndividual.cs" />
     <Compile Include="PlanningModels\Planning\TransmissionExpansionPlan.cs" />
+    <Compile Include="PlanningModels\Planning\TransmissionExpansionPlanScenarioResults.cs" />
+    <Compile Include="PlanningModels\PowerSystemData\PowerSystemWithCandidateTransmissionLines.cs" />
     <Compile Include="PlanningModels\ScenarioPowerSystemPlanningModel.cs" />
     <Compile Include="PlanningModels\Planning\CandidateTransmissionLine.cs" />
     <Compile Include="PlanningModels\Planning\PowerSystemScenario.cs" />
-    <Compile Include="PlanningModels\PowerSystem\GeneratingUnit.cs" />
-    <Compile Include="PlanningModels\PowerSystem\InelasticLoad.cs" />
-    <Compile Include="PlanningModels\PowerSystem\IPowerSystem.cs" />
-    <Compile Include="PlanningModels\PowerSystem\Node.cs" />
-    <Compile Include="PlanningModels\PowerSystem\NodeElement.cs" />
+    <Compile Include="PlanningModels\PowerSystemData\GeneratingUnit.cs" />
+    <Compile Include="PlanningModels\PowerSystemData\InelasticLoad.cs" />
+    <Compile Include="PlanningModels\PowerSystemData\IPowerSystem.cs" />
+    <Compile Include="PlanningModels\PowerSystemData\Node.cs" />
+    <Compile Include="PlanningModels\PowerSystemData\NodeElement.cs" />
     <Compile Include="PlanningModels\ScenarioTEPModel.cs" />
     <Compile Include="Solvers\GRBOptimization\BaseGRBOptimizationModel.cs" />
     <Compile Include="Solvers\GRBOptimization\BaseGRBOptimizationModelResult.cs" />
@@ -71,7 +73,7 @@
     <Compile Include="Solvers\LDCOPF\LDCOPFModelResults.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModelSolver.cs" />
     <Compile Include="Solvers\OPF\OPFModel.cs" />
-    <Compile Include="PlanningModels\PowerSystem\PowerSystem.cs" />
+    <Compile Include="PlanningModels\PowerSystemData\PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\IPowerSystemSolver.cs" />
     <Compile Include="Solvers\OPF\OPFModelForLDC.cs" />
@@ -80,7 +82,7 @@
     <Compile Include="Solvers\OPF\OPFModelSolverForLDC.cs" />
     <Compile Include="Solvers\PowerSystemSolverConfiguration.cs" />
     <Compile Include="Solvers\PowerSystemSolveResults.cs" />
-    <Compile Include="PlanningModels\PowerSystem\TransmissionLine.cs" />
+    <Compile Include="PlanningModels\PowerSystemData\TransmissionLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">

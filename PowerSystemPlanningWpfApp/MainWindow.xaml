@@ -92,7 +92,7 @@
                 <staticTEPControls:TEPLDCInspectControl />
             </TabItem>-->
             <TabItem Header="Scenario TEP LDC">
-                <scenarioTEPControls:ScenarioTEPLDCInspectControl />
+                <scenarioTEPControls:ScenarioTEPLDCInspectControl x:Name="myScenarioTepLDCInspectControl" />
             </TabItem>
             <TabItem Header="Scenario TEP Enumeration">
                 <scenarioTEPControls:ScenarioTEPEnumerateControl />

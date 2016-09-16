@@ -12,7 +12,7 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// </summary>
     public class OPFModelResult : BaseGRBOptimizationModelResult
     {
-        protected PowerSystem PowerSystem;
+        protected IPowerSystem PowerSystem;
         /// <summary>
         /// Gets the total operation cost (generation plus load shedding, the model's objective value).
         /// </summary>
@@ -77,7 +77,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <remarks>This constructor can be used to find out if the model was correctly solved by means of the <see cref="IsModelSolved"/> property.</remarks>
         public OPFModelResult(int status) : base(status) { }
 
-        public OPFModelResult(PowerSystem powerSystem, int status, double objVal, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
+        public OPFModelResult(IPowerSystem powerSystem, int status, double objVal, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
             : base(status, objVal)
         {
             this.PowerSystem = powerSystem;

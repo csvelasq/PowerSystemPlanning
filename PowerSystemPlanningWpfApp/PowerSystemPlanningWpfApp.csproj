@@ -153,6 +153,7 @@
     <Compile Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectControl.xaml.cs">
       <DependentUpon>ScenarioTEPLDCInspectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Analysis\ScenarioTEP\ScenarioTepViewModel.cs" />
     <Compile Include="Analysis\StaticTEP\TEPLDCInspectControl.xaml.cs">
       <DependentUpon>TEPLDCInspectControl.xaml</DependentUpon>
     </Compile>
@@ -280,7 +281,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\ScenarioTEPViewModel.cs" />
+    <Compile Include="Model\MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

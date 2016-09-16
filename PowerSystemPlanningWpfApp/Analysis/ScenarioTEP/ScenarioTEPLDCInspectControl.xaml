@@ -10,39 +10,58 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000" Background="White">
     <DockPanel LastChildFill="True">
-        <Grid DockPanel.Dock="Left">
+        <Grid DockPanel.Dock="Left" Width="400">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*" />
-                <RowDefinition Height="5" />
                 <RowDefinition Height="1*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="1.5*" />
             </Grid.RowDefinitions>
             <!--Expansion plan details-->
             <GroupBox Header="Transmission expansion plan" Grid.Row="0">
-                <analysisControls:TransmissionExpansionPlanDetailsControl />
+                <analysisControls:TransmissionExpansionPlanDetailsControl DataContext="{Binding MyTEPlanDetailViewModel}" />
             </GroupBox>
             <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+            <!--Scenario results of implementing this expansion plan-->
             <GroupBox Header="Scenario results" Grid.Row="2">
                 <DockPanel LastChildFill="True">
+                    <!--Run button-->
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-                        <!--Run button-->
-                        <Button Command="{Binding TEPLDCOPFSolveCommand}" Width="162" HorizontalAlignment="Left">
+                        <Button Command="{Binding SolveScenarioLDCOPFCommand}" Width="162" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Run_32x.png" Width="16" />
                                 <TextBlock Margin="5,0,5,0">Solve Scenario LDC OPF</TextBlock>
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                        <Label Content="Expected operation cost (MMUS$):" />
-                        <TextBox Width="80" Height="20" />
-                    </StackPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                        <Label Content="Present worth of expected cost (MMUS$):" />
-                        <TextBox Width="80" Height="20" />
-                    </StackPanel>
+                    <!--Summary total costs-->
+                    <Grid DockPanel.Dock="Top" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!--total expected costs-->
+                        <Label Content="Total expected costs (MMUS$):" Grid.Column="0" Grid.Row="0" />
+                        <TextBox Text="{Binding MyTEPDetailedResults.PVExpectedTotalCosts, StringFormat=C, Mode=OneWay}" Width="80" Height="20" Grid.Column="1" Grid.Row="0" />
+                        <!--PV expected operation costs-->
+                        <Label Content="PV of expected operation costs (MMUS$):" Grid.Column="0" Grid.Row="1" />
+                        <TextBox Text="{Binding MyTEPDetailedResults.PVExpectedOperationCosts, StringFormat=C, Mode=OneWay}" Width="80" Height="20" Grid.Column="1" Grid.Row="1" />
+                        <!--Expected operation costs-->
+                        <Label Content="Expected operation costs (MMUS$):" Grid.Column="0" Grid.Row="2" />
+                        <TextBox Text="{Binding MyTEPDetailedResults.FVExpectedOperationCosts, StringFormat=C, Mode=OneWay}" Width="80" Height="20"  Grid.Column="1" Grid.Row="2"  />
+                        <!--total operation costs-->
+                        <Label Content="Total operation costs (MMUS$):" Grid.Column="0" Grid.Row="3" />
+                        <TextBox Text="{Binding MyTEPDetailedResults.FVTotalOperationCosts, StringFormat=C, Mode=OneWay}" Width="80" Height="20" Grid.Column="1" Grid.Row="3" />
+                    </Grid>
+                    <!--Operation costs under each scenario-->
                     <localUtils:ImageTextBlock Width="280" HorizontalAlignment="Left" Margin="0,5,0,0" DockPanel.Dock="Bottom"
-                        MessageForTextBlock="Select one scenario in the above grid in order to see detailed OPF results (in the right panel)" />
-                    <localUtils:CustomDataGrid>
+                        MessageForTextBlock="Select one scenario in the above grid in order to see detailed OPF results (in the right panel)." />
+                    <localUtils:CustomDataGrid ItemsSource="{Binding MyTEPDetailedResults.MyDetailedTEPResultsForEachScenario, Mode=OneWay}" AutoGenerateColumns="False">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="ContentTemplate">
@@ -55,10 +74,10 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Scenario Name" Binding="{Binding Name}" Width="60" />
-                            <DataGridTextColumn Header="Scenario Probability" Binding="{Binding Probability, StringFormat=p0}" Width="70" />
-                            <DataGridTextColumn Header="Total Operation Cost (MMUS$)" Binding="{Binding TotalCost, StringFormat=C}" Width="110" />
-                            <DataGridTextColumn Header="Probability-Weighted Operation Cost (MMUS$)" Binding="{Binding TotalCost, StringFormat=C}" Width="130" />
+                            <DataGridTextColumn Header="Scenario Name" Binding="{Binding ScenarioEvaluated.Name}" Width="60" />
+                            <DataGridTextColumn Header="Scenario Probability" Binding="{Binding ScenarioEvaluated.Probability, StringFormat=p0}" Width="70" />
+                            <DataGridTextColumn Header="Operation Cost (MMUS$)" Binding="{Binding ScenarioOperationCosts, StringFormat=C}" Width="110" />
+                            <DataGridTextColumn Header="Probability-Weighted Operation Cost (MMUS$)" Binding="{Binding ProbabilityWeightedScenarioOperationCosts, StringFormat=C}" Width="130" />
                         </DataGrid.Columns>
                     </localUtils:CustomDataGrid>
                 </DockPanel>

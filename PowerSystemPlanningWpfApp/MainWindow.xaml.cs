@@ -19,6 +19,7 @@ using NLog;
 using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanningWpfApp.Model;
 using PowerSystemPlanning.PlanningModels.Planning;
+using PowerSystemPlanningWpfApp.Analysis.ScenarioTEP;
 
 namespace PowerSystemPlanningWpfApp
 {
@@ -32,20 +33,37 @@ namespace PowerSystemPlanningWpfApp
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        ScenarioTEPViewModel _MyScenarioTEPViewModel;
-        public ScenarioTEPViewModel MyScenarioTEPViewModel
+        MainWindowViewModel _MyMainWindowViewModel;
+        public MainWindowViewModel MyMainWindowViewModel
         {
             get
             {
-                return _MyScenarioTEPViewModel;
+                return _MyMainWindowViewModel;
             }
 
             set
             {
-                _MyScenarioTEPViewModel = value;
-                DataContext = _MyScenarioTEPViewModel;
+                _MyMainWindowViewModel = value;
+                DataContext = _MyMainWindowViewModel;
+                MyScenarioTepViewModel = new ScenarioTepViewModel(MyMainWindowViewModel.MyScenarioTEPModel);
             }
         }
+
+        ScenarioTepViewModel _MyScenarioTepViewModel;
+        public ScenarioTepViewModel MyScenarioTepViewModel
+        {
+            get
+            {
+                return _MyScenarioTepViewModel;
+            }
+
+            set
+            {
+                _MyScenarioTepViewModel = value;
+                myScenarioTepLDCInspectControl.DataContext = _MyScenarioTepViewModel;
+            }
+        }
+
 
         public MainWindow()
         {
@@ -57,7 +75,7 @@ namespace PowerSystemPlanningWpfApp
 
         private void CreateNewDefaultViewModel()
         {
-            MyScenarioTEPViewModel = ScenarioTEPViewModel.CreateDefaultScenarioTEPModel();
+            MyMainWindowViewModel = MainWindowViewModel.CreateDefaultScenarioTEPModel();
             //Logs the creation of the default model
             MainWindow.logger.Info("New power system model created with default (arbitrary) parameters).");
         }
@@ -76,7 +94,7 @@ namespace PowerSystemPlanningWpfApp
             {
                 case MessageBoxResult.Yes:
                     // User pressed Yes button: save and then create new
-                    MyScenarioTEPViewModel.MyScenarioTEPModel.saveToXMLFile();
+                    MyMainWindowViewModel.MyScenarioTEPModel.saveToXMLFile();
                     CreateNewDefaultViewModel();
                     break;
                 case MessageBoxResult.No:
@@ -110,7 +128,7 @@ namespace PowerSystemPlanningWpfApp
             try
             {
                 ScenarioTEPModel MyScenarioTEPModel = ScenarioTEPModel.readFromXMLFile(filename);
-                MyScenarioTEPViewModel = new ScenarioTEPViewModel(MyScenarioTEPModel);
+                MyMainWindowViewModel = new MainWindowViewModel(MyScenarioTEPModel);
                 this.RecentFileList.InsertFile(filename);
                 MainWindow.logger.Info(String.Format("Loaded file '{0}'", filename));
             }
@@ -125,10 +143,10 @@ namespace PowerSystemPlanningWpfApp
 
         private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!MyScenarioTEPViewModel.MyScenarioTEPModel.IsSaved)
+            if (!MyMainWindowViewModel.MyScenarioTEPModel.IsSaved)
             {
                 Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                dlg.FileName = MyScenarioTEPViewModel.MyScenarioTEPModel.Name; // Default file name
+                dlg.FileName = MyMainWindowViewModel.MyScenarioTEPModel.Name; // Default file name
                 dlg.DefaultExt = ".xml"; // Default file extension
                 dlg.Filter = "XML file (.xml)|*.xml"; // Filter files by extension
                                                       // Show save file dialog box
@@ -136,17 +154,17 @@ namespace PowerSystemPlanningWpfApp
                 // Process save file dialog box results
                 if (result == true)
                 {
-                    MyScenarioTEPViewModel.MyScenarioTEPModel.saveToXMLFile(dlg.FileName);
+                    MyMainWindowViewModel.MyScenarioTEPModel.saveToXMLFile(dlg.FileName);
                 }
             }
-            else MyScenarioTEPViewModel.MyScenarioTEPModel.saveToXMLFile();
-            MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", MyScenarioTEPViewModel.MyScenarioTEPModel.FullFileName, MyScenarioTEPViewModel.MyScenarioTEPModel.Name));
+            else MyMainWindowViewModel.MyScenarioTEPModel.saveToXMLFile();
+            MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", MyMainWindowViewModel.MyScenarioTEPModel.FullFileName, MyMainWindowViewModel.MyScenarioTEPModel.Name));
         }
 
         private void SaveAsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = MyScenarioTEPViewModel.MyScenarioTEPModel.Name; // Default file name
+            dlg.FileName = MyMainWindowViewModel.MyScenarioTEPModel.Name; // Default file name
             dlg.DefaultExt = ".xml"; // Default file extension
             dlg.Filter = "XML file (.xml)|*.xml"; // Filter files by extension
             // Show save file dialog box
@@ -154,8 +172,8 @@ namespace PowerSystemPlanningWpfApp
             // Process save file dialog box results
             if (result == true)
             {
-                MyScenarioTEPViewModel.MyScenarioTEPModel.saveToXMLFile(dlg.FileName);
-                MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", MyScenarioTEPViewModel.MyScenarioTEPModel.FullFileName, MyScenarioTEPViewModel.MyScenarioTEPModel.Name));
+                MyMainWindowViewModel.MyScenarioTEPModel.saveToXMLFile(dlg.FileName);
+                MainWindow.logger.Info(String.Format("'{1}' saved to file '{0}'", MyMainWindowViewModel.MyScenarioTEPModel.FullFileName, MyMainWindowViewModel.MyScenarioTEPModel.Name));
             }
         }
 
@@ -173,7 +191,7 @@ namespace PowerSystemPlanningWpfApp
                 case MessageBoxResult.Yes:
                     // User pressed Yes button: save and then close
                     Application.Current.Shutdown();
-                    MyScenarioTEPViewModel.MyScenarioTEPModel.saveToXMLFile();
+                    MyMainWindowViewModel.MyScenarioTEPModel.saveToXMLFile();
                     break;
                 case MessageBoxResult.No:
                     // User pressed No button: close immediately

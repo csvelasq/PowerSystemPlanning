@@ -10,9 +10,13 @@ namespace PowerSystemPlanning.PlanningModels.Planning
     /// <summary>
     /// A transmission expansion plan, composed by a subset of the candidate transmission lines.
     /// </summary>
+    /// <remarks>
+    /// This class is intended to be constructed with a predefined set of transmission lines to be built (selected among all candidate transmission lines), in order to evaluate the pareto-frontier of future planning under scenario uncertainty. The performance of this transmission expansion plan under various future scenarios can be evaluated by calling <see cref="EvaluateObjectives"/>, which returns, for each scenario evaluated, to total investment costs plus the present value of total operation costs under each scenario (discounted at the rate given by <see cref="MyScenarioTEPModel"/>).
+    /// Detailed results are avilable in <see cref="MyDetailedTEPScenariosResults"/> after calling <see cref="BuildDetailedTEPScenariosResults+"/>.
+    /// </remarks>
     public class TransmissionExpansionPlan : IMultiObjectiveIndividual
     {
-        protected ScenarioTEPModel MyScenarioTEPModel;
+        public ScenarioTEPModel MyScenarioTEPModel { get; protected set; }
 
         /// <summary>
         /// The list of candidate transmission lines which are built in this transmission expansion plan.
@@ -26,13 +30,19 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         {
             get { return (from tl in BuiltTransmissionLines select tl.InvestmentCost).Sum(); }
         }
+
+        /// <summary>
+        /// The LDC OPF model for simulating the implementation of this expansion plan under each scenario.
+        /// </summary>
+        public List<LDCOPFModel> MyLDCOPFModelEachScenario { get; protected set; }
+
         /// <summary>
         /// The total operation costs (in MMUS$) with this transmission expansion plan in each scenario.
         /// </summary>
         /// <remarks>Total operation cost under each scenario is calculated by simulating the LDC OPF in each scenario, considering that the transmission lines in this expansion plan are operational. This variable is set by the <see cref="EvaluateObjectives"/> function.</remarks>
         public List<double> ScenariosOperationCosts { get; protected set; }
         /// <summary>
-        /// The factor by which operation costs must be multiplied to obtain present-worth.
+        /// The factor by which operation costs must be multiplied to obtain present-value.
         /// </summary>
         /// <remarks>Equals \f$ \frac{1}{(1+r)^N} \f$ where r is the yearly discount rate, and N is the target planning year (with the investment year being N=0).</remarks>
         public double DiscountFactor
@@ -43,27 +53,22 @@ namespace PowerSystemPlanning.PlanningModels.Planning
             }
         }
         /// <summary>
-        /// The present worth of the operation costs under each scenario.
+        /// The present value of total costs (investment plus operation) under each scenario.
         /// </summary>
-        public List<double> PresentWorthScenariosOperationCosts
-        {
-            get
-            {
-                return (from c in ScenariosOperationCosts select c * DiscountFactor).ToList<double>();
-            }
-        }
+        public List<double> PresentValueScenariosTotalCosts { get; protected set; }
         /// <summary>
-        /// The present worth of total costs (investment plus operation) under each scenario.
+        /// Each objective function is the PV of total costs (investment plus operation) under each scenario.
         /// </summary>
-        public List<double> PresentWorthScenariosTotalCosts
-        {
-            get
-            {
-                double totalInvestmentCost = TotalInvestmentCost;
-                return (from c in ScenariosOperationCosts select (c * DiscountFactor + totalInvestmentCost)).ToList<double>();
-            }
-        }
-        public List<double> ObjectiveValues { get { return PresentWorthScenariosTotalCosts; } }
+        public List<double> ObjectiveValues { get { return PresentValueScenariosTotalCosts; } }
+        /// <summary>
+        /// Expected total costs (investment plus operation), present value and weighted by scenario probabilities.
+        /// </summary>
+        public double ExpectedTotalCosts { get; protected set; }
+
+        /// <summary>
+        /// The detailed results of implementing this transmission expansion plan under each scenario simulated.
+        /// </summary>
+        public TransmissionExpansionPlanScenarioDetailedResults MyDetailedTEPScenariosResults { get; protected set; }
 
         /// <summary>
         /// Constructor of transmission expansion plan.
@@ -80,9 +85,21 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         public List<double> EvaluateObjectives()
         {
             ScenariosOperationCosts = new List<double>();
+            PresentValueScenariosTotalCosts = new List<double>();
+            ExpectedTotalCosts = 0;
+            double discountFactor = DiscountFactor;
+            double totalInvestmentCost = TotalInvestmentCost;
+            MyLDCOPFModelEachScenario = new List<LDCOPFModel>();
             foreach (PowerSystemScenario scenarioToEval in MyScenarioTEPModel.MyScenarios)
             {
-                ScenariosOperationCosts.Add(EvaluateScenarioOperationCosts(scenarioToEval));
+                //scenario operation costs
+                double opC = EvaluateScenarioOperationCosts(scenarioToEval);
+                ScenariosOperationCosts.Add(opC);
+                //scenario total costs
+                double totC = discountFactor * opC + totalInvestmentCost;
+                PresentValueScenariosTotalCosts.Add(totC);
+                //expected total costs
+                ExpectedTotalCosts += totC * scenarioToEval.Probability;
             }
             return ObjectiveValues;
         }
@@ -95,10 +112,22 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         public double EvaluateScenarioOperationCosts(PowerSystemScenario scenarioToEval)
         {
             //builds the model
-            LDCOPFModel MyLDCOPFModel = new LDCOPFModel(scenarioToEval.MyPowerSystem, MyScenarioTEPModel.MyLoadDurationCurve);
+            PowerSystemWithCandidateTransmissionLines MyPowerSystemWithCandidateTransmissionLines = new PowerSystemWithCandidateTransmissionLines(scenarioToEval.MyPowerSystem, BuiltTransmissionLines);
+            LDCOPFModel model = new LDCOPFModel(MyPowerSystemWithCandidateTransmissionLines, MyScenarioTEPModel.MyLoadDurationCurve);
+            MyLDCOPFModelEachScenario.Add(model);
             // TODO implement an OPF optimization model where single parameters can be modified (instead of rebuilding the whole model on each call) via GRB.ChgCoeff(constr,var,newvalue)
-            MyLDCOPFModel.BuildSolveAndDisposeModel();
-            return MyLDCOPFModel.MyBaseGRBOptimizationModelResult.ObjVal;
+            model.BuildSolveAndDisposeModel();
+            return model.MyBaseGRBOptimizationModelResult.ObjVal;
+        }
+
+        /// <summary>
+        /// Constructs detailed results for this transmission expansion plan evaluated under several scenarios.
+        /// </summary>
+        /// <returns></returns>
+        public TransmissionExpansionPlanScenarioDetailedResults BuildDetailedTEPScenariosResults()
+        {
+            MyDetailedTEPScenariosResults = new TransmissionExpansionPlanScenarioDetailedResults(this);
+            return MyDetailedTEPScenariosResults;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace PowerSystemPlanning.Solvers.OPF
     {
         public override string GRBOptimizationModelName { get { return "Linear Optimal (DC) Power Flow"; } }
 
-        protected PowerSystem MyPowerSystem;
+        protected IPowerSystem MyPowerSystem;
 
         /// <summary>
         /// The results of this simple OPF model (set by <see cref="BuildOPFModelResults"/>).
@@ -112,7 +112,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// Creates the Gurobi OPF model for the provided power system.
         /// </summary>
         /// <param name="powerSystem">The power system for which the OPF will be solved.</param>
-        public OPFModel(PowerSystem powerSystem) : base()
+        public OPFModel(IPowerSystem powerSystem) : base()
         {
             this.MyPowerSystem = powerSystem;
         }
@@ -123,7 +123,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <param name="powerSystem"></param>
         /// <param name="env"></param>
         /// <param name="model"></param>
-        public OPFModel(PowerSystem powerSystem, GRBEnv env, GRBModel model) : base(env,model)
+        public OPFModel(IPowerSystem powerSystem, GRBEnv env, GRBModel model) : base(env,model)
         {
             this.MyPowerSystem = powerSystem;
         }

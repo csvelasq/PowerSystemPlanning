@@ -20,6 +20,10 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// The power system data for this scenario
         /// </summary>
         public PowerSystem MyPowerSystem { get; set; }
+        /// <summary>
+        /// The probability that this scenario occurs
+        /// </summary>
+        public double Probability { get; set; } = 0;
 
         public PowerSystemScenario()
         {

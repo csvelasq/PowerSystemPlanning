@@ -13,7 +13,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
     /// </summary>
     public class LDCOPFModelResults : BaseGRBOptimizationModelResult
     {
-        protected PowerSystem MyPowerSystem;
+        protected IPowerSystem MyPowerSystem;
 
         /// <summary>
         /// Summary of LDC OPF results for each node in the power system (total energy consumed, etc).
@@ -85,7 +85,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         
         public LDCOPFModelResults(int status) : base(status) { }
 
-        public LDCOPFModelResults(PowerSystem powerSystem, int status, double objVal, LoadDurationCurveByBlocks durationCurveBlocks, List<OPFModelResultForLDC> opfResultsByBlock)
+        public LDCOPFModelResults(IPowerSystem powerSystem, int status, double objVal, LoadDurationCurveByBlocks durationCurveBlocks, List<OPFModelResultForLDC> opfResultsByBlock)
             : base(status, objVal)
         {
             this.MyPowerSystem = powerSystem;

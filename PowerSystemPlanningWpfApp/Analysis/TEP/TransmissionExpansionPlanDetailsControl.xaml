@@ -11,17 +11,14 @@
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top">
             <!--Number of built transmission lines-->
-            <TextBlock>
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0} transmission lines built in this expansion plan">
-                        <Binding Path="NumberOfBuiltTransmissionLines" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding NumberOfBuiltTransmissionLines, Mode=OneWay}" Margin="5,0,0,0" />
+                <TextBlock Text=" transmission lines built in this expansion plan"/>
+            </StackPanel>
             <!--Total investment cost-->
             <StackPanel Orientation="Horizontal">
                 <Label Content="Total investment cost (MUS$):" />
-                <TextBox Width="100" Height="20" Text="{Binding TotalInvestmentCost, StringFormat=C}" IsReadOnly="True" />
+                <TextBox Width="100" Height="20" Text="{Binding TotalInvestmentCost, StringFormat=C, Mode=OneWay}" IsReadOnly="True" />
             </StackPanel>
             <!--Show only selected?-->
             <!--<StackPanel Orientation="Horizontal" IsEnabled="False">
@@ -30,7 +27,7 @@
             </StackPanel>-->
         </StackPanel>
         <!--Details of the current expansion plan-->
-        <localUtils:CustomDataGrid ItemsSource="{Binding CandidateTransmissionLinesToBuild}" AutoGenerateColumns="False">
+        <localUtils:CustomDataGrid ItemsSource="{Binding MyCandidateTransmissionLines}" AutoGenerateColumns="False">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="ContentTemplate">

@@ -17,7 +17,7 @@
             </TextBlock.Text>
         </TextBlock>
         <!--Action buttons: build pareto-frontier-->
-        <Button Command="{Binding BuildParetoFrontier}" HorizontalAlignment="Left" Margin="5,0,0,0" DockPanel.Dock="Top">
+        <Button Command="{Binding BuildParetoFrontier}" HorizontalAlignment="Left" DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal">
                 <Image Source="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Run_32x.png" Width="16" />
                 <TextBlock Margin="5,0,5,0">Build Exact Pareto Frontier</TextBlock>

@@ -20,6 +20,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
     /// </summary>
     public partial class ScenarioTEPLDCInspectControl : UserControl
     {
+        // TODO databinding for OPF LDC details
         public ScenarioTEPLDCInspectControl()
         {
             InitializeComponent();

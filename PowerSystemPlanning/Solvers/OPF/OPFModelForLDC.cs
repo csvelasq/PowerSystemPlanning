@@ -24,7 +24,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// </summary>
         public OPFModelResultForLDC MyOPFModelResultForLDC { get; protected set; }
 
-        public OPFModelForLDC(PowerSystem powerSystem, GRBEnv env, GRBModel model, LoadBlock loadBlock)
+        public OPFModelForLDC(IPowerSystem powerSystem, GRBEnv env, GRBModel model, LoadBlock loadBlock)
             : base(powerSystem, env, model)
         {
             this.LoadBlock = loadBlock;

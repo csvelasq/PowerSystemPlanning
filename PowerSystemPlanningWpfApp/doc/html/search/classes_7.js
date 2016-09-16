@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['opfldcresultscontrol',['OPFLDCResultsControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_results_control.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],
   ['opfldcresultscontrol',['OPFLDCResultsControl',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_o_p_f_l_d_c_results_control.html',1,'PowerSystemPlanningWpfApp::LDC']]],
+  ['opfldcresultscontrol',['OPFLDCResultsControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_results_control.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],
   ['opfldcresultswindow',['OPFLDCResultsWindow',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_o_p_f_l_d_c_results_window.html',1,'PowerSystemPlanningWpfApp::LDC']]],
   ['opfldcresultswindow',['OPFLDCResultsWindow',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_results_window.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],
   ['opfldcruncontrol',['OPFLDCRunControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_run_control.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],

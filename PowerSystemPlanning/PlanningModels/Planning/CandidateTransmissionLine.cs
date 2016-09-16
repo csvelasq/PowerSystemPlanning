@@ -8,6 +8,8 @@ namespace PowerSystemPlanning.PlanningModels
 {
     public class CandidateTransmissionLine : TransmissionLine
     {
+        // TODO should implement INPC
+
         /// <summary>
         /// The investment cost (US$) in this candidate transmission line
         /// </summary>

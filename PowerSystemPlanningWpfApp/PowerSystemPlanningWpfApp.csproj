@@ -156,9 +156,10 @@
     <Compile Include="Analysis\StaticTEP\TEPLDCInspectControl.xaml.cs">
       <DependentUpon>TEPLDCInspectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analysis\TransmissionExpansionPlanDetailsControl.xaml.cs">
+    <Compile Include="Analysis\TEP\TransmissionExpansionPlanDetailsControl.xaml.cs">
       <DependentUpon>TransmissionExpansionPlanDetailsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Analysis\TEP\TransmissionExpansionPlanDetailViewModel.cs" />
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
     </Compile>
@@ -204,7 +205,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Analysis\TransmissionExpansionPlanDetailsControl.xaml">
+    <Page Include="Analysis\TEP\TransmissionExpansionPlanDetailsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

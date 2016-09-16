@@ -1,15 +1,8 @@
 var searchData=
 [
-  ['scenariotep2ndorderenumeratecontrol',['ScenarioTEP2ndOrderEnumerateControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p_1_1_scenario_t_e_p2nd_order_enumerate_control.html',1,'PowerSystemPlanningWpfApp::Analysis::ScenarioTEP']]],
-  ['scenariotepenumeratecontrol',['ScenarioTEPEnumerateControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p_1_1_scenario_t_e_p_enumerate_control.html',1,'PowerSystemPlanningWpfApp::Analysis::ScenarioTEP']]],
-  ['scenariotepenumeration',['ScenarioTEPEnumeration',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p_1_1_scenario_t_e_p_enumeration.html',1,'PowerSystemPlanningWpfApp::Analysis::ScenarioTEP']]],
-  ['scenariotepldcinspectcontrol',['ScenarioTEPLDCInspectControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p_1_1_scenario_t_e_p_l_d_c_inspect_control.html',1,'PowerSystemPlanningWpfApp::Analysis::ScenarioTEP']]],
-  ['scenariotepviewmodel',['ScenarioTEPViewModel',['../class_power_system_planning_wpf_app_1_1_model_1_1_scenario_t_e_p_view_model.html#a82672e6d24c6545e221c377720070207',1,'PowerSystemPlanningWpfApp::Model::ScenarioTEPViewModel']]],
-  ['scenariotepviewmodel',['ScenarioTEPViewModel',['../class_power_system_planning_wpf_app_1_1_model_1_1_scenario_t_e_p_view_model.html',1,'PowerSystemPlanningWpfApp::Model']]],
-  ['scenariotepwindow',['ScenarioTEPWindow',['../class_power_system_planning_wpf_app_1_1_scenario_t_e_p_1_1_scenario_t_e_p_window.html',1,'PowerSystemPlanningWpfApp::ScenarioTEP']]],
-  ['selectedloadblockinldcopfresults',['selectedLoadBlockInLDCOPFResults',['../class_power_system_planning_wpf_app_1_1_model_1_1_scenario_t_e_p_view_model.html#a5c3e7623d12f9a846c54cb3f1a9817a9',1,'PowerSystemPlanningWpfApp::Model::ScenarioTEPViewModel']]],
-  ['setpropertyvalue',['SetPropertyValue',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#ade0f04c0f7b18dd5b170e071d5534d38',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]],
-  ['shortenpathname',['ShortenPathname',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html#a98ebf9d14956e17f7973efde04d5281b',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]],
-  ['simpleterminal',['SimpleTerminal',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_simple_terminal.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
-  ['statictepwindow',['StaticTEPWindow',['../class_power_system_planning_wpf_app_1_1_static_t_e_p_1_1_static_t_e_p_window.html',1,'PowerSystemPlanningWpfApp::StaticTEP']]]
+  ['recentfilelist',['RecentFileList',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
+  ['runeconomicdispatch',['RunEconomicDispatch',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_run_economic_dispatch.html',1,'PowerSystemPlanningWpfApp::OPF']]],
+  ['runldc',['RunLDC',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_run_l_d_c.html',1,'PowerSystemPlanningWpfApp::LDC']]],
+  ['runldcopf',['RunLdcOpf',['../class_power_system_planning_wpf_app_1_1_model_1_1_scenario_t_e_p_view_model.html#ac234a9f97c86f4fc1189f7ac5ae60b91',1,'PowerSystemPlanningWpfApp::Model::ScenarioTEPViewModel']]],
+  ['runopfwindow',['RunOPFWindow',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_run_o_p_f_window.html',1,'PowerSystemPlanningWpfApp::OPF']]]
 ];

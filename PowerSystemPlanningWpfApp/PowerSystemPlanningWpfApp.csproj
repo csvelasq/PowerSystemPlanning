@@ -141,6 +141,10 @@
     <Compile Include="Analysis\LDC\OPFLDCRunControl.xaml.cs">
       <DependentUpon>OPFLDCRunControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Analysis\LDC\OPFLDCViewModel.cs" />
+    <Compile Include="Analysis\OPF\OPFResultsWindow.xaml.cs">
+      <DependentUpon>OPFResultsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Analysis\OPF\OPFRunControl.xaml.cs">
       <DependentUpon>OPFRunControl.xaml</DependentUpon>
     </Compile>
@@ -164,6 +168,7 @@
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlUtils\MyCommands.cs" />
     <Compile Include="Model\CandidateTransmissionLinesEditorControl.xaml.cs">
       <DependentUpon>CandidateTransmissionLinesEditorControl.xaml</DependentUpon>
     </Compile>
@@ -183,6 +188,10 @@
       <DependentUpon>OPFRunWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Analysis\LDC\OPFLDCRunControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\OPF\OPFResultsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,7 +290,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\MainWindowViewModel.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

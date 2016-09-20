@@ -22,14 +22,21 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// The list of candidate transmission lines which are built in this transmission expansion plan.
         /// </summary>
         public IList<CandidateTransmissionLine> BuiltTransmissionLines { get; set; }
+        /// <summary>
+        /// Gets a list of the names of built transmission lines.
+        /// </summary>
         public string BuiltTransmissionLinesNames
         {
             get
             {
                 string s = "[";
-                foreach (var t in BuiltTransmissionLines)
+                for (int i = 0; i < BuiltTransmissionLines.Count; i++)
                 {
-                    s += t.Name + ",";
+                    var t = BuiltTransmissionLines[i];
+                    s += t.Name;
+                    if (i < BuiltTransmissionLines.Count - 1)
+                        s += ",";
+
                 }
                 return s + "]";
             }
@@ -53,17 +60,6 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// </summary>
         /// <remarks>Total operation cost under each scenario is calculated by simulating the LDC OPF in each scenario, considering that the transmission lines in this expansion plan are operational. This variable is set by the <see cref="EvaluateObjectives"/> function.</remarks>
         public List<double> ScenariosOperationCosts { get; protected set; }
-        /// <summary>
-        /// The factor by which operation costs must be multiplied to obtain present-value.
-        /// </summary>
-        /// <remarks>Equals \f$ \frac{1}{(1+r)^N} \f$ where r is the yearly discount rate, and N is the target planning year (with the investment year being N=0).</remarks>
-        public double DiscountFactor
-        {
-            get
-            {
-                return 1 / Math.Pow(1 + MyScenarioTEPModel.YearlyDiscountRate, MyScenarioTEPModel.TargetPlanningYear);
-            }
-        }
         /// <summary>
         /// The present value of total costs (investment plus operation) under each scenario.
         /// </summary>
@@ -96,24 +92,45 @@ namespace PowerSystemPlanning.PlanningModels.Planning
 
         public List<double> EvaluateObjectives()
         {
+            EvaluateScenarios(false);
+            return ObjectiveValues;
+        }
+
+        /// <summary>
+        /// Evaluates the operation costs under several scenarios after implementing this transmission expansion plan.
+        /// </summary>
+        /// <param name="buildDetailedResults">Indicates whether detailed results are built and reported.</param>
+        /// <returns>An object that encapsulates detailed results for the TEP under several scenarios if buildDetailedResults=true; null otherwise.</returns>
+        public TransmissionExpansionPlanScenarioDetailedResults EvaluateScenarios(bool buildDetailedResults)
+        {
+            //Initialization
             ScenariosOperationCosts = new List<double>();
             PresentValueScenariosTotalCosts = new List<double>();
             ExpectedTotalCosts = 0;
-            double discountFactor = DiscountFactor;
+            double pvFactor = MyScenarioTEPModel.OperationPresentValueFactor;
             double totalInvestmentCost = TotalInvestmentCost;
+            //Build and solve the LDC OPF model under each scenario
             MyLDCOPFModelEachScenario = new List<LDCOPFModel>();
             foreach (PowerSystemScenario scenarioToEval in MyScenarioTEPModel.MyScenarios)
             {
-                //scenario operation costs
-                double opC = EvaluateScenarioOperationCosts(scenarioToEval, false);
+                //evaluate scenario operation costs
+                double opC = EvaluateScenarioOperationCosts(scenarioToEval, buildDetailedResults) / 1e6; //must convert from US$ to MMUS$
                 ScenariosOperationCosts.Add(opC);
                 //scenario total costs
-                double totC = discountFactor * opC + totalInvestmentCost;
+                double totC = pvFactor * opC + totalInvestmentCost;
                 PresentValueScenariosTotalCosts.Add(totC);
                 //expected total costs
                 ExpectedTotalCosts += totC * scenarioToEval.Probability;
             }
-            return ObjectiveValues;
+            //Results
+            if (buildDetailedResults)
+            {
+                return BuildDetailedTEPScenariosResults();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -130,15 +147,15 @@ namespace PowerSystemPlanning.PlanningModels.Planning
             // TODO implement an OPF optimization model where single parameters can be modified (instead of rebuilding the whole model on each call) via GRB.ChgCoeff(constr,var,newvalue)
             if (buildDetailedResults)
             {
-                model.BuildSolveAndDisposeModel();
-            }
-            else
-            {
                 model.BuildGRBOptimizationModel();
                 model.OptimizeGRBModel();
                 model.BuildGRBOptimizationModelResults();
                 model.BuildLDCOPFModelResults();
                 model.Dispose();
+            }
+            else
+            {
+                model.BuildSolveAndDisposeModel();
             }
             return model.MyBaseGRBOptimizationModelResult.ObjVal;
         }

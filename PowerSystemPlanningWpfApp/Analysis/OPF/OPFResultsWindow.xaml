@@ -1,0 +1,11 @@
+﻿<!--bind to object of type 'OPFModelResultForLDC'-->
+<Window x:Class="PowerSystemPlanningWpfApp.Analysis.OPF.OPFResultsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Analysis.OPF"
+        mc:Ignorable="d"
+        Title="Detailed OPF Results" Height="500.567" Width="1055.524">
+    <local:OPFResultsControl />
+</Window>

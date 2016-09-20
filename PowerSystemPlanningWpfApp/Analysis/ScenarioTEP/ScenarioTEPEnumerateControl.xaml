@@ -7,20 +7,14 @@
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="600" Background="White">
+             d:DesignHeight="400" d:DesignWidth="600" Background="White"
+             d:DataContext="{d:DesignInstance local:ScenarioTepViewModel}">
     <DockPanel LastChildFill="True">
         <!--Number of possible alternatives-->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <TextBlock Text="{Binding MyScenarioTEPModel.TransmissionExpansionPlansCount}" />
             <TextBlock Text=" possible transmission expansion plans." />
         </StackPanel>
-        <!--<TextBlock DockPanel.Dock="Top">
-            <TextBlock.Text>
-                <MultiBinding StringFormat="{}{0} possible transmission expansion plans.">
-                    <Binding Path="MyScenarioTEPModel.TransmissionExpansionPlansCount" />
-                </MultiBinding>
-            </TextBlock.Text>
-        </TextBlock>-->
         <!--Action buttons: enumerate; evaluate-->
         <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
             <Button Command="{Binding EnumerateTransmissionExpansionPlans}" HorizontalAlignment="Left">
@@ -54,8 +48,8 @@
             <DataGrid.Columns>
                 <!--<DataGridTextColumn Header="Plan Id" Binding="{Binding PlanId}" />-->
                 <DataGridTextColumn Header="New Transmission Lines Count" Binding="{Binding BuiltTransmissionLines.Count}" Width="110" />
-                <DataGridTextColumn Header="Transmission lines" Binding="{Binding BuiltTransmissionLinesNames}" Width="90" />
                 <DataGridTextColumn Header="Investment Cost (MUS$)" Binding="{Binding TotalInvestmentCost}" Width="90" />
+                <DataGridTextColumn Header="Transmission lines" Binding="{Binding BuiltTransmissionLinesNames}" Width="90" />
                 <!--<DataGridTextColumn Header="Average Total Cost (MMUS$)" Binding="{Binding AverageTotalCost}" Width="90" />
                 <DataGridTextColumn Header="Minimum Total Cost (MMUS$)" Binding="{Binding MinimumTotalCost}" Width="90" />
                 <DataGridTextColumn Header="Maximum Total Cost (MMUS$)" Binding="{Binding MaximumTotalCost}" Width="100" />-->

@@ -12,7 +12,8 @@ using System.Xml.Serialization;
 
 namespace PowerSystemPlanning.PlanningModels
 {
-    //TODO decoupled open & save (a collection of serializable objects which can be modified in runtime by plugins)
+    // TODO decoupled open & save (a collection of serializable objects which can be modified in runtime by plugins)
+    // TODO extend bindableBase instead of customized INPC implementation
     /// <summary>
     /// Encapsulates data for power system planning under a small number of future scenarios.
     /// </summary>
@@ -28,7 +29,7 @@ namespace PowerSystemPlanning.PlanningModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Example implementation from: https://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged(v=vs.110).aspx
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             if (PropertyChanged != null)
             {
@@ -64,12 +65,16 @@ namespace PowerSystemPlanning.PlanningModels
         /// </summary>
         public int TargetPlanningYear { get; set; }
         /// <summary>
+        /// The number of years that the operation in this scenarios will be valid (starting from <see cref="TargetPlanningYear"/>)
+        /// </summary>
+        public int YearsWithOperation { get; set; }
+        /// <summary>
         /// The future scenarios being modeled (each scenario is a full power system data object).
         /// </summary>
         public BindingList<PowerSystemScenario> MyScenarios { get; set; }
         // TODO define a basis power system from which scenarios will derive (shared Nodes, Generator ID/Name, etc)
 
-        public double _YearlyDiscountRate;
+        double _YearlyDiscountRate;
         /// <summary>
         /// The rate used to discount future cash flows (often below 10%).
         /// </summary>
@@ -92,10 +97,30 @@ namespace PowerSystemPlanning.PlanningModels
         /// The factor used to discount future cash flows.
         /// </summary>
         /// <remarks>
-        /// Equals 1/(1+DiscountRate). Hence, a cash flow of C in year N has a present value of 
-        /// C*(YearlyDiscountFactor)^N.
+        /// Equals \f$ \frac{1}{1+DiscountRate}\f$. Hence, a cash flow of \f$ C \f$ in year \f$ N \f$ has a present value of 
+        /// \f$ C \cdot YearlyDiscountFactor^N \f$.
         /// </remarks>
         public double YearlyDiscountFactor { get { return 1 / (1 + YearlyDiscountRate); } }
+
+        /// <summary>
+        /// The factor used to transform operation costs in the target planning year, into present value.
+        /// </summary>
+        /// <remarks>
+        /// It is assumed that operation costs are calculated for the <see cref="TargetPlanningYear"/>=N, 
+        /// and these costs remain unchanged for <see cref="YearsWithOperation"/>=M more years.
+        /// Hence, the formula for transforming these yearly operation costs into present value is:
+        /// \f[
+        ///     \frac{1}{(1+r)^N} \cdot \left[ \frac{1}{r} \cdot \left(1 - (1+r)^{-M}\right) \right]
+        /// \f]
+        /// </remarks>
+        public double OperationPresentValueFactor
+        {
+            get
+            {
+                return Math.Pow(YearlyDiscountFactor, TargetPlanningYear) * 
+                    (1 - Math.Pow(YearlyDiscountFactor, YearsWithOperation)) / YearlyDiscountRate;
+            }
+        }
 
         private string _FullFileName;
         /// <summary>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['runldcopf',['RunLdcOpf',['../class_power_system_planning_wpf_app_1_1_model_1_1_main_window_view_model.html#a652ac22666e4d8af25be1804ded697ce',1,'PowerSystemPlanningWpfApp::Model::MainWindowViewModel']]]
+  ['setpropertyvalue',['SetPropertyValue',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#ade0f04c0f7b18dd5b170e071d5534d38',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]],
+  ['shortenpathname',['ShortenPathname',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html#a98ebf9d14956e17f7973efde04d5281b',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]]
 ];

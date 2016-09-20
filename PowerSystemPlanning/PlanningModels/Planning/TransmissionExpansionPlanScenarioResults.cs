@@ -71,7 +71,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
                     MyTransmissionExpansionPlan.MyScenarioTEPModel.MyScenarios[s], 
                     invCost, 
                     MyTransmissionExpansionPlan.ScenariosOperationCosts[s], 
-                    MyTransmissionExpansionPlan.DiscountFactor, 
+                    MyTransmissionExpansionPlan.MyScenarioTEPModel.OperationPresentValueFactor, 
                     MyTransmissionExpansionPlan.MyLDCOPFModelEachScenario[s].MyDetailedLDCOPFModelResults
                     );
                 MyDetailedTEPResultsForEachScenario.Add(t);
@@ -125,14 +125,14 @@ namespace PowerSystemPlanning.PlanningModels.Planning
 
         public TransmissionExpansionPlanLDCResultsForOneScenario() { }
 
-        public TransmissionExpansionPlanLDCResultsForOneScenario(PowerSystemScenario scenarioEvaluated, double totalInvestmentCost, double scenarioOperationCosts, double discountFactor, LDCOPFModelResults opfModelResults)
+        public TransmissionExpansionPlanLDCResultsForOneScenario(PowerSystemScenario scenarioEvaluated, double totalInvestmentCost, double scenarioOperationCosts, double pvFactor, LDCOPFModelResults opfModelResults)
         {
             ScenarioEvaluated = scenarioEvaluated;
             TotalInvestmentCost = totalInvestmentCost;
             // TODO build these detailed results
             DetailedLDCOPFModelResults = opfModelResults;
             ScenarioOperationCosts = scenarioOperationCosts;
-            PresentValueScenarioOperationCosts = discountFactor * scenarioOperationCosts;
+            PresentValueScenarioOperationCosts = pvFactor * scenarioOperationCosts;
             PresentValueScenarioTotalCosts = TotalInvestmentCost + PresentValueScenarioOperationCosts;
             //probability weighted results
             ProbabilityWeightedScenarioOperationCosts = ScenarioEvaluated.Probability * ScenarioOperationCosts;

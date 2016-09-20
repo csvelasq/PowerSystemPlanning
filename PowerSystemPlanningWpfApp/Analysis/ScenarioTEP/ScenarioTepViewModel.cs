@@ -1,8 +1,10 @@
 ﻿using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.PlanningModels.Planning;
 using PowerSystemPlanning.Solvers.LDCOPF;
-using PowerSystemPlanningWpfApp.Analysis.TEP;
+using PowerSystemPlanningWpfApp.Analysis;
+using PowerSystemPlanningWpfApp.Analysis.LDC;
 using Prism.Commands;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,34 +16,16 @@ using System.Windows.Input;
 
 namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
 {
-    public class ScenarioTepViewModel : INotifyPropertyChanged
+    public class ScenarioTepViewModel : BindableBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Example implementation from: https://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged(v=vs.110).aspx
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
         public ScenarioTEPModel _MyScenarioTEPModel;
         public ScenarioTEPModel MyScenarioTEPModel
         {
-            get
-            {
-                return _MyScenarioTEPModel;
-            }
+            get { return _MyScenarioTEPModel; }
             set
             {
-                if (_MyScenarioTEPModel != value)
-                {
-                    _MyScenarioTEPModel = value;
-                    _MyTEPlanDetailViewModel = new TransmissionExpansionPlanDetailViewModel(MyScenarioTEPModel.MyCandidateTransmissionLines, true);
-                    NotifyPropertyChanged();
-                }
+                SetProperty<ScenarioTEPModel>(ref _MyScenarioTEPModel, value);
+                MyTEPlanDetailViewModel = new TransmissionExpansionPlanDetailViewModel(MyScenarioTEPModel.MyCandidateTransmissionLines, true);
             }
         }
 
@@ -49,7 +33,14 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         /// <summary>
         /// The view model for viewing and editing the transmission expansion plan currently under analysis.
         /// </summary>
-        public TransmissionExpansionPlanDetailViewModel MyTEPlanDetailViewModel { get { return _MyTEPlanDetailViewModel; } }
+        public TransmissionExpansionPlanDetailViewModel MyTEPlanDetailViewModel
+        {
+            get { return _MyTEPlanDetailViewModel; }
+            set
+            {
+                SetProperty<TransmissionExpansionPlanDetailViewModel>(ref _MyTEPlanDetailViewModel, value);
+            }
+        }
 
         TransmissionExpansionPlan _MyTransmissionExpansionPlan;
         /// <summary>
@@ -63,13 +54,25 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
             }
             set
             {
-                if (_MyTransmissionExpansionPlan != value)
+                SetProperty<TransmissionExpansionPlan>(ref _MyTransmissionExpansionPlan, value);
+            }
+        }
+
+        public TransmissionExpansionPlanLDCResultsForOneScenario _CurrentlySelectedScenarioLDC;
+        public TransmissionExpansionPlanLDCResultsForOneScenario CurrentlySelectedScenarioLDC
+        {
+            get { return _CurrentlySelectedScenarioLDC; }
+            set
+            {
+                SetProperty<TransmissionExpansionPlanLDCResultsForOneScenario>(ref _CurrentlySelectedScenarioLDC, value);
+                if (_CurrentlySelectedScenarioLDC != null)
                 {
-                    _MyTransmissionExpansionPlan = value;
-                    NotifyPropertyChanged();
+                    MyOPFLDCViewModel.MyLDCOPFModelResults = _CurrentlySelectedScenarioLDC.DetailedLDCOPFModelResults;
                 }
             }
         }
+        
+        public OPFLDCViewModel MyOPFLDCViewModel { get; private set; }
 
         public ICommand SolveScenarioLDCOPFCommand { get; private set; }
 
@@ -82,38 +85,22 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         /// </summary>
         public TransmissionExpansionPlanScenarioDetailedResults MyTEPDetailedResults
         {
-            get
-            {
-                return _MyTEPDetailedResults;
-            }
-
+            get { return _MyTEPDetailedResults; }
             set
             {
-                if (_MyTEPDetailedResults != value)
-                {
-                    _MyTEPDetailedResults = value;
-                    NotifyPropertyChanged();
-                }
+                SetProperty<TransmissionExpansionPlanScenarioDetailedResults>(ref _MyTEPDetailedResults, value);
             }
         }
-        
+
         TransmissionExpansionPlanScenarioDetailedResults _MyTEPDetailedResults;
 
         List<TransmissionExpansionPlan> _AllTEPAlternatives;
         public List<TransmissionExpansionPlan> AllTEPAlternatives
         {
-            get
-            {
-                return _AllTEPAlternatives;
-            }
-
+            get { return _AllTEPAlternatives; }
             set
             {
-                if (_AllTEPAlternatives != value)
-                {
-                    _AllTEPAlternatives = value;
-                    NotifyPropertyChanged();
-                }
+                SetProperty<List<TransmissionExpansionPlan>>(ref _AllTEPAlternatives, value);
             }
         }
 
@@ -122,6 +109,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
 
         public ScenarioTepViewModel()
         {
+            MyOPFLDCViewModel = new OPFLDCViewModel();
             SolveScenarioLDCOPFCommand = new DelegateCommand(SolveScenarioLDCOPF);
             TEPlansAreEnumerated = false;
             EnumerateTransmissionExpansionPlans = new DelegateCommand(RunEnumerateTransmissionExpansionPlans);
@@ -138,9 +126,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
             // Build the plan
             MyTransmissionExpansionPlan = new TransmissionExpansionPlan(MyTEPlanDetailViewModel.MySelectedCandidateTransmissionLines.ToList<CandidateTransmissionLine>(), MyScenarioTEPModel);
             // Evaluate total costs under each scenario
-            MyTransmissionExpansionPlan.EvaluateObjectives();
-            // Build detailed results for binding to GUI
-            MyTEPDetailedResults = MyTransmissionExpansionPlan.BuildDetailedTEPScenariosResults();
+            MyTEPDetailedResults = MyTransmissionExpansionPlan.EvaluateScenarios(true);
         }
 
         bool TEPlansAreEnumerated;

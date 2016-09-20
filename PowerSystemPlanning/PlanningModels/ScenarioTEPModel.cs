@@ -20,16 +20,20 @@ namespace PowerSystemPlanning.PlanningModels
         public BindingList<CandidateTransmissionLine> MyCandidateTransmissionLines
         {
             get { return _MyCandidateTransmissionLines; }
-            protected set
+            set
             {
-                _MyCandidateTransmissionLines = value;
-                // New candidate transmission lines are bound to the power system in the first scenario 
-                // (in order to automatically assign a unique ID to each Candidate Transmission Line)
-                // TODO find better solution for adding new candidate transmission lines
-                _MyCandidateTransmissionLines.AddingNew += (sender, e) =>
+                if (_MyCandidateTransmissionLines != value)
                 {
-                    e.NewObject = new CandidateTransmissionLine(MyScenarios[0].MyPowerSystem.Nodes, MyCandidateTransmissionLines);
-                };
+                    _MyCandidateTransmissionLines = value;
+                    // New candidate transmission lines are bound to the power system in the first scenario 
+                    // (in order to automatically assign a unique ID to each Candidate Transmission Line)
+                    // TODO find better solution for adding new candidate transmission lines
+                    _MyCandidateTransmissionLines.AddingNew += (sender, e) =>
+                    {
+                        e.NewObject = new CandidateTransmissionLine(MyScenarios[0].MyPowerSystem.Nodes, MyCandidateTransmissionLines);
+                    };
+                    NotifyPropertyChanged();
+                }
             }
         }
         public long TransmissionExpansionPlansCount
@@ -74,6 +78,8 @@ namespace PowerSystemPlanning.PlanningModels
         public static IEnumerable<IEnumerable<T>> GetPowerSet<T>(IList<T> list)
         {
             // code from https://rosettacode.org/wiki/Power_set#C.23
+            // an enumerator can be easily implemented by iterating through the range;
+            // and returning the "select from..." in each iteration
             return from m in Enumerable.Range(0, 1 << list.Count) //range 0..2^N
                    select
                        from i in Enumerable.Range(0, list.Count) //range 0..N

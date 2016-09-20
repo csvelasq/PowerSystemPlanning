@@ -9,7 +9,8 @@
              xmlns:analysisControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis"
              xmlns:opfLdcControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.LDC"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1000" Background="White">
+             d:DesignHeight="600" d:DesignWidth="1000" Background="White"
+             d:DataContext="{d:DesignInstance local:ScenarioTepViewModel}">
     <DockPanel LastChildFill="True">
         <Grid DockPanel.Dock="Left" Width="400">
             <Grid.RowDefinitions>
@@ -62,7 +63,7 @@
                     <!--Operation costs under each scenario-->
                     <localUtils:ImageTextBlock Width="280" HorizontalAlignment="Left" Margin="0,5,0,0" DockPanel.Dock="Bottom"
                         MessageForTextBlock="Select one scenario in the above grid in order to see detailed OPF results (in the right panel)." />
-                    <localUtils:CustomDataGrid x:Name="dgScenarioTEPResults" ItemsSource="{Binding MyTEPDetailedResults.MyDetailedTEPResultsForEachScenario, Mode=OneWay}" AutoGenerateColumns="False">
+                    <localUtils:CustomDataGrid x:Name="dgScenarioTEPResults" ItemsSource="{Binding MyTEPDetailedResults.MyDetailedTEPResultsForEachScenario, Mode=OneWay}" AutoGenerateColumns="False" SelectedItem="{Binding CurrentlySelectedScenarioLDC}">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="ContentTemplate">
@@ -86,7 +87,7 @@
         </Grid>
         <!--LDC OPF results-->
         <GroupBox Header="OPF LDC Results">
-            <opfLdcControls:OPFLDCResultsControl DataContext="{Binding ElementName=dgScenarioTEPResults, Path=SelectedItem.DetailedLDCOPFModelResults}" />
+            <opfLdcControls:OPFLDCResultsControl DataContext="{Binding MyOPFLDCViewModel}" />
         </GroupBox>
     </DockPanel>
 </UserControl>

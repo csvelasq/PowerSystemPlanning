@@ -1,12 +1,18 @@
 var searchData=
 [
-  ['ldcopfmodel',['LDCOPFModel',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model.html',1,'PowerSystemPlanning::Solvers::LDCOPF']]],
-  ['ldcopfmodelresults',['LDCOPFModelResults',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model_results.html',1,'PowerSystemPlanning::Solvers::LDCOPF']]],
-  ['ldcopfmodelsolver',['LDCOPFModelSolver',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model_solver.html',1,'PowerSystemPlanning::Solvers::LDCOPF']]],
-  ['loadblock',['LoadBlock',['../class_power_system_planning_1_1_planning_models_1_1_load_block.html',1,'PowerSystemPlanning::PlanningModels']]],
-  ['loaddurationcurvebyblocks',['LoadDurationCurveByBlocks',['../class_power_system_planning_1_1_planning_models_1_1_load_duration_curve_by_blocks.html',1,'PowerSystemPlanning::PlanningModels']]],
-  ['loadmultiplier',['LoadMultiplier',['../class_power_system_planning_1_1_planning_models_1_1_load_block.html#a6df111273d4d268292e7281ae2215606',1,'PowerSystemPlanning::PlanningModels::LoadBlock']]],
-  ['loadshed',['LoadShed',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a214c633fe3b1b9e1c0e94939fcc6a978',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
-  ['loadsheddingcost',['LoadSheddingCost',['../class_power_system_planning_1_1_power_system.html#a3f0729d4eaa155e4b8be848d84a1fbff',1,'PowerSystemPlanning::PowerSystem']]],
-  ['lshed_5fsolution',['LShed_Solution',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#ae6a8e6e2681b8801e723d8e03a45a82d',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]]
+  ['id',['Id',['../class_power_system_planning_1_1_node.html#abd72649e4b2b83daa0980ab87a90034a',1,'PowerSystemPlanning.Node.Id()'],['../class_power_system_planning_1_1_node_element.html#aa18ee6e98501ec6c8c235058888a47e3',1,'PowerSystemPlanning.NodeElement.Id()'],['../class_power_system_planning_1_1_transmission_line.html#ad45fb4c791feefe84bf71bbb53baf7db',1,'PowerSystemPlanning.TransmissionLine.Id()']]],
+  ['imultiobjectiveindividual',['IMultiObjectiveIndividual',['../interface_power_system_planning_1_1_planning_models_1_1_planning_1_1_i_multi_objective_individual.html',1,'PowerSystemPlanning::PlanningModels::Planning']]],
+  ['incomingtransmissionlines',['IncomingTransmissionLines',['../class_power_system_planning_1_1_node.html#a6b851f2b0cce15e7d245b40b43424a2d',1,'PowerSystemPlanning::Node']]],
+  ['inelasticload',['InelasticLoad',['../class_power_system_planning_1_1_inelastic_load.html',1,'PowerSystemPlanning']]],
+  ['inelasticload',['InelasticLoad',['../class_power_system_planning_1_1_inelastic_load.html#a47abae64f9f66d537230cdff873d9efa',1,'PowerSystemPlanning::InelasticLoad']]],
+  ['inelasticloads',['InelasticLoads',['../class_power_system_planning_1_1_node.html#a242eb347ec0e73927cfcba3ddacc8153',1,'PowerSystemPlanning.Node.InelasticLoads()'],['../class_power_system_planning_1_1_power_system.html#a3785895f5e1d62105769d59f433979b1',1,'PowerSystemPlanning.PowerSystem.InelasticLoads()']]],
+  ['installedcapacitymw',['InstalledCapacityMW',['../class_power_system_planning_1_1_generating_unit.html#a85c9d9099840f3238ca341dd313b56f4',1,'PowerSystemPlanning::GeneratingUnit']]],
+  ['investmentcost',['InvestmentCost',['../class_power_system_planning_1_1_planning_models_1_1_candidate_transmission_line.html#a30c664edbc538e88d1e97d5bbe9460b9',1,'PowerSystemPlanning::PlanningModels::CandidateTransmissionLine']]],
+  ['ipowersystem',['IPowerSystem',['../interface_power_system_planning_1_1_i_power_system.html',1,'PowerSystemPlanning']]],
+  ['ipowersystemsolver',['IPowerSystemSolver',['../interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html',1,'PowerSystemPlanning::Solvers']]],
+  ['ismodelinfeasible',['IsModelInfeasible',['../class_power_system_planning_1_1_solvers_1_1_base_g_r_b_optimization_model_result.html#af5cf21ccaf99fb774a5d33adc2ce6dcd',1,'PowerSystemPlanning::Solvers::BaseGRBOptimizationModelResult']]],
+  ['ismodelsolved',['IsModelSolved',['../class_power_system_planning_1_1_solvers_1_1_base_g_r_b_optimization_model_result.html#ad85c2e43f587d316449238fde76d8474',1,'PowerSystemPlanning::Solvers::BaseGRBOptimizationModelResult']]],
+  ['ismodelunbounded',['IsModelUnbounded',['../class_power_system_planning_1_1_solvers_1_1_base_g_r_b_optimization_model_result.html#ad05ccadcec657f75cbf6e864bc0e519c',1,'PowerSystemPlanning::Solvers::BaseGRBOptimizationModelResult']]],
+  ['issaved',['IsSaved',['../class_power_system_planning_1_1_planning_models_1_1_scenario_power_system_planning_model.html#a681f9462569e90eb24ef9032efa89e95',1,'PowerSystemPlanning::PlanningModels::ScenarioPowerSystemPlanningModel']]],
+  ['itransmissionline',['ITransmissionLine',['../interface_power_system_planning_1_1_i_transmission_line.html',1,'PowerSystemPlanning']]]
 ];

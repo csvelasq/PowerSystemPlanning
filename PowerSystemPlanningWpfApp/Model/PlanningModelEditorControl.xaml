@@ -5,13 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model"
-            xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
-            xmlns:modelControls="clr-namespace:PowerSystemPlanningWpfApp.Model"
+             xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
+             xmlns:modelControls="clr-namespace:PowerSystemPlanningWpfApp.Model"
+             xmlns:planningModel="clr-namespace:PowerSystemPlanning.PlanningModels;assembly=PowerSystemPlanning"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="900" Background="White">
+             d:DesignHeight="700" d:DesignWidth="900" Background="White"
+             d:DataContext="{d:DesignInstance planningModel:ScenarioTEPModel}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="200" />
+            <RowDefinition Height="250" />
             <RowDefinition Height="300*" />
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="True">
@@ -25,8 +27,12 @@
                 <!--Target Planning Year; Discount rate-->
                 <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
                     <Label Content="Target Planning Year:" />
-                    <TextBox Text="{Binding TargetPlanningYear, StringFormat=N0}" Width="50" Height="20" VerticalAlignment="Center" />
-                    <Label Content="Yearly Discount Rate:" />
+                    <TextBox Text="{Binding TargetPlanningYear, StringFormat=N0}" Width="30" Height="20" VerticalAlignment="Center" />
+                    <Label Content="Years in Operation:" />
+                    <TextBox Text="{Binding YearsWithOperation, StringFormat=N0}" Width="30" Height="20" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
+                        <Label Content="Yearly Discount Rate:" />
                     <TextBox Text="{Binding YearlyDiscountRate, StringFormat=p2}" Width="50" Height="20" VerticalAlignment="Center" />
                 </StackPanel>
                 <!--Scenarios-->
@@ -35,8 +41,7 @@
                         <localUtils:ImageTextBlock DockPanel.Dock="Bottom"
                             MessageForTextBlock="Click a row to edit the power system data for each scenario in the form below." />
                         <localUtils:CustomDataGrid x:Name="dgScenarios" ItemsSource="{Binding MyScenarios}" AutoGenerateColumns="False"
-                          SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="True"
-                                                   SelectedItem="{Binding Path=MyMainWindowViewModel.currentlySelectedScenario, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}">
+                          SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150" />
                                 <DataGridTextColumn Header="Probability" Binding="{Binding Probability, StringFormat=p0}" Width="70" />
@@ -50,7 +55,7 @@
             <!--Candidate Transmission Lines-->
             <modelControls:CandidateTransmissionLinesEditorControl DataContext="{Binding MyCandidateTransmissionLines}" />
         </DockPanel>
-        <modelControls:PowerSystemEditorControl DataContext="{Binding ElementName=dgScenarios, Path=SelectedItem}" 
-                                                Grid.Row="1" />
+        <!--Power System Editor for selected scenario-->
+        <modelControls:PowerSystemEditorControl DataContext="{Binding ElementName=dgScenarios, Path=SelectedItem}" Grid.Row="1" />
     </Grid>
 </UserControl>

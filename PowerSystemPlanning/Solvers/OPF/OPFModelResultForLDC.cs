@@ -31,16 +31,19 @@ namespace PowerSystemPlanning.Solvers.OPF
             }
         }
         /// <summary>
-        /// Gets the total generation cost (US$) for suplying demand during the whole block's duration.
+        /// Gets the total generation cost (MMUS$) for suplying demand during the whole block's duration.
         /// </summary>
         /// <remarks> Equals the sum over all generators of output (MW) multiplied by marginal cost (US$/MW), multiplied by the block duration (hours).</remarks>
         public override double TotalGenerationCost
         {
             get
             {
-                return (MyLoadBlock.Duration * (from genResults in this.GeneratingUnitOPFResults select genResults.TotalGenerationCost).Sum());
+                return (MyLoadBlock.Duration * (from genResults in this.GeneratingUnitOPFResults select genResults.TotalGenerationCost).Sum()) / 1e6;
             }
         }
+        /// <summary>
+        /// Gets the total hourly operation cost (US$/h) for supplying demand.
+        /// </summary>
         public double HourlyOperationCost
         {
             get
@@ -80,14 +83,14 @@ namespace PowerSystemPlanning.Solvers.OPF
             }
         }
         /// <summary>
-        /// Gets the total load shedding cost (in US$).
+        /// Gets the total load shedding cost (MMUS$).
         /// </summary>
         /// <remarks>Equals the total load-shedding (MW) multiplied by the system's load shedding cost (US$/MW), multiplied by the block duration (hours).</remarks>
         public override double TotalLoadSheddingCost
         {
             get
             {
-                return (MyLoadBlock.Duration * this.PowerSystem.LoadSheddingCost * TotalLoadShedding);
+                return (this.PowerSystem.LoadSheddingCost * (MyLoadBlock.Duration * TotalLoadShedding)) / 1e6;
             }
         }
 

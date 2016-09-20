@@ -1,7 +1,26 @@
 var searchData=
 [
-  ['reactanceohm',['ReactanceOhm',['../class_power_system_planning_1_1_transmission_line.html#acaa88f661cda6aa13361691f2409f3ef',1,'PowerSystemPlanning::TransmissionLine']]],
-  ['readfromxmlfile',['readFromXMLFile',['../class_power_system_planning_1_1_planning_models_1_1_scenario_t_e_p_model.html#a5cb161c31e7adca89d24eb139abc10ce',1,'PowerSystemPlanning::PlanningModels::ScenarioTEPModel']]],
-  ['relativeblockdurations',['RelativeBlockDurations',['../class_power_system_planning_1_1_planning_models_1_1_load_duration_curve_by_blocks.html#a7af2e0c2de1ca9002fde7a9fdb01a2e5',1,'PowerSystemPlanning::PlanningModels::LoadDurationCurveByBlocks']]],
-  ['result',['Result',['../class_power_system_planning_1_1_solvers_1_1_solver_results.html#a6b3ef15a892f16675d6aa5fce8baab8d',1,'PowerSystemPlanning::Solvers::SolverResults']]]
+  ['ldcopf',['LDCOPF',['../namespace_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f.html',1,'PowerSystemPlanning::Solvers']]],
+  ['opf',['OPF',['../namespace_power_system_planning_1_1_solvers_1_1_o_p_f.html',1,'PowerSystemPlanning::Solvers']]],
+  ['peaknodalspotprice',['PeakNodalSpotPrice',['../class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_node_l_d_c_o_p_f_result.html#a5ce84225ae5f9dc8b687eb37c4d9a34f',1,'PowerSystemPlanning::Solvers::LDCOPF::NodeLDCOPFResult']]],
+  ['pflow',['PFlow',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#ae1bd525a2d2633a3c62c3e85b2ffa16e',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
+  ['pflow_5fsolution',['PFlow_Solution',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a42cd352e50a3a3602652c3dd9974615e',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
+  ['pgen',['PGen',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a7753aadc5568fd85710377fa770bc675',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
+  ['pgen_5fsolution',['PGen_Solution',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#a2ed4ccf11d87a4a642a87875228e7c10',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]],
+  ['planning',['Planning',['../namespace_power_system_planning_1_1_planning_models_1_1_planning.html',1,'PowerSystemPlanning::PlanningModels']]],
+  ['planningmodels',['PlanningModels',['../namespace_power_system_planning_1_1_planning_models.html',1,'PowerSystemPlanning']]],
+  ['powersystem',['PowerSystem',['../class_power_system_planning_1_1_power_system.html',1,'PowerSystemPlanning']]],
+  ['powersystemplanning',['PowerSystemPlanning',['../namespace_power_system_planning.html',1,'']]],
+  ['powersystemscenario',['PowerSystemScenario',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_power_system_scenario.html',1,'PowerSystemPlanning::PlanningModels::Planning']]],
+  ['powersystemsolverconfiguration',['PowerSystemSolverConfiguration',['../class_power_system_planning_1_1_solvers_1_1_power_system_solver_configuration.html',1,'PowerSystemPlanning::Solvers']]],
+  ['powersystemwithcandidatetransmissionlines',['PowerSystemWithCandidateTransmissionLines',['../class_power_system_planning_1_1_planning_models_1_1_power_system_with_candidate_transmission_lines.html',1,'PowerSystemPlanning::PlanningModels']]],
+  ['presentvaluescenariooperationcosts',['PresentValueScenarioOperationCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan_l_d_c_results_for_one_scenario.html#a921a27b469044b82d7a0fe533d7fc150',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlanLDCResultsForOneScenario']]],
+  ['presentvaluescenariostotalcosts',['PresentValueScenariosTotalCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan.html#a6c6063c75b14336d615491bd2c0098b3',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlan']]],
+  ['presentvaluescenariototalcosts',['PresentValueScenarioTotalCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan_l_d_c_results_for_one_scenario.html#a326e935be4f84bd8d000abd7e54d718c',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlanLDCResultsForOneScenario']]],
+  ['probability',['Probability',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_power_system_scenario.html#a9bf41cd1f509af595fe24565934da6a7',1,'PowerSystemPlanning::PlanningModels::Planning::PowerSystemScenario']]],
+  ['probabilityweightedpvscenariooperationcosts',['ProbabilityWeightedPVScenarioOperationCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan_l_d_c_results_for_one_scenario.html#af2995fc4c16aa3860ca1f874d646feca',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlanLDCResultsForOneScenario']]],
+  ['probabilityweightedpvscenariototalcosts',['ProbabilityWeightedPVScenarioTotalCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan_l_d_c_results_for_one_scenario.html#a1e393e649652d6723219000a2e4f7c25',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlanLDCResultsForOneScenario']]],
+  ['pvexpectedoperationcosts',['PVExpectedOperationCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan_scenario_detailed_results.html#a380b2c566396ea3e60c30e64df183476',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlanScenarioDetailedResults']]],
+  ['pvexpectedtotalcosts',['PVExpectedTotalCosts',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan_scenario_detailed_results.html#a6f38003733242e42cd5897f4c80f5ab7',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlanScenarioDetailedResults']]],
+  ['solvers',['Solvers',['../namespace_power_system_planning_1_1_solvers.html',1,'PowerSystemPlanning']]]
 ];

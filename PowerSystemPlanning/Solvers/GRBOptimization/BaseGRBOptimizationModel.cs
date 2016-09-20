@@ -99,7 +99,7 @@ namespace PowerSystemPlanning.Solvers
         }
 
         /// <summary>
-        /// Builds and optimizes this Gurobi optimization model.
+        /// Builds, optimizes and create detailed results for this Gurobi optimization model.
         /// </summary>
         /// <returns>An encapsulator of the results of the optimization process.</returns>
         public BaseGRBOptimizationModelResult BuildSolveAndDisposeModel()

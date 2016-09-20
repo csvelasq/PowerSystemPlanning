@@ -20,6 +20,7 @@ using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanningWpfApp.Model;
 using PowerSystemPlanning.PlanningModels.Planning;
 using PowerSystemPlanningWpfApp.Analysis.ScenarioTEP;
+using PowerSystemPlanningWpfApp.Analysis.LDC;
 
 namespace PowerSystemPlanningWpfApp
 {
@@ -32,38 +33,11 @@ namespace PowerSystemPlanningWpfApp
         /// NLog Logger for this class.
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        MainWindowViewModel _MyMainWindowViewModel;
+        
         public MainWindowViewModel MyMainWindowViewModel
         {
-            get
-            {
-                return _MyMainWindowViewModel;
-            }
-
-            set
-            {
-                _MyMainWindowViewModel = value;
-                DataContext = _MyMainWindowViewModel;
-                MyScenarioTepViewModel = new ScenarioTepViewModel(MyMainWindowViewModel.MyScenarioTEPModel);
-            }
+            get { return (MainWindowViewModel)this.DataContext; }
         }
-
-        ScenarioTepViewModel _MyScenarioTepViewModel;
-        public ScenarioTepViewModel MyScenarioTepViewModel
-        {
-            get
-            {
-                return _MyScenarioTepViewModel;
-            }
-
-            set
-            {
-                _MyScenarioTepViewModel = value;
-                myScenarioTepLDCInspectControl.DataContext = _MyScenarioTepViewModel;
-            }
-        }
-
 
         public MainWindow()
         {
@@ -73,9 +47,10 @@ namespace PowerSystemPlanningWpfApp
             this.RecentFileList.MenuClick += (s, e) => OpenModelFile(e.Filepath);
         }
 
+        // TODO implement all the following methods as commands in the backend
         private void CreateNewDefaultViewModel()
         {
-            MyMainWindowViewModel = MainWindowViewModel.CreateDefaultScenarioTEPModel();
+            DataContext = MainWindowViewModel.CreateDefaultScenarioTEPModel();
             //Logs the creation of the default model
             MainWindow.logger.Info("New power system model created with default (arbitrary) parameters).");
         }
@@ -127,8 +102,7 @@ namespace PowerSystemPlanningWpfApp
         {
             try
             {
-                ScenarioTEPModel MyScenarioTEPModel = ScenarioTEPModel.readFromXMLFile(filename);
-                MyMainWindowViewModel = new MainWindowViewModel(MyScenarioTEPModel);
+                MyMainWindowViewModel.OpenModelFile(filename);
                 this.RecentFileList.InsertFile(filename);
                 MainWindow.logger.Info(String.Format("Loaded file '{0}'", filename));
             }

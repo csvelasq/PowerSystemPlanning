@@ -28,7 +28,6 @@ namespace PowerSystemPlanning.Solvers.OPF
             : base(powerSystem, env, model)
         {
             this.LoadBlock = loadBlock;
-            ObjectiveFunctionMultiplier = 1e-6; //objective function value is in MMUS$ instead of $
         }
 
         protected override void AddGRBVarsPGen()
@@ -38,7 +37,7 @@ namespace PowerSystemPlanning.Solvers.OPF
             {
                 GeneratingUnit gen = MyPowerSystem.GeneratingUnits[i];
                 PGen[i] = MyGrbModel.AddVar(0, gen.InstalledCapacityMW,
-                    gen.MarginalCost * this.LoadBlock.Duration * ObjectiveFunctionMultiplier, GRB.CONTINUOUS, "PGen" + gen.Id);
+                    gen.MarginalCost * this.LoadBlock.Duration, GRB.CONTINUOUS, "PGen" + gen.Id);
             }
         }
 
@@ -50,7 +49,7 @@ namespace PowerSystemPlanning.Solvers.OPF
                 if (node.TotalLoad > 0)
                 {
                     load_shed.Add(MyGrbModel.AddVar(0, node.TotalLoad * LoadBlock.LoadMultiplier,
-                        MyPowerSystem.LoadSheddingCost * LoadBlock.Duration * ObjectiveFunctionMultiplier, GRB.CONTINUOUS, "LS" + node.Id));
+                        MyPowerSystem.LoadSheddingCost * LoadBlock.Duration, GRB.CONTINUOUS, "LS" + node.Id));
                 }
             }
             this.LoadShed = load_shed.ToArray<GRBVar>();

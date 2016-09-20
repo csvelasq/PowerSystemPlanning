@@ -14,8 +14,7 @@
         <StackPanel Orientation="Vertical" Grid.Row="0">
             <StackPanel Orientation="Horizontal" Grid.Row="0">
                 <Label Content="Scenario name:" HorizontalAlignment="Left" />
-                <!--<ComboBox Width="80" Height="20"></ComboBox>-->
-                <TextBox Text="{Binding Path=currentlySelectedScenario.Name, Mode=OneWay}" Width="200" Height="20" />
+                <ComboBox ItemsSource="{Binding MyScenarios}" SelectedItem="{Binding CurrentlySelectedScenario}" Width="150" Height="20" />
             </StackPanel>
             <Button Command="{Binding LDCOPFSolveCommand}" Width="110" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
@@ -26,6 +25,7 @@
         </StackPanel>
         <GroupBox Header="OPF LDC Results" Grid.Row="1">
             <local:OPFLDCResultsControl x:Name="myOpfLdcResultsControl"/>
+            <!--the results control binds to the same view-model (inheritance)-->
         </GroupBox>
     </Grid>
 </UserControl>

@@ -16,7 +16,8 @@
         xmlns:opfLdcControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.LDC"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
-        Title="Power System Planning" Height="1000" Width="1200" WindowState="Maximized" Loaded="Window_Loaded">
+        Title="Power System Planning" Height="1000" Width="1200" WindowState="Maximized" Loaded="Window_Loaded"
+        d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="NewCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommandBinding_Executed" />
@@ -79,28 +80,25 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TabControl Grid.Row="1" SelectedIndex="{Binding tabControlPowerSystem_SelectedIndex, Mode=TwoWay}">
+        <TabControl Grid.Row="1">
             <TabItem Header="Power System Model">
-                <modelControls:PlanningModelEditorControl x:Name="myPowerSystemEditorControl" DataContext="{Binding MyScenarioTEPModel}" />
+                <modelControls:PlanningModelEditorControl DataContext="{Binding MyScenarioTEPModel}" />
             </TabItem>
-            <TabItem Header="OPF">
+            <!--<TabItem Header="OPF">
                 <opfControls:OPFResultsControl x:Name="myOPFResultsControl" />
-            </TabItem>
-            <TabItem Header="LDC OPF">
+            </TabItem>-->
+            <!--<TabItem Header="LDC OPF">
                 <opfLdcControls:OPFLDCRunControl x:Name="myOPFLDCRunControl" />
-            </TabItem>
-            <!--<TabItem Header="TEP LDC">
-                <staticTEPControls:TEPLDCInspectControl />
             </TabItem>-->
             <TabItem Header="Scenario TEP LDC">
-                <scenarioTEPControls:ScenarioTEPLDCInspectControl x:Name="myScenarioTepLDCInspectControl" />
+                <scenarioTEPControls:ScenarioTEPLDCInspectControl DataContext="{Binding MyScenarioTepViewModel}" />
             </TabItem>
             <TabItem Header="Scenario TEP Enumeration">
-                <scenarioTEPControls:ScenarioTEPEnumerateControl />
+                <scenarioTEPControls:ScenarioTEPEnumerateControl DataContext="{Binding MyScenarioTepViewModel}" />
             </TabItem>
-            <TabItem Header="Second Order Scenario TEP Enumeration">
+            <!--<TabItem Header="Second Order Scenario TEP Enumeration">
                 <scenarioTEPControls:ScenarioTEP2ndOrderEnumerateControl />
-            </TabItem>
+            </TabItem>-->
         </TabControl>
         <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />
         <GroupBox Name="logExpander"  Header="Log" Grid.Row="3">

@@ -74,7 +74,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
             {
                 OpfResultsByBlock.Add(opfModel.BuildOPFModelResultsForLDC());
             }
-            LDCOPFModelResults MyDetailedLDCOPFModelResults = new LDCOPFModelResults(MyPowerSystem, status, ObjVal, DurationCurveBlocks, OpfResultsByBlock);
+            MyDetailedLDCOPFModelResults = new LDCOPFModelResults(MyPowerSystem, status, ObjVal, DurationCurveBlocks, OpfResultsByBlock);
             return MyDetailedLDCOPFModelResults;
         }
     }

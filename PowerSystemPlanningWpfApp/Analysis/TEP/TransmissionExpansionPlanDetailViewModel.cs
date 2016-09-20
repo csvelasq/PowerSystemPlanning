@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanningWpfApp.Analysis.TEP
+namespace PowerSystemPlanningWpfApp.Analysis
 {
     public class TransmissionExpansionPlanDetailViewModel : INotifyPropertyChanged
     {
@@ -23,6 +23,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.TEP
         }
 
         public BindingList<CandidateTransmissionLineForBinding> MyCandidateTransmissionLines { get; set; }
+
         /// <summary>
         /// Can be used to create a new transmission expansion plan.
         /// </summary>

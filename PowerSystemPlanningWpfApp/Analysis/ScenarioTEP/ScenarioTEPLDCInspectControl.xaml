@@ -63,7 +63,7 @@
                     <!--Operation costs under each scenario-->
                     <localUtils:ImageTextBlock Width="280" HorizontalAlignment="Left" Margin="0,5,0,0" DockPanel.Dock="Bottom"
                         MessageForTextBlock="Select one scenario in the above grid in order to see detailed OPF results (in the right panel)." />
-                    <localUtils:CustomDataGrid x:Name="dgScenarioTEPResults" ItemsSource="{Binding MyTEPDetailedResults.MyDetailedTEPResultsForEachScenario, Mode=OneWay}" AutoGenerateColumns="False" SelectedItem="{Binding CurrentlySelectedScenarioLDC}">
+                    <localUtils:CustomDataGrid x:Name="dgScenarioTEPResults" ItemsSource="{Binding MyTEPDetailedResults.MyDetailedTEPResultsForEachScenario, Mode=OneWay}" AutoGenerateColumns="False" SelectedItem="{Binding CurrentlySelectedScenarioLDC}" IsReadOnly="True">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="ContentTemplate">

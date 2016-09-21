@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="600" Background="White">
+             d:DesignHeight="400" d:DesignWidth="600" Background="White"
+             d:DataContext="{d:DesignInstance local:ScenarioTepViewModel}">
     <DockPanel LastChildFill="True">
         <!--Number of possible alternatives-->
-        <TextBlock DockPanel.Dock="Top">
+        <TextBlock DockPanel.Dock="Top" Margin="0,0,0,5">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} possible transmission expansion plans.">
                     <Binding Path="MyScenarioTEPModel.TransmissionExpansionPlansCount" />

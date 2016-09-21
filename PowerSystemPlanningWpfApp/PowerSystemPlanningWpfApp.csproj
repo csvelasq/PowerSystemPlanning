@@ -168,7 +168,7 @@
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ControlUtils\MyCommands.cs" />
+    <Compile Include="ControlUtils\MyCommands_DgDblClick.cs" />
     <Compile Include="Model\CandidateTransmissionLinesEditorControl.xaml.cs">
       <DependentUpon>CandidateTransmissionLinesEditorControl.xaml</DependentUpon>
     </Compile>
@@ -243,9 +243,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ControlUtils\ClipboardHelper2.cs" />
-    <Compile Include="ControlUtils\CsvHelper.cs" />
-    <Compile Include="ControlUtils\CustomDataGrid.cs" />
+    <Compile Include="ControlUtils\CustomDg\ClipboardHelper2.cs" />
+    <Compile Include="ControlUtils\CustomDg\CsvHelper.cs" />
+    <Compile Include="ControlUtils\CustomDg\CustomDataGrid.cs" />
     <Compile Include="ControlUtils\RecentFileList.cs" />
     <Compile Include="ControlUtils\SimpleTerminal.xaml.cs">
       <DependentUpon>SimpleTerminal.xaml</DependentUpon>

@@ -96,9 +96,9 @@
             <TabItem Header="Scenario TEP Enumeration">
                 <scenarioTEPControls:ScenarioTEPEnumerateControl DataContext="{Binding MyScenarioTepViewModel}" />
             </TabItem>
-            <!--<TabItem Header="Second Order Scenario TEP Enumeration">
-                <scenarioTEPControls:ScenarioTEP2ndOrderEnumerateControl />
-            </TabItem>-->
+            <TabItem Header="Second Order Scenario TEP Enumeration">
+                <scenarioTEPControls:ScenarioTEP2ndOrderEnumerateControl DataContext="{Binding MyScenarioTepViewModel}" />
+            </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />
         <GroupBox Name="logExpander"  Header="Log" Grid.Row="3">

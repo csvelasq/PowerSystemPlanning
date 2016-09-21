@@ -71,7 +71,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
                 }
             }
         }
-        
+
         public OPFLDCViewModel MyOPFLDCViewModel { get; private set; }
 
         public ICommand SolveScenarioLDCOPFCommand { get; private set; }
@@ -111,9 +111,8 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         {
             MyOPFLDCViewModel = new OPFLDCViewModel();
             SolveScenarioLDCOPFCommand = new DelegateCommand(SolveScenarioLDCOPF);
-            TEPlansAreEnumerated = false;
             EnumerateTransmissionExpansionPlans = new DelegateCommand(RunEnumerateTransmissionExpansionPlans);
-            //EvaluateEnumeratedTransmissionExpansionPlans = new DelegateCommand(RunEvaluateEnumeratedTransmissionExpansionPlans, CanExecuteEvaluateEnumeratedTransmissionExpansionPlans);
+            EvaluateEnumeratedTransmissionExpansionPlans = new DelegateCommand(RunEvaluateEnumeratedTransmissionExpansionPlans);
         }
 
         public ScenarioTepViewModel(ScenarioTEPModel s) : this()
@@ -129,19 +128,24 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
             MyTEPDetailedResults = MyTransmissionExpansionPlan.EvaluateScenarios(true);
         }
 
-        bool TEPlansAreEnumerated;
         public void RunEnumerateTransmissionExpansionPlans()
         {
             AllTEPAlternatives = MyScenarioTEPModel.EnumerateAlternativeTransmissionExpansionPlans();
-            TEPlansAreEnumerated = true;
         }
-
+        
         public void RunEvaluateEnumeratedTransmissionExpansionPlans()
         {
+            //Evaluate the alternatives
+            foreach (var tePlan in AllTEPAlternatives)
+            {
+                //Evaluate the current alternative, building detailed results
+                tePlan.EvaluateScenarios(false);
+            }
+            //Fire event to enable view to generate as many columns as necessary
+            if (OnAllTepAlternativesEvaluated != null)
+                OnAllTepAlternativesEvaluated();
         }
-        public bool CanExecuteEvaluateEnumeratedTransmissionExpansionPlans()
-        {
-            return TEPlansAreEnumerated;
-        }
+
+        public event Action OnAllTepAlternativesEvaluated;
     }
 }

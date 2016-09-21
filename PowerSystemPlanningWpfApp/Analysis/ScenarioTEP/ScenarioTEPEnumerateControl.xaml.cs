@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,37 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
     /// </summary>
     public partial class ScenarioTEPEnumerateControl : UserControl
     {
+        ScenarioTepViewModel MyScenarioTepViewModel { get { return (ScenarioTepViewModel)DataContext; } }
+
         public ScenarioTEPEnumerateControl()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (MyScenarioTepViewModel != null)
+            {
+                MyScenarioTepViewModel.OnAllTepAlternativesEvaluated += AllTepAlternativesEvaluated;
+            }
+        }
+
+        void AllTepAlternativesEvaluated()
+        {
+            var scenarios = MyScenarioTepViewModel.MyScenarioTEPModel.MyScenarios;
+            for (int i = 0; i < scenarios.Count; i++)
+            {
+                var mybinding = new Binding(String.Format("ObjectiveValues[{0}]", i));
+                mybinding.StringFormat = "C";
+                var col = new DataGridTextColumn
+                {
+                    Header = "Operation Costs in '" + scenarios[i].Name + "'",
+                    Binding = mybinding,
+                    Width = 110
+                };
+                col.ElementStyle = (Style)Application.Current.FindResource("CellRightAlign");
+                dgTEPEnum.Columns.Add(col);
+            }
         }
     }
 }

@@ -14,13 +14,11 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
     {
         public CustomDataGrid() : base()
         {
+            //My own custom default style for datagrids
             Margin = new Thickness(0, 3, 0, 3);
             AlternatingRowBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightBlue"));
-            //ColumnHeaderStyle = new Style(typeof(DataGridColumnHeader));
-            //ColumnHeaderStyle.Setters.Add(new Setter());
-            // TODO wrap column header; stop doing it in XAML each time the control is used
+            ColumnHeaderStyle = (Style)Application.Current.FindResource("DgColumnHeaderWrap");
         }
-
         public event ExecutedRoutedEventHandler ExecutePasteEvent;
         public event CanExecuteRoutedEventHandler CanExecutePasteEvent;
 
@@ -89,11 +87,9 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
             // parse the clipboard data            
             List<string[]> rowData = ClipboardHelper2.ParseClipboardData();
 
-            // TODO Paste from excel only a subset of columns
-            int displayIndexSelectedColumn = (target as CustomDataGrid).CurrentColumn.DisplayIndex;
-
             bool hasAddedNewRow = false;
 
+            // call OnPastingCellClipboardContent for each cell
             int minRowIndex = Items.IndexOf(CurrentItem);
             int maxRowIndex = Items.Count - 1;
             int minColumnDisplayIndex = (SelectionUnit != DataGridSelectionUnit.FullRow) ? Columns.IndexOf(CurrentColumn) : 0;
@@ -112,6 +108,8 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
                     {
                         DataGridColumn column = ColumnFromDisplayIndex(j);
                         column.OnPastingCellClipboardContent(Items[i], rowData[rowDataIndex][columnDataIndex]);
+
+                        //column.OnPastingCellClipboardContent(
                     }
 
                     CommitEditCommand.Execute(this, this);

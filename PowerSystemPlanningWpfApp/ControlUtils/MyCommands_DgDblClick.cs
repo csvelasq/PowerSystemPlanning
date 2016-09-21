@@ -10,10 +10,10 @@ using System.Windows.Input;
 namespace PowerSystemPlanningWpfApp.ControlUtils
 {
     // Enables double-click in datagrids: code from https://social.msdn.microsoft.com/Forums/vstudio/en-US/632ea875-a5b8-4d47-85b3-b30f28e0b827/mousedouble-click-or-singleclick-on-datagrid-in-mvvm-how-can-i-do-that?forum=wpf
-    public static class MyCommands
+    public static class MyCommands_DgDblClick
     {
         public static readonly DependencyProperty DataGridDoubleClickProperty =
-          DependencyProperty.RegisterAttached("DataGridDoubleClickCommand", typeof(ICommand), typeof(MyCommands),
+          DependencyProperty.RegisterAttached("DataGridDoubleClickCommand", typeof(ICommand), typeof(MyCommands_DgDblClick),
                             new PropertyMetadata(new PropertyChangedCallback(AttachOrRemoveDataGridDoubleClickEvent)));
 
         public static ICommand GetDataGridDoubleClickCommand(DependencyObject obj)

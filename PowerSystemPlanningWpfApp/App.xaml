@@ -9,7 +9,18 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Simple Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="CellRightAlign">
+                <Setter Property="Control.HorizontalAlignment" Value="Right" />
+            </Style>
+            <Style x:Key="DgColumnHeaderWrap" TargetType="DataGridColumnHeader">
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
-
     </Application.Resources>
 </Application>

@@ -1,7 +1,9 @@
 ﻿using PowerSystemPlanning.Solvers.LDCOPF;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,8 +16,19 @@ namespace PowerSystemPlanning.PlanningModels.Planning
     /// This class is intended to be constructed with a predefined set of transmission lines to be built (selected among all candidate transmission lines), in order to evaluate the pareto-frontier of future planning under scenario uncertainty. The performance of this transmission expansion plan under various future scenarios can be evaluated by calling <see cref="EvaluateObjectives"/>, which returns, for each scenario evaluated, to total investment costs plus the present value of total operation costs under each scenario (discounted at the rate given by <see cref="MyScenarioTEPModel"/>).
     /// Detailed results are avilable in <see cref="MyDetailedTEPScenariosResults"/> after calling <see cref="BuildDetailedTEPScenariosResults+"/>.
     /// </remarks>
-    public class TransmissionExpansionPlan : IMultiObjectiveIndividual
+    public class TransmissionExpansionPlan : IMultiObjectiveIndividual, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Example implementation from: https://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged(v=vs.110).aspx
+        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         public ScenarioTEPModel MyScenarioTEPModel { get; protected set; }
 
         /// <summary>
@@ -122,6 +135,12 @@ namespace PowerSystemPlanning.PlanningModels.Planning
                 //expected total costs
                 ExpectedTotalCosts += totC * scenarioToEval.Probability;
             }
+            //Notify Property Changes
+            // TODO implement in each property
+            NotifyPropertyChanged("ScenariosOperationCosts");
+            NotifyPropertyChanged("PresentValueScenariosTotalCosts");
+            NotifyPropertyChanged("ObjectiveValues");
+            NotifyPropertyChanged("ExpectedTotalCosts");
             //Results
             if (buildDetailedResults)
             {

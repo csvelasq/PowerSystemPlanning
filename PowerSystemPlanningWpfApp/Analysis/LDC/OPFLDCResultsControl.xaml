@@ -68,7 +68,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <localUtils:CustomDataGrid ItemsSource="{Binding MyLDCOPFModelResults.MyOpfResultsByBlock}" AutoGenerateColumns="False"
                                                SelectedItem="{Binding CurrentlySelectedLoadBlockResults}" SelectionMode="Single" SelectionUnit="FullRow" 
-                                               localUtils:MyCommands.DataGridDoubleClickCommand="{Binding DgLDC_DoubleClick}"
+                                               localUtils:MyCommands_DgDblClick.DataGridDoubleClickCommand="{Binding DgLDC_DoubleClick}"
                                                IsReadOnly="True">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">

@@ -41,16 +41,20 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
             var scenarios = MyScenarioTepViewModel.MyScenarioTEPModel.MyScenarios;
             for (int i = 0; i < scenarios.Count; i++)
             {
-                var mybinding = new Binding(String.Format("ObjectiveValues[{0}]", i));
-                mybinding.StringFormat = "C";
-                var col = new DataGridTextColumn
+                string myheader = "Operation Costs in '" + scenarios[i].Name + "'";
+                if (dgTEPEnum.Columns.Where(c => ((string)c.Header) == myheader).Count() == 0)
                 {
-                    Header = "Operation Costs in '" + scenarios[i].Name + "'",
-                    Binding = mybinding,
-                    Width = 110
-                };
-                col.ElementStyle = (Style)Application.Current.FindResource("CellRightAlign");
-                dgTEPEnum.Columns.Add(col);
+                    var mybinding = new Binding(String.Format("ObjectiveValues[{0}]", i));
+                    mybinding.StringFormat = "C";
+                    var col = new DataGridTextColumn
+                    {
+                        Header = myheader,
+                        Binding = mybinding,
+                        Width = 110
+                    };
+                    col.ElementStyle = (Style)Application.Current.FindResource("CellRightAlign");
+                    dgTEPEnum.Columns.Add(col);
+                }
             }
         }
     }

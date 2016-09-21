@@ -46,6 +46,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <!--total expected costs-->
                         <Label Content="Total expected costs (MMUS$):" Grid.Column="0" Grid.Row="0" />
@@ -59,6 +60,9 @@
                         <!--total operation costs-->
                         <Label Content="Total operation costs (MMUS$):" Grid.Column="0" Grid.Row="3" />
                         <TextBox Text="{Binding MyTEPDetailedResults.FVTotalOperationCosts, StringFormat=C, Mode=OneWay}" Width="80" Height="20" Grid.Column="1" Grid.Row="3" />
+                        <!--Operation Costs Present Value Factor-->
+                        <Label Content="Operation Costs Present Value Factor:" Grid.Column="0" Grid.Row="4" />
+                        <TextBox Text="{Binding MyScenarioTEPModel.OperationPresentValueFactor, StringFormat=N5, Mode=OneWay}" Width="80" Height="20" Grid.Column="1" Grid.Row="4" />
                     </Grid>
                     <!--Operation costs under each scenario-->
                     <localUtils:ImageTextBlock Width="280" HorizontalAlignment="Left" Margin="0,5,0,0" DockPanel.Dock="Bottom"
@@ -79,7 +83,9 @@
                             <DataGridTextColumn Header="Scenario Name" Binding="{Binding ScenarioEvaluated.Name}" Width="60" />
                             <DataGridTextColumn Header="Scenario Probability" Binding="{Binding ScenarioEvaluated.Probability, StringFormat=p0}" Width="70" />
                             <DataGridTextColumn Header="Operation Cost (MMUS$)" Binding="{Binding ScenarioOperationCosts, StringFormat=C}" Width="110" />
+                            <DataGridTextColumn Header="PV of Operation Cost (MMUS$)" Binding="{Binding PresentValueScenarioOperationCosts, StringFormat=C}" Width="110" />
                             <DataGridTextColumn Header="Probability-Weighted Operation Cost (MMUS$)" Binding="{Binding ProbabilityWeightedScenarioOperationCosts, StringFormat=C}" Width="130" />
+                            <DataGridTextColumn Header="PV of Probability-Weighted Operation Cost (MMUS$)" Binding="{Binding ProbabilityWeightedPVScenarioOperationCosts, StringFormat=C}" Width="130" />
                         </DataGrid.Columns>
                     </localUtils:CustomDataGrid>
                 </DockPanel>

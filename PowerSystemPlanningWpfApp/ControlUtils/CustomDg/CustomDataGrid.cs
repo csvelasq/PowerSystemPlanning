@@ -18,6 +18,7 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
             Margin = new Thickness(0, 3, 0, 3);
             AlternatingRowBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightBlue"));
             ColumnHeaderStyle = (Style)Application.Current.FindResource("DgColumnHeaderWrap");
+            ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
         }
         public event ExecutedRoutedEventHandler ExecutePasteEvent;
         public event CanExecuteRoutedEventHandler CanExecutePasteEvent;

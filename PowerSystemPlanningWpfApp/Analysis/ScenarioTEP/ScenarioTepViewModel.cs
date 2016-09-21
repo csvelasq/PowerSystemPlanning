@@ -135,6 +135,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         
         public void RunEvaluateEnumeratedTransmissionExpansionPlans()
         {
+            AllTEPAlternatives = MyScenarioTEPModel.EnumerateAlternativeTransmissionExpansionPlans();
             //Evaluate the alternatives
             foreach (var tePlan in AllTEPAlternatives)
             {

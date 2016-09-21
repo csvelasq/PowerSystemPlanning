@@ -107,18 +107,31 @@ namespace PowerSystemPlanning.PlanningModels
         /// </summary>
         /// <remarks>
         /// It is assumed that operation costs are calculated for the <see cref="TargetPlanningYear"/>=N, 
-        /// and these costs remain unchanged for <see cref="YearsWithOperation"/>=M more years.
-        /// Hence, the formula for transforming these yearly operation costs into present value is:
+        /// and these costs remain unchanged for <see cref="YearsWithOperation"/>=M more years. 
+        /// The costs incurred in year N are considered to be a cash-flow received at the beginning of year N,
+        /// so these costs are discounted by \f$ \frac{1}{(1+r)^N} \f$.
+        /// 
+        /// The value of the costs incurred between years \f$ N+1 \f$ and \f$ N+M \f$, in year \f$ N \f$, is:
         /// \f[
-        ///     \frac{1}{(1+r)^N} \cdot \left[ \frac{1}{r} \cdot \left(1 - (1+r)^{-M}\right) \right]
+        ///     \sum_{t=1}^{M} \frac{1}{(1+r)^t} = \frac{1-(1+r)^{-(M-1)}}{r}
+        /// \f]
+        /// Note that costs incurred in year M are accounted for at the beginning of year M. 
+        /// So as not to count the year 0, these costs must be discounted \f$ M-1 \f$ years.
+        /// 
+        /// That value (in \f$ t=N \f$) is brought to present value along with the costs incurred in year \f$ N \f$, 
+        /// yielding the following factor used to transform yearly operation costs into present value:
+        /// \f[
+        ///     \frac{1}{(1+r)^N} \cdot \left( 1 + \frac{1-(1+r)^{-(M-1)}}{r} \right)
         /// \f]
         /// </remarks>
         public double OperationPresentValueFactor
         {
             get
             {
-                return Math.Pow(YearlyDiscountFactor, TargetPlanningYear) * 
-                    (1 - Math.Pow(YearlyDiscountFactor, YearsWithOperation)) / YearlyDiscountRate;
+                var d = YearlyDiscountFactor;
+                var p1 = 1 + (1 - Math.Pow(d, YearsWithOperation - 1)) / YearlyDiscountRate;
+                var factor = Math.Pow(d, TargetPlanningYear) * p1;
+                return factor;
             }
         }
 

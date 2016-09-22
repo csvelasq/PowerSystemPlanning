@@ -58,5 +58,31 @@ namespace PowerSystemPlanning.PlanningModels
             AllTransmissionLines.AddRange(myPowerSystem.TransmissionLines);
             AllTransmissionLines.AddRange(builtTransmissionLines);
         }
+
+        public static PowerSystem ClonePWSAndAddCandidateLines(PowerSystem pws, IList<CandidateTransmissionLine> candidates)
+        {
+            PowerSystem r = new PowerSystem();
+            r._GeneratingUnits = pws._GeneratingUnits;
+            r._InelasticLoads = pws._InelasticLoads;
+            r.LoadSheddingCost = pws.LoadSheddingCost;
+            //Copy nodes
+            r._Nodes = new System.ComponentModel.BindingList<Node>();
+            foreach (var originalNode in pws._Nodes)
+            {
+                var newNode = new Node(r, originalNode);
+                r._Nodes.Add(newNode);
+            }
+            //Copy transmission lines (existing and candidate)
+            r._TransmissionLines = new System.ComponentModel.BindingList<TransmissionLine>();
+            foreach (var tl in pws._TransmissionLines)
+            {
+                r._TransmissionLines.Add(tl);
+            }
+            foreach (var alt in candidates)
+            {
+                r._TransmissionLines.Add(alt);
+            }
+            return r;
+        }
     }
 }

@@ -21,16 +21,13 @@ namespace PowerSystemPlanning.PlanningModels
             get { return PowerSystemNodes; }
         }
 
-        IList<CandidateTransmissionLine> CandidateTransmissionLines;
-
         public CandidateTransmissionLine() : base() { }
 
-        public CandidateTransmissionLine(IList<Node> powerSystemNodes, IList<CandidateTransmissionLine> candidateTransmissionLines)
+        public CandidateTransmissionLine(IList<Node> powerSystemNodes, int id)
         {
             PowerSystemNodes = powerSystemNodes;
-            CandidateTransmissionLines = candidateTransmissionLines;
             MyPowerSystem = null;
-            Id = CandidateTransmissionLines.Count;
+            Id = id;
         }
     }
 }

@@ -147,8 +147,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
                 tePlan.EvaluateScenarios(false);
             }
             //Fire event to enable view to generate as many columns as necessary
-            if (OnAllTepAlternativesEvaluated != null)
-                OnAllTepAlternativesEvaluated();
+            OnAllTepAlternativesEvaluated?.Invoke();
         }
 
         public event Action OnAllTepAlternativesEvaluated;

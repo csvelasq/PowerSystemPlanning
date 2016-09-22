@@ -94,9 +94,9 @@
             <TabItem Header="Scenario TEP LDC">
                 <scenarioTEPControls:ScenarioTEPLDCInspectControl DataContext="{Binding MyScenarioTepViewModel}" />
             </TabItem>
-            <TabItem Header="Scenario TEP Enumeration">
+            <!--<TabItem Header="Scenario TEP Enumeration">
                 <scenarioTEPControls:ScenarioTEPEnumerateControl DataContext="{Binding MyScenarioTepViewModel}" />
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="Second Order Scenario TEP Enumeration">
                 <paretoBruteForceTEPControls:ScenarioTEP2ndOrderEnumerateControl DataContext="{Binding MyScenarioTEPParetoViewModel}" />
             </TabItem>

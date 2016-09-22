@@ -26,7 +26,6 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         public ScenarioTEPEnumerateControl()
         {
             InitializeComponent();
-            //DataContextChanged += UserControl_DataContextChanged;
         }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -39,6 +38,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
 
         void AllTepAlternativesEvaluated()
         {
+            // TODO http://stackoverflow.com/questions/15549193/is-it-possible-to-get-dynamic-columns-on-wpf-datagrid-in-mvvm-pattern
             var scenarios = MyScenarioTepViewModel.MyScenarioTEPModel.MyScenarios;
             for (int i = 0; i < scenarios.Count; i++)
             {

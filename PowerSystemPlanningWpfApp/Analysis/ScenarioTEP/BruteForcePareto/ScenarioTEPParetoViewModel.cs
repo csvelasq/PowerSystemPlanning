@@ -1,6 +1,8 @@
 ﻿using PowerSystemPlanning.MultiObjective;
 using PowerSystemPlanning.PlanningModels;
+using PowerSystemPlanning.PlanningModels.Planning;
 using PowerSystemPlanning.Solvers.ScenarioTEP;
+using PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -24,6 +26,19 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto
                 SetProperty<ScenarioTEPModel>(ref _MyScenarioTEPModel, value);
                 MyParetoBuilder = new ScenarioTEPMOOParetoBruteForce(MyScenarioTEPModel);
                 TepAlternativesInParetoFront = null;
+                AllPossibleTEPAlternatives = null;
+                ObjectiveFunctionsName = (from function in MyParetoBuilder.MyTEPMOOProblem.MyObjectiveFunctionsDefinition
+                                          select function.MyObjectiveName);
+            }
+        }
+
+        private IEnumerable<string> _ObjectiveFunctionsName;
+        public IEnumerable<string> ObjectiveFunctionsName
+        {
+            get { return _ObjectiveFunctionsName; }
+            set
+            {
+                SetProperty<IEnumerable<string>>(ref _ObjectiveFunctionsName, value);
             }
         }
 
@@ -52,8 +67,27 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto
             set
             {
                 SetProperty<BaseMultiObjectiveIndividualList>(ref _TepAlternativesInParetoFront, value);
+                if (TepAlternativesInParetoFront != null && TepAlternativesInParetoFront.Count > 0)
+                    ParetoAlternativesViewModel.TepAlternatives =
+                        (from alt in TepAlternativesInParetoFront
+                         select (TransmissionExpansionPlan)alt);
             }
         }
+
+        public ScenarioTepAlternativesEnumControlViewModel ParetoAlternativesViewModel { get; set; }
+
+        private List<TransmissionExpansionPlan> _AllPossibleTEPAlternatives;
+        public List<TransmissionExpansionPlan> AllPossibleTEPAlternatives
+        {
+            get { return _AllPossibleTEPAlternatives; }
+            set
+            {
+                SetProperty<List<TransmissionExpansionPlan>>(ref _AllPossibleTEPAlternatives, value);
+                AllAlternativesViewModel.TepAlternatives = AllPossibleTEPAlternatives;
+            }
+        }
+
+        public ScenarioTepAlternativesEnumControlViewModel AllAlternativesViewModel { get; set; }
 
         public ICommand BuildParetoFrontier { get; private set; }
         public ICommand DgTepPareto_DoubleClick { get; private set; }
@@ -62,12 +96,15 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto
         {
             BuildParetoFrontier = new DelegateCommand(RunBuildParetoFrontier);
             DgTepPareto_DoubleClick = new DelegateCommand(RunDgTepPareto_DoubleClick);
+            AllAlternativesViewModel = new ScenarioTepAlternativesEnumControlViewModel();
+            ParetoAlternativesViewModel = new ScenarioTepAlternativesEnumControlViewModel();
         }
 
         private void RunBuildParetoFrontier()
         {
             MyParetoBuilder.Solve();
             TepAlternativesInParetoFront = MyParetoBuilder.ParetoFront;
+            AllPossibleTEPAlternatives = MyParetoBuilder.AllPossibleTEPAlternatives;
         }
 
         private void RunDgTepPareto_DoubleClick()

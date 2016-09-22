@@ -34,6 +34,10 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// </summary>
         protected GRBVar[] PFlow;
         /// <summary>
+        /// A map from the ID of each transmission lines to the position on the <see cref="PFlow"/> array.
+        /// </summary>
+        protected Dictionary<int,int> PFlow_TLsIDs;
+        /// <summary>
         /// Load shedding (in MW).
         /// </summary>
         /// <remarks>Including load shedding in the model allows it to be always feasible with null power flows in every branch.</remarks>
@@ -153,11 +157,13 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected void AddGRBVarsPFlow()
         {
+            PFlow_TLsIDs = new Dictionary<int, int>();
             PFlow = new GRBVar[MyPowerSystem.TransmissionLines.Count];
             for (int i = 0; i < MyPowerSystem.TransmissionLines.Count; i++)
             {
                 TransmissionLine tl = MyPowerSystem.TransmissionLines[i];
                 PFlow[i] = MyGrbModel.AddVar(-tl.ThermalCapacityMW, tl.ThermalCapacityMW, 0, GRB.CONTINUOUS, "PFlow" + tl.Id);
+                PFlow_TLsIDs.Add(tl.Id, i);
             }
         }
 
@@ -210,11 +216,11 @@ namespace PowerSystemPlanning.Solvers.OPF
                 }
                 foreach (TransmissionLine tl in node.IncomingTransmissionLines)
                 {
-                    powerBalanceLHS.AddTerm(+1, PFlow[tl.Id]); //incoming power flow
+                    powerBalanceLHS.AddTerm(+1, PFlow[PFlow_TLsIDs[tl.Id]]); //incoming power flow
                 }
                 foreach (TransmissionLine tl in node.OutgoingTransmissionLines)
                 {
-                    powerBalanceLHS.AddTerm(-1, PFlow[tl.Id]); //outgoing power flow
+                    powerBalanceLHS.AddTerm(-1, PFlow[PFlow_TLsIDs[tl.Id]]); //outgoing power flow
                 }
                 GRBLinExpr powerBalanceRHS = new GRBLinExpr();
                 powerBalanceRHS.AddConstant(node.TotalLoad);

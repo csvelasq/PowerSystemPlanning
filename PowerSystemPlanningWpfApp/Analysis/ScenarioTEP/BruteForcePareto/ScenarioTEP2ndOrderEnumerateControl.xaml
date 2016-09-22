@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto"
+             xmlns:enumControl="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="600" Background="White"
+             d:DesignHeight="400" d:DesignWidth="1000" Background="White"
              d:DataContext="{d:DesignInstance local:ScenarioTEPParetoViewModel}">
     <DockPanel LastChildFill="True">
-        <!--Number of possible alternatives-->
         <!--Number of possible alternatives-->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"  Margin="0,0,0,5">
             <TextBlock Text="{Binding MyScenarioTEPModel.TransmissionExpansionPlansCount}" />
@@ -23,18 +23,28 @@
             </StackPanel>
         </Button>
         <localUtils:ImageTextBlock MessageForTextBlock="Building the pareto-frontier by exhaustive enumeration is computationally expensive." Margin="0,5,0,5" DockPanel.Dock="Top" />
-        <!--Enumeration/evaluation results-->
-        <localUtils:ImageTextBlock MessageForTextBlock="Double-click one plan from the above grid in order to inspect details." Margin="0,5,0,5" DockPanel.Dock="Bottom" />
-        <localUtils:CustomDataGrid ItemsSource="{Binding TepAlternativesInParetoFront, Mode=OneWay}" AutoGenerateColumns="False" IsReadOnly="True"
-                                   localUtils:MyCommands_DgDblClick.DataGridDoubleClickCommand="{Binding DgTepPareto_DoubleClick}" x:Name="dgTEPParetoFront">
-            <DataGrid.Columns>
-                <!--<DataGridTextColumn Header="Plan Id" Binding="{Binding PlanId}" />-->
-                <DataGridTextColumn Header="New Transmission Lines Count" Binding="{Binding BuiltTransmissionLines.Count}" Width="110" />
-                <DataGridTextColumn Header="Investment Cost (MUS$)" Binding="{Binding TotalInvestmentCost}" Width="90" />
-                <DataGridTextColumn Header="Transmission lines" Binding="{Binding BuiltTransmissionLinesNames}" Width="90" />
-                <DataGridTextColumn Header="Expected costs (MMUS$)" Binding="{Binding ExpectedTotalCosts, StringFormat=C}" Width="90" ElementStyle="{StaticResource ResourceKey=CellRightAlign}" />
-                <!--Total costs under each scenario will be bind by the view's code-behind-->
-            </DataGrid.Columns>
-        </localUtils:CustomDataGrid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--Pareto Frontier results-->
+            <GroupBox Header="Pareto Frontier" Grid.Column="0">
+                <DockPanel>
+                    <!--Number of elements in pareto frontier-->
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <Label Content="Solutions in Pareto Frontier:" />
+                        <Label Content="{Binding TepAlternativesInParetoFront.Count}" />
+                    </StackPanel>
+                    <enumControl:ScenarioTepAlternativesEnumControl DataContext="{Binding ParetoAlternativesViewModel}" />
+                </DockPanel>
+            </GroupBox>
+            <!--Enumeration/evaluation results-->
+            <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" />
+            <GroupBox Header="All alternatives" Grid.Column="2">
+                <enumControl:ScenarioTepAlternativesEnumControl DataContext="{Binding AllAlternativesViewModel}" />
+            </GroupBox>
+        </Grid>
     </DockPanel>
 </UserControl>

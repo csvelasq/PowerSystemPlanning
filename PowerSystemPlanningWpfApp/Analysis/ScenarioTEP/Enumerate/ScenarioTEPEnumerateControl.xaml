@@ -33,6 +33,7 @@
         <localUtils:ImageTextBlock MessageForTextBlock="Enumerating and /or evaluating all possible plans might take a while..." Margin="0,5,0,5" DockPanel.Dock="Top" />
         <!--Enumeration/evaluation results-->
         <localUtils:ImageTextBlock MessageForTextBlock="Double-click one plan in the above grid in order to inspect details (a new window will open)." Margin="0,5,0,5" DockPanel.Dock="Bottom" />
+        <!--<enumControl:ScenarioTepAlternativesEnumControl DataContext="{Binding AllAlternativesViewModel}" />-->
         <localUtils:CustomDataGrid ItemsSource="{Binding AllTEPAlternatives, Mode=OneWay}" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgTEPEnum"
                                    localUtils:MyCommands_DgDblClick.DataGridDoubleClickCommand="{Binding DgTepEnum_DoubleClick}">
             <DataGrid.Columns>

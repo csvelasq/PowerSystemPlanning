@@ -21,7 +21,9 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
     /// Hence, this method is extremely inefficient.
     /// 
     /// To use this class, construct providing a scenario TEP model and then call <see cref="Solve"/>.
-    /// That method will enumerate, evaluate all alternatives, and then construct the pareto frontier.
+    /// That method will enumerate, evaluate all alternatives, and then construct the pareto frontier. 
+    /// The results are stored in <see cref="ParetoFront"/> and also in <see cref="AllPossibleTEPAlternatives"/>.
+    /// <see cref="Solve"/> can also be called after setting <see cref="AllPossibleTEPAlternatives"/>, on which case Solve will only produce the pareto frontier.
     /// </remarks>
     public class ScenarioTEPMOOParetoBruteForce : IPowerSystemSolver
     {
@@ -33,6 +35,11 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
         public ScenarioTEPModel MyScenarioTEPModel { get; protected set; }
 
         public MOOScenarioTEP MyTEPMOOProblem { get; set; }
+
+        /// <summary>
+        /// List of all possible expansion alternatives, evaluated under each scenario.
+        /// </summary>
+        public List<TransmissionExpansionPlan> AllPossibleTEPAlternatives { get; set; }
 
         public BaseMultiObjectiveIndividualList MOOAllPossibleTEPAlternatives { get; protected set; }
 
@@ -55,24 +62,26 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
             this.MySolverResults = new SolverResults(this.MyTEPMOOProblem.MyMOOName);
             this.MySolverResults.StartSolutionProcess();
             // Builds the model
-            //try
-            //{
-                List<TransmissionExpansionPlan> AllPossibleTEPAlternatives = MyScenarioTEPModel.EnumerateAlternativeTransmissionExpansionPlans();
-                foreach (var alternative in AllPossibleTEPAlternatives)
+            try
+            {
+                if (AllPossibleTEPAlternatives == null)
                 {
-                    alternative.EvaluateObjectives();
+                    AllPossibleTEPAlternatives = MyScenarioTEPModel.EnumerateAlternativeTransmissionExpansionPlans();
+                    foreach (var alternative in AllPossibleTEPAlternatives)
+                    {
+                        alternative.EvaluateObjectives();
+                    }
                 }
                 MOOAllPossibleTEPAlternatives = new BaseMultiObjectiveIndividualList(MyTEPMOOProblem);
                 MOOAllPossibleTEPAlternatives.AddRange(AllPossibleTEPAlternatives);
-                AllPossibleTEPAlternatives = null;
                 // Solves the model
                 ParetoFront = MOOAllPossibleTEPAlternatives.BuildParetoEfficientFrontier();
-            //}
-            //catch (Exception e)
-            //{
-            //    this.MySolverResults.StopFailedSolutionProcessWithException(e);
-            //    return;
-            //}
+            }
+            catch (Exception e)
+            {
+                this.MySolverResults.StopFailedSolutionProcessWithException(e);
+                return;
+            }
             // Finalizes result reporting
             this.MySolverResults.StopSuccessfulSolutionProcess(ParetoFront);
         }

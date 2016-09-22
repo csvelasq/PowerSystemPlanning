@@ -164,8 +164,11 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         public double EvaluateScenarioOperationCosts(PowerSystemScenario scenarioToEval, bool buildDetailedResults)
         {
             //builds the model
-            PowerSystemWithCandidateTransmissionLines MyPowerSystemWithCandidateTransmissionLines = new PowerSystemWithCandidateTransmissionLines(scenarioToEval.MyPowerSystem, BuiltTransmissionLines);
-            LDCOPFModel model = new LDCOPFModel(MyPowerSystemWithCandidateTransmissionLines, MyScenarioTEPModel.MyLoadDurationCurve);
+            //PowerSystemWithCandidateTransmissionLines MyPowerSystemWithCandidateTransmissionLines = new PowerSystemWithCandidateTransmissionLines(scenarioToEval.MyPowerSystem, BuiltTransmissionLines);
+            PowerSystem pws = PowerSystemWithCandidateTransmissionLines.ClonePWSAndAddCandidateLines(scenarioToEval.MyPowerSystem, BuiltTransmissionLines);
+            // TODO build pws only once, and then change the built transmission lines
+            // TODO encapsulate power system with a decorator pattern
+            LDCOPFModel model = new LDCOPFModel(pws, MyScenarioTEPModel.MyLoadDurationCurve);
             MyLDCOPFModelEachScenario.Add(model);
             // TODO implement an OPF optimization model where single parameters can be modified (instead of rebuilding the whole model on each call) via GRB.ChgCoeff(constr,var,newvalue)
             if (buildDetailedResults)

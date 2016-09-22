@@ -152,6 +152,10 @@
       <DependentUpon>ScenarioTEP2ndOrderEnumerateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Analysis\ScenarioTEP\BruteForcePareto\ScenarioTEPParetoViewModel.cs" />
+    <Compile Include="Analysis\ScenarioTEP\Enumerate\ScenarioTepAlternativesEnumControl.xaml.cs">
+      <DependentUpon>ScenarioTepAlternativesEnumControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ScenarioTEP\Enumerate\ScenarioTepAlternativesEnumControlViewModel.cs" />
     <Compile Include="Analysis\ScenarioTEP\Enumerate\ScenarioTEPEnumerateControl.xaml.cs">
       <DependentUpon>ScenarioTEPEnumerateControl.xaml</DependentUpon>
     </Compile>
@@ -169,6 +173,7 @@
       <DependentUpon>TransmissionExpansionPlanDetailsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Analysis\TEP\TransmissionExpansionPlanDetailViewModel.cs" />
+    <Compile Include="ControlUtils\CustomDg\DataGridColumnsBehavior.cs" />
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
     </Compile>
@@ -204,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Analysis\ScenarioTEP\BruteForcePareto\ScenarioTEP2ndOrderEnumerateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\ScenarioTEP\Enumerate\ScenarioTepAlternativesEnumControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

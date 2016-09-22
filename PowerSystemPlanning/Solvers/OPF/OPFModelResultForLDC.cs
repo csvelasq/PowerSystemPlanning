@@ -135,8 +135,8 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <remarks>This constructor can be used to find out if the model was correctly solved by means of the <see cref="IsModelSolved"/> property.</remarks>
         public OPFModelResultForLDC(int status) : base(status) { }
 
-        public OPFModelResultForLDC(IPowerSystem powerSystem, int status, double objVal, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice, LoadBlock loadBlock)
-            : base(powerSystem, status, objVal, pGen_Solution, pFlow_Solution, lShed_Solution, busAng_Solution, nodalSpotPrice)
+        public OPFModelResultForLDC(IPowerSystem powerSystem, int status, double objVal, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice, Dictionary<int, int> PFlow_TLsIDs, LoadBlock loadBlock)
+            : base(powerSystem, status, objVal, pGen_Solution, pFlow_Solution, lShed_Solution, busAng_Solution, nodalSpotPrice, PFlow_TLsIDs)
         {
             this.MyLoadBlock = loadBlock;
             //Generating units results

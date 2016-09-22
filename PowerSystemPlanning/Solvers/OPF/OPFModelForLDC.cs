@@ -69,11 +69,11 @@ namespace PowerSystemPlanning.Solvers.OPF
                 }
                 foreach (TransmissionLine tl in node.IncomingTransmissionLines)
                 {
-                    powerBalanceLHS.AddTerm(+1, PFlow[tl.Id]); //incoming power flow
+                    powerBalanceLHS.AddTerm(+1, PFlow[PFlow_TLsIDs[tl.Id]]); //incoming power flow
                 }
                 foreach (TransmissionLine tl in node.OutgoingTransmissionLines)
                 {
-                    powerBalanceLHS.AddTerm(-1, PFlow[tl.Id]); //outgoing power flow
+                    powerBalanceLHS.AddTerm(-1, PFlow[PFlow_TLsIDs[tl.Id]]); //outgoing power flow
                 }
                 GRBLinExpr powerBalanceRHS = new GRBLinExpr();
                 powerBalanceRHS.AddConstant(node.TotalLoad * LoadBlock.LoadMultiplier);
@@ -88,7 +88,7 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         public OPFModelResultForLDC BuildOPFModelResultsForLDC()
         {
-            MyOPFModelResultForLDC = new OPFModelResultForLDC(MyPowerSystem, GRBModelStatus, ObjVal, PGen_Solution, PFlow_Solution, LShed_Solution, BusAng_Solution, NodalSpotPrice, LoadBlock);
+            MyOPFModelResultForLDC = new OPFModelResultForLDC(MyPowerSystem, GRBModelStatus, ObjVal, PGen_Solution, PFlow_Solution, LShed_Solution, BusAng_Solution, NodalSpotPrice, PFlow_TLsIDs, LoadBlock);
             return MyOPFModelResultForLDC;
         }
     }

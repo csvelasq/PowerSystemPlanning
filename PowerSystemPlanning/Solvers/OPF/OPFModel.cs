@@ -255,7 +255,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <remarks>This method should be called upon successful solution of the model.</remarks>
         public OPFModelResult BuildOPFModelResults()
         {
-            MyOPFModelResult = new OPFModelResult(MyPowerSystem, GRBModelStatus, ObjVal, PGen_Solution, PFlow_Solution, LShed_Solution, BusAng_Solution, NodalSpotPrice);
+            MyOPFModelResult = new OPFModelResult(MyPowerSystem, GRBModelStatus, ObjVal, PGen_Solution, PFlow_Solution, LShed_Solution, BusAng_Solution, NodalSpotPrice, PFlow_TLsIDs);
             return MyOPFModelResult;
         }
     }

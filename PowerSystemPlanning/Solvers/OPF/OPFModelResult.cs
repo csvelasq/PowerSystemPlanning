@@ -77,7 +77,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <remarks>This constructor can be used to find out if the model was correctly solved by means of the <see cref="IsModelSolved"/> property.</remarks>
         public OPFModelResult(int status) : base(status) { }
 
-        public OPFModelResult(IPowerSystem powerSystem, int status, double objVal, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice)
+        public OPFModelResult(IPowerSystem powerSystem, int status, double objVal, double[] pGen_Solution, double[] pFlow_Solution, double[] lShed_Solution, double[] busAng_Solution, double[] nodalSpotPrice, Dictionary<int, int> PFlow_TLsIDs)
             : base(status, objVal)
         {
             this.PowerSystem = powerSystem;
@@ -91,7 +91,7 @@ namespace PowerSystemPlanning.Solvers.OPF
             this.TransmissionLineOPFResults = new List<TransmissionLineOPFResult>();
             foreach (TransmissionLine tl in this.PowerSystem.TransmissionLines)
             {
-                this.TransmissionLineOPFResults.Add(new TransmissionLineOPFResult(tl, pFlow_Solution[tl.Id]));
+                this.TransmissionLineOPFResults.Add(new TransmissionLineOPFResult(tl, pFlow_Solution[PFlow_TLsIDs[tl.Id]]));
             }
             //Nodes
             this.NodeOPFResults = new List<NodeOPFResult>();

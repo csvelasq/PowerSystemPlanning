@@ -26,6 +26,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         public ScenarioTEPEnumerateControl()
         {
             InitializeComponent();
+            //DataContextChanged += UserControl_DataContextChanged;
         }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

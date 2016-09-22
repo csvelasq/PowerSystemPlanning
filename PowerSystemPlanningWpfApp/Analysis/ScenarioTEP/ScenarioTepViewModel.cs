@@ -80,6 +80,8 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
 
         public ICommand EvaluateEnumeratedTransmissionExpansionPlans { get; private set; }
 
+        public ICommand DgTepEnum_DoubleClick { get; private set; }
+
         /// <summary>
         /// The results of evaluating the currently selected transmission expansion plan, under several future scenarios
         /// </summary>
@@ -113,6 +115,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
             SolveScenarioLDCOPFCommand = new DelegateCommand(SolveScenarioLDCOPF);
             EnumerateTransmissionExpansionPlans = new DelegateCommand(RunEnumerateTransmissionExpansionPlans);
             EvaluateEnumeratedTransmissionExpansionPlans = new DelegateCommand(RunEvaluateEnumeratedTransmissionExpansionPlans);
+            DgTepEnum_DoubleClick = new DelegateCommand(ShowDetailedTEPResultsForOneAlternative);
         }
 
         public ScenarioTepViewModel(ScenarioTEPModel s) : this()
@@ -123,7 +126,8 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         public void SolveScenarioLDCOPF()
         {
             // Build the plan
-            MyTransmissionExpansionPlan = new TransmissionExpansionPlan(MyTEPlanDetailViewModel.MySelectedCandidateTransmissionLines.ToList<CandidateTransmissionLine>(), MyScenarioTEPModel);
+            MyTransmissionExpansionPlan = new TransmissionExpansionPlan(MyTEPlanDetailViewModel.MySelectedCandidateTransmissionLines.ToList<CandidateTransmissionLine>(), MyScenarioTEPModel, 
+                new PowerSystemPlanning.Models.Planning.ScenarioTEP.MOOScenarioTEP(MyScenarioTEPModel));
             // Evaluate total costs under each scenario
             MyTEPDetailedResults = MyTransmissionExpansionPlan.EvaluateScenarios(true);
         }
@@ -132,7 +136,7 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         {
             AllTEPAlternatives = MyScenarioTEPModel.EnumerateAlternativeTransmissionExpansionPlans();
         }
-        
+
         public void RunEvaluateEnumeratedTransmissionExpansionPlans()
         {
             AllTEPAlternatives = MyScenarioTEPModel.EnumerateAlternativeTransmissionExpansionPlans();
@@ -148,5 +152,13 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
         }
 
         public event Action OnAllTepAlternativesEvaluated;
+
+        public void ShowDetailedTEPResultsForOneAlternative()
+        {
+            // TODO make this window show the selected plan
+            ScenarioTEPLDCInspectWindow tepDetailsWindow = new ScenarioTEPLDCInspectWindow();
+            tepDetailsWindow.DataContext = this;
+            tepDetailsWindow.Show();
+        }
     }
 }

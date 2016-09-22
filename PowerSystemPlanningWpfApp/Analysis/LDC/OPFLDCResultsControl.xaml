@@ -70,17 +70,6 @@
                                                SelectedItem="{Binding CurrentlySelectedLoadBlockResults}" SelectionMode="Single" SelectionUnit="FullRow" 
                                                localUtils:MyCommands_DgDblClick.DataGridDoubleClickCommand="{Binding DgLDC_DoubleClick}"
                                                IsReadOnly="True">
-                        <DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="ContentTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Duration [hours]" Binding="{Binding MyLoadBlock.Duration, StringFormat=N0}" Width="57" IsReadOnly="False" />
                             <DataGridTextColumn Header="Load multiplier" Binding="{Binding MyLoadBlock.LoadMultiplier, StringFormat=p0}" Width="70" />
@@ -88,7 +77,7 @@
                             <DataGridTextColumn Header="Total Energy Consumed (GWh)" Binding="{Binding TotalEnergyConsumed, StringFormat=N1}" IsReadOnly="True" Width="80" />
                             <DataGridTextColumn Header="Load Shedding (GWh)" Binding="{Binding TotalLoadSheddingEnergy, StringFormat=N1}" IsReadOnly="True" Width="70" />
                             <DataGridTextColumn Header="Total Operation Cost (MMUS$)" Binding="{Binding TotalOperationCost, StringFormat=C}" IsReadOnly="True" Width="80" />
-                            <DataGridTextColumn Header="Hourly Operation Cost (US$/h)" Binding="{Binding HourlyOperationCost, StringFormat=C}" IsReadOnly="True" Width="80" />
+                            <DataGridTextColumn Header="Hourly Operation Cost (US$/h)" Binding="{Binding HourlyOperationCost, StringFormat=C}" IsReadOnly="True" Width="85" />
                             <DataGridTextColumn Header="Average Nodal Spot Price (US$/MW)" Binding="{Binding AverageNodalSpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
                             <DataGridTextColumn Header="Maximum Nodal Spot Price (US$/MW)" Binding="{Binding MaximumNodalSpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
                             <DataGridTextColumn Header="Minimum Nodal Spot Price (US$/MW)" Binding="{Binding MinimumNodalSpotPrice, StringFormat=C}" IsReadOnly="True" Width="100" />
@@ -101,17 +90,6 @@
         <GroupBox Header="Nodal results" Grid.Row="3">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <localUtils:CustomDataGrid ItemsSource="{Binding MyLDCOPFModelResults.MyNodeLDCOPFResults}" AutoGenerateColumns="False" IsReadOnly="True">
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Node ID" Binding="{Binding NodeId}" IsReadOnly="True" Width="50" />
                         <DataGridTextColumn Header="Node Name" Binding="{Binding NodeName}" IsReadOnly="True" Width="50" />

@@ -1,6 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_view_model.html" title="View&#45;model for analizing results of the LDC OPF model (these results are already constructed, not built in this view&#45;model). " alt="" coords="160,5,380,47"/>
-<area shape="rect" id="node4" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p_1_1_scenario_tep_view_model.html" title="PowerSystemPlanningWpfApp.\lAnalysis.ScenarioTEP.ScenarioTep\lViewModel" alt="" coords="156,71,384,127"/>
-<area shape="rect" id="node5" href="$class_power_system_planning_wpf_app_1_1_main_window_view_model.html" title="PowerSystemPlanningWpfApp.\lMainWindowViewModel" alt="" coords="169,152,371,193"/>
-<area shape="rect" id="node3" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_run_o_p_f_l_d_c_view_model.html" title="PowerSystemPlanningWpfApp.\lAnalysis.LDC.RunOPFLDCViewModel" alt="" coords="432,5,675,47"/>
+<area shape="rect" id="node2" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_view_model.html" title="View&#45;model for analizing results of the LDC OPF model (these results are already constructed, not built in this view&#45;model). " alt="" coords="167,5,387,47"/>
+<area shape="rect" id="node4" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p_1_1_brute_force_pareto_1_1_scenario_t_e_p_pareto_view_model.html" title="PowerSystemPlanningWpfApp.\lAnalysis.ScenarioTEP.BruteForce\lPareto.ScenarioTEPParetoViewModel" alt="" coords="156,71,397,127"/>
+<area shape="rect" id="node5" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p_1_1_scenario_tep_view_model.html" title="PowerSystemPlanningWpfApp.\lAnalysis.ScenarioTEP.ScenarioTep\lViewModel" alt="" coords="163,151,391,207"/>
+<area shape="rect" id="node6" href="$class_power_system_planning_wpf_app_1_1_main_window_view_model.html" title="PowerSystemPlanningWpfApp.\lMainWindowViewModel" alt="" coords="175,232,378,273"/>
+<area shape="rect" id="node3" href="$class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_run_o_p_f_l_d_c_view_model.html" title="PowerSystemPlanningWpfApp.\lAnalysis.LDC.RunOPFLDCViewModel" alt="" coords="445,5,688,47"/>
 </map>

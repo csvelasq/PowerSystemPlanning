@@ -148,14 +148,18 @@
     <Compile Include="Analysis\OPF\OPFRunControl.xaml.cs">
       <DependentUpon>OPFRunControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analysis\ScenarioTEP\ScenarioTEP2ndOrderEnumerateControl.xaml.cs">
+    <Compile Include="Analysis\ScenarioTEP\BruteForcePareto\ScenarioTEP2ndOrderEnumerateControl.xaml.cs">
       <DependentUpon>ScenarioTEP2ndOrderEnumerateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analysis\ScenarioTEP\ScenarioTEPEnumerateControl.xaml.cs">
+    <Compile Include="Analysis\ScenarioTEP\BruteForcePareto\ScenarioTEPParetoViewModel.cs" />
+    <Compile Include="Analysis\ScenarioTEP\Enumerate\ScenarioTEPEnumerateControl.xaml.cs">
       <DependentUpon>ScenarioTEPEnumerateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectControl.xaml.cs">
       <DependentUpon>ScenarioTEPLDCInspectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectWindow.xaml.cs">
+      <DependentUpon>ScenarioTEPLDCInspectWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Analysis\ScenarioTEP\ScenarioTepViewModel.cs" />
     <Compile Include="Analysis\StaticTEP\TEPLDCInspectControl.xaml.cs">
@@ -199,15 +203,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Analysis\ScenarioTEP\ScenarioTEP2ndOrderEnumerateControl.xaml">
+    <Page Include="Analysis\ScenarioTEP\BruteForcePareto\ScenarioTEP2ndOrderEnumerateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Analysis\ScenarioTEP\ScenarioTEPEnumerateControl.xaml">
+    <Page Include="Analysis\ScenarioTEP\Enumerate\ScenarioTEPEnumerateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

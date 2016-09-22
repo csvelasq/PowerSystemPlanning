@@ -135,6 +135,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_power_system_planning_1_1_solvers_1_1_l_d_c_o_p_f_1_1_l_d_c_o_p_f_model_solver.html#a38ce2d4194488af6fd0d825c08104721">PowerSystemPlanning.Solvers.LDCOPF.LDCOPFModelSolver</a>
 , <a class="el" href="class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model_solver_for_l_d_c.html#a5e092f249108601427c48c0f48553b6e">PowerSystemPlanning.Solvers.OPF.OPFModelSolverForLDC</a>
 </li>
+<li>BuildParetoEfficientFrontier()
+: <a class="el" href="class_power_system_planning_1_1_multi_objective_1_1_base_multi_objective_individual_list.html#a773dc10cf021e297357159b45a4206aa">PowerSystemPlanning.MultiObjective.BaseMultiObjectiveIndividualList</a>
+</li>
 <li>BuildSolveAndDisposeModel()
 : <a class="el" href="class_power_system_planning_1_1_solvers_1_1_base_g_r_b_optimization_model.html#a302bd006c0a0c5f54580b73f38f212ec">PowerSystemPlanning.Solvers.BaseGRBOptimizationModel</a>
 </li>
@@ -145,6 +148,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Dispose()
 : <a class="el" href="class_power_system_planning_1_1_solvers_1_1_base_g_r_b_optimization_model.html#aea8e52b7125abd8ca7630157af49513b">PowerSystemPlanning.Solvers.BaseGRBOptimizationModel</a>
 </li>
+<li>Dominates()
+: <a class="el" href="class_power_system_planning_1_1_multi_objective_1_1_base_multi_objective_individual.html#a629020e210a5f8c529ee8b80dc40cfa3">PowerSystemPlanning.MultiObjective.BaseMultiObjectiveIndividual</a>
+, <a class="el" href="interface_power_system_planning_1_1_multi_objective_1_1_i_multi_objective_individual.html#a3df8a83d9fc536075644bbd0b4fcd614">PowerSystemPlanning.MultiObjective.IMultiObjectiveIndividual</a>
+</li>
 </ul>
 
 
@@ -153,8 +160,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_power_system_planning_1_1_planning_models_1_1_scenario_t_e_p_model.html#a8c5c89bd62b5a03d3b26b14bb3fa579e">PowerSystemPlanning.PlanningModels.ScenarioTEPModel</a>
 </li>
 <li>EvaluateObjectives()
-: <a class="el" href="interface_power_system_planning_1_1_planning_models_1_1_planning_1_1_i_multi_objective_individual.html#a740b2eda5caf882a550ea6c1c43c7a7d">PowerSystemPlanning.PlanningModels.Planning.IMultiObjectiveIndividual</a>
-, <a class="el" href="class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan.html#a622d07b3d957c6b48e0fe3173c26a95c">PowerSystemPlanning.PlanningModels.Planning.TransmissionExpansionPlan</a>
+: <a class="el" href="class_power_system_planning_1_1_multi_objective_1_1_base_multi_objective_individual.html#a0938e1bd5f90165ce1d41a4a1ee250fb">PowerSystemPlanning.MultiObjective.BaseMultiObjectiveIndividual</a>
+, <a class="el" href="interface_power_system_planning_1_1_multi_objective_1_1_i_multi_objective_individual.html#a89d82b6d5765304dd299d68672aa8f29">PowerSystemPlanning.MultiObjective.IMultiObjectiveIndividual</a>
+, <a class="el" href="class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan.html#ab7766ad9acabe9098d16c5579b9da1d0">PowerSystemPlanning.PlanningModels.Planning.TransmissionExpansionPlan</a>
 </li>
 <li>EvaluateScenarioOperationCosts()
 : <a class="el" href="class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan.html#a31078d234490a5d8e1c9768051822831">PowerSystemPlanning.PlanningModels.Planning.TransmissionExpansionPlan</a>
@@ -175,6 +183,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>InelasticLoad()
 : <a class="el" href="class_power_system_planning_1_1_inelastic_load.html#a47abae64f9f66d537230cdff873d9efa">PowerSystemPlanning.InelasticLoad</a>
+</li>
+<li>IsDominatedBy()
+: <a class="el" href="class_power_system_planning_1_1_multi_objective_1_1_base_multi_objective_individual.html#a4ced720d3dc328c6aa45f5dd054cb209">PowerSystemPlanning.MultiObjective.BaseMultiObjectiveIndividual</a>
+, <a class="el" href="interface_power_system_planning_1_1_multi_objective_1_1_i_multi_objective_individual.html#aa148a94763fe3c754da5175018863eb9">PowerSystemPlanning.MultiObjective.IMultiObjectiveIndividual</a>
 </li>
 </ul>
 
@@ -219,17 +231,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Solve()
 : <a class="el" href="class_power_system_planning_1_1_solvers_1_1_base_optimization_power_system_solver.html#a6569b84027dbafd7cccfe42a14bbd716">PowerSystemPlanning.Solvers.BaseOptimizationPowerSystemSolver</a>
 , <a class="el" href="interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html#a8c296a6bf289a4f39d63cbbb87e52565">PowerSystemPlanning.Solvers.IPowerSystemSolver</a>
+, <a class="el" href="class_power_system_planning_1_1_solvers_1_1_scenario_t_e_p_1_1_scenario_t_e_p_m_o_o_pareto_brute_force.html#a4acf236db867036f9822514a5e18e31a">PowerSystemPlanning.Solvers.ScenarioTEP.ScenarioTEPMOOParetoBruteForce</a>
 </li>
 <li>SolveAsync()
 : <a class="el" href="class_power_system_planning_1_1_solvers_1_1_base_optimization_power_system_solver.html#a8b2ca2b6e2b107b1eeeb3f574e3373ea">PowerSystemPlanning.Solvers.BaseOptimizationPowerSystemSolver</a>
 , <a class="el" href="interface_power_system_planning_1_1_solvers_1_1_i_power_system_solver.html#acaee56f3c9c709712ff33008d0869d91">PowerSystemPlanning.Solvers.IPowerSystemSolver</a>
+, <a class="el" href="class_power_system_planning_1_1_solvers_1_1_scenario_t_e_p_1_1_scenario_t_e_p_m_o_o_pareto_brute_force.html#a79f1d06a0fc226e36e6a8d8136a1ce0a">PowerSystemPlanning.Solvers.ScenarioTEP.ScenarioTEPMOOParetoBruteForce</a>
+</li>
+<li>StartSolutionProcess()
+: <a class="el" href="class_power_system_planning_1_1_solvers_1_1_solver_results.html#a09becd189b9dbcc8b9eded1eb673e01e">PowerSystemPlanning.Solvers.SolverResults</a>
+</li>
+<li>StopFailedSolutionProcessWithException()
+: <a class="el" href="class_power_system_planning_1_1_solvers_1_1_solver_results.html#a0fdb1cdfcaf1519bbb889037209688d4">PowerSystemPlanning.Solvers.SolverResults</a>
+</li>
+<li>StopSolutionProcess()
+: <a class="el" href="class_power_system_planning_1_1_solvers_1_1_solver_results.html#a9752d5c6db684070ea889c649d86a0c9">PowerSystemPlanning.Solvers.SolverResults</a>
+</li>
+<li>StopSuccessfulSolutionProcess()
+: <a class="el" href="class_power_system_planning_1_1_solvers_1_1_solver_results.html#a37a3a106c9236f67daf80fede466fa3d">PowerSystemPlanning.Solvers.SolverResults</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
 <li>TransmissionExpansionPlan()
-: <a class="el" href="class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan.html#a315853af2f0450523915ab2a4414fe68">PowerSystemPlanning.PlanningModels.Planning.TransmissionExpansionPlan</a>
+: <a class="el" href="class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan.html#af97ec9f3641d0b2faa8aed088fc89de4">PowerSystemPlanning.PlanningModels.Planning.TransmissionExpansionPlan</a>
 </li>
 <li>TransmissionLine()
 : <a class="el" href="class_power_system_planning_1_1_transmission_line.html#a6031223d4ebe71e02ee01908b92f4789">PowerSystemPlanning.TransmissionLine</a>

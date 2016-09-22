@@ -50,11 +50,8 @@ namespace PowerSystemPlanning.Solvers
         public void Solve()
         {
             // Initializes result reporting
-            this.MySolverResults = new SolverResults();
-            this.MySolverResults.SolverName = this.MyGRBOptimizationModel.GRBOptimizationModelName;
-            this.MySolverResults.StartTime = DateTime.Now;
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            this.MySolverResults = new SolverResults(this.MyGRBOptimizationModel.GRBOptimizationModelName);
+            this.MySolverResults.StartSolutionProcess();
             // Builds the model
             MyGRBOptimizationModel.BuildGRBOptimizationModel();
             // Solves the model
@@ -65,10 +62,7 @@ namespace PowerSystemPlanning.Solvers
             // Disposes of model
             MyGRBOptimizationModel.Dispose();
             // Finalizes result reporting
-            this.MySolverResults.Result = this.MyGRBOptimizationModel.MyBaseGRBOptimizationModelResult;
-            stopwatch.Stop();
-            this.MySolverResults.ExecutionTime = stopwatch.Elapsed;
-            var x = MySolverResults.StopTime - MySolverResults.StartTime;
+            this.MySolverResults.StopSuccessfulSolutionProcess(this.MyGRBOptimizationModel.MyBaseGRBOptimizationModelResult);
         }
 
         /// <summary>

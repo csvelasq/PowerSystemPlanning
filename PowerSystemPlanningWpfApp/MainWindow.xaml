@@ -12,6 +12,7 @@
         xmlns:analysisControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis"
         xmlns:staticTEPControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.StaticTEP"
         xmlns:scenarioTEPControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP"
+        xmlns:paretoBruteForceTEPControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto"
         xmlns:opfControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.OPF"
         xmlns:opfLdcControls="clr-namespace:PowerSystemPlanningWpfApp.Analysis.LDC"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal" x:Class="PowerSystemPlanningWpfApp.MainWindow"
@@ -97,7 +98,7 @@
                 <scenarioTEPControls:ScenarioTEPEnumerateControl DataContext="{Binding MyScenarioTepViewModel}" />
             </TabItem>
             <TabItem Header="Second Order Scenario TEP Enumeration">
-                <scenarioTEPControls:ScenarioTEP2ndOrderEnumerateControl DataContext="{Binding MyScenarioTepViewModel}" />
+                <paretoBruteForceTEPControls:ScenarioTEP2ndOrderEnumerateControl DataContext="{Binding MyScenarioTEPParetoViewModel}" />
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />

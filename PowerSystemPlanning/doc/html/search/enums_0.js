@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['solverresultstate',['SolverResultState',['../namespace_power_system_planning_1_1_solvers.html#a65cf66cf55e429cb1d296f580b98adcc',1,'PowerSystemPlanning::Solvers']]],
-  ['solververbosity',['SolverVerbosity',['../namespace_power_system_planning_1_1_solvers.html#a9531f09b6e2b27e02a36fca1f083fb74',1,'PowerSystemPlanning::Solvers']]]
+  ['optimizationsense',['OptimizationSense',['../namespace_power_system_planning_1_1_multi_objective.html#a205bf8d88fe43f1ebf7a245324454fe6',1,'PowerSystemPlanning::MultiObjective']]]
 ];

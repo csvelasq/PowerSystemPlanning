@@ -4,6 +4,7 @@ using PowerSystemPlanning.PlanningModels.Planning;
 using PowerSystemPlanning.Solvers.LDCOPF;
 using PowerSystemPlanning.Solvers.OPF;
 using PowerSystemPlanningWpfApp.Analysis.ScenarioTEP;
+using PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -19,19 +20,6 @@ namespace PowerSystemPlanningWpfApp
 {
     public class MainWindowViewModel : BindableBase
     {
-        /*
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Example implementation from: https://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged(v=vs.110).aspx
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        */
-
         public ScenarioTEPModel _MyScenarioTEPModel;
         /// <summary>
         /// The TEP scenario model of the power system.
@@ -42,7 +30,8 @@ namespace PowerSystemPlanningWpfApp
             set
             {
                 SetProperty<ScenarioTEPModel>(ref _MyScenarioTEPModel, value);
-                MyScenarioTepViewModel.MyScenarioTEPModel = _MyScenarioTEPModel;
+                MyScenarioTepViewModel.MyScenarioTEPModel = MyScenarioTEPModel;
+                MyScenarioTEPParetoViewModel.MyScenarioTEPModel = MyScenarioTEPModel;
             }
         }
 
@@ -56,14 +45,23 @@ namespace PowerSystemPlanningWpfApp
                 SetProperty<ScenarioTepViewModel>(ref _MyScenarioTepViewModel, value);
             }
         }
-        /// <summary>
-        /// Initializes a model with default (arbitrary) parameters
-        /// </summary>
+
+        ScenarioTEPParetoViewModel _MyScenarioTEPParetoViewModel;
+        public ScenarioTEPParetoViewModel MyScenarioTEPParetoViewModel
+        {
+            get { return _MyScenarioTEPParetoViewModel; }
+            set
+            {
+                SetProperty<ScenarioTEPParetoViewModel>(ref _MyScenarioTEPParetoViewModel, value);
+            }
+        }
+
         public MainWindowViewModel() : this(new ScenarioTEPModel()) { }
 
         public MainWindowViewModel(ScenarioTEPModel myScenarioTEPModel)
         {
             MyScenarioTepViewModel = new ScenarioTepViewModel();
+            MyScenarioTEPParetoViewModel = new ScenarioTEPParetoViewModel();
             MyScenarioTEPModel = myScenarioTEPModel;
         }
 
@@ -75,7 +73,7 @@ namespace PowerSystemPlanningWpfApp
         /// <summary>
         /// Creates a new scenario tep view model with default (arbitrary) parameters for the power system data model.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A new (mostly empty) scenario TEP model.</returns>
         public static MainWindowViewModel CreateDefaultScenarioTEPModel()
         {
             MainWindowViewModel MyScenarioTEPViewModel = new MainWindowViewModel();
@@ -90,6 +88,7 @@ namespace PowerSystemPlanningWpfApp
             MyScenarioTEPModel.YearlyDiscountRate = 0.07;
             MyScenarioTEPModel.MyLoadDurationCurve = defaultLoadDurationCurve;
             MyScenarioTEPModel.TargetPlanningYear = 10;
+            MyScenarioTEPModel.YearsWithOperation = 10;
             //Adds an empty scenario
             MyScenarioTEPModel.MyScenarios.Add(new PowerSystemScenario("Unnamed scenario", new PowerSystem()));
             return MyScenarioTEPViewModel;

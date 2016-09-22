@@ -1,4 +1,5 @@
-﻿using PowerSystemPlanning.PlanningModels.Planning;
+﻿using PowerSystemPlanning.Models.Planning.ScenarioTEP;
+using PowerSystemPlanning.PlanningModels.Planning;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,10 +67,11 @@ namespace PowerSystemPlanning.PlanningModels
         /// <returns>A list containing all possible alternative transmission expansion plans.</returns>
         public List<TransmissionExpansionPlan> EnumerateAlternativeTransmissionExpansionPlans()
         {
+            MOOScenarioTEP myMOOScenarioTEP = new MOOScenarioTEP(this);
             List<TransmissionExpansionPlan> alternatives = new List<TransmissionExpansionPlan>();
             foreach (var builtLines in ScenarioTEPModel.GetPowerSet<CandidateTransmissionLine>(MyCandidateTransmissionLines))
             {
-                TransmissionExpansionPlan alternative = new TransmissionExpansionPlan(builtLines.ToList(), this);
+                TransmissionExpansionPlan alternative = new TransmissionExpansionPlan(builtLines.ToList(), this, myMOOScenarioTEP);
                 alternatives.Add(alternative);
             }
             return alternatives;

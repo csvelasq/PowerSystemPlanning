@@ -1,4 +1,6 @@
-﻿using PowerSystemPlanning.Solvers.LDCOPF;
+﻿using PowerSystemPlanning.Models.Planning.ScenarioTEP;
+using PowerSystemPlanning.MultiObjective;
+using PowerSystemPlanning.Solvers.LDCOPF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +18,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
     /// This class is intended to be constructed with a predefined set of transmission lines to be built (selected among all candidate transmission lines), in order to evaluate the pareto-frontier of future planning under scenario uncertainty. The performance of this transmission expansion plan under various future scenarios can be evaluated by calling <see cref="EvaluateObjectives"/>, which returns, for each scenario evaluated, to total investment costs plus the present value of total operation costs under each scenario (discounted at the rate given by <see cref="MyScenarioTEPModel"/>).
     /// Detailed results are avilable in <see cref="MyDetailedTEPScenariosResults"/> after calling <see cref="BuildDetailedTEPScenariosResults+"/>.
     /// </remarks>
-    public class TransmissionExpansionPlan : IMultiObjectiveIndividual, INotifyPropertyChanged
+    public class TransmissionExpansionPlan : BaseMultiObjectiveIndividual, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -80,7 +82,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// <summary>
         /// Each objective function is the PV of total costs (investment plus operation) under each scenario.
         /// </summary>
-        public List<double> ObjectiveValues { get { return PresentValueScenariosTotalCosts; } }
+        public override List<double> ObjectiveValues { get { return PresentValueScenariosTotalCosts; } }
         /// <summary>
         /// Expected total costs (investment plus operation), present value and weighted by scenario probabilities.
         /// </summary>
@@ -97,13 +99,15 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// <param name="tlsInPlan">Transmission lines to be built in this expansion plan.</param>
         /// <param name="yearlyDiscountRate">The yearly discount rate.</param>
         /// <param name="targetPlanningYear">The target planning year (with the investment year being N=0)</param>
-        public TransmissionExpansionPlan(IList<CandidateTransmissionLine> tlsInPlan, ScenarioTEPModel myScenarioTEPModel)
+        public TransmissionExpansionPlan(IList<CandidateTransmissionLine> tlsInPlan, ScenarioTEPModel myScenarioTEPModel,
+            MOOScenarioTEP myMOOScenarioTEP)
+            : base(myMOOScenarioTEP)
         {
             BuiltTransmissionLines = tlsInPlan;
             MyScenarioTEPModel = myScenarioTEPModel;
         }
 
-        public List<double> EvaluateObjectives()
+        public override List<double> EvaluateObjectives()
         {
             EvaluateScenarios(false);
             return ObjectiveValues;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.PlanningModels
+namespace PowerSystemPlanning.Models.Planning.LDC
 {
     /// <summary>
     /// 

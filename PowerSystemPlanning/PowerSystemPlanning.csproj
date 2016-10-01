@@ -40,6 +40,10 @@
       <HintPath>..\packages\NLog.4.3.5\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -52,42 +56,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModels\StateBinding\Branch\SimpleTransmissionLineState.cs" />
+    <Compile Include="BindingModels\StateBinding\Nodes\NodeState.cs" />
+    <Compile Include="BindingModels\StateBinding\PowerSystemElementState.cs" />
+    <Compile Include="IHaveIdAndName.cs" />
+    <Compile Include="Models\Planning\InvestmentBranch\CandidateTransmissionLine.cs" />
+    <Compile Include="Models\Planning\InvestmentBranch\ICandidateTransmissionLine.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\MOOScenarioTEP.cs" />
+    <Compile Include="Models\Planning\State\IPowerSystemTEPState.cs" />
+    <Compile Include="BindingModels\BaseDataBinding\Branch\BranchElement.cs" />
+    <Compile Include="Models\SystemBaseData\Branch\IBranchElement.cs" />
+    <Compile Include="Models\SystemBaseData\IPowerSystemElement.cs" />
+    <Compile Include="Models\Planning\State\Branch\ICandidateTransmissionLineState.cs" />
+    <Compile Include="Models\SystemBaseData\Nodes\INode.cs" />
+    <Compile Include="Models\SystemState\Branch\ISimpleTransmissionLineState.cs" />
+    <Compile Include="BindingModels\StateBinding\Generator\GeneratingUnitState.cs" />
+    <Compile Include="Models\SystemBaseData\Generator\IGeneratingUnit.cs" />
+    <Compile Include="Models\SystemBaseData\Load\IInelasticLoad.cs" />
+    <Compile Include="Models\SystemState\IPowerSystemElementState.cs" />
+    <Compile Include="Models\SystemState\IPowerSystemStateCollection.cs" />
+    <Compile Include="Models\SystemState\Load\IInelasticLoadState.cs" />
+    <Compile Include="BindingModels\StateBinding\Load\InelasticLoadState.cs" />
+    <Compile Include="Models\SystemState\Generator\IGeneratingUnitState.cs" />
+    <Compile Include="Models\SystemState\IElementWithAvailability.cs" />
+    <Compile Include="Models\Planning\IInvestmentElement.cs" />
+    <Compile Include="Models\Planning\State\IInvestmentElementState.cs" />
+    <Compile Include="Models\SystemState\IPowerSystemState.cs" />
+    <Compile Include="Models\SystemBaseData\Nodes\INodeElement.cs" />
+    <Compile Include="Models\SystemBaseData\Branch\ISimpleTransmissionLine.cs" />
+    <Compile Include="BindingModels\BaseDataBinding\PowerSystemElement.cs" />
+    <Compile Include="Models\SystemState\Nodes\INodeState.cs" />
     <Compile Include="MultiObjective\BaseMultiObjectiveIndividual.cs" />
     <Compile Include="MultiObjective\BaseMultiObjectiveIndividualList.cs" />
     <Compile Include="MultiObjective\BaseMultiObjectiveOptimizationProblem.cs" />
     <Compile Include="MultiObjective\IMultiObjectiveIndividual.cs" />
     <Compile Include="MultiObjective\IMultiObjectiveOptimizationProblem.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\TransmissionExpansionPlanScenarioResults.cs" />
-    <Compile Include="Models\PowerSystemData\PowerSystemWithCandidateTransmissionLines.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\ScenarioPowerSystemPlanningModel.cs" />
-    <Compile Include="Models\Planning\CandidateTransmissionLine.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\PowerSystemScenario.cs" />
-    <Compile Include="Models\PowerSystemData\GeneratingUnit.cs" />
-    <Compile Include="Models\PowerSystemData\InelasticLoad.cs" />
-    <Compile Include="Models\PowerSystemData\IPowerSystem.cs" />
-    <Compile Include="Models\PowerSystemData\Node.cs" />
-    <Compile Include="Models\PowerSystemData\NodeElement.cs" />
+    <Compile Include="BindingModels\BaseDataBinding\Generator\GeneratingUnit.cs" />
+    <Compile Include="BindingModels\BaseDataBinding\Load\InelasticLoad.cs" />
+    <Compile Include="Models\SystemBaseData\IPowerSystem.cs" />
+    <Compile Include="BindingModels\BaseDataBinding\Nodes\Node.cs" />
+    <Compile Include="BindingModels\BaseDataBinding\Nodes\NodeElement.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\ScenarioTEPModel.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\TransmissionExpansionPlan.cs" />
     <Compile Include="Solvers\GRBOptimization\BaseGRBOptimizationModel.cs" />
     <Compile Include="Solvers\GRBOptimization\BaseGRBOptimizationModelResult.cs" />
     <Compile Include="Solvers\GRBOptimization\BaseOptimizationPowerSystemSolver.cs" />
-    <Compile Include="Models\Planning\DurationCurveBlocks.cs" />
+    <Compile Include="Models\Planning\LDC\DurationCurveBlocks.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModel.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModelResults.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModelSolver.cs" />
     <Compile Include="Solvers\OPF\OPFModel.cs" />
-    <Compile Include="Models\PowerSystemData\PowerSystem.cs" />
+    <Compile Include="BindingModels\BaseDataBinding\PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\IPowerSystemSolver.cs" />
-    <Compile Include="Solvers\OPF\OPFModelForLDC.cs" />
     <Compile Include="Solvers\OPF\OPFModelResult.cs" />
-    <Compile Include="Solvers\OPF\OPFModelResultForLDC.cs" />
-    <Compile Include="Solvers\OPF\OPFModelSolverForLDC.cs" />
     <Compile Include="Solvers\PowerSystemSolverConfiguration.cs" />
     <Compile Include="Solvers\PowerSystemSolveResults.cs" />
-    <Compile Include="Models\PowerSystemData\TransmissionLine.cs" />
+    <Compile Include="BindingModels\BaseDataBinding\Branch\SimpleTransmissionLine.cs" />
     <Compile Include="Solvers\ScenarioTEP\ScenarioTEPMOOParetoBruteForce.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,7 +128,9 @@
     <None Include="packages.config" />
     <None Include="PowerSystemPlanningDoxy.conf" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BindingModels\PlanningBinding\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)

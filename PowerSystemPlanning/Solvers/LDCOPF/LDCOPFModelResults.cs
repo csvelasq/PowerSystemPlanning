@@ -13,7 +13,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
     /// </summary>
     public class LDCOPFModelResults : BaseGRBOptimizationModelResult
     {
-        protected IPowerSystem MyPowerSystem;
+        protected IPowerSystemState MyPowerSystemState;
 
         /// <summary>
         /// Summary of LDC OPF results for each node in the power system (total energy consumed, etc).
@@ -23,7 +23,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         /// <summary>
         /// The results of the OPF model in each block of the duration curve.
         /// </summary>
-        public List<OPFModelResultForLDC> MyOpfResultsByBlock { get; protected set; }
+        public List<OPFModelResult> MyOpfResultsByBlock { get; protected set; }
 
         public double TotalOperationCost
         {
@@ -85,17 +85,16 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         
         public LDCOPFModelResults(int status) : base(status) { }
 
-        public LDCOPFModelResults(IPowerSystem powerSystem, int status, double objVal, LoadDurationCurveByBlocks durationCurveBlocks, List<OPFModelResultForLDC> opfResultsByBlock)
+        public LDCOPFModelResults(IPowerSystemState powerSystemState, int status, double objVal, List<OPFModelResult> opfResultsByBlock)
             : base(status, objVal)
         {
-            this.MyPowerSystem = powerSystem;
-            this.ObjVal = objVal;
+            this.MyPowerSystemState = powerSystemState;
             this.MyOpfResultsByBlock = opfResultsByBlock;
             //Build results by node
             this.MyNodeLDCOPFResults = new List<NodeLDCOPFResult>();
-            foreach (Node node in this.MyPowerSystem.Nodes)
+            foreach (var node in this.MyPowerSystemState.Nodes)
             {
-                NodeLDCOPFResult nodeResultsLDCOPF = new NodeLDCOPFResult(node, opfResultsByBlock);
+                var nodeResultsLDCOPF = new NodeLDCOPFResult(node, opfResultsByBlock);
                 MyNodeLDCOPFResults.Add(nodeResultsLDCOPF);
             }
         }
@@ -112,7 +111,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
 
         public string NodeName { get { return this.Node.Name; } }
 
-        private List<OPFModelResultForLDC> MyOpfResultsByBlock { get; set; }
+        private List<OPFModelResult> MyOpfResultsByBlock { get; set; }
 
         /// <summary>
         /// Total energy generated in this node during the whole year (GWh, sum of energy generated in each block).
@@ -172,11 +171,11 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
             get
             {
                 return (from opfBlockResult in MyOpfResultsByBlock
-                        select opfBlockResult.NodeOPFResultsForLDC[NodeId].SpotPrice).Max();
+                        select opfBlockResult.NodeOPFResults[NodeId].SpotPrice).Max();
             }
         }
 
-        public NodeLDCOPFResult(Node node, List<OPFModelResultForLDC> opfResultsByBlock)
+        public NodeLDCOPFResult(Node node, List<OPFModelResult> opfResultsByBlock)
         {
             this.Node = node;
             this.MyOpfResultsByBlock = opfResultsByBlock;

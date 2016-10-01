@@ -105,13 +105,6 @@ namespace PowerSystemPlanning.PlanningModels
             {
                 XmlSerializer reader = new XmlSerializer(typeof(ScenarioTEPModel));
                 retval = (ScenarioTEPModel)reader.Deserialize(xmlStream);
-                foreach (PowerSystemScenario scenario in retval.MyScenarios)
-                {
-                    foreach (Node node in scenario.MyPowerSystem.Nodes)
-                    {
-                        node.PowerSystem = scenario.MyPowerSystem;
-                    }
-                }
             }
             return retval;
         }

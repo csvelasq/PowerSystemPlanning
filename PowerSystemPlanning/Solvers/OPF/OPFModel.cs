@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Gurobi;
+using PowerSystemPlanning.Models.SystemState;
+using PowerSystemPlanning.Solvers.OPF.OpfResults;
 
 namespace PowerSystemPlanning.Solvers.OPF
 {
@@ -15,7 +13,7 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// </remarks>
     public class OPFModel : BaseGRBOptimizationModel
     {
-        public override string GRBOptimizationModelName { get { return "Linear Optimal (DC) Power Flow"; } }
+        public override string GRBOptimizationModelName => "Linear Optimal (DC) Power Flow";
 
         protected IPowerSystemState MyPowerSystemState;
 
@@ -153,120 +151,130 @@ namespace PowerSystemPlanning.Solvers.OPF
 
         protected void AddGRBVarsPGen()
         {
-            PGen = new GRBVar[MyPowerSystemState.GeneratingUnits.Count];
+            PGen = new GRBVar[MyPowerSystemState.ActiveGeneratingUnitStates.Count()];
             int k = 0;
-            foreach (GeneratingUnit gen in MyPowerSystemState.GeneratingUnits)
+            foreach (var gen in MyPowerSystemState.ActiveGeneratingUnitStates)
             {
                 PGen[k] = MyGrbModel.AddVar(0,
-                    gen.InstalledCapacityMW,
-                    gen.MarginalCost * MyPowerSystemState.DurationHours,
+                    gen.AvailableCapacity,
+                    gen.MarginalCost * MyPowerSystemState.Duration,
                     GRB.CONTINUOUS,
-                    "PGen" + gen.Id);
+                    "PGen" + gen.UnderlyingGeneratingUnit.Id);
                 k++;
             }
         }
 
         protected void AddGRBVarsPFlow()
         {
-            PFlow = new GRBVar[MyPowerSystemState.TransmissionLines.Count];
+            PFlow = new GRBVar[MyPowerSystemState.ActiveSimpleTransmissionLineStates.Count()];
             int l = 0;
-            foreach (TransmissionLine tl in MyPowerSystemState.TransmissionLines)
+            foreach (var tl in MyPowerSystemState.ActiveSimpleTransmissionLineStates)
             {
-                PFlow[l] = MyGrbModel.AddVar(-tl.ThermalCapacityMW,
-                    tl.ThermalCapacityMW,
+                PFlow[l] = MyGrbModel.AddVar(-tl.AvailableThermalCapacity,
+                    tl.AvailableThermalCapacity,
                     0,
                     GRB.CONTINUOUS,
-                    "PFlow" + tl.Id);
+                    "PFlow" + tl.UnderlyingTransmissionLine.Id);
                 l++;
             }
         }
 
         protected void AddGRBVarsLoadShed()
         {
-            this.LoadShed = new GRBVar[MyPowerSystemState.InelasticLoads.Count];
+            this.LoadShed = new GRBVar[MyPowerSystemState.InelasticLoadStates.Count];
             int d = 0;
-            foreach (InelasticLoad load in MyPowerSystemState.InelasticLoads)
+            foreach (var load in MyPowerSystemState.InelasticLoadStates)
             {
                 LoadShed[d] = MyGrbModel.AddVar(0,
-                    load.ConsumptionMW,
-                    MyPowerSystemState.LoadSheddingCost * MyPowerSystemState.DurationHours,
+                    load.Consumption,
+                    load.LoadSheddingCost * MyPowerSystemState.Duration,
                     GRB.CONTINUOUS,
-                    "LS" + load.Id);
+                    "LS" + load.UnderlyingInelasticLoad.Id);
                 d++;
             }
         }
 
         protected void AddGRBVarsBusAngles()
         {
-            BusAngle = new GRBVar[MyPowerSystemState.Nodes.Count];
+            BusAngle = new GRBVar[MyPowerSystemState.NodeStates.Count];
             //Adds reference bus angle (equals 0)
             BusAngle[0] = MyGrbModel.AddVar(0, 0, 0, GRB.CONTINUOUS,
-                "theta" + MyPowerSystemState.Nodes[0].Id);
+                "theta" + MyPowerSystemState.NodeStates[0].UnderlyingNode.Id);
             //Adds the rest of the bus angles
-            for (int i = 1; i < MyPowerSystemState.Nodes.Count; i++)
+            for (int i = 1; i < MyPowerSystemState.NodeStates.Count; i++)
             {
-                BusAngle[i] = MyGrbModel.AddVar(-GRB.INFINITY, GRB.INFINITY, 0, GRB.CONTINUOUS, "theta" + MyPowerSystemState.Nodes[i].Id);
+                BusAngle[i] = MyGrbModel.AddVar(
+                    -GRB.INFINITY,
+                    GRB.INFINITY,
+                    0,
+                    GRB.CONTINUOUS,
+                    "theta" + MyPowerSystemState.NodeStates[i].UnderlyingNode.Id);
             }
         }
 
         protected void AddGRBConstrPowerBalance()
         {
-            this.NodalPowerBalance = new GRBConstr[MyPowerSystemState.Nodes.Count];
-            int b = 0;
-            foreach (Node node in MyPowerSystemState.Nodes)
+            this.NodalPowerBalance = new GRBConstr[MyPowerSystemState.NodeStates.Count];
+            int b = 0; //node number
+            foreach (var node in MyPowerSystemState.NodeStates)
             {
                 GRBLinExpr powerBalanceLHS = new GRBLinExpr();
                 //Power generated in this node
-                foreach (GeneratingUnit gen in node.GeneratingUnits)
+                foreach (var gen in node.ActiveGeneratingUnitStates)
                 {
+                    int genIndex = MyPowerSystemState.ActiveGeneratingUnitStates.IndexOf(gen);
                     powerBalanceLHS.AddTerm(1,
-                        PGen[MyPowerSystemState.GeneratingUnits.IndexOf(gen)]);
+                        PGen[genIndex]);
                 }
                 //Incoming power flow (to this node)
-                foreach (TransmissionLine tl in node.IncomingTransmissionLines)
+                foreach (var tl in node.ActiveIncomingTransmissionLinesStates)
                 {
                     powerBalanceLHS.AddTerm(+1,
-                        PFlow[MyPowerSystemState.TransmissionLines.IndexOf(tl)]);
+                        PFlow[MyPowerSystemState.ActiveSimpleTransmissionLineStates.IndexOf(tl)]);
                 }
                 //Outgoing power flow (from this node)
-                foreach (TransmissionLine tl in node.OutgoingTransmissionLines)
+                foreach (var tl in node.ActiveOutgoingTransmissionLinesStates)
                 {
                     powerBalanceLHS.AddTerm(-1,
-                        PFlow[MyPowerSystemState.TransmissionLines.IndexOf(tl)]); //outgoing power flow
+                        PFlow[MyPowerSystemState.ActiveSimpleTransmissionLineStates.IndexOf(tl)]); //outgoing power flow
                 }
                 //Inelastic loads connected to this node
                 GRBLinExpr powerBalanceRHS = new GRBLinExpr();
-                powerBalanceRHS.AddConstant(node.TotalLoad);
+                powerBalanceRHS.AddConstant(node.TotalInelasticLoad);
                 //Load shedding
-                foreach (InelasticLoad load in node.InelasticLoads)
+                foreach (var load in node.InelasticLoadsStates)
                 {
                     powerBalanceRHS.AddTerm(-1,
-                        LoadShed[MyPowerSystemState.InelasticLoads.IndexOf(load)]);
+                        LoadShed[MyPowerSystemState.InelasticLoadStates.IndexOf(load)]);
                 }
-                this.NodalPowerBalance[b] = MyGrbModel.AddConstr(powerBalanceLHS, 
-                    GRB.EQUAL, 
-                    powerBalanceRHS, 
+                this.NodalPowerBalance[b] = MyGrbModel.AddConstr(powerBalanceLHS,
+                    GRB.EQUAL,
+                    powerBalanceRHS,
                     "PowerBalanceNode" + b);
             }
         }
 
         protected void AddGRBConstrDCPowerFlow()
         {
-            DCPowerFlow = new GRBConstr[MyPowerSystemState.TransmissionLines.Count];
+            DCPowerFlow = new GRBConstr[MyPowerSystemState.ActiveSimpleTransmissionLineStates.Count];
             int l = 0;
-            foreach (TransmissionLine tl in MyPowerSystemState.TransmissionLines)
+            foreach (var tl in MyPowerSystemState.ActiveSimpleTransmissionLineStates)
             {
+                //PFlow variable (power flow throw this line)
                 GRBLinExpr powerFlowLHS = new GRBLinExpr();
                 powerFlowLHS.AddTerm(1,
-                    PFlow[MyPowerSystemState.TransmissionLines.IndexOf(tl)]);
+                    PFlow[MyPowerSystemState.ActiveSimpleTransmissionLineStates.IndexOf(tl)]);
+                //Power flow calculated with susceptance and bus angles
                 GRBLinExpr powerFlowRHS = new GRBLinExpr();
-                powerFlowRHS.AddTerm(+tl.SusceptanceMho,
-                    BusAngle[MyPowerSystemState.Nodes.IndexOf(tl.NodeFrom)]);
-                powerFlowRHS.AddTerm(-tl.SusceptanceMho,
-                    BusAngle[MyPowerSystemState.Nodes.IndexOf(tl.NodeTo)]);
-                DCPowerFlow[l] = MyGrbModel.AddConstr(powerFlowLHS, 
-                    GRB.EQUAL, 
-                    powerFlowRHS, 
+                powerFlowRHS.AddTerm(+tl.UnderlyingTransmissionLine.SusceptanceMho,
+                    BusAngle[MyPowerSystemState.MyPowerSystem.Nodes.IndexOf(tl.UnderlyingTransmissionLine.NodeFrom)]);
+                powerFlowRHS.AddTerm(-tl.UnderlyingTransmissionLine.SusceptanceMho,
+                    BusAngle[MyPowerSystemState.MyPowerSystem.Nodes.IndexOf(tl.UnderlyingTransmissionLine.NodeTo)]);
+                //Add constraint
+                DCPowerFlow[l] = MyGrbModel.AddConstr(
+                    powerFlowLHS,
+                    GRB.EQUAL,
+                    powerFlowRHS,
                     "PowerFlowTL" + l);
             }
         }

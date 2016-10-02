@@ -15,5 +15,9 @@ namespace PowerSystemPlanning.Models.SystemState.Load
         /// The current consumption of this load.
         /// </summary>
         double Consumption { get; set; }
+        /// <summary>
+        /// The cost (US$) of shedding 1 MWh of this load.
+        /// </summary>
+        double LoadSheddingCost { get; }
     }
 }

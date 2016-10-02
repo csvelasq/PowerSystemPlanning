@@ -11,5 +11,7 @@ namespace PowerSystemPlanning.Models.SystemState.Branch
         /// The transmission line whose state this object describes.
         /// </summary>
         ISimpleTransmissionLine UnderlyingTransmissionLine { get; }
+
+        double AvailableThermalCapacity { get; }
     }
 }

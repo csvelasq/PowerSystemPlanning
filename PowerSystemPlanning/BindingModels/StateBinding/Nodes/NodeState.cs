@@ -17,88 +17,55 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Nodes
     public class NodeState : PowerSystemElementState, INodeState
     {
         public INode UnderlyingNode { get; protected set; }
-
         public override IPowerSystemElement MyPowerSystemElement => UnderlyingNode;
 
-        public IEnumerable<IGeneratingUnitState> GeneratingUnitsStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<IInelasticLoadState> InelasticLoadsStates =>
+            (from load in MyPowerSystemState.InelasticLoadStates
+            where load.UnderlyingInelasticLoad.ConnectionNode == UnderlyingNode
+            select load).ToList();
 
-        public IEnumerable<IGeneratingUnitState> ActiveGeneratingUnitStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public double TotalInelasticLoad =>
+            (from load in MyPowerSystemState.InelasticLoadStates
+             where load.UnderlyingInelasticLoad.ConnectionNode == UnderlyingNode
+             select load.Consumption)
+            .Sum();
 
-        public IEnumerable<IInelasticLoadState> InelasticLoadsStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<IGeneratingUnitState> GeneratingUnitsStates
+            =>
+            (from gen in MyPowerSystemState.GeneratingUnitStates
+            where gen.UnderlyingGeneratingUnit.ConnectionNode == UnderlyingNode
+            select gen).ToList();
 
-        public double TotalInelasticLoad
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<IGeneratingUnitState> ActiveGeneratingUnitStates =>
+            (from gen in GeneratingUnitsStates
+            where gen.IsAvailable
+            select gen).ToList();
 
-        public IEnumerable<ISimpleTransmissionLineState> TransmissionLinesStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<ISimpleTransmissionLineState> TransmissionLinesStates =>
+            IncomingTransmissionLinesStates.Concat(OutgoingTransmissionLinesStates).ToList();
 
-        public IEnumerable<ISimpleTransmissionLineState> ActiveTransmissionLinesStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<ISimpleTransmissionLineState> ActiveTransmissionLinesStates =>
+            ActiveIncomingTransmissionLinesStates.Concat(ActiveOutgoingTransmissionLinesStates).ToList();
 
-        public IEnumerable<ISimpleTransmissionLineState> IncomingTransmissionLinesStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<ISimpleTransmissionLineState> IncomingTransmissionLinesStates =>
+            (from tl in MyPowerSystemState.SimpleTransmissionLineStates
+            where tl.UnderlyingTransmissionLine.NodeTo == UnderlyingNode
+            select tl).ToList();
 
-        public IEnumerable<ISimpleTransmissionLineState> ActiveIncomingTransmissionLinesStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<ISimpleTransmissionLineState> ActiveIncomingTransmissionLinesStates =>
+            (from tl in IncomingTransmissionLinesStates
+            where tl.IsAvailable
+            select tl).ToList();
 
-        public IEnumerable<ISimpleTransmissionLineState> OutgoingTransmissionLinesStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<ISimpleTransmissionLineState> OutgoingTransmissionLinesStates =>
+            (from tl in MyPowerSystemState.SimpleTransmissionLineStates
+            where tl.UnderlyingTransmissionLine.NodeFrom == UnderlyingNode
+            select tl).ToList();
 
-        public IEnumerable<ISimpleTransmissionLineState> ActiveOutgoingTransmissionLinesStates
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IList<ISimpleTransmissionLineState> ActiveOutgoingTransmissionLinesStates =>
+            (from tl in OutgoingTransmissionLinesStates
+            where tl.IsAvailable
+            select tl).ToList();
 
         public NodeState(IPowerSystemState state, INode wrappedInelasticLoad)
             : base(state)

@@ -59,6 +59,7 @@
     <Compile Include="BindingModels\StateBinding\Branch\SimpleTransmissionLineState.cs" />
     <Compile Include="BindingModels\StateBinding\Nodes\NodeState.cs" />
     <Compile Include="BindingModels\StateBinding\PowerSystemElementState.cs" />
+    <Compile Include="BindingModels\StateBinding\PowerSystemState.cs" />
     <Compile Include="IHaveIdAndName.cs" />
     <Compile Include="Models\Planning\InvestmentBranch\CandidateTransmissionLine.cs" />
     <Compile Include="Models\Planning\InvestmentBranch\ICandidateTransmissionLine.cs" />
@@ -112,9 +113,13 @@
     <Compile Include="BindingModels\BaseDataBinding\PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\IPowerSystemSolver.cs" />
-    <Compile Include="Solvers\OPF\OPFModelResult.cs" />
-    <Compile Include="Solvers\PowerSystemSolverConfiguration.cs" />
-    <Compile Include="Solvers\PowerSystemSolveResults.cs" />
+    <Compile Include="Solvers\OPF\OpfResults\BaseOPFResultElement.cs" />
+    <Compile Include="Solvers\OPF\OpfResults\LoadOPFResult.cs" />
+    <Compile Include="Solvers\OPF\OpfResults\OPFModelResult.cs" />
+    <Compile Include="Solvers\OPF\OpfResults\GeneratingUnitOPFResult.cs" />
+    <Compile Include="Solvers\OPF\OpfResults\NodeOPFResult.cs" />
+    <Compile Include="Solvers\OPF\OpfResults\TransmissionLineOPFResult.cs" />
+    <Compile Include="Solvers\SolverResults.cs" />
     <Compile Include="BindingModels\BaseDataBinding\Branch\SimpleTransmissionLine.cs" />
     <Compile Include="Solvers\ScenarioTEP\ScenarioTEPMOOParetoBruteForce.cs" />
   </ItemGroup>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PowerSystemPlanning.Solvers
+﻿namespace PowerSystemPlanning.Solvers
 {
     /// <summary>
     /// Required methods of a power system solver tool (e.g. optimal power flow, transmission expansion planning)

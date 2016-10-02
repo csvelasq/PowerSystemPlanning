@@ -25,10 +25,19 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Branch
             set { SetProperty<bool>(ref _IsAvailable, value); }
         }
 
+        [DataMember()]
+        protected double _AvailableThermalCapacity;
+        public double AvailableThermalCapacity
+        {
+            get { return _AvailableThermalCapacity; }
+            set { SetProperty<double>(ref _AvailableThermalCapacity, value); }
+        }
+
         public SimpleTransmissionLineState(IPowerSystemState state, ISimpleTransmissionLine tl)
             :base(state)
         {
             UnderlyingTransmissionLine = tl;
+            AvailableThermalCapacity = tl.ThermalCapacity;
         }
     }
 }

@@ -26,11 +26,13 @@ namespace PowerSystemPlanning.Models.SystemState
         /// The state of each generating unit in this power system.
         /// </summary>
         IList<IGeneratingUnitState> GeneratingUnitStates { get; }
+        IList<IGeneratingUnitState> ActiveGeneratingUnitStates { get; }
         /// <summary>
         /// The current state of each inelastic load in this power system.
         /// </summary>
         IList<IInelasticLoadState> InelasticLoadStates { get; }
 
         IList<ISimpleTransmissionLineState> SimpleTransmissionLineStates { get; }
+        IList<ISimpleTransmissionLineState> ActiveSimpleTransmissionLineStates { get; }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using PowerSystemPlanning.Solvers.LDCOPF;
+using PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.PlanningModels.Planning
+namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
 {
     /// <summary>
     /// Container of the results of evaluating the implementation of a transmission expansion plan in a set of possible future scenarios.
@@ -102,7 +103,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         /// <summary>
         /// The detailed LDC OPF model results for this scenario.
         /// </summary>
-        public LDCOPFModelResults DetailedLDCOPFModelResults { get; protected set; }
+        public LdcOpfModelResults DetailedLDCOPFModelResults { get; protected set; }
 
         /// <summary>
         /// The present worth of the operation costs under the evaluated scenario.
@@ -125,7 +126,7 @@ namespace PowerSystemPlanning.PlanningModels.Planning
 
         public TransmissionExpansionPlanLDCResultsForOneScenario() { }
 
-        public TransmissionExpansionPlanLDCResultsForOneScenario(PowerSystemScenario scenarioEvaluated, double totalInvestmentCost, double scenarioOperationCosts, double pvFactor, LDCOPFModelResults opfModelResults)
+        public TransmissionExpansionPlanLDCResultsForOneScenario(PowerSystemScenario scenarioEvaluated, double totalInvestmentCost, double scenarioOperationCosts, double pvFactor, LdcOpfModelResults opfModelResults)
         {
             ScenarioEvaluated = scenarioEvaluated;
             TotalInvestmentCost = totalInvestmentCost;

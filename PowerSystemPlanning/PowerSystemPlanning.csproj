@@ -107,8 +107,9 @@
     <Compile Include="Solvers\GRBOptimization\BaseOptimizationPowerSystemSolver.cs" />
     <Compile Include="Models\Planning\LDC\DurationCurveBlocks.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModel.cs" />
-    <Compile Include="Solvers\LDCOPF\LDCOPFModelResults.cs" />
     <Compile Include="Solvers\LDCOPF\LDCOPFModelSolver.cs" />
+    <Compile Include="Solvers\LDCOPF\LdcOpfResults\LdcOpfModelResults.cs" />
+    <Compile Include="Solvers\LDCOPF\LdcOpfResults\NodeLdcOpfResult.cs" />
     <Compile Include="Solvers\OPF\OPFModel.cs" />
     <Compile Include="BindingModels\BaseDataBinding\PowerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

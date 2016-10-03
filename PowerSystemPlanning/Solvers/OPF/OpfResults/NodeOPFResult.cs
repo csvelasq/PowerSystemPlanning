@@ -54,11 +54,11 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
         /******************************************
          * CURTAILMENT (PHYSICAL)
          ******************************************/
-        public double PowerCurtailed =>
+        public double TotalPowerCurtailed =>
             (from load in GlobalResultsOpfModelResults.MyLoadOpfResults
              where load.MyLoadState.UnderlyingInelasticLoad.ConnectionNode == MyNodeState.UnderlyingNode
              select load.PowerCurtailed).Sum();
-        public double EnergyCurtailed =>
+        public double TotalEnergyCurtailed =>
             (from load in GlobalResultsOpfModelResults.MyLoadOpfResults
              where load.MyLoadState.UnderlyingInelasticLoad.ConnectionNode == MyNodeState.UnderlyingNode
              select load.PowerCurtailed).Sum();

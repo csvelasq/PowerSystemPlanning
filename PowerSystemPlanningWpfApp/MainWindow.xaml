@@ -26,14 +26,8 @@
         <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAsCommandBinding_Executed" />
         <CommandBinding Command="ApplicationCommands.Close" Executed="CloseCommandBinding_Executed" />
     </Window.CommandBindings>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="300*" />
-            <RowDefinition Height="5" />
-            <RowDefinition Height="100" />
-        </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+    <DockPanel LastChildFill="True">
+        <DockPanel DockPanel.Dock="Top"  HorizontalAlignment="Left" VerticalAlignment="Center">
             <Menu DockPanel.Dock="Left" Background="White">
                 <MenuItem Header="_File">
                     <MenuItem x:Name="menubtnNew" Header="_New" Command="ApplicationCommands.New">
@@ -81,31 +75,60 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TabControl Grid.Row="1">
-            <TabItem Header="Power System Model">
-                <modelControls:PlanningModelEditorControl DataContext="{Binding MyScenarioTEPModel}" />
-            </TabItem>
-            <!--<TabItem Header="OPF">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300*" />
+                <!--Contents-->
+                <RowDefinition Height="5" />
+                <!--Vertical Grid Splitter-->
+                <RowDefinition Height="200" />
+                <!--Log and shell-->
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300*" />
+                        <!--Contents-->
+                        <RowDefinition Height="5" />
+                        <!--Vertical Grid Splitter-->
+                        <RowDefinition Height="100" />
+                        <!--Log and shell-->
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Power Systems" Grid.Row="0" />
+                </Grid>
+                <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" />
+                <TabControl Grid.Column="2">
+                    <TabItem Header="Power System Model">
+                        <modelControls:PlanningModelEditorControl DataContext="{Binding MyScenarioTEPModel}" />
+                    </TabItem>
+                    <!--<TabItem Header="OPF">
                 <opfControls:OPFResultsControl x:Name="myOPFResultsControl" />
             </TabItem>-->
-            <!--<TabItem Header="LDC OPF">
+                    <!--<TabItem Header="LDC OPF">
                 <opfLdcControls:OPFLDCRunControl x:Name="myOPFLDCRunControl" />
             </TabItem>-->
-            <TabItem Header="Scenario TEP LDC">
-                <scenarioTEPControls:ScenarioTEPLDCInspectControl DataContext="{Binding MyScenarioTepViewModel}" />
-            </TabItem>
-            <!--<TabItem Header="Scenario TEP Enumeration">
+                    <TabItem Header="Scenario TEP LDC">
+                        <scenarioTEPControls:ScenarioTEPLDCInspectControl DataContext="{Binding MyScenarioTepViewModel}" />
+                    </TabItem>
+                    <!--<TabItem Header="Scenario TEP Enumeration">
                 <scenarioTEPControls:ScenarioTEPEnumerateControl DataContext="{Binding MyScenarioTepViewModel}" />
             </TabItem>-->
-            <TabItem Header="Second Order Scenario TEP Enumeration">
-                <paretoBruteForceTEPControls:ScenarioTEP2ndOrderEnumerateControl DataContext="{Binding MyScenarioTEPParetoViewModel}" />
-            </TabItem>
-        </TabControl>
-        <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />
-        <GroupBox Name="logExpander"  Header="Log" Grid.Row="3">
-            <ScrollViewer>
-                <RichTextBox x:Name="LogRichTextBox" />
-            </ScrollViewer>
-        </GroupBox>
-    </Grid>
+                    <TabItem Header="Second Order Scenario TEP Enumeration">
+                        <paretoBruteForceTEPControls:ScenarioTEP2ndOrderEnumerateControl DataContext="{Binding MyScenarioTEPParetoViewModel}" />
+                    </TabItem>
+                </TabControl>
+            </Grid>
+            <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+            <GroupBox Header="Log" Grid.Row="2">
+                <ScrollViewer>
+                    <RichTextBox x:Name="LogRichTextBox" />
+                </ScrollViewer>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
 </Window>

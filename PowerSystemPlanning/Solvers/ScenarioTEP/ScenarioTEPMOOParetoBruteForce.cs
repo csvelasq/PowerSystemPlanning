@@ -1,14 +1,13 @@
 ﻿using NLog;
 using PowerSystemPlanning.Models.Planning.ScenarioTEP;
 using PowerSystemPlanning.MultiObjective;
-using PowerSystemPlanning.PlanningModels;
-using PowerSystemPlanning.PlanningModels.Planning;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PowerSystemPlanning.Models.SystemBaseData;
 
 namespace PowerSystemPlanning.Solvers.ScenarioTEP
 {
@@ -50,6 +49,35 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
         /// </summary>
         public SolverResults MySolverResults { get; protected set; }
 
+        public IPowerSystem MyPowerSystem
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string SolverName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string StudyName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public ScenarioTEPMOOParetoBruteForce(ScenarioTEPModel myScenarioTEPModel)
         {
             MyScenarioTEPModel = myScenarioTEPModel;
@@ -87,6 +115,11 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
         }
 
         public void SolveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveToXml(string fullPath)
         {
             throw new NotImplementedException();
         }

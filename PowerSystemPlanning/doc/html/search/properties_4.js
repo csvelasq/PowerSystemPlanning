@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['detailedldcopfmodelresults',['DetailedLDCOPFModelResults',['../class_power_system_planning_1_1_planning_models_1_1_planning_1_1_transmission_expansion_plan_l_d_c_results_for_one_scenario.html#ad76efa117a5280da21a455ea3a8a7503',1,'PowerSystemPlanning::PlanningModels::Planning::TransmissionExpansionPlanLDCResultsForOneScenario']]],
-  ['duration',['Duration',['../class_power_system_planning_1_1_planning_models_1_1_load_block.html#a41d7c0c4bb68225f9db1dc04595e4e5f',1,'PowerSystemPlanning::PlanningModels::LoadBlock']]],
-  ['durationblocks',['DurationBlocks',['../class_power_system_planning_1_1_planning_models_1_1_load_duration_curve_by_blocks.html#a3095245709274aed5c6bd1d740d84768',1,'PowerSystemPlanning::PlanningModels::LoadDurationCurveByBlocks']]]
+  ['executiontime',['ExecutionTime',['../class_power_system_planning_1_1_solvers_1_1_solver_results.html#af8b240e811cd09b47ee38ebbc0270ce1',1,'PowerSystemPlanning::Solvers::SolverResults']]],
+  ['expectedtotalcosts',['ExpectedTotalCosts',['../class_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_transmission_expansion_plan.html#aef7af8d686f8465b0742d1868e1d0439',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP::TransmissionExpansionPlan']]]
 ];

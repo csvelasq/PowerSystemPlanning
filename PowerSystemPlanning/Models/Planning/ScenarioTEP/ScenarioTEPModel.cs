@@ -1,5 +1,5 @@
-﻿using PowerSystemPlanning.Models.Planning.ScenarioTEP;
-using PowerSystemPlanning.PlanningModels.Planning;
+﻿using PowerSystemPlanning.Models.Planning.InvestmentBranch;
+using PowerSystemPlanning.Models.Planning.LDC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace PowerSystemPlanning.PlanningModels
+namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
 {
     public class ScenarioTEPModel : ScenarioPowerSystemPlanningModel
     {
@@ -32,7 +32,7 @@ namespace PowerSystemPlanning.PlanningModels
                     _MyCandidateTransmissionLines.AddingNew += (sender, e) =>
                     {
                         var id = MyScenarios[0].MyPowerSystem.TransmissionLines.Count + MyCandidateTransmissionLines.Count;
-                        e.NewObject = new CandidateTransmissionLine(MyScenarios[0].MyPowerSystem.Nodes, id);
+                        e.NewObject = new CandidateTransmissionLine(MyScenarios[0].MyPowerSystem);
                     };
                     NotifyPropertyChanged();
                 }

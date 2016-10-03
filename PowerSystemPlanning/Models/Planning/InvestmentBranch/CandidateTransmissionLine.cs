@@ -1,6 +1,7 @@
 ﻿using System;
 using PowerSystemPlanning.Models.SystemBaseData;
 using PowerSystemPlanning.Models.SystemBaseData.Branch;
+using PowerSystemPlanning.BindingModels.BaseDataBinding;
 
 namespace PowerSystemPlanning.Models.Planning.InvestmentBranch
 {

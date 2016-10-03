@@ -1,11 +1,12 @@
-﻿using System;
+﻿using PowerSystemPlanning.BindingModels.BaseDataBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.PlanningModels.Planning
+namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
 {
     /// <summary>
     /// Encapsulates power system data in a particular future scenario being modeled.

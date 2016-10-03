@@ -5,6 +5,7 @@ using System.Linq;
 using PowerSystemPlanning.Models.SystemState;
 using PowerSystemPlanning.Solvers.GRBOptimization;
 using PowerSystemPlanning.Solvers.OPF.OpfResults;
+using PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults;
 
 namespace PowerSystemPlanning.Solvers.LDCOPF
 {
@@ -30,18 +31,18 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         /// <summary>
         /// Detailed results for this LDCOPF, set by calling <see cref="BuildLDCOPFModelResults"/> (after the model is solved).
         /// </summary>
-        public LDCOPFModelResults MyDetailedLDCOPFModelResults { get; protected set; }
+        public LdcOpfModelResults MyDetailedLDCOPFModelResults { get; protected set; }
 
         public LDCOPFModel(IEnumerable<IPowerSystemState> powerSystemStates)
             : base()
         {
-            this.MyPowerSystemStates = powerSystemStates;
+            this.MyPowerSystemStates = new List<IPowerSystemState>(powerSystemStates);
         }
 
         public LDCOPFModel(IEnumerable<IPowerSystemState> powerSystemStates, GRBEnv grbEnv, GRBModel grbModel)
             : base(grbEnv, grbModel)
         {
-            this.MyPowerSystemStates = powerSystemStates;
+            this.MyPowerSystemStates = new List<IPowerSystemState>(powerSystemStates);
         }
 
         public override void BuildGRBOptimizationModel()
@@ -60,15 +61,17 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         /// Build detailed results for this LDC OPF.
         /// </summary>
         /// <returns>An encapsulator of the detailed results of this LDC OPF.</returns>
-        public LDCOPFModelResults BuildLDCOPFModelResults()
+        public LdcOpfModelResults BuildLDCOPFModelResults()
         {
             int status = MyGrbModel.Get(GRB.IntAttr.Status);
+            //detailed results for each block
             OpfResultsByBlock = new List<OPFModelResult>();
             foreach (OPFModel opfModel in this.OpfByBlock)
             {
                 OpfResultsByBlock.Add(opfModel.BuildOPFModelResults());
             }
-            MyDetailedLDCOPFModelResults = new LDCOPFModelResults(MyPowerSystemStates, status, ObjVal, OpfResultsByBlock);
+            //detailed results for this LDC OPF model (aggregate and in per node)
+            MyDetailedLDCOPFModelResults = new LdcOpfModelResults(status, ObjVal, OpfResultsByBlock, MyPowerSystemStates[0].MyPowerSystem.Nodes);
             return MyDetailedLDCOPFModelResults;
         }
     }

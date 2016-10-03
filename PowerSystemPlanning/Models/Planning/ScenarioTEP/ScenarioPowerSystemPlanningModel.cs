@@ -1,5 +1,5 @@
 ﻿using NLog;
-using PowerSystemPlanning.PlanningModels.Planning;
+using PowerSystemPlanning.Models.Planning.LDC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace PowerSystemPlanning.PlanningModels
+namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
 {
     // TODO decoupled open & save (a collection of serializable objects which can be modified in runtime by plugins)
     // TODO extend bindableBase instead of customized INPC implementation

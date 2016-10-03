@@ -8,6 +8,10 @@ using PowerSystemPlanning.Models.SystemBaseData.Generator;
 using PowerSystemPlanning.Models.SystemBaseData.Load;
 using PowerSystemPlanning.Models.SystemBaseData.Nodes;
 using PowerSystemPlanning.Models.SystemBaseData.Branch;
+using PowerSystemPlanning.BindingModels.BaseDataBinding.Branch;
+using PowerSystemPlanning.BindingModels.BaseDataBinding.Load;
+using PowerSystemPlanning.BindingModels.BaseDataBinding.Generator;
+using PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes;
 
 namespace PowerSystemPlanning.BindingModels.BaseDataBinding
 {
@@ -21,6 +25,9 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
     [DataContract()]
     public class PowerSystem : BindableBase, IPowerSystem
     {
+        [DataMember()]
+        public string Name { get; set; }
+
         /// <summary>
         /// Nodes of the power system, bindable to GUI.
         /// </summary>
@@ -40,6 +47,8 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
         /// All Generating units in the power system
         /// </summary>
         public IList<IGeneratingUnit> GeneratingUnits => this.BindingGeneratingUnits.Cast<IGeneratingUnit>().ToList();
+
+        public double TotalGeneratingCapacity => (from gen in this.BindingGeneratingUnits select gen.InstalledCapacity).Sum();
 
         /// <summary>
         /// All Inelastic loads in the power system, bindable to GUI.
@@ -82,14 +91,14 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
             //new objects are added directly by the GUI
             //catching the event allows for making new objects reference this power system
             // TODO attach addingnew handler directly in the setter for each of the following bindinglist (_Nodes, _GeneratingUnits, ...)
-            _Nodes = new BindingList<Node>();
-            _Nodes.AddingNew += (sender, e) => { e.NewObject = new Node(this); };
+            BindingNodes = new BindingList<Node>();
+            BindingNodes.AddingNew += (sender, e) => { e.NewObject = new Node(this); };
             BindingGeneratingUnits = new BindingList<GeneratingUnit>();
             BindingGeneratingUnits.AddingNew += (sender, e) => { e.NewObject = new GeneratingUnit(this); };
             BindingInelasticLoads = new BindingList<InelasticLoad>();
             BindingInelasticLoads.AddingNew += (sender, e) => { e.NewObject = new InelasticLoad(this); };
-            _TransmissionLines = new BindingList<TransmissionLine>();
-            _TransmissionLines.AddingNew += (sender, e) => { e.NewObject = new TransmissionLine(this); };
+            BindingTransmissionLines = new BindingList<SimpleTransmissionLine>();
+            BindingTransmissionLines.AddingNew += (sender, e) => { e.NewObject = new SimpleTransmissionLine(this); };
         }
     }
 }

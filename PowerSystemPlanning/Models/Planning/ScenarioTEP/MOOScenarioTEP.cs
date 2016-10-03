@@ -1,5 +1,4 @@
 ﻿using PowerSystemPlanning.MultiObjective;
-using PowerSystemPlanning.PlanningModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +9,7 @@ namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
 {
     public class MOOScenarioTEP : BaseMultiObjectiveOptimizationProblem
     {
-        public override string MyMOOName
-        {
-            get
-            {
-                return "TEP under MOO Scenario uncertainty (one objective for each scenario)";
-            }
-        }
+        public override string MyMOOName => "TEP under MOO Scenario uncertainty (one objective for each scenario)";
 
         public ScenarioTEPModel MyScenarioTEPModel { get; protected set; }
 

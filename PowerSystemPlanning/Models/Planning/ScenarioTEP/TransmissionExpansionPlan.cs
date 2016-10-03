@@ -1,4 +1,5 @@
-﻿using PowerSystemPlanning.Models.Planning.ScenarioTEP;
+﻿using PowerSystemPlanning.BindingModels.BaseDataBinding;
+using PowerSystemPlanning.Models.Planning.InvestmentBranch;
 using PowerSystemPlanning.MultiObjective;
 using PowerSystemPlanning.Solvers.LDCOPF;
 using System;
@@ -9,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.PlanningModels.Planning
+namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
 {
     /// <summary>
     /// A transmission expansion plan, composed by a subset of the candidate transmission lines.
@@ -165,10 +166,10 @@ namespace PowerSystemPlanning.PlanningModels.Planning
         {
             //builds the model
             //PowerSystemWithCandidateTransmissionLines MyPowerSystemWithCandidateTransmissionLines = new PowerSystemWithCandidateTransmissionLines(scenarioToEval.MyPowerSystem, BuiltTransmissionLines);
-            PowerSystem pws = PowerSystemWithCandidateTransmissionLines.ClonePWSAndAddCandidateLines(scenarioToEval.MyPowerSystem, BuiltTransmissionLines);
+            PowerSystem pws = null;// PowerSystemWithCandidateTransmissionLines.ClonePWSAndAddCandidateLines(scenarioToEval.MyPowerSystem, BuiltTransmissionLines);
             // TODO build pws only once, and then change the built transmission lines
             // TODO encapsulate power system with a decorator pattern
-            LDCOPFModel model = new LDCOPFModel(pws, MyScenarioTEPModel.MyLoadDurationCurve);
+            LDCOPFModel model = null;//new LDCOPFModel(pws, MyScenarioTEPModel.MyLoadDurationCurve);
             MyLDCOPFModelEachScenario.Add(model);
             // TODO implement an OPF optimization model where single parameters can be modified (instead of rebuilding the whole model on each call) via GRB.ChgCoeff(constr,var,newvalue)
             if (buildDetailedResults)

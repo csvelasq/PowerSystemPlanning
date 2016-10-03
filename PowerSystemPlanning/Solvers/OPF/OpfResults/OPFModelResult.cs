@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PowerSystemPlanning.BindingModels.BaseDataBinding.Generator;
-using PowerSystemPlanning.BindingModels.BaseDataBinding.Load;
-using PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes;
-using PowerSystemPlanning.BindingModels.StateBinding.Generator;
 using PowerSystemPlanning.Models.SystemState;
-using PowerSystemPlanning.Models.SystemState.Branch;
-using PowerSystemPlanning.Models.SystemState.Generator;
-using PowerSystemPlanning.Models.SystemState.Nodes;
+using PowerSystemPlanning.Solvers.GRBOptimization;
 
 namespace PowerSystemPlanning.Solvers.OPF.OpfResults
 {
@@ -82,10 +76,10 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
         /******************************************
          * CURTAILMENT (PHYSICAL)
          ******************************************/
-        public double PowerCurtailed =>
+        public double TotalPowerCurtailed =>
             (from load in MyLoadOpfResults
              select load.PowerCurtailed).Sum();
-        public double EnergyCurtailed =>
+        public double TotalEnergyCurtailed =>
             (from load in MyLoadOpfResults
              select load.PowerCurtailed).Sum();
 

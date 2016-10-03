@@ -1,5 +1,8 @@
 ﻿using Gurobi;
-using PowerSystemPlanning.PlanningModels;
+using PowerSystemPlanning.Models.Planning.LDC;
+using PowerSystemPlanning.Models.SystemBaseData;
+using PowerSystemPlanning.Solvers.GRBOptimization;
+using PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults;
 using PowerSystemPlanning.Solvers.OPF;
 using System;
 using System.Collections.Generic;
@@ -23,9 +26,9 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         /// <summary>
         /// The detailed results of this LDC OPF model (per node, generator, and transmission line).
         /// </summary>
-        public LDCOPFModelResults MyLDCOPFResults { get; protected set; }
+        public LdcOpfModelResults MyLDCOPFResults { get; protected set; }
 
-        public LDCOPFModelSolver(PowerSystem powerSystem, LoadDurationCurveByBlocks durationCurveBlocks)
+        public LDCOPFModelSolver(IPowerSystem powerSystem, LoadDurationCurveByBlocks durationCurveBlocks)
             : base(powerSystem)
         {
             this.DurationCurveBlocks = durationCurveBlocks;

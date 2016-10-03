@@ -11,12 +11,16 @@ namespace PowerSystemPlanning.Solvers.GRBOptimization
     /// </remarks>
     public abstract class BaseOptimizationPowerSystemSolver : IPowerSystemStudy
     {
-        protected IPowerSystem MyPowerSystem;
+        public IPowerSystem MyPowerSystem { get; protected set; }
 
         /// <summary>
         /// Encapsulator of the overall results of the solution process (e.g. elapsed time).
         /// </summary>
         public SolverResults MySolverResults { get; protected set; }
+
+        public string SolverName => MyGRBOptimizationModel.GRBOptimizationModelName;
+
+        public string StudyName { get; set; }
 
         /// <summary>
         /// Gurobi optimization model wrapped by this solver.
@@ -64,6 +68,11 @@ namespace PowerSystemPlanning.Solvers.GRBOptimization
         /// Asynchronously solves the Gurobi optimization model wrapped by this solver.
         /// </summary>
         public void SolveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveToXml(string path)
         {
             throw new NotImplementedException();
         }

@@ -11,6 +11,7 @@ namespace PowerSystemPlanning.Models.SystemBaseData
     /// </summary>
     public interface IPowerSystem
     {
+        string Name { get; }
         /// <summary>
         /// Set of nodes (buses) in this power system.
         /// </summary>

@@ -25,7 +25,7 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
     /// The results are stored in <see cref="ParetoFront"/> and also in <see cref="AllPossibleTEPAlternatives"/>.
     /// <see cref="Solve"/> can also be called after setting <see cref="AllPossibleTEPAlternatives"/>, on which case Solve will only produce the pareto frontier.
     /// </remarks>
-    public class ScenarioTEPMOOParetoBruteForce : IPowerSystemSolver
+    public class ScenarioTEPMOOParetoBruteForce : IPowerSystemStudy
     {
         /// <summary>
         /// NLog Logger for this solver.

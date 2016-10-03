@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.Solvers
+namespace PowerSystemPlanning.Solvers.GRBOptimization
 {
     /// <summary>
     /// Encapsulates the general results of the Gurobi optimization process for a given model.
@@ -23,17 +23,17 @@ namespace PowerSystemPlanning.Solvers
         /// <summary>
         /// True if the model was proved to be infeasible, false otherwise.
         /// </summary>
-        public bool IsModelInfeasible { get { return GRBStatus == GRB.Status.INFEASIBLE; } }
+        public bool IsModelInfeasible => GRBStatus == GRB.Status.INFEASIBLE;
 
         /// <summary>
         /// True if the model was solved to optimality, false otherwise.
         /// </summary>
-        public bool IsModelSolved { get { return GRBStatus == GRB.Status.OPTIMAL; } }
+        public bool IsModelSolved => GRBStatus == GRB.Status.OPTIMAL;
 
         /// <summary>
         /// True if the model was proved to be unbounded, false otherwise.
         /// </summary>
-        public bool IsModelUnbounded { get { return GRBStatus == GRB.Status.UNBOUNDED; } }
+        public bool IsModelUnbounded => GRBStatus == GRB.Status.UNBOUNDED;
 
         /// <summary>
         /// The value of the objective function.

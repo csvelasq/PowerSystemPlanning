@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Gurobi;
 using PowerSystemPlanning.Models.SystemState;
+using PowerSystemPlanning.Solvers.GRBOptimization;
 using PowerSystemPlanning.Solvers.OPF.OpfResults;
 
 namespace PowerSystemPlanning.Solvers.OPF
@@ -15,7 +16,7 @@ namespace PowerSystemPlanning.Solvers.OPF
     {
         public override string GRBOptimizationModelName => "Linear Optimal (DC) Power Flow";
 
-        protected IPowerSystemState MyPowerSystemState;
+        public IPowerSystemState MyPowerSystemState { get; protected set; }
 
         /// <summary>
         /// The results of this simple OPF model (set by <see cref="BuildOPFModelResults"/>).

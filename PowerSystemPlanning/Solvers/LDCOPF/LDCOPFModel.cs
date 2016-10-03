@@ -1,12 +1,10 @@
 ﻿using Gurobi;
-using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.Solvers.OPF;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PowerSystemPlanning.Models.SystemState;
+using PowerSystemPlanning.Solvers.GRBOptimization;
+using PowerSystemPlanning.Solvers.OPF.OpfResults;
 
 namespace PowerSystemPlanning.Solvers.LDCOPF
 {
@@ -17,7 +15,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
     {
         public override string GRBOptimizationModelName { get { return "Linear Optimal (DC) Power Flow, with Load Duration Curve Representation of Demand"; } }
 
-        public IEnumerable<IPowerSystemState> MyPowerSystemStates { get; protected set; }
+        public List<IPowerSystemState> MyPowerSystemStates { get; protected set; }
 
         /// <summary>
         /// The OPF model in each block of the duration curve.

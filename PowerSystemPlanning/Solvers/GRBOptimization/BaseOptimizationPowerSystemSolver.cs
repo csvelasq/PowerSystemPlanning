@@ -1,22 +1,17 @@
-﻿using Gurobi;
+﻿using PowerSystemPlanning.Models.SystemBaseData;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.Solvers
+namespace PowerSystemPlanning.Solvers.GRBOptimization
 {
     /// <summary>
     /// Base class for power system solvers which wrap a single optimization model (e.g. OPF, LDC OPF). Intended for detailed analysis of single instances. Concrete implementations should only override <see cref="MyGRBOptimizationModel"/> and <see cref="BuildOptimizationModelResults"/>.
     /// </summary>
     /// <remarks>This class adds non-essential functionality to <see cref="BaseGRBOptimizationModel"/>, particularly automated detailed result reporting such as start time, execution time, etc.
-    /// This class should be implemented in order to provide the ability to analyze detailed results for an existing optimization model. Implementing classes should override <see cref="BuildOptimizationModelResults"/> in order to build detailed and specific results for the wrapped optimization model. The reason for such an implementation is to avoid disposing of the gurobi model before detailed results can be extracted (<see cref="Solve"/>). Once the implementation overwrites the two required elements, using the solver only requires a single call to 'Solve' (obviously after initializing this object).
+    /// This class should be implemented in order to provide the ability to analyze detailed results for an existing optimization model. Implementing classes should override <see cref="BuildOptimizationModelResults"/> in order to build detailed and specific results for the wrapped optimization model. The reason for such an implementation is to avoid disposing of the gurobi model before detailed results can be extracted (<see cref="Solve"/>). Once the implementation overwrites the two required elements, using the solver only requires a single call to <see cref="Solve"/> (obviously after creating an instance of this class).
     /// </remarks>
-    public abstract class BaseOptimizationPowerSystemSolver : IPowerSystemSolver
+    public abstract class BaseOptimizationPowerSystemSolver : IPowerSystemStudy
     {
-        protected PowerSystem MyPowerSystem;
+        protected IPowerSystem MyPowerSystem;
 
         /// <summary>
         /// Encapsulator of the overall results of the solution process (e.g. elapsed time).
@@ -34,7 +29,7 @@ namespace PowerSystemPlanning.Solvers
         /// </summary>
         /// <param name="powerSystem">The power system to which this solver will be applied.</param>
         /// <remarks>GRBEnv and GRBModel are first created here, and then passed through to the specific optimization model objects.</remarks>
-        public BaseOptimizationPowerSystemSolver(PowerSystem powerSystem)
+        protected BaseOptimizationPowerSystemSolver(IPowerSystem powerSystem)
         {
             this.MyPowerSystem = powerSystem;
         }

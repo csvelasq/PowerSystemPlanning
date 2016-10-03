@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.Solvers
+namespace PowerSystemPlanning.Solvers.GRBOptimization
 {
     /// <summary>
-    /// Base implementation of a Gurobi optimization model. Concrete implementations should only override <see cref="GRBOptimizationModelName"/> and <see cref="BuildGRBOptimizationModel"/>.
+    /// Base implementation of a Gurobi optimization model.
     /// </summary>
     /// <remarks>
     /// Provides basic and common functionality for solving a gurobi optimization model. This class should be overwritten by any particular gurobi optimization model. Once <see cref="GRBOptimizationModelName"/> and <see cref="BuildGRBOptimizationModel"/> are overwritten, there are two options for using the resulting concrete implementation:
@@ -35,11 +35,11 @@ namespace PowerSystemPlanning.Solvers
         /// <summary>
         /// The current status of this Gurobi optimization model.
         /// </summary>
-        protected int GRBModelStatus { get { return MyGrbModel.Get(GRB.IntAttr.Status); } }
+        protected int GRBModelStatus => MyGrbModel.Get(GRB.IntAttr.Status);
         /// <summary>
         /// The value of the objective function in this Gurobi optimization model.
         /// </summary>
-        protected double ObjVal { get { return MyGrbModel.Get(GRB.DoubleAttr.ObjVal); } }
+        protected double ObjVal => MyGrbModel.Get(GRB.DoubleAttr.ObjVal);
 
         /// <summary>
         /// The basic results of this gurobi optimization model.
@@ -49,7 +49,7 @@ namespace PowerSystemPlanning.Solvers
         /// <summary>
         /// Constructor, creates new Gurobi environment and variables.
         /// </summary>
-        public BaseGRBOptimizationModel()
+        protected BaseGRBOptimizationModel()
         {
             MyGrbEnv = new GRBEnv();
             MyGrbModel = new GRBModel(MyGrbEnv);
@@ -60,7 +60,7 @@ namespace PowerSystemPlanning.Solvers
         /// </summary>
         /// <param name="grbEnv"></param>
         /// <param name="grbModel"></param>
-        public BaseGRBOptimizationModel(GRBEnv grbEnv, GRBModel grbModel)
+        protected BaseGRBOptimizationModel(GRBEnv grbEnv, GRBModel grbModel)
         {
             MyGrbEnv = grbEnv;
             MyGrbModel = grbModel;

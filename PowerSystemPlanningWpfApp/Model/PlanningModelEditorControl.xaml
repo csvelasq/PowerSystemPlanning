@@ -7,10 +7,8 @@
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              xmlns:modelControls="clr-namespace:PowerSystemPlanningWpfApp.Model"
-             xmlns:planningModel="clr-namespace:PowerSystemPlanning.PlanningModels;assembly=PowerSystemPlanning"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="900" Background="White"
-             d:DataContext="{d:DesignInstance planningModel:ScenarioTEPModel}">
+             d:DesignHeight="700" d:DesignWidth="900" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="250" />

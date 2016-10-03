@@ -1,4 +1,4 @@
-﻿using PowerSystemPlanning.PlanningModels;
+﻿using PowerSystemPlanning.Models.Planning.InvestmentBranch;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

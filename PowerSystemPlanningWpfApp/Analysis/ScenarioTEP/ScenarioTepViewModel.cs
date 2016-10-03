@@ -1,5 +1,5 @@
-﻿using PowerSystemPlanning.PlanningModels;
-using PowerSystemPlanning.PlanningModels.Planning;
+﻿using PowerSystemPlanning.Models.Planning.InvestmentBranch;
+using PowerSystemPlanning.Models.Planning.ScenarioTEP;
 using PowerSystemPlanning.Solvers.LDCOPF;
 using PowerSystemPlanningWpfApp.Analysis;
 using PowerSystemPlanningWpfApp.Analysis.LDC;

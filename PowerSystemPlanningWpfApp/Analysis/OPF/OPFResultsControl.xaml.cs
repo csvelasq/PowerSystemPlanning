@@ -1,6 +1,7 @@
 ﻿using PowerSystemPlanning;
 using PowerSystemPlanning.Solvers;
 using PowerSystemPlanning.Solvers.OPF;
+using PowerSystemPlanning.Solvers.OPF.OpfResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,9 @@ namespace PowerSystemPlanningWpfApp.Analysis.OPF
     /// </summary>
     public partial class OPFResultsControl : UserControl
     {
-        OPFModelResultForLDC _OPFResultsForLDC;
+        OPFModelResult _OPFResultsForLDC;
 
-        public OPFModelResultForLDC OPFResultsForLDC
+        public OPFModelResult OPFResultsForLDC
         {
             set
             {

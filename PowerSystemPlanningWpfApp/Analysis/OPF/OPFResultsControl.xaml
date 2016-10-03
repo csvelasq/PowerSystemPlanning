@@ -1,16 +1,14 @@
-﻿<!--bind to object of type 'OPFModelResultForLDC'-->
-<UserControl x:Class="PowerSystemPlanningWpfApp.Analysis.OPF.OPFResultsControl"
+﻿<UserControl x:Class="PowerSystemPlanningWpfApp.Analysis.OPF.OPFResultsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Analysis.OPF"
-             xmlns:planningModel="clr-namespace:PowerSystemPlanning.Solvers.OPF;assembly=PowerSystemPlanning"
+             xmlns:planningModel="clr-namespace:PowerSystemPlanning.Solvers.OPF.OpfResults;assembly=PowerSystemPlanning"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="950" Background="White"
-             d:DataContext="{d:DesignInstance planningModel:OPFModelResultForLDC}">
-    <!--d:DataContext="{d:DesignInstance vm:OPFModelResultForLDC}"-->
+             d:DataContext="{d:DesignInstance planningModel:OPFModelResult}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanningWpfApp.Application
+namespace PowerSystemPlanningWpfApp.ApplicationWide
 {
     public class PowerSystemSummary : BindableBase
     {

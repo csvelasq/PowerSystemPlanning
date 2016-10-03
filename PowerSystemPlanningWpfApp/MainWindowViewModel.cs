@@ -1,6 +1,6 @@
-﻿using PowerSystemPlanning;
-using PowerSystemPlanning.PlanningModels;
-using PowerSystemPlanning.PlanningModels.Planning;
+﻿using PowerSystemPlanning.BindingModels.BaseDataBinding;
+using PowerSystemPlanning.Models.Planning.LDC;
+using PowerSystemPlanning.Models.Planning.ScenarioTEP;
 using PowerSystemPlanning.Solvers.LDCOPF;
 using PowerSystemPlanning.Solvers.OPF;
 using PowerSystemPlanningWpfApp.Analysis.ScenarioTEP;

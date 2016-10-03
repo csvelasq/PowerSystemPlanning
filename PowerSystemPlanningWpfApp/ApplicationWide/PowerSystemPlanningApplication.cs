@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanningWpfApp.Application
+namespace PowerSystemPlanningWpfApp.ApplicationWide
 {
     /// <summary>
     /// Encapsulates information on the local workspace directory which contains power systems and studies

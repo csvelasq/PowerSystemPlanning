@@ -1,6 +1,8 @@
 ﻿using PowerSystemPlanning;
-using PowerSystemPlanning.PlanningModels;
+using PowerSystemPlanning.BindingModels.BaseDataBinding;
+using PowerSystemPlanning.Models.Planning.LDC;
 using PowerSystemPlanning.Solvers.OPF;
+using PowerSystemPlanning.Solvers.OPF.OpfResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,10 +39,10 @@ namespace PowerSystemPlanningWpfApp.Analysis.OPF
             }
         }
         LoadBlock MyLoadBlock { get; set; }
-        OPFModelSolverForLDC OPFSolverForLDC;
+        //OPFModelSolver OPFSolverForLDC;
 
-        OPFModelResultForLDC _OPFResultsForLDC;
-        OPFModelResultForLDC OPFResultsForLDC
+        OPFModelResult _OPFResultsForLDC;
+        OPFModelResult OPFResultsForLDC
         {
             get
             {
@@ -62,11 +64,11 @@ namespace PowerSystemPlanningWpfApp.Analysis.OPF
         private void btnRunOpf_Click(object sender, RoutedEventArgs e)
         {
             //builds the model
-            OPFSolverForLDC = new OPFModelSolverForLDC(this.MyPowerSystem, this.MyLoadBlock);
+            //OPFSolverForLDC = new OPFModelSolver(this.MyPowerSystem, this.MyLoadBlock);
             //solves the model
-            OPFSolverForLDC.Solve();
+            //OPFSolverForLDC.Solve();
             //binds results
-            OPFResultsForLDC = OPFSolverForLDC.MyOPFModelResultsForLDC;
+            //OPFResultsForLDC = OPFSolverForLDC.MyOPFModelResultsForLDC;
         }
     }
 }

@@ -16,9 +16,7 @@ using PowerSystemPlanning;
 using System.Collections.ObjectModel;
 using System.IO;
 using NLog;
-using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanningWpfApp.Model;
-using PowerSystemPlanning.PlanningModels.Planning;
 using PowerSystemPlanningWpfApp.Analysis.ScenarioTEP;
 using PowerSystemPlanningWpfApp.Analysis.LDC;
 

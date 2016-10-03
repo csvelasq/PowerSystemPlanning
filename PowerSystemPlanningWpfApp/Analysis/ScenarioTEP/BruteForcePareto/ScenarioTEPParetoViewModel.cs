@@ -1,6 +1,5 @@
-﻿using PowerSystemPlanning.MultiObjective;
-using PowerSystemPlanning.PlanningModels;
-using PowerSystemPlanning.PlanningModels.Planning;
+﻿using PowerSystemPlanning.Models.Planning.ScenarioTEP;
+using PowerSystemPlanning.MultiObjective;
 using PowerSystemPlanning.Solvers.ScenarioTEP;
 using PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate;
 using Prism.Commands;

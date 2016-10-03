@@ -184,11 +184,8 @@
     <Compile Include="ApplicationWide\WorkspaceBrowser\WorkspaceBrowserControl.xaml.cs">
       <DependentUpon>WorkspaceBrowserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Application\PowerSystemPlanningApplication.cs" />
-    <Compile Include="Application\PowerSystemSummary.cs" />
-    <Compile Include="Application\WorkspaceBrowser\WorkspaceBrowserControl.xaml.cs">
-      <DependentUpon>WorkspaceBrowserControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ApplicationWide\PowerSystemPlanningApplication.cs" />
+    <Compile Include="ApplicationWide\PowerSystemSummary.cs" />
     <Compile Include="ControlUtils\CustomDg\DataGridColumnsBehavior.cs" />
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
@@ -253,10 +250,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ApplicationWide\WorkspaceBrowser\WorkspaceBrowserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Application\WorkspaceBrowser\WorkspaceBrowserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

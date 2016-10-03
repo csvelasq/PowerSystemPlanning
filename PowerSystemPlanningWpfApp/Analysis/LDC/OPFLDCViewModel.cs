@@ -1,7 +1,8 @@
-﻿using PowerSystemPlanning.PlanningModels;
-using PowerSystemPlanning.PlanningModels.Planning;
+﻿using PowerSystemPlanning.Models.Planning.LDC;
+using PowerSystemPlanning.Models.Planning.ScenarioTEP;
 using PowerSystemPlanning.Solvers.LDCOPF;
-using PowerSystemPlanning.Solvers.OPF;
+using PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults;
+using PowerSystemPlanning.Solvers.OPF.OpfResults;
 using PowerSystemPlanningWpfApp.Analysis.OPF;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -20,27 +21,27 @@ namespace PowerSystemPlanningWpfApp.Analysis.LDC
     /// </summary>
     public class OPFLDCViewModel : BindableBase
     {
-        LDCOPFModelResults _MyLDCOPFModelResults;
-        public LDCOPFModelResults MyLDCOPFModelResults
+        LdcOpfModelResults _MyLDCOPFModelResults;
+        public LdcOpfModelResults MyLDCOPFModelResults
         {
             get { return _MyLDCOPFModelResults; }
             set
             {
-                SetProperty<LDCOPFModelResults>(ref this._MyLDCOPFModelResults, value);
+                SetProperty<LdcOpfModelResults>(ref this._MyLDCOPFModelResults, value);
             }
         }
 
-        private OPFModelResultForLDC currentlySelectedLoadBlockResults;
+        private OPFModelResult currentlySelectedLoadBlockResults;
 
         /// <summary>
         /// Handles a double click in the datagrid with summarized results for each LDC block (shows detailed OPF results window).
         /// </summary>
         public ICommand DgLDC_DoubleClick { get; private set; }
 
-        public OPFModelResultForLDC CurrentlySelectedLoadBlockResults
+        public OPFModelResult CurrentlySelectedLoadBlockResults
         {
             get { return currentlySelectedLoadBlockResults; }
-            set { SetProperty<OPFModelResultForLDC>(ref currentlySelectedLoadBlockResults, value); }
+            set { SetProperty<OPFModelResult>(ref currentlySelectedLoadBlockResults, value); }
         }
 
         public OPFLDCViewModel()

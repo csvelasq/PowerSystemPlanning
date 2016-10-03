@@ -1,5 +1,4 @@
-﻿using PowerSystemPlanning.PlanningModels;
-using PowerSystemPlanning.PlanningModels.Planning;
+﻿using PowerSystemPlanning.Models.Planning.ScenarioTEP;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;

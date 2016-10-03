@@ -1,6 +1,6 @@
 ﻿using PowerSystemPlanning;
-using PowerSystemPlanning.PlanningModels;
 using PowerSystemPlanning.Solvers.LDCOPF;
+using PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +23,8 @@ namespace PowerSystemPlanningWpfApp.Analysis.LDC
     /// </summary>
     public partial class OPFLDCResultsControl : UserControl
     {
-        LDCOPFModelResults _MyLDCOPFModelResults;
-        public LDCOPFModelResults MyLDCOPFModelResults
+        LdcOpfModelResults _MyLDCOPFModelResults;
+        public LdcOpfModelResults MyLDCOPFModelResults
         {
             get { return _MyLDCOPFModelResults; }
             set

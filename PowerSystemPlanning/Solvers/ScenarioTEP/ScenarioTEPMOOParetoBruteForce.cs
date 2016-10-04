@@ -57,7 +57,7 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
             }
         }
 
-        public string SolverName
+        public string StudyGenericName
         {
             get
             {
@@ -65,7 +65,7 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
             }
         }
 
-        public string StudyName
+        public string StudyInstanceName
         {
             get
             {

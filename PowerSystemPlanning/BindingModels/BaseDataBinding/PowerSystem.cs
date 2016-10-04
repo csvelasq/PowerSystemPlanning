@@ -26,7 +26,13 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
     public class PowerSystem : BindableBase, IPowerSystem
     {
         [DataMember()]
-        public string Name { get; set; }
+        string _Name;
+
+        public string Name
+        {
+            get { return _Name; }
+            set { SetProperty<string>(ref _Name, value); }
+        }
 
         /// <summary>
         /// Nodes of the power system, bindable to GUI.
@@ -84,7 +90,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
         /// <summary>
         /// All Transmission lines in the power sytem.
         /// </summary>
-        public IList<ISimpleTransmissionLine> TransmissionLines =>this.BindingTransmissionLines.Cast<ISimpleTransmissionLine>().ToList();
+        public IList<ISimpleTransmissionLine> TransmissionLines => this.BindingTransmissionLines.Cast<ISimpleTransmissionLine>().ToList();
 
         public PowerSystem()
         {

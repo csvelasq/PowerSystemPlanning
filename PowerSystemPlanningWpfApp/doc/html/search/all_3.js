@@ -1,5 +1,11 @@
 var searchData=
 [
-  ['generatedinternaltypehelper',['GeneratedInternalTypeHelper',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html',1,'XamlGeneratedNamespace']]],
-  ['getpropertyvalue',['GetPropertyValue',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#afdc9fe15b56607d02082908d934480c6',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]]
+  ['candidatetransmissionlineforbinding',['CandidateTransmissionLineForBinding',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_candidate_transmission_line_for_binding.html',1,'PowerSystemPlanningWpfApp::Analysis']]],
+  ['candidatetransmissionlineseditorcontrol',['CandidateTransmissionLinesEditorControl',['../class_power_system_planning_wpf_app_1_1_model_1_1_candidate_transmission_lines_editor_control.html',1,'PowerSystemPlanningWpfApp::Model']]],
+  ['canuserpastetonewrows',['CanUserPasteToNewRows',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#a3444d83edb40c95ccf9aca14ffe6f3ce',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
+  ['canuserpastetonewrowsproperty',['CanUserPasteToNewRowsProperty',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#a2521d8f0307ab66a4fa0c1c31c305332',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
+  ['createdelegate',['CreateDelegate',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a8ec4c37e82d9f4e867e9655f4eac3a78',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type delegateType, object target, string handler)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a8ec4c37e82d9f4e867e9655f4eac3a78',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type delegateType, object target, string handler)']]],
+  ['createinstance',['CreateInstance',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#aefb7a98fceb9c287cef4756942f441d1',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type type, System.Globalization.CultureInfo culture)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#aefb7a98fceb9c287cef4756942f441d1',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type type, System.Globalization.CultureInfo culture)']]],
+  ['csvhelper',['CsvHelper',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_csv_helper.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
+  ['customdatagrid',['CustomDataGrid',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]]
 ];

@@ -1,8 +1,21 @@
 var searchData=
 [
-  ['recentfilelist',['RecentFileList',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
-  ['runeconomicdispatch',['RunEconomicDispatch',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_run_economic_dispatch.html',1,'PowerSystemPlanningWpfApp::OPF']]],
-  ['runldc',['RunLDC',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_run_l_d_c.html',1,'PowerSystemPlanningWpfApp::LDC']]],
-  ['runopfldcviewmodel',['RunOPFLDCViewModel',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_run_o_p_f_l_d_c_view_model.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],
-  ['runopfwindow',['RunOPFWindow',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_run_o_p_f_window.html',1,'PowerSystemPlanningWpfApp::OPF']]]
+  ['oncanexecutepaste',['OnCanExecutePaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#ad62754f9382daa406815f7965d6af785',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
+  ['onexecutedpaste',['OnExecutedPaste',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_custom_data_grid.html#a7a8455f1c46a856165914960a0e60418',1,'PowerSystemPlanningWpfApp::ControlUtils::CustomDataGrid']]],
+  ['openedpowersystemscontrol',['OpenedPowerSystemsControl',['../class_power_system_planning_wpf_app_1_1_application_wide_1_1_workspace_browser_1_1_opened_power_systems_control.html',1,'PowerSystemPlanningWpfApp::ApplicationWide::WorkspaceBrowser']]],
+  ['openworkspacedirectory',['OpenWorkspaceDirectory',['../class_power_system_planning_wpf_app_1_1_application_wide_1_1_power_system_planning_application.html#a6650f319f7ca2d26fb338a0d143ab63b',1,'PowerSystemPlanningWpfApp::ApplicationWide::PowerSystemPlanningApplication']]],
+  ['opfldcresultscontrol',['OPFLDCResultsControl',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_o_p_f_l_d_c_results_control.html',1,'PowerSystemPlanningWpfApp::LDC']]],
+  ['opfldcresultscontrol',['OPFLDCResultsControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_results_control.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],
+  ['opfldcresultswindow',['OPFLDCResultsWindow',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_o_p_f_l_d_c_results_window.html',1,'PowerSystemPlanningWpfApp::LDC']]],
+  ['opfldcresultswindow',['OPFLDCResultsWindow',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_results_window.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],
+  ['opfldcruncontrol',['OPFLDCRunControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_run_control.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],
+  ['opfldcviewmodel',['OPFLDCViewModel',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_l_d_c_1_1_o_p_f_l_d_c_view_model.html',1,'PowerSystemPlanningWpfApp::Analysis::LDC']]],
+  ['opfresultscontrol',['OPFResultsControl',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_o_p_f_results_control.html',1,'PowerSystemPlanningWpfApp::OPF']]],
+  ['opfresultscontrol',['OPFResultsControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_o_p_f_1_1_o_p_f_results_control.html',1,'PowerSystemPlanningWpfApp::Analysis::OPF']]],
+  ['opfresultswindow',['OPFResultsWindow',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_o_p_f_1_1_o_p_f_results_window.html',1,'PowerSystemPlanningWpfApp::Analysis::OPF']]],
+  ['opfresultswindow',['OPFResultsWindow',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_o_p_f_results_window.html',1,'PowerSystemPlanningWpfApp::OPF']]],
+  ['opfruncontrol',['OPFRunControl',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_o_p_f_1_1_o_p_f_run_control.html',1,'PowerSystemPlanningWpfApp::Analysis::OPF']]],
+  ['opfrunwindow',['OPFRunWindow',['../class_power_system_planning_wpf_app_1_1_o_p_f_1_1_o_p_f_run_window.html',1,'PowerSystemPlanningWpfApp::OPF']]],
+  ['opfrunwindow',['OPFRunWindow',['../class_power_system_planning_wpf_app_1_1_analysis_1_1_o_p_f_1_1_o_p_f_run_window.html',1,'PowerSystemPlanningWpfApp::Analysis::OPF']]],
+  ['optimizeopfldc',['OptimizeOPFLDC',['../class_power_system_planning_wpf_app_1_1_l_d_c_1_1_optimize_o_p_f_l_d_c.html',1,'PowerSystemPlanningWpfApp::LDC']]]
 ];

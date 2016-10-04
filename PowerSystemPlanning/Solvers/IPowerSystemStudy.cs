@@ -11,7 +11,7 @@ namespace PowerSystemPlanning.Solvers
     /// Implementations of this class are meant to encapsulate:
     ///     1. The definition of the generic study (its generic name, e.g. "OPF")
     ///     2. The definition of this instance of the study, particularly the input data (based on <see cref="MyPowerSystem"/>)
-    ///     2. The results of this instance of the study, encapsulated by <see cref="MySolverResults"/> and other particular objects as defined by implementing studies
+    ///     2. The results of this instance of the study, encapsulated by <see cref="MySolverResults"/> and other particular objects as defined by implementing studies.
     /// </remarks>
     public interface IPowerSystemStudy
     {
@@ -22,11 +22,11 @@ namespace PowerSystemPlanning.Solvers
         /// <summary>
         /// The (generic) name of the underlying solver for this study (e.g. "OPF").
         /// </summary>
-        string SolverName { get; }
+        string StudyGenericName { get; }
         /// <summary>
         /// The name of this study (e.g. "OPF peak demand 2020").
         /// </summary>
-        string StudyName { get; set; }
+        string StudyInstanceName { get; set; }
         /// <summary>
         /// Solves the underlying problem involved in this study (synchronous)
         /// </summary>

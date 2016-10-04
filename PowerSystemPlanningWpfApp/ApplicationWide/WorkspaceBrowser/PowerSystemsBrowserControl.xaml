@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="PowerSystemPlanningWpfApp.ApplicationWide.WorkspaceBrowser.PowerSystemsBrowserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.WorkspaceBrowser"
+             xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
+             xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=appWide:PowerSystemPlanningApplication}">
+    <DockPanel>
+        <!--Actions: new, delete, save, save all-->
+        <WrapPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <!--Create new power system-->
+            <localUtils:ImageTextButton Command="{Binding NewPowerSystemCommand}" 
+                                        ToolTip="New" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/NewFile_16x.png" />
+            <!--Open selected power system-->
+            <localUtils:ImageTextButton Command="{Binding EditSelectedPowerSystemCommand}" 
+                                        ToolTip="Edit" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Edit_16x.png" />
+            <!--Delete selected power system-->
+            <localUtils:ImageTextButton Command="{Binding DeleteSelectedPowerSystemCommand}" 
+                                        ToolTip="Delete" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Cancel_16x.png" />
+            <!--Save selected power system-->
+            <localUtils:ImageTextButton Command="{Binding SaveSelectedPowerSystemCommand}" 
+                                        ToolTip="Save" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Save_16x.png" />
+            <!--Save all power systems-->
+            <localUtils:ImageTextButton Command="{Binding SaveAllPowerSystemsCommand}" 
+                                        ToolTip="Save All" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/SaveAll_16x.png" />
+        </WrapPanel>
+        <!--Power system listview-->
+        <ListView ItemsSource="{Binding MyPowerSystemsSummary}" 
+                  SelectedItem="{Binding SelectedPowerSystemSummary}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Expander>
+                        <Expander.Header>
+                            <TextBlock FontWeight="Bold">
+                                <TextBlock.Text>
+                                    <MultiBinding Mode="OneWay" StringFormat="{}'{0}' ({1} nodes)">
+                                        <Binding Path="MyPowerSystem.Name" />
+                                        <Binding Path="MyPowerSystem.Nodes.Count" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </Expander.Header>
+                        <StackPanel Orientation="Vertical">
+                            <!--Loads-->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding MyPowerSystem.InelasticLoads.Count}" />
+                                <TextBlock Text=" loads, " />
+                                <TextBlock Text="{Binding MyPowerSystem.TotalInelasticLoad}" />
+                                <TextBlock Text=" MW peak load" />
+                            </StackPanel>
+                            <!--Generators-->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding MyPowerSystem.GeneratingUnits.Count}" />
+                                <TextBlock Text=" generators, " />
+                                <TextBlock Text="{Binding MyPowerSystem.TotalGeneratingCapacity}" />
+                                <TextBlock Text=" MW generating capacity" />
+                            </StackPanel>
+                            <!--Transmission Lines-->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding MyPowerSystem.TransmissionLines.Count}" />
+                                <TextBlock Text=" transmission lines" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Expander>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </DockPanel>
+</UserControl>

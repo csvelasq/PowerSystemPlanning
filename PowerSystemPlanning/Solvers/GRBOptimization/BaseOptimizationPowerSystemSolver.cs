@@ -18,9 +18,9 @@ namespace PowerSystemPlanning.Solvers.GRBOptimization
         /// </summary>
         public SolverResults MySolverResults { get; protected set; }
 
-        public string SolverName => MyGRBOptimizationModel.GRBOptimizationModelName;
+        public string StudyGenericName => MyGRBOptimizationModel.GRBOptimizationModelName;
 
-        public string StudyName { get; set; }
+        public string StudyInstanceName { get; set; }
 
         /// <summary>
         /// Gurobi optimization model wrapped by this solver.

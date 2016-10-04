@@ -6,70 +6,75 @@
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemEditor"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              xmlns:pwsModel="clr-namespace:PowerSystemPlanning.BindingModels.BaseDataBinding;assembly=PowerSystemPlanning"
+             xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance Type=pwsModel:PowerSystem}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="300*" />
-        </Grid.ColumnDefinitions>
-        <GroupBox Header="Nodes" Grid.Column="0">
-            <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding BindingNodes}" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100" />
-                </DataGrid.Columns>
-            </localUtils:CustomDataGrid>
+             d:DataContext="{d:DesignInstance Type=appWide:PowerSystemSummary}">
+    <DockPanel DataContext="{Binding MyPowerSystem}">
+        <GroupBox Header="Power System" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Name: " />
+                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" />
+            </StackPanel>
         </GroupBox>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="5" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Nodes">
+                <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding BindingNodes}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100" />
+                    </DataGrid.Columns>
+                </localUtils:CustomDataGrid>
+            </GroupBox>
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="1.5*" />
-                </Grid.ColumnDefinitions>
-                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-                <GroupBox Header="Consumers" Grid.Column="0" >
-                    <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding BindingInelasticLoads}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="1.5*" />
+                    </Grid.ColumnDefinitions>
+                    <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+                    <GroupBox Header="Consumers" Grid.Column="0" >
+                        <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding BindingInelasticLoads}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeName}" Width="75" />
+                                <DataGridTextColumn Header="Consumption (MW)" Binding="{Binding Consumption, StringFormat=N1}" Width="90" />
+                            </DataGrid.Columns>
+                        </localUtils:CustomDataGrid>
+                    </GroupBox>
+                    <GroupBox Header="Generators" Grid.Column="2" >
+                        <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding BindingGeneratingUnits}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeName}" Width="75" />
+                                <DataGridTextColumn Header="Installed Capacity (MW)" Binding="{Binding InstalledCapacity, StringFormat=N1}" Width="70" />
+                                <DataGridTextColumn Header="Marginal Cost (US$/MWh)" Binding="{Binding MarginalCost, StringFormat=C}" Width="80" />
+                            </DataGrid.Columns>
+                        </localUtils:CustomDataGrid>
+                    </GroupBox>
+                </Grid>
+                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+                <GroupBox Header="Transmission Lines" Grid.Row="2">
+                    <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding BindingTransmissionLines}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeName}" Width="75" />
-                            <DataGridTextColumn Header="Consumption (MW)" Binding="{Binding Consumption, StringFormat=N1}" Width="90" />
-                        </DataGrid.Columns>
-                    </localUtils:CustomDataGrid>
-                </GroupBox>
-                <GroupBox Header="Generators" Grid.Column="2" >
-                    <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding BindingGeneratingUnits}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Connection Node" Binding="{Binding ConnectionNodeName}" Width="75" />
-                            <DataGridTextColumn Header="Installed Capacity (MW)" Binding="{Binding InstalledCapacity, StringFormat=N1}" Width="70" />
-                            <DataGridTextColumn Header="Marginal Cost (US$/MWh)" Binding="{Binding MarginalCost, StringFormat=C}" Width="80" />
+                            <DataGridTextColumn Header="From Node" Binding="{Binding NodeFromName}" Width="60" />
+                            <DataGridTextColumn Header="To Node" Binding="{Binding NodeToName}" Width="60" />
+                            <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacity, StringFormat=N1}" Width="100" />
+                            <DataGridTextColumn Header="Susceptance (mho)" Binding="{Binding SusceptanceMho, StringFormat=N5}" Width="80" />
                         </DataGrid.Columns>
                     </localUtils:CustomDataGrid>
                 </GroupBox>
             </Grid>
-            <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-            <GroupBox Header="Transmission Lines" Grid.Row="2">
-                <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding BindingTransmissionLines}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="From Node" Binding="{Binding NodeFromName}" Width="60" />
-                        <DataGridTextColumn Header="To Node" Binding="{Binding NodeToName}" Width="60" />
-                        <DataGridTextColumn Header="Thermal capacity (MW)" Binding="{Binding ThermalCapacity, StringFormat=N1}" Width="100" />
-                        <DataGridTextColumn Header="Susceptance (mho)" Binding="{Binding SusceptanceMho, StringFormat=N5}" Width="80" />
-                    </DataGrid.Columns>
-                </localUtils:CustomDataGrid>
-            </GroupBox>
-        </Grid>
-    </Grid>
+        </StackPanel>
+    </DockPanel>
 </UserControl>

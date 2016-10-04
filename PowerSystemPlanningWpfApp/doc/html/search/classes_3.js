@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['generatedinternaltypehelper',['GeneratedInternalTypeHelper',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html',1,'XamlGeneratedNamespace']]]
+  ['datagridcolumnsbehavior',['DataGridColumnsBehavior',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_data_grid_columns_behavior.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
+  ['datagridtest',['DatagridTest',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_datagrid_test.html',1,'PowerSystemPlanningWpfApp::ControlUtils']]],
+  ['dockmanagerviewmodel',['DockManagerViewModel',['../class_power_system_planning_wpf_app_1_1_application_wide_1_1_dock_manager_view_model.html',1,'PowerSystemPlanningWpfApp::ApplicationWide']]],
+  ['documentclosedevent',['DocumentClosedEvent',['../class_power_system_planning_wpf_app_1_1_application_wide_1_1_events_1_1_document_closed_event.html',1,'PowerSystemPlanningWpfApp::ApplicationWide::Events']]]
 ];

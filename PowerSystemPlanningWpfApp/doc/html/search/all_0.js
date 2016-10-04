@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['about',['About',['../class_power_system_planning_wpf_app_1_1_help_1_1_about.html',1,'PowerSystemPlanningWpfApp::Help']]],
-  ['addeventhandler',['AddEventHandler',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a73471f4a6d1ca4c4fceec9ad8610f0c8',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]],
-  ['app',['App',['../class_power_system_planning_wpf_app_1_1_app.html',1,'PowerSystemPlanningWpfApp']]]
+  ['_5feventaggregator',['_eventAggregator',['../class_power_system_planning_wpf_app_1_1_application_wide_1_1_dock_manager_view_model.html#a9ede2ffd3e9a940bf2df8f1e81037532',1,'PowerSystemPlanningWpfApp.ApplicationWide.DockManagerViewModel._eventAggregator()'],['../class_power_system_planning_wpf_app_1_1_application_wide_1_1_power_system_planning_application.html#abef026a371154874b6ace829f98ea7d4',1,'PowerSystemPlanningWpfApp.ApplicationWide.PowerSystemPlanningApplication._eventAggregator()'],['../class_power_system_planning_wpf_app_1_1_main_window_view_model.html#a727c4df234f3371f155ea9216c6c9ca1',1,'PowerSystemPlanningWpfApp.MainWindowViewModel._eventAggregator()']]]
 ];

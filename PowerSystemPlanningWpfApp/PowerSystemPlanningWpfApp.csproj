@@ -79,6 +79,9 @@
       <HintPath>..\packages\NLog.4.3.5\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\..\..\..\Documents\cs_vsExamples\Ookii.Dialogs\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
       <Private>True</Private>
@@ -181,6 +184,16 @@
       <DependentUpon>TransmissionExpansionPlanDetailsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Analysis\TEP\TransmissionExpansionPlanDetailViewModel.cs" />
+    <Compile Include="ApplicationService.cs" />
+    <Compile Include="ApplicationWide\BaseDocumentViewModel.cs" />
+    <Compile Include="ApplicationWide\DockManagerViewModel.cs" />
+    <Compile Include="ApplicationWide\Events\PowerSystemCreatedEvent.cs" />
+    <Compile Include="ApplicationWide\WorkspaceBrowser\PowerSystemsBrowserControl.xaml.cs">
+      <DependentUpon>PowerSystemsBrowserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWide\WorkspaceBrowser\StudiesBrowserControl.xaml.cs">
+      <DependentUpon>StudiesBrowserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationWide\WorkspaceBrowser\WorkspaceBrowserControl.xaml.cs">
       <DependentUpon>WorkspaceBrowserControl.xaml</DependentUpon>
     </Compile>
@@ -189,6 +202,9 @@
     <Compile Include="ControlUtils\CustomDg\DataGridColumnsBehavior.cs" />
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlUtils\ImageTextButton.xaml.cs">
+      <DependentUpon>ImageTextButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlUtils\MultiValueConverter.cs" />
     <Compile Include="ControlUtils\MyCommands_DgDblClick.cs" />
@@ -250,11 +266,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ApplicationWide\WorkspaceBrowser\PowerSystemsBrowserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWide\WorkspaceBrowser\StudiesBrowserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ApplicationWide\WorkspaceBrowser\WorkspaceBrowserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ControlUtils\ImageTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlUtils\ImageTextButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -346,6 +374,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\Edit_16x.png" />
     <Resource Include="Resources\Folder_16x.png" />
     <Resource Include="Resources\SaveAll_16x.png" />
     <Resource Include="Resources\Refresh_16x.png" />

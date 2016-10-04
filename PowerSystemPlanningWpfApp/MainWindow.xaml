@@ -12,7 +12,7 @@
         xmlns:pwsModel="clr-namespace:PowerSystemPlanning.BindingModels.BaseDataBinding;assembly=PowerSystemPlanning"
         xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
-        xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:dockctrl="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
         x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
@@ -21,8 +21,10 @@
         Loaded="Window_Loaded"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <DockPanel LastChildFill="True">
-        <DockPanel DockPanel.Dock="Top"  HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Menu DockPanel.Dock="Left" Background="White" Margin="0,5,0,5">
+        <StackPanel DockPanel.Dock="Top"  
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center">
+            <Menu Background="White" Margin="0,5,0,5">
                 <MenuItem Header="_File">
                     <MenuItem x:Name="menubtnNew" Header="_New" Command="ApplicationCommands.New">
                         <MenuItem.Icon>
@@ -68,59 +70,62 @@
                     <MenuItem x:Name="aboutMenuItem" Header="_About"  />
                 </MenuItem>
             </Menu>
-        </DockPanel>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="300*" />
-                <!--Contents-->
-                <RowDefinition Height="5" />
-                <!--Vertical Grid Splitter-->
-                <RowDefinition Height="200" />
-                <!--Log and shell-->
-            </Grid.RowDefinitions>
-            <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-            <!--Workspace browser and contents-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-                <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" />
-                <!--Workspace browser-->
-                <browser:WorkspaceBrowserControl Grid.Column="0" 
-                                                 DataContext="{Binding MyPowerSystemPlanningApplication}" />
-                <!--Contents-->
-                <dock:DockingManager DataContext="{Binding MyDockManagerViewModel}" 
+        </StackPanel>
+        <!--Contents-->
+        <avalonDock:DockingManager DataContext="{Binding MyDockManagerViewModel}" 
                                      DocumentsSource="{Binding MyOpenDocuments}"
                                      ActiveContent="{Binding ActiveDocumentViewModel, Mode=TwoWay}"
                                      Grid.Column="2" x:Name="dockingManager">
-                    <dock:DockingManager.Resources>
-                        <!-- add views for specific ViewModels -->
-                        <!--View for Power System editor-->
-                        <DataTemplate DataType="{x:Type appWide:PowerSystemSummary}">
-                            <pwsEditor:PowerSystemEditorControl />
-                        </DataTemplate>
-                        <!--View for system state-->
-                        <!--View for OPF (based on a system state)-->
-                    </dock:DockingManager.Resources>
-                    <dock:DockingManager.LayoutItemContainerStyle>
-                        <!-- you can add additional bindings from the layoutitem to the DockWindowViewModel -->
-                        <Style TargetType="{x:Type dockctrl:LayoutItem}" >
-                            <Setter Property="Title" Value="{Binding Model.Title}" />
-                        </Style>
-                    </dock:DockingManager.LayoutItemContainerStyle>
-                </dock:DockingManager>
-            </Grid>
-            <!--Log and python shell-->
-            <TabControl Grid.Row="3">
-                <TabItem Header="Log">
-                    <ScrollViewer>
-                        <RichTextBox x:Name="LogRichTextBox" />
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Python Shell" />
-            </TabControl>
-        </Grid>
+            <avalonDock:DockingManager.Resources>
+                <!--add views for specific ViewModels -->
+                <!--View for Power System editor-->
+                <DataTemplate DataType="{x:Type appWide:PowerSystemSummary}">
+                    <pwsEditor:PowerSystemEditorControl />
+                </DataTemplate>
+                <!--View for system state-->
+                <!--View for OPF (based on a system state)-->
+            </avalonDock:DockingManager.Resources>
+            <avalonDock:DockingManager.LayoutItemContainerStyle>
+                <!--you can add additional bindings from the layoutitem to the DockWindowViewModel-->
+                <Style TargetType="{x:Type dockctrl:LayoutItem}" >
+                    <Setter Property="Title" Value="{Binding Model.Title}" />
+                </Style>
+            </avalonDock:DockingManager.LayoutItemContainerStyle>
+
+            <avalonDock:LayoutRoot>
+                <avalonDock:LayoutPanel Orientation="Horizontal">
+                    <!--Workspace browser-->
+                    <avalonDock:LayoutAnchorablePaneGroup DockWidth="250" 
+                                                                  Orientation="Vertical">
+                        <avalonDock:LayoutAnchorablePane>
+                            <avalonDock:LayoutAnchorable Title="Browser">
+                                <!--Workspace browser-->
+                                <browser:WorkspaceBrowserControl Grid.Column="0" 
+                                                 DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}, Path=MyMainWindowViewModel.MyPowerSystemPlanningApplication}" />
+                            </avalonDock:LayoutAnchorable>
+                        </avalonDock:LayoutAnchorablePane>
+                    </avalonDock:LayoutAnchorablePaneGroup>
+                    <!--Opened documents: power systems and studies-->
+                    <avalonDock:LayoutDocumentPaneGroup>
+                        <avalonDock:LayoutDocumentPane/>
+                    </avalonDock:LayoutDocumentPaneGroup>
+                </avalonDock:LayoutPanel>
+                <avalonDock:LayoutRoot.BottomSide>
+                    <!--Log and Python Shell-->
+                    <avalonDock:LayoutAnchorSide>
+                        <avalonDock:LayoutAnchorGroup>
+                            <avalonDock:LayoutAnchorable Title="Log">
+                                <ScrollViewer>
+                                    <RichTextBox x:Name="LogRichTextBox" />
+                                </ScrollViewer>
+                            </avalonDock:LayoutAnchorable>
+                            <avalonDock:LayoutAnchorable Title="Python Shell">
+                                <TextBox/>
+                            </avalonDock:LayoutAnchorable>
+                        </avalonDock:LayoutAnchorGroup>
+                    </avalonDock:LayoutAnchorSide>
+                </avalonDock:LayoutRoot.BottomSide>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
     </DockPanel>
 </Window>

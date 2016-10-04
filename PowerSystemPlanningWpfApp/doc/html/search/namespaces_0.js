@@ -13,6 +13,7 @@ var searchData=
   ['model',['Model',['../namespace_power_system_planning_wpf_app_1_1_model.html',1,'PowerSystemPlanningWpfApp']]],
   ['opf',['OPF',['../namespace_power_system_planning_wpf_app_1_1_analysis_1_1_o_p_f.html',1,'PowerSystemPlanningWpfApp::Analysis']]],
   ['opf',['OPF',['../namespace_power_system_planning_wpf_app_1_1_o_p_f.html',1,'PowerSystemPlanningWpfApp']]],
+  ['powersystemeditor',['PowerSystemEditor',['../namespace_power_system_planning_wpf_app_1_1_model_1_1_power_system_editor.html',1,'PowerSystemPlanningWpfApp::Model']]],
   ['powersystemplanningwpfapp',['PowerSystemPlanningWpfApp',['../namespace_power_system_planning_wpf_app.html',1,'']]],
   ['properties',['Properties',['../namespace_power_system_planning_wpf_app_1_1_properties.html',1,'PowerSystemPlanningWpfApp']]],
   ['scenariotep',['ScenarioTEP',['../namespace_power_system_planning_wpf_app_1_1_analysis_1_1_scenario_t_e_p.html',1,'PowerSystemPlanningWpfApp::Analysis']]],

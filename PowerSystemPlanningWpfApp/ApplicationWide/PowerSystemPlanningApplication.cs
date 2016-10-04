@@ -29,7 +29,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// <summary>
         /// The full absolute path to the workspace directory.
         /// </summary>
-        public string WorkspaceDirectoryFullPath { get; set; }
+        public string WorkspaceDirectoryFullPath { get; set; } = "MyWorkspace";
 
         /// <summary>
         /// True if <see cref="WorkspaceDirectoryFullPath"/> refers to an existing directory.

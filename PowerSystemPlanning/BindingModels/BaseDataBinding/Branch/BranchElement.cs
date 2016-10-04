@@ -29,6 +29,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Branch
         /// </summary>
         public string NodeFromName
         {
+            get { return NodeFrom.Name; }
             set
             {
                 var newNode = MyPowerSystem.Nodes.First(x => x.Name == value);
@@ -53,6 +54,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Branch
         /// </summary>
         public string NodeToName
         {
+            get { return NodeTo.Name; }
             set
             {
                 var newNode = MyPowerSystem.Nodes.First(x => x.Name == value);

@@ -6,24 +6,29 @@
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.WorkspaceBrowser"
              xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="200"
+             d:DesignHeight="600" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type=appWide:PowerSystemPlanningApplication}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
+            <RowDefinition Height="75" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="5" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Current workspace:" />
-            <TextBlock Text="{Binding WorkspaceDirectoryFullPath}" />
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <TextBlock Text="Current workspace: " Margin="5,5,5,0" />
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Command="{Binding NewPowerSystem}" Margin="0,5,5,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image Source="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Folder_16x.png" Width="16" />
+                </Button>
+                <TextBox Text="{Binding WorkspaceDirectoryFullPath}" Margin="5,5,5,5" TextWrapping="Wrap" Height="40" />
+            </DockPanel>
         </StackPanel>
         <GroupBox Header="Power Systems" Grid.Row="1">
             <DockPanel>
                 <WrapPanel Orientation="Horizontal" DockPanel.Dock="Top">
                     <!--Create new power system-->
-                    <Button Command="{Binding NewPowerSystem}" HorizontalAlignment="Left" DockPanel.Dock="Top">
+                    <Button Command="{Binding NewPowerSystem}" HorizontalAlignment="Left" DockPanel.Dock="Top" ToolTip="New">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/NewFile_16x.png" Width="16" />
                             <TextBlock Margin="5,0,5,0">New</TextBlock>
@@ -51,8 +56,45 @@
                         </StackPanel>
                     </Button>
                 </WrapPanel>
-                <ListView>
-                    
+                <ListView ItemsSource="{Binding MyPowerSystemsSummary}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Expander>
+                                <!--Header="{Binding NameAndSummary}">-->
+                                <Expander.Header>
+                                    <TextBox FontWeight="Bold">
+                                        <TextBox.Text>
+                                            <MultiBinding Mode="OneWay" StringFormat="{}'{0}' ({1} nodes)">
+                                                <Binding Path="Name" />
+                                                <Binding Path="MyUnderlyingPowerSystem.Nodes.Count" />
+                                            </MultiBinding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </Expander.Header>
+                                <StackPanel Orientation="Vertical">
+                                    <!--Loads-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding MyUnderlyingPowerSystem.InelasticLoads.Count}" />
+                                        <TextBlock Text=" loads, " />
+                                        <TextBlock Text="{Binding MyUnderlyingPowerSystem.TotalInelasticLoad}" />
+                                        <TextBlock Text=" MW peak load" />
+                                    </StackPanel>
+                                    <!--Generators-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding MyUnderlyingPowerSystem.GeneratingUnits.Count}" />
+                                        <TextBlock Text=" generators, " />
+                                        <TextBlock Text="{Binding MyUnderlyingPowerSystem.TotalGeneratingCapacity}" />
+                                        <TextBlock Text=" MW generating capacity" />
+                                    </StackPanel>
+                                    <!--Transmission Lines-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding MyUnderlyingPowerSystem.TransmissionLines.Count}" />
+                                        <TextBlock Text=" transmission lines" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </DockPanel>
         </GroupBox>

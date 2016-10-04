@@ -17,6 +17,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes
         /// </summary>
         public string ConnectionNodeName
         {
+            get { return ConnectionNode.Name; }
             set
             {
                 var newNode = MyPowerSystem.Nodes.First(x => x.Name == value);

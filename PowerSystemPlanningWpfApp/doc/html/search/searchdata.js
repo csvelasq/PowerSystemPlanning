@@ -5,7 +5,7 @@ var indexSectionsWithContent =
   2: "px",
   3: "acdgimos",
   4: "_cmstw",
-  5: "cdimnst"
+  5: "cdimnstw"
 };
 
 var indexSectionNames =

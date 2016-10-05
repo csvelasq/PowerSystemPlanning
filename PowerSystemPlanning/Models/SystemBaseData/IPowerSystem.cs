@@ -16,6 +16,10 @@ namespace PowerSystemPlanning.Models.SystemBaseData
         /// </summary>
         string Name { get; }
         /// <summary>
+        /// The (default) load shedding cost (US$/MWh).
+        /// </summary>
+        double LoadSheddingCost { get; }
+        /// <summary>
         /// Set of nodes (buses) in this power system.
         /// </summary>
         IList<INode> Nodes { get; }

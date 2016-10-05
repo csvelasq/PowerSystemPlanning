@@ -29,10 +29,10 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Branch
         /// </summary>
         public string NodeFromName
         {
-            get { return NodeFrom.Name; }
+            get { return NodeFrom?.Name; }
             set
             {
-                var newNode = MyPowerSystem.Nodes.First(x => x.Name == value);
+                var newNode = MyPowerSystem.Nodes.FirstOrDefault(x => x.Name == value);
                 SetProperty<INode>(ref _NodeFrom, newNode);
             }
         }
@@ -54,10 +54,10 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Branch
         /// </summary>
         public string NodeToName
         {
-            get { return NodeTo.Name; }
+            get { return NodeTo?.Name; }
             set
             {
-                var newNode = MyPowerSystem.Nodes.First(x => x.Name == value);
+                var newNode = MyPowerSystem.Nodes.FirstOrDefault(x => x.Name == value);
                 SetProperty<INode>(ref _NodeTo, newNode);
             }
         }

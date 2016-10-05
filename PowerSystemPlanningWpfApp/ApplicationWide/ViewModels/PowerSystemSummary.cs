@@ -1,4 +1,5 @@
-﻿using PowerSystemPlanning.BindingModels.BaseDataBinding;
+﻿using NLog;
+using PowerSystemPlanning.BindingModels.BaseDataBinding;
 using PowerSystemPlanning.Models.SystemBaseData;
 using PowerSystemPlanning.Solvers;
 using Prism.Commands;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +30,17 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
     /// </remarks>
     public class PowerSystemSummary : BaseDocumentViewModel
     {
+        /// <summary>
+        /// NLog Logger for this class.
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         #region Basic properties
+        /// <summary>
+        /// The power system application who owns this power system wrapper
+        /// </summary>
+        public PowerSystemPlanningApplication MyOwnerApp { get; set; }
+
         /// <summary>
         /// The power system wrapped by this class.
         /// </summary>
@@ -49,18 +61,11 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// <summary>
         /// The absolute path of the local folder where this power system is saved (within <see cref="SubFolderRelativePath"/>).
         /// </summary>
-        public string MasterFolderAbsolutePath { get; set; }
-
-        string _SubFolderRelativePath;
+        public string MasterFolderAbsolutePath => MyOwnerApp.WorkspaceFolderAbsolutePath;
         /// <summary>
         /// The relative path to the subdirectory of <see cref="MasterFolderAbsolutePath"/> where this power system is saved.
         /// </summary>
-        public string SubFolderRelativePath => Title;
-
-        /// <summary>
-        /// The absolute path to the local subdirectory where this power system is currently saved. Used to rename a folder if it existed previously
-        /// </summary>
-        public string MyCurrentFolderAbsolutePath { get; private set; }
+        public string SubFolderRelativePath => MyPowerSystem.Name;
 
         /// <summary>
         /// The absolute path to the local subdirectory where this power system is saved.
@@ -70,22 +75,48 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// <summary>
         /// The absolute path to the local XML file where this power system is saved.
         /// </summary>
-        public string MyXmlAbsolutePath => Path.Combine(MyFolderAbsolutePath, Title + ".xml");
+        public string MyXmlAbsolutePath => Path.Combine(MyFolderAbsolutePath, MyPowerSystem.Name + ".xml");
         #endregion
 
         #region Commands
         public DelegateCommand SaveCommand { get; protected set; }
         #endregion
 
-        public PowerSystemSummary() : this(new PowerSystem()) { }
+        public PowerSystemSummary() { }
 
-        public PowerSystemSummary(PowerSystem sys)
+        public PowerSystemSummary(PowerSystemPlanningApplication ownerApp, PowerSystem sys)
         {
+            MyOwnerApp = ownerApp;
             MyPowerSystem = sys;
+
             MyPowerSystem.PropertyChanged += MyPowerSystem_PropertyChanged;
             SaveCommand = new DelegateCommand(Save);
         }
 
+        #region Public Methods
+        /// <summary>
+        /// Recursively deletes the folder where this power system is saved.
+        /// </summary>
+        public void DeleteFolderIfExists()
+        {
+            if (Directory.Exists(MyFolderAbsolutePath))
+                Directory.Delete(MyFolderAbsolutePath, true);
+        }
+
+        public void Save()
+        {
+            // TODO handle changes in power system's name
+            //Create folder if it does not exist
+            if (!Directory.Exists(MyFolderAbsolutePath))
+            {
+                Directory.CreateDirectory(MyFolderAbsolutePath);
+            }
+            //Save power system (overwrites if file existed)
+            MyPowerSystem.SaveToXml(MyXmlAbsolutePath);
+        }
+        #endregion
+
+        #region Private Methods
         private void MyPowerSystem_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MyPowerSystem.Name))
@@ -93,30 +124,12 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
                 OnPropertyChanged(nameof(Title));
             }
         }
-
-        #region Methods
-        /// <summary>
-        /// Recursively deletes the folder where this power system is saved.
-        /// </summary>
-        public void DeleteFolder()
-        {
-            Directory.Delete(MyFolderAbsolutePath);
-        }
-
-        public void Save()
-        {
-            if (!Directory.Exists(MyFolderAbsolutePath))
-            {
-                Directory.CreateDirectory(MyFolderAbsolutePath);
-            }
-            MyPowerSystem.SaveToXml(MyXmlAbsolutePath);
-        }
         #endregion
 
-        public static PowerSystemSummary OpenFromXml(string xmlPath)
+        public static PowerSystemSummary OpenFromXml(PowerSystemPlanningApplication ownerApp, string xmlPath)
         {
             var deserializedPowerSystem = PowerSystem.OpenFromXml(xmlPath);
-            var newSummary = new PowerSystemSummary(deserializedPowerSystem);
+            var newSummary = new PowerSystemSummary(ownerApp, deserializedPowerSystem);
             return newSummary;
         }
     }

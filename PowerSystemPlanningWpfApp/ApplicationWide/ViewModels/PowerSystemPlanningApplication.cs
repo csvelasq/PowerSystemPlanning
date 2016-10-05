@@ -1,4 +1,5 @@
 ﻿using NLog;
+using PowerSystemPlanning.BindingModels;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
 using Prism.Commands;
 using Prism.Events;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,7 +33,8 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
     /// If necessary, it may be useful to extract an interface of <see cref="PowerSystemSummary"/> 
     /// and provide two implementations: one of an unopened power system, and one of an opened power system.
     /// </remarks>
-    public class PowerSystemPlanningApplication : BindableBase
+    [DataContract()]
+    public class PowerSystemPlanningApplication : SerializableBindableBase
     {
         /// <summary>
         /// NLog Logger for this class.
@@ -170,8 +173,8 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         {
             //TODO Request confirmation
             //Delete the folder from the local disk
-            SelectedPowerSystemSummary.DeleteFolder();
-            //Delte the object from memory
+            SelectedPowerSystemSummary.DeleteFolderIfExists();
+            //Delete the object from memory
             MyPowerSystemsSummary.Remove(SelectedPowerSystemSummary);
             SelectedPowerSystemSummary = null;
         }
@@ -179,9 +182,9 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         private void CreateNewPowerSystem()
         {
             //Create a new unnamed power system
-            var newPowerSystemSummary = new PowerSystemSummary();
-            newPowerSystemSummary.MyPowerSystem.Name = "Unnamed power system";
-            newPowerSystemSummary.MasterFolderAbsolutePath = WorkspaceFolderAbsolutePath;
+            var newPowerSystem = new PowerSystem();
+            newPowerSystem.Name = "Unnamed power system";
+            var newPowerSystemSummary = new PowerSystemSummary(this, newPowerSystem);
             MyPowerSystemsSummary.Add(newPowerSystemSummary);
             //Publish event
             _eventAggregator.GetEvent<Events.PowerSystemCreatedEvent>().Publish(_SelectedPowerSystemSummary);
@@ -213,9 +216,16 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
                     if (File.Exists(xmlPwsPath))
                     {
                         //deserialize the power system
-                        var deserializedPowerSystemSummary = PowerSystemSummary.OpenFromXml(xmlPwsPath);
-                        MyPowerSystemsSummary.Add(deserializedPowerSystemSummary);
-                        logger.Debug($"Successfully opened power system '{pwsName}' from file '{xmlPwsPath}'");
+                        try
+                        {
+                            var deserializedPowerSystemSummary = PowerSystemSummary.OpenFromXml(this, xmlPwsPath);
+                            MyPowerSystemsSummary.Add(deserializedPowerSystemSummary);
+                            logger.Debug($"Successfully opened power system '{pwsName}' from file '{xmlPwsPath}'");
+                        }
+                        catch (Exception e)
+                        {
+                            logger.Error(e, $"Error while opening power system in path '{xmlPwsPath}'.");
+                        }
                     }
                     else
                     {

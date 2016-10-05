@@ -4,6 +4,7 @@ using PowerSystemPlanning.Models.SystemBaseData.Branch;
 
 namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Branch
 {
+    [DataContract()]
     public class SimpleTransmissionLine : BranchElement, ISimpleTransmissionLine
     {
         protected double _ThermalCapacity;

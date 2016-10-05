@@ -94,6 +94,19 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
         /// </summary>
         public IList<ISimpleTransmissionLine> TransmissionLines => this.BindingTransmissionLines.Cast<ISimpleTransmissionLine>().ToList();
 
+        public List<PowerSystemElement> AllBindableElements
+        {
+            get
+            {
+                var elements = new List<PowerSystemElement>();
+                elements.AddRange(BindingNodes);
+                elements.AddRange(BindingGeneratingUnits);
+                elements.AddRange(BindingInelasticLoads);
+                elements.AddRange(BindingTransmissionLines);
+                return elements;
+            }
+        }
+
         public PowerSystem()
         {
             //new objects are added directly by the GUI
@@ -140,12 +153,17 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
             XmlDictionaryReader reader =
             XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
 
+            //Deserialize the power system
             PowerSystem deserializedPowerSystem = (PowerSystem)dcs.ReadObject(reader);
 
-            foreach (var node in deserializedPowerSystem.BindingNodes)
+            //Bind elements to the power system (nodes, gens, loads, and tls)
+            foreach (var element in deserializedPowerSystem.AllBindableElements)
             {
-                node.MyBindingPowerSystem = deserializedPowerSystem;
+                element.MyBindingPowerSystem = deserializedPowerSystem;
             }
+
+            //Automatically assign IDs to new elements in the power system
+            deserializedPowerSystem.DefaultNewElementsInBindingLists();
 
             return deserializedPowerSystem;
         }

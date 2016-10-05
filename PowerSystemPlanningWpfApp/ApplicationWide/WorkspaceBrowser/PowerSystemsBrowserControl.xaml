@@ -29,7 +29,7 @@
                                         ToolTip="Save All" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/SaveAll_16x.png" />
         </WrapPanel>
         <!--Power system listview-->
-        <ListView ItemsSource="{Binding MyPowerSystemsSummary}" 
+        <ListView ItemsSource="{Binding MyPowerSystemsSummary, Mode=OneWay}" 
                   SelectedItem="{Binding SelectedPowerSystemSummary}">
             <ListView.ItemTemplate>
                 <DataTemplate>

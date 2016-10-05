@@ -54,7 +54,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Generator
         /// Creates a new generating unit within the provided power system with an automatically assigned ID.
         /// </summary>
         /// <param name="pws">The power system to which this generator belongs.</param>
-        public GeneratingUnit(IPowerSystem pws)
+        public GeneratingUnit(PowerSystem pws)
             : base(pws, pws.GeneratingUnits.Count)
         { }
     }

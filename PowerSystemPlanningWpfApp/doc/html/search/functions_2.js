@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getpropertyvalue',['GetPropertyValue',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#afdc9fe15b56607d02082908d934480c6',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, System.Globalization.CultureInfo culture)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#afdc9fe15b56607d02082908d934480c6',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, System.Globalization.CultureInfo culture)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#afdc9fe15b56607d02082908d934480c6',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, System.Globalization.CultureInfo culture)']]]
+  ['deletefolder',['DeleteFolder',['../class_power_system_planning_wpf_app_1_1_application_wide_1_1_power_system_summary.html#a9a073607b682a4e87826494071090b3d',1,'PowerSystemPlanningWpfApp::ApplicationWide::PowerSystemSummary']]]
 ];

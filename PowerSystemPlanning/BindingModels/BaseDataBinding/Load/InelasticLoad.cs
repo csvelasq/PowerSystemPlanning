@@ -37,7 +37,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Load
         /// Creates a new inelastic load within the provided power system with an automatically assigned ID.
         /// </summary>
         /// <param name="pws">The power system to which this load belongs.</param>
-        public InelasticLoad(IPowerSystem pws)
+        public InelasticLoad(PowerSystem pws)
             : base(pws, pws.InelasticLoads.Count)
         { }
     }

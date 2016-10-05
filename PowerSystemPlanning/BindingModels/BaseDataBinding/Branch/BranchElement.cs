@@ -62,11 +62,11 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Branch
             }
         }
 
-        public BranchElement(IPowerSystem pws, int id, string name)
+        public BranchElement(PowerSystem pws, int id, string name)
             : base(pws, id, name)
         { }
 
-        public BranchElement(IPowerSystem pws, int id)
+        public BranchElement(PowerSystem pws, int id)
             : base(pws, id)
         { }
     }

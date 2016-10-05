@@ -4,9 +4,10 @@ var indexSectionsWithContent =
   1: "bcgilmnopst",
   2: "p",
   3: "bdeginorst",
-  4: "bdeghilnoptu",
+  4: "bcdeghilnoptu",
   5: "os",
-  6: "abcdefgilmnoprstuy"
+  6: "abcdefgilmnoprstuy",
+  7: "p"
 };
 
 var indexSectionNames =
@@ -17,7 +18,8 @@ var indexSectionNames =
   3: "functions",
   4: "variables",
   5: "enums",
-  6: "properties"
+  6: "properties",
+  7: "events"
 };
 
 var indexSectionLabels =
@@ -28,6 +30,7 @@ var indexSectionLabels =
   3: "Functions",
   4: "Variables",
   5: "Enumerations",
-  6: "Properties"
+  6: "Properties",
+  7: "Events"
 };
 

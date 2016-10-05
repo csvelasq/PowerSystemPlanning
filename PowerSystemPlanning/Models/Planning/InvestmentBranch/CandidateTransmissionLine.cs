@@ -17,7 +17,7 @@ namespace PowerSystemPlanning.Models.Planning.InvestmentBranch
         public ISimpleTransmissionLine UnderlyingSimpleTransmissionLine
         { get; protected set; }
         
-        public CandidateTransmissionLine(IPowerSystem pws)
+        public CandidateTransmissionLine(PowerSystem pws)
             : base(pws, pws.GeneratingUnits.Count)
         { }
     }

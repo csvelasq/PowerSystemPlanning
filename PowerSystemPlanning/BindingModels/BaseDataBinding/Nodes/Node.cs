@@ -100,7 +100,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes
         /// </summary>
         /// <param name="pws">The power system to which this node is being added</param>
         /// <remarks>The ID of the new node is set to the number of nodes in the given power system. However, the nely created node is not added to the list of nodes in the provided power system.</remarks>
-        public Node(IPowerSystem pws)
+        public Node(PowerSystem pws)
             : base(pws, pws.Nodes.Count)
         { }
     }

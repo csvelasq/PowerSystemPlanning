@@ -17,30 +17,31 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes
         /// </summary>
         public string ConnectionNodeName
         {
-            get { return ConnectionNode.Name; }
+            get { return ConnectionNode?.Name; }
             set
             {
-                var newNode = MyPowerSystem.Nodes.First(x => x.Name == value);
-                ConnectionNode = newNode;
+                var newNode = MyBindingPowerSystem.BindingNodes.First(x => x.Name == value);
+                MyConnectionNode = newNode;
             }
         }
 
-        protected INode _ConnectionNode;
+        [DataMember()]
+        protected Node _ConnectionNode;
+        public Node MyConnectionNode
+        {
+            get { return _ConnectionNode; }
+            set { SetProperty<Node>(ref _ConnectionNode, value); }
+        }
         /// <summary>
         /// The node to which this element is connected.
         /// </summary>
-        [DataMember()]
-        public INode ConnectionNode
-        {
-            get { return _ConnectionNode; }
-            set { SetProperty<INode>(ref _ConnectionNode, value); }
-        }
+        public INode ConnectionNode => MyConnectionNode;
 
-        public NodeElement(IPowerSystem pws, int id, string name)
+        public NodeElement(PowerSystem pws, int id, string name)
             : base(pws, id, name)
         { }
 
-        public NodeElement(IPowerSystem pws, int id)
+        public NodeElement(PowerSystem pws, int id)
             : base(pws, id)
         { }
     }

@@ -20,12 +20,15 @@
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <TextBlock Text="Current workspace: " Margin="5,5,5,0" />
             <DockPanel>
-                <Button DockPanel.Dock="Right" Command="{Binding OpenWorkspaceCommand}" Margin="0,5,5,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Image Source="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Folder_16x.png" Width="16" />
-                </Button>
-                <TextBox Text="{Binding WorkspaceDirectoryFullPath, Mode=OneWay}" 
-                         IsReadOnly="True"
-                         Margin="5,5,5,5" TextWrapping="Wrap" Height="40" />
+                <StackPanel DockPanel.Dock="Right" Orientation="Vertical">
+                    <localUtils:ImageTextButton Command="{Binding OpenWorkspaceCommand}" 
+                                                Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Folder_16x.png" />
+                    <localUtils:ImageTextButton Command="{Binding RefreshWorkspaceCommand}" 
+                                                Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Refresh_16x.png" />
+                </StackPanel>
+                <TextBox Text="{Binding WorkspaceFolderAbsolutePath, Mode=OneWay}" 
+                         IsReadOnly="True" Margin="5,5,5,5" Height="40" 
+                         TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" />
             </DockPanel>
         </StackPanel>
         <GroupBox Header="Power Systems" Grid.Row="1">

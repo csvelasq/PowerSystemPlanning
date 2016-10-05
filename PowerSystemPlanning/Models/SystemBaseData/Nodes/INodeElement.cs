@@ -8,6 +8,6 @@
         /// <summary>
         /// The node to which this element is connected in the power system.
         /// </summary>
-        INode ConnectionNode { get; set; }
+        INode ConnectionNode { get; }
     }
 }

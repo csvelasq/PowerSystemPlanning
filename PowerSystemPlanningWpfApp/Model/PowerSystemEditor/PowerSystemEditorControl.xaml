@@ -17,16 +17,16 @@
                 <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" />
             </StackPanel>
         </GroupBox>
-        <StackPanel Orientation="Horizontal">
-            <GroupBox Header="Nodes">
-                <localUtils:CustomDataGrid x:Name="dgNodes" ItemsSource="{Binding BindingNodes}" AutoGenerateColumns="False">
+        <DockPanel>
+            <GroupBox Header="Nodes" DockPanel.Dock="Left">
+                <localUtils:CustomDataGrid ItemsSource="{Binding BindingNodes}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100" />
                     </DataGrid.Columns>
                 </localUtils:CustomDataGrid>
             </GroupBox>
-            <Grid>
+            <Grid Width="Auto">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="5" />
@@ -40,7 +40,7 @@
                     </Grid.ColumnDefinitions>
                     <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
                     <GroupBox Header="Consumers" Grid.Column="0" >
-                        <localUtils:CustomDataGrid x:Name="dgConsumers" ItemsSource="{Binding BindingInelasticLoads}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
+                        <localUtils:CustomDataGrid ItemsSource="{Binding BindingInelasticLoads}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
@@ -50,7 +50,7 @@
                         </localUtils:CustomDataGrid>
                     </GroupBox>
                     <GroupBox Header="Generators" Grid.Column="2" >
-                        <localUtils:CustomDataGrid x:Name="dgGenerators" ItemsSource="{Binding BindingGeneratingUnits}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
+                        <localUtils:CustomDataGrid ItemsSource="{Binding BindingGeneratingUnits}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
@@ -63,7 +63,7 @@
                 </Grid>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
                 <GroupBox Header="Transmission Lines" Grid.Row="2">
-                    <localUtils:CustomDataGrid x:Name="dgTransmissionLines" ItemsSource="{Binding BindingTransmissionLines}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
+                    <localUtils:CustomDataGrid ItemsSource="{Binding BindingTransmissionLines}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
@@ -75,6 +75,6 @@
                     </localUtils:CustomDataGrid>
                 </GroupBox>
             </Grid>
-        </StackPanel>
+        </DockPanel>
     </DockPanel>
 </UserControl>

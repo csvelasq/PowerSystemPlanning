@@ -12,6 +12,8 @@ using PowerSystemPlanning.BindingModels.BaseDataBinding.Branch;
 using PowerSystemPlanning.BindingModels.BaseDataBinding.Load;
 using PowerSystemPlanning.BindingModels.BaseDataBinding.Generator;
 using PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes;
+using System.Xml;
+using System.IO;
 
 namespace PowerSystemPlanning.BindingModels.BaseDataBinding
 {
@@ -23,11 +25,11 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
     /// The purpose of this class is to allow easy end-user manipulation and edition of the power system model.
     /// </remarks>
     [DataContract()]
-    public class PowerSystem : BindableBase, IPowerSystem
+    public class PowerSystem : SerializableBindableBase, IPowerSystem
     {
-        [DataMember()]
         string _Name;
 
+        [DataMember()]
         public string Name
         {
             get { return _Name; }
@@ -98,13 +100,54 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
             //catching the event allows for making new objects reference this power system
             // TODO attach addingnew handler directly in the setter for each of the following bindinglist (_Nodes, _GeneratingUnits, ...)
             BindingNodes = new BindingList<Node>();
-            BindingNodes.AddingNew += (sender, e) => { e.NewObject = new Node(this); };
             BindingGeneratingUnits = new BindingList<GeneratingUnit>();
-            BindingGeneratingUnits.AddingNew += (sender, e) => { e.NewObject = new GeneratingUnit(this); };
             BindingInelasticLoads = new BindingList<InelasticLoad>();
-            BindingInelasticLoads.AddingNew += (sender, e) => { e.NewObject = new InelasticLoad(this); };
             BindingTransmissionLines = new BindingList<SimpleTransmissionLine>();
+            DefaultNewElementsInBindingLists();
+        }
+
+        /// <summary>
+        /// Catches addingNew events in each binding list to automatically assign an ID to each element.
+        /// </summary>
+        public void DefaultNewElementsInBindingLists()
+        {
+            BindingNodes.AddingNew += (sender, e) => { e.NewObject = new Node(this); };
+            BindingInelasticLoads.AddingNew += (sender, e) => { e.NewObject = new InelasticLoad(this); };
+            BindingGeneratingUnits.AddingNew += (sender, e) => { e.NewObject = new GeneratingUnit(this); };
             BindingTransmissionLines.AddingNew += (sender, e) => { e.NewObject = new SimpleTransmissionLine(this); };
+        }
+
+        /// <summary>
+        /// Serializes this power system to an XML file.
+        /// </summary>
+        /// <param name="xmlPath">The output path for the XML file with the serialized power system.</param>
+        public void SaveToXml(string xmlPath)
+        {
+            var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
+            DataContractSerializer dcs = new DataContractSerializer(typeof(PowerSystem), dcsSettings);
+            var xmlSettings = new XmlWriterSettings { Indent = true };
+            using (var myXmlWriter = XmlWriter.Create(xmlPath, xmlSettings))
+            {
+                dcs.WriteObject(myXmlWriter, this);
+            }
+        }
+
+        public static PowerSystem OpenFromXml(string xmlPath)
+        {
+            var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
+            DataContractSerializer dcs = new DataContractSerializer(typeof(PowerSystem), dcsSettings);
+            FileStream fs = new FileStream(xmlPath, FileMode.Open);
+            XmlDictionaryReader reader =
+            XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+
+            PowerSystem deserializedPowerSystem = (PowerSystem)dcs.ReadObject(reader);
+
+            foreach (var node in deserializedPowerSystem.BindingNodes)
+            {
+                node.MyBindingPowerSystem = deserializedPowerSystem;
+            }
+
+            return deserializedPowerSystem;
         }
     }
 }

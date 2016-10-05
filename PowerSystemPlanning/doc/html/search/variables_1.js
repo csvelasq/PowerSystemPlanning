@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dcpowerflow',['DCPowerFlow',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#adbb9b62dca53bb4faf5d9ee7c55d6372',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]]
+  ['connectionnode',['ConnectionNode',['../class_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_nodes_1_1_node_element.html#a1e4541362349d4c2e61181bc9dc96722',1,'PowerSystemPlanning::BindingModels::BaseDataBinding::Nodes::NodeElement']]]
 ];

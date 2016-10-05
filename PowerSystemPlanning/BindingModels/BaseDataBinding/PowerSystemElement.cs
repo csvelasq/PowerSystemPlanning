@@ -5,9 +5,11 @@ using PowerSystemPlanning.Models.SystemBaseData;
 namespace PowerSystemPlanning.BindingModels.BaseDataBinding
 {
     [DataContract()]
-    public abstract class PowerSystemElement : BindableBase, IPowerSystemElement
+    public abstract class PowerSystemElement : SerializableBindableBase, IPowerSystemElement
     {
-        public IPowerSystem MyPowerSystem { get; set; }
+        public PowerSystem MyBindingPowerSystem { get; set; }
+
+        public IPowerSystem MyPowerSystem => MyBindingPowerSystem;
 
         protected int _Id;
 
@@ -36,14 +38,14 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
             set { SetProperty<string>(ref _Name, value); }
         }
 
-        public PowerSystemElement(IPowerSystem pws, int id, string name)
+        public PowerSystemElement(PowerSystem pws, int id, string name)
         {
-            MyPowerSystem = pws;
+            MyBindingPowerSystem = pws;
             Id = id;
             Name = name;
         }
 
-        public PowerSystemElement(IPowerSystem pws, int id)
+        public PowerSystemElement(PowerSystem pws, int id)
             : this(pws, id, "")
         { }
     }

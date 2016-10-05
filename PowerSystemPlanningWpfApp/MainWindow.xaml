@@ -9,7 +9,6 @@
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
         xmlns:browser="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.WorkspaceBrowser"
         xmlns:pwsEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemEditor"
-        xmlns:pwsModel="clr-namespace:PowerSystemPlanning.BindingModels.BaseDataBinding;assembly=PowerSystemPlanning"
         xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
@@ -17,7 +16,7 @@
         x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
         Title="Power System Planning" 
-        Height="1000" Width="1200" WindowState="Maximized"
+        Height="800" Width="900" WindowState="Maximized"
         Loaded="Window_Loaded"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <DockPanel LastChildFill="True">

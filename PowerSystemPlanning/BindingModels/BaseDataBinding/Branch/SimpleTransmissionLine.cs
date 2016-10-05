@@ -44,7 +44,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding.Branch
         /// Creates a new transmission line within the provided power system with an automatically assigned ID.
         /// </summary>
         /// <param name="pws">The power system to which this transmission line belongs.</param>
-        public SimpleTransmissionLine(IPowerSystem pws)
+        public SimpleTransmissionLine(PowerSystem pws)
             : base(pws, pws.TransmissionLines.Count)
         { }
     }

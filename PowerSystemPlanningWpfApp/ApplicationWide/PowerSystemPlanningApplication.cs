@@ -1,4 +1,5 @@
 ﻿using NLog;
+using PowerSystemPlanning.BindingModels.BaseDataBinding;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -26,7 +27,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
     ///         +Stochastic TEP under scenarios
     ///         +Stochastic TEP under scenarios v2
     /// 
-    /// Currently all power systems in the <see cref="WorkspaceDirectoryFullPath"/> are always opened in the application.
+    /// Currently all power systems in the <see cref="WorkspaceFolderAbsolutePath"/> are always opened in the application.
     /// If necessary, it may be useful to extract an interface of <see cref="PowerSystemSummary"/> 
     /// and provide two implementations: one of an unopened power system, and one of an opened power system.
     /// </remarks>
@@ -50,17 +51,17 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// Workspace directory is a user setting, can be modified by calling <see cref="OpenWorkspaceDirectory(string)"/>
         /// which is in turn called by <see cref="OpenWorkspaceCommand"/>
         /// </remarks>
-        public string WorkspaceDirectoryFullPath => Properties.Settings.Default.Workspace;
+        public string WorkspaceFolderAbsolutePath => Properties.Settings.Default.Workspace;
 
         /// <summary>
-        /// True if <see cref="WorkspaceDirectoryFullPath"/> refers to an existing directory.
+        /// True if <see cref="WorkspaceFolderAbsolutePath"/> refers to an existing directory.
         /// </summary>
-        public bool WorkspaceExists => Directory.Exists(WorkspaceDirectoryFullPath);
+        public bool WorkspaceExists => Directory.Exists(WorkspaceFolderAbsolutePath);
 
         /// <summary>
-        /// A collection of the topmost directories in <see cref="WorkspaceDirectoryFullPath"/>.
+        /// A collection of the topmost directories in <see cref="WorkspaceFolderAbsolutePath"/>.
         /// </summary>
-        public IEnumerable<string> WorkspaceSubDirs => Directory.EnumerateDirectories(WorkspaceDirectoryFullPath);
+        public IEnumerable<string> WorkspaceSubDirs => Directory.EnumerateDirectories(WorkspaceFolderAbsolutePath);
 
         /// <summary>
         /// The list of power systems in the current workspace, all of which are currently opened.
@@ -89,6 +90,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         #region Commands
         public DelegateCommand OpenWorkspaceCommand { get; protected set; }
+        public DelegateCommand RefreshWorkspaceCommand { get; protected set; }
         public DelegateCommand NewPowerSystemCommand { get; protected set; }
         public DelegateCommand EditSelectedPowerSystemCommand { get; protected set; }
         public DelegateCommand DeleteSelectedPowerSystemCommand { get; protected set; }
@@ -100,6 +102,8 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         {
             _eventAggregator = ApplicationService.Instance.EventAggregator;
             //Command initialization
+            RefreshWorkspaceCommand =
+                new DelegateCommand(RefreshWorkspace);
             OpenWorkspaceCommand =
                 new DelegateCommand(OpenWorkspace);
             NewPowerSystemCommand =
@@ -114,8 +118,11 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
                 new CompositeCommand();
             MyPowerSystemsSummary = new BindingList<PowerSystemSummary>();
             MyPowerSystemsSummary.AddingNew += MyPowerSystemsSummary_AddingNew;
-            //Open workspace
-            OpenWorkspaceDirectory(Properties.Settings.Default.Workspace);
+        }
+
+        private void RefreshWorkspace()
+        {
+            OpenWorkspaceDirectory(WorkspaceFolderAbsolutePath, true);
         }
 
         #region Command Methods
@@ -136,7 +143,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
                 // Get the selected file name and display in a TextBox 
                 if (result == true)
                 {
-                    this.OpenWorkspaceDirectory(dialog.SelectedPath);
+                    this.OpenWorkspaceDirectory(dialog.SelectedPath, false);
                 }
             }
         }
@@ -162,8 +169,8 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         private void DeleteSelectedPowerSystem()
         {
             //TODO Request confirmation
-            //Delete the directory from the local disk
-            SelectedPowerSystemSummary.DeleteDirectory();
+            //Delete the folder from the local disk
+            SelectedPowerSystemSummary.DeleteFolder();
             //Delte the object from memory
             MyPowerSystemsSummary.Remove(SelectedPowerSystemSummary);
             SelectedPowerSystemSummary = null;
@@ -174,6 +181,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
             //Create a new unnamed power system
             var newPowerSystemSummary = new PowerSystemSummary();
             newPowerSystemSummary.MyPowerSystem.Name = "Unnamed power system";
+            newPowerSystemSummary.MasterFolderAbsolutePath = WorkspaceFolderAbsolutePath;
             MyPowerSystemsSummary.Add(newPowerSystemSummary);
             //Publish event
             _eventAggregator.GetEvent<Events.PowerSystemCreatedEvent>().Publish(_SelectedPowerSystemSummary);
@@ -184,20 +192,36 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// Opens every power system within a given power system directory
         /// </summary>
         /// <param name="selectedPath"></param>
-        public void OpenWorkspaceDirectory(string selectedPath)
+        /// <param name="forceOpen">If true, the workspace will be opened even if selectedPath is equal to the setting.</param>
+        public void OpenWorkspaceDirectory(string selectedPath, bool forceOpen)
         {
             //Only reopen workspace if a new directory was selected
-            if (selectedPath != Properties.Settings.Default.Workspace)
+            if (forceOpen || selectedPath != Properties.Settings.Default.Workspace)
             {
                 //Persist workspace
                 Properties.Settings.Default.Workspace = selectedPath;
                 Properties.Settings.Default.Save();
-                OnPropertyChanged(nameof(WorkspaceDirectoryFullPath));
+                OnPropertyChanged(nameof(WorkspaceFolderAbsolutePath));
                 //Log
-                logger.Debug($"Opening workspace '{WorkspaceDirectoryFullPath}'");
+                logger.Debug($"Opening workspace '{WorkspaceFolderAbsolutePath}'");
                 foreach (var subdir in WorkspaceSubDirs)
                 {
-                    logger.Debug($"Opening power system directory '{subdir}'");
+                    //Extract last element of the path
+                    var pwsName = subdir.Substring(subdir.LastIndexOf("\\") + 1);
+                    //absolute path to power system xml 
+                    var xmlPwsPath = Path.Combine(subdir, pwsName + ".xml");
+                    if (File.Exists(xmlPwsPath))
+                    {
+                        //deserialize the power system
+                        var deserializedPowerSystemSummary = PowerSystemSummary.OpenFromXml(xmlPwsPath);
+                        MyPowerSystemsSummary.Add(deserializedPowerSystemSummary);
+                        logger.Debug($"Successfully opened power system '{pwsName}' from file '{xmlPwsPath}'");
+                    }
+                    else
+                    {
+                        var xmlPwsRelativePath = xmlPwsPath.Substring(xmlPwsPath.LastIndexOf("\\") + 1);
+                        logger.Debug($"Failed to open power system. No XML file '{xmlPwsRelativePath}' was found for power system '{pwsName}' in folder '{xmlPwsPath}'");
+                    }
                 }
             }
         }

@@ -73,7 +73,7 @@ namespace PowerSystemPlanning.BindingModels.BaseDataBinding
         /// </summary>
         public double TotalInelasticLoad => (from load in this.BindingInelasticLoads select load.Consumption).Sum();
 
-        private double _LoadSheddingCost = 10000; //default (arbitrary) value
+        private double _LoadSheddingCost = 2000; //default (arbitrary) value
         /// <summary>
         /// The cost (in US$) of shedding 1 MWh of any load.
         /// </summary>

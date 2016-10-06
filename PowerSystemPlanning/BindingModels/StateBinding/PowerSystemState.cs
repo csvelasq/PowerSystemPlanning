@@ -19,7 +19,7 @@ using Prism.Mvvm;
 namespace PowerSystemPlanning.BindingModels.StateBinding
 {
     [DataContract()]
-    public class PowerSystemState : BindableBase, IPowerSystemState
+    public class PowerSystemState : SerializableBindableBase, IPowerSystemState
     {
         [DataMember()]
         protected double _Duration;
@@ -33,11 +33,11 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
         public IPowerSystem MyPowerSystem => MyBindingPowerSystem;
 
         [DataMember()]
-        public BindingList<NodeState> BindingNodeStates;
+        public BindingList<NodeState> BindingNodeStates { get; set; }
         public IList<INodeState> NodeStates => BindingNodeStates.Cast<INodeState>().ToList();
 
         [DataMember()]
-        public BindingList<GeneratingUnitState> BindingGeneratingUnitStates;
+        public BindingList<GeneratingUnitState> BindingGeneratingUnitStates { get; set; }
         public IList<IGeneratingUnitState> GeneratingUnitStates => BindingGeneratingUnitStates.Cast<IGeneratingUnitState>().ToList();
 
         public IList<IGeneratingUnitState> ActiveGeneratingUnitStates =>
@@ -46,11 +46,11 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
              select (IGeneratingUnitState)gen).ToList();
 
         [DataMember()]
-        public BindingList<InelasticLoadState> BindingInelasticLoadStates;
+        public BindingList<InelasticLoadState> BindingInelasticLoadStates { get; set; }
         public IList<IInelasticLoadState> InelasticLoadStates => BindingInelasticLoadStates.Cast<IInelasticLoadState>().ToList();
 
         [DataMember()]
-        public BindingList<SimpleTransmissionLineState> BindingSimpleTransmissionLineStates;
+        public BindingList<SimpleTransmissionLineState> BindingSimpleTransmissionLineStates { get; set; }
         public IList<ISimpleTransmissionLineState> SimpleTransmissionLineStates => BindingSimpleTransmissionLineStates.Cast<ISimpleTransmissionLineState>().ToList();
 
         public IList<ISimpleTransmissionLineState> ActiveSimpleTransmissionLineStates =>
@@ -63,25 +63,25 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
             MyBindingPowerSystem = system;
             //Add generator states
             BindingGeneratingUnitStates = new BindingList<GeneratingUnitState>();
-            foreach (var gen in MyPowerSystem.GeneratingUnits)
+            foreach (var gen in MyBindingPowerSystem.BindingGeneratingUnits)
             {
                 BindingGeneratingUnitStates.Add(new GeneratingUnitState(this, gen));
             }
             //Add load states
             BindingInelasticLoadStates = new BindingList<InelasticLoadState>();
-            foreach (var load in MyPowerSystem.InelasticLoads)
+            foreach (var load in MyBindingPowerSystem.BindingInelasticLoads)
             {
                 BindingInelasticLoadStates.Add(new InelasticLoadState(this, load));
             }
             //Add transmission lines states
             BindingSimpleTransmissionLineStates = new BindingList<SimpleTransmissionLineState>();
-            foreach (var tl in MyPowerSystem.TransmissionLines)
+            foreach (var tl in MyBindingPowerSystem.BindingTransmissionLines)
             {
                 BindingSimpleTransmissionLineStates.Add(new SimpleTransmissionLineState(this, tl));
             }
             //Add node states
             BindingNodeStates = new BindingList<NodeState>();
-            foreach (var node in MyPowerSystem.Nodes)
+            foreach (var node in MyBindingPowerSystem.BindingNodes)
             {
                 BindingNodeStates.Add(new NodeState(this, node));
             }

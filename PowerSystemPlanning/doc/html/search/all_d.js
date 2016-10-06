@@ -6,10 +6,10 @@ var searchData=
   ['branch',['Branch',['../namespace_power_system_planning_1_1_binding_models_1_1_state_binding_1_1_branch.html',1,'PowerSystemPlanning::BindingModels::StateBinding']]],
   ['branch',['Branch',['../namespace_power_system_planning_1_1_models_1_1_system_base_data_1_1_branch.html',1,'PowerSystemPlanning::Models::SystemBaseData']]],
   ['branch',['Branch',['../namespace_power_system_planning_1_1_models_1_1_system_state_1_1_branch.html',1,'PowerSystemPlanning::Models::SystemState']]],
+  ['generator',['Generator',['../namespace_power_system_planning_1_1_models_1_1_system_state_1_1_generator.html',1,'PowerSystemPlanning::Models::SystemState']]],
   ['generator',['Generator',['../namespace_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_generator.html',1,'PowerSystemPlanning::BindingModels::BaseDataBinding']]],
   ['generator',['Generator',['../namespace_power_system_planning_1_1_models_1_1_system_base_data_1_1_generator.html',1,'PowerSystemPlanning::Models::SystemBaseData']]],
   ['generator',['Generator',['../namespace_power_system_planning_1_1_binding_models_1_1_state_binding_1_1_generator.html',1,'PowerSystemPlanning::BindingModels::StateBinding']]],
-  ['generator',['Generator',['../namespace_power_system_planning_1_1_models_1_1_system_state_1_1_generator.html',1,'PowerSystemPlanning::Models::SystemState']]],
   ['grboptimization',['GRBOptimization',['../namespace_power_system_planning_1_1_solvers_1_1_g_r_b_optimization.html',1,'PowerSystemPlanning::Solvers']]],
   ['investmentbranch',['InvestmentBranch',['../namespace_power_system_planning_1_1_models_1_1_planning_1_1_investment_branch.html',1,'PowerSystemPlanning::Models::Planning']]],
   ['ldc',['LDC',['../namespace_power_system_planning_1_1_models_1_1_planning_1_1_l_d_c.html',1,'PowerSystemPlanning::Models::Planning']]],
@@ -54,6 +54,7 @@ var searchData=
   ['solvers',['Solvers',['../namespace_power_system_planning_1_1_solvers.html',1,'PowerSystemPlanning']]],
   ['state',['State',['../namespace_power_system_planning_1_1_models_1_1_planning_1_1_state.html',1,'PowerSystemPlanning::Models::Planning']]],
   ['statebinding',['StateBinding',['../namespace_power_system_planning_1_1_binding_models_1_1_state_binding.html',1,'PowerSystemPlanning::BindingModels']]],
+  ['statecollectiondatatable',['StateCollectionDataTable',['../namespace_power_system_planning_1_1_binding_models_1_1_state_collection_data_table.html',1,'PowerSystemPlanning::BindingModels']]],
   ['systembasedata',['SystemBaseData',['../namespace_power_system_planning_1_1_models_1_1_system_base_data.html',1,'PowerSystemPlanning::Models']]],
   ['systemstate',['SystemState',['../namespace_power_system_planning_1_1_models_1_1_system_state.html',1,'PowerSystemPlanning::Models']]]
 ];

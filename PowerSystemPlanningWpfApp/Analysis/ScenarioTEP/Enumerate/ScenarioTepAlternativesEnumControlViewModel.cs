@@ -74,15 +74,15 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate
 
         private void AddCommonDataColumns(ObservableCollection<DataGridColumn> columns)
         {
-            columns.Add(CreateNewColumn_WithMyStyle("New Transmission Lines Count", "BuiltTransmissionLines.Count", "", 110));
-            columns.Add(CreateNewColumn_WithMyStyle("Investment Cost (MUS$)", "TotalInvestmentCost", "C1", 90));
-            columns.Add(CreateNewColumn_WithMyStyle("Transmission lines", "BuiltTransmissionLinesNames", "", 90));
-            columns.Add(CreateNewColumn_WithMyStyle("Expected costs (MMUS$)", "ExpectedTotalCosts", "C", 90));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("New Transmission Lines Count", "BuiltTransmissionLines.Count", "", 110));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Investment Cost (MUS$)", "TotalInvestmentCost", "C1", 90));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Transmission lines", "BuiltTransmissionLinesNames", "", 90));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Expected costs (MMUS$)", "ExpectedTotalCosts", "C", 90));
         }
 
         private void SetDgColumns()
         {
-            if (TepAlternatives!=null && TepAlternatives.Count() > 0)
+            if (TepAlternatives != null && TepAlternatives.Count() > 0)
             {
                 ObservableCollection<DataGridColumn> colList = new ObservableCollection<DataGridColumn>();
                 //Add common columns
@@ -97,25 +97,12 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate
                 var objectiveFunctions = TepAlternatives.First().MyProblem.MyObjectiveFunctionsDefinition;
                 for (int i = 0; i < objectiveFunctions.Count; i++)
                 {
-                    colList.Add(CreateNewColumn_WithMyStyle(objectiveFunctions[i].MyObjectiveName, String.Format("ObjectiveValues[{0}]", i), "C", 110));
+                    colList.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle
+                        (objectiveFunctions[i].MyObjectiveName, String.Format("ObjectiveValues[{0}]", i), "C", 110));
                 }
                 //Set column collection in order to update the view
                 MyColumnCollection = colList;
             }
-        }
-
-        public static DataGridTextColumn CreateNewColumn_WithMyStyle(string header, string bindingPath, string bindingStringFormat, double width)
-        {
-            var mybinding = new Binding(bindingPath);
-            mybinding.StringFormat = bindingStringFormat;
-            DataGridTextColumn col = new DataGridTextColumn
-            {
-                Header = header,
-                Binding = mybinding,
-                Width = width
-            };
-            col.ElementStyle = (Style)Application.Current.FindResource("CellRightAlign");
-            return col;
         }
     }
 }

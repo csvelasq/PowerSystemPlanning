@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace PowerSystemPlanningWpfApp.ControlUtils
 {
@@ -82,6 +83,20 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
         public static ObservableCollection<DataGridColumn> GetBindableColumns(DependencyObject element)
         {
             return (ObservableCollection<DataGridColumn>)element.GetValue(BindableColumnsProperty);
+        }
+        
+        public static DataGridTextColumn CreateNewColumn_WithMyStyle(string header, string bindingPath, string bindingStringFormat, double width)
+        {
+            var mybinding = new Binding(bindingPath);
+            mybinding.StringFormat = bindingStringFormat;
+            DataGridTextColumn col = new DataGridTextColumn
+            {
+                Header = header,
+                Binding = mybinding,
+                Width = width
+            };
+            col.ElementStyle = (Style)Application.Current.FindResource("CellRightAlign");
+            return col;
         }
     }
 }

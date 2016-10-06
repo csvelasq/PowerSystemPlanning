@@ -9,6 +9,6 @@
              xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance Type=appWide:PowerSystemSummary}">
-    <local:PowerSystemCoreEditorControl DataContext="{Binding MyPowerSystem}" />
+             d:DataContext="{d:DesignInstance Type=appWide:PowerSysViewModel}">
+    <local:PowerSystemCoreEditorControl DataContext="{Binding MyPowerSys.MyPowerSystem}" />
 </UserControl>

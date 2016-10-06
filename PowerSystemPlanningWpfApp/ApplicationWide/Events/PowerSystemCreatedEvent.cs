@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prism.Events;
+using PowerSystemPlanningWpfApp.ApplicationWide.AppModels;
+using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide.Events
 {
-    public class PowerSystemCreatedEvent : PubSubEvent<PowerSystemSummary> { }
-    public class RequestPowerSystemEditionEvent : PubSubEvent<PowerSystemSummary> { }
+    public class PowerSystemOpenedEvent : PubSubEvent<PowerSysViewModel> { }
+    public class RequestDocumentOpenEvent : PubSubEvent<BaseDocumentViewModel> { }
     public class DocumentClosedEvent : PubSubEvent<BaseDocumentViewModel> { }
-    //public class WindowLoadedEvent : PubSubEvent<object> { }
 }

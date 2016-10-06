@@ -13,7 +13,9 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Branch
     public class SimpleTransmissionLineState : PowerSystemElementState, ISimpleTransmissionLineState
     {
         [DataMember()]
-        public ISimpleTransmissionLine UnderlyingTransmissionLine { get; protected set; }
+        public SimpleTransmissionLine BindingUnderlyingTransmissionLine { get; protected set; }
+
+        public ISimpleTransmissionLine UnderlyingTransmissionLine => BindingUnderlyingTransmissionLine;
 
         public override IPowerSystemElement MyPowerSystemElement => UnderlyingTransmissionLine;
 
@@ -22,7 +24,20 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Branch
         public bool IsAvailable
         {
             get { return _IsAvailable; }
-            set { SetProperty<bool>(ref _IsAvailable, value); }
+            set
+            {
+                SetProperty<bool>(ref _IsAvailable, value);
+                /*
+                if (_IsAvailable != value)
+                {
+                    _IsAvailable = value;
+                    OnPropertyChanged();
+                    //If transmission line is disabled, no thermal capacity
+                    if (!IsAvailable)
+                        AvailableThermalCapacity = 0;
+                }
+                */
+            }
         }
 
         [DataMember()]
@@ -33,10 +48,10 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Branch
             set { SetProperty<double>(ref _AvailableThermalCapacity, value); }
         }
 
-        public SimpleTransmissionLineState(IPowerSystemState state, ISimpleTransmissionLine tl)
-            :base(state)
+        public SimpleTransmissionLineState(PowerSystemState state, SimpleTransmissionLine tl)
+            : base(state)
         {
-            UnderlyingTransmissionLine = tl;
+            BindingUnderlyingTransmissionLine = tl;
             AvailableThermalCapacity = tl.ThermalCapacity;
         }
     }

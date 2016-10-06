@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.Model
+namespace PowerSystemPlanningWpfApp.Model.PowerSystemEditor
 {
     /// <summary>
-    /// Interaction logic for PlanningModelEditorControl.xaml
+    /// Interaction logic for PowerSystemBrowserControl.xaml
     /// </summary>
-    public partial class PlanningModelEditorControl : UserControl
+    public partial class PowerSystemBrowserControl : UserControl
     {
-        public PlanningModelEditorControl()
+        public PowerSystemBrowserControl()
         {
             InitializeComponent();
         }

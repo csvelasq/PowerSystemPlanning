@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="PowerSystemPlanningWpfApp.Model.PowerSystemEditor.PowerSystemBrowserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemEditor"
+        xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
+        xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=appWide:PowerSysViewModel}">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="2,2,2,2">
+            <TextBlock Text="Power System: " />
+            <TextBox Text="{Binding MyPowerSys.MyPowerSystem.Name, Mode=OneWay}"
+                     IsReadOnly="True" TextWrapping="Wrap" Width="150" />
+        </StackPanel>
+        <TextBlock Text="Test Cases" FontWeight="Bold" DockPanel.Dock="Top" Margin="2,2,2,2"/>
+        <!--Actions: new, delete, save, save all-->
+        <WrapPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="2,2,2,2">
+            <!--Create new study-->
+            <localUtils:ImageTextButton Command="{Binding NewStudyCommand}" ToolTip="New" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/NewFile_16x.png" />
+            <!--Open selected Study-->
+            <localUtils:ImageTextButton Command="{Binding OpenStudyCommand}" ToolTip="Open" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Open_16x.png" />
+            <!--Delete selected Study-->
+            <localUtils:ImageTextButton Command="{Binding DeleteStudyCommand}" ToolTip="Delete" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Cancel_16x.png" />
+            <!--Save selected Study-->
+            <localUtils:ImageTextButton Command="{Binding SaveStudyCommand}" ToolTip="Save" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Save_16x.png" />
+            <!--Save all Studies-->
+            <localUtils:ImageTextButton Command="{Binding SaveAllStudiesCommand}" ToolTip="Save All" Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/SaveAll_16x.png" />
+        </WrapPanel>
+        <!--Study listview-->
+        <ListView ItemsSource="{Binding MyPowerSys.MyStudies}"
+                  SelectedItem="{Binding SelectedStudy}"
+                  Margin="2,2,2,2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding MyTepScenarioStudy.GenericName}" FontWeight="Bold" Margin="2,2,2,2" />
+                        <TextBlock Text="{Binding MyTepScenarioStudy.InstanceName}" Margin="2,2,2,2" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </DockPanel>
+</UserControl>

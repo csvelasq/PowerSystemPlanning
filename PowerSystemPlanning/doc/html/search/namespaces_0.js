@@ -21,9 +21,9 @@ var searchData=
   ['load',['Load',['../namespace_power_system_planning_1_1_models_1_1_system_state_1_1_load.html',1,'PowerSystemPlanning::Models::SystemState']]],
   ['models',['Models',['../namespace_power_system_planning_1_1_models.html',1,'PowerSystemPlanning']]],
   ['multiobjective',['MultiObjective',['../namespace_power_system_planning_1_1_multi_objective.html',1,'PowerSystemPlanning']]],
-  ['nodes',['Nodes',['../namespace_power_system_planning_1_1_models_1_1_system_state_1_1_nodes.html',1,'PowerSystemPlanning::Models::SystemState']]],
   ['nodes',['Nodes',['../namespace_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_nodes.html',1,'PowerSystemPlanning::BindingModels::BaseDataBinding']]],
   ['nodes',['Nodes',['../namespace_power_system_planning_1_1_models_1_1_system_base_data_1_1_nodes.html',1,'PowerSystemPlanning::Models::SystemBaseData']]],
+  ['nodes',['Nodes',['../namespace_power_system_planning_1_1_models_1_1_system_state_1_1_nodes.html',1,'PowerSystemPlanning::Models::SystemState']]],
   ['nodes',['Nodes',['../namespace_power_system_planning_1_1_binding_models_1_1_state_binding_1_1_nodes.html',1,'PowerSystemPlanning::BindingModels::StateBinding']]],
   ['opf',['OPF',['../namespace_power_system_planning_1_1_solvers_1_1_o_p_f.html',1,'PowerSystemPlanning::Solvers']]],
   ['opfresults',['OpfResults',['../namespace_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_opf_results.html',1,'PowerSystemPlanning::Solvers::OPF']]],
@@ -34,6 +34,7 @@ var searchData=
   ['solvers',['Solvers',['../namespace_power_system_planning_1_1_solvers.html',1,'PowerSystemPlanning']]],
   ['state',['State',['../namespace_power_system_planning_1_1_models_1_1_planning_1_1_state.html',1,'PowerSystemPlanning::Models::Planning']]],
   ['statebinding',['StateBinding',['../namespace_power_system_planning_1_1_binding_models_1_1_state_binding.html',1,'PowerSystemPlanning::BindingModels']]],
+  ['statecollectiondatatable',['StateCollectionDataTable',['../namespace_power_system_planning_1_1_binding_models_1_1_state_collection_data_table.html',1,'PowerSystemPlanning::BindingModels']]],
   ['systembasedata',['SystemBaseData',['../namespace_power_system_planning_1_1_models_1_1_system_base_data.html',1,'PowerSystemPlanning::Models']]],
   ['systemstate',['SystemState',['../namespace_power_system_planning_1_1_models_1_1_system_state.html',1,'PowerSystemPlanning::Models']]]
 ];

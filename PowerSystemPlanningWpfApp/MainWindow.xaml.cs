@@ -14,7 +14,7 @@ namespace PowerSystemPlanningWpfApp
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {       
+    {
         public MainWindowViewModel MyMainWindowViewModel
         {
             get { return (MainWindowViewModel)this.DataContext; }
@@ -51,6 +51,13 @@ namespace PowerSystemPlanningWpfApp
                 LogManager.ReconfigExistingLoggers();
 
             });
+        }
+
+        private void DockingManager_Loaded(object sender, RoutedEventArgs e)
+        {
+            bottomAnchor.ToggleAutoHide();
+            var root = (Xceed.Wpf.AvalonDock.Layout.LayoutAnchorablePane)bottomAnchor.Parent;
+            root.DockHeight = new GridLength(200);
         }
     }
 }

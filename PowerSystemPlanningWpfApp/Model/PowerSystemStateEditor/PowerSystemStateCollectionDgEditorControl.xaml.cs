@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.Model
+namespace PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor
 {
     /// <summary>
-    /// Interaction logic for LoadDurationCurveEditorControl.xaml
+    /// Interaction logic for PowerSystemStateCollectionDgEditorControl.xaml
     /// </summary>
-    public partial class LoadDurationCurveEditorControl : UserControl
+    public partial class PowerSystemStateCollectionDgEditorControl : UserControl
     {
-        public LoadDurationCurveEditorControl()
+        public PowerSystemStateCollectionDgEditorControl()
         {
             InitializeComponent();
         }

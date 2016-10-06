@@ -166,24 +166,14 @@
     </Compile>
     <Compile Include="Analysis\TEP\TransmissionExpansionPlanDetailViewModel.cs" />
     <Compile Include="ApplicationService.cs" />
-    <Compile Include="ApplicationWide\AppModels\PowerSystemDefinition.cs" />
-    <Compile Include="ApplicationWide\AppModels\PowerSystemDefinitionInWorkspace.cs" />
     <Compile Include="ApplicationWide\AppModels\PowerSystemDefinitionInLocalFolder.cs" />
-    <Compile Include="ApplicationWide\AppModels\PowerSystemWorkspaceInLocalFolder.cs" />
+    <Compile Include="ApplicationWide\AppModels\StudyInLocalFolder.cs" />
+    <Compile Include="ApplicationWide\AppModels\TepScenarioStudy.cs" />
     <Compile Include="ApplicationWide\ViewModels\BaseDocumentViewModel.cs" />
     <Compile Include="ApplicationWide\ViewModels\DockManagerViewModel.cs" />
     <Compile Include="ApplicationWide\Events\PowerSystemCreatedEvent.cs" />
-    <Compile Include="ApplicationWide\WorkspaceBrowser\PowerSystemsBrowserControl.xaml.cs">
-      <DependentUpon>PowerSystemsBrowserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationWide\WorkspaceBrowser\StudiesBrowserControl.xaml.cs">
-      <DependentUpon>StudiesBrowserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationWide\WorkspaceBrowser\WorkspaceBrowserControl.xaml.cs">
-      <DependentUpon>WorkspaceBrowserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationWide\ViewModels\PowerSystemPlanningApplication.cs" />
-    <Compile Include="ApplicationWide\ViewModels\PowerSystemSummary.cs" />
+    <Compile Include="ApplicationWide\ViewModels\PowerSysViewModel.cs" />
+    <Compile Include="ApplicationWide\ViewModels\StudyViewModel.cs" />
     <Compile Include="ControlUtils\CustomDg\DataGridColumnsBehavior.cs" />
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
@@ -195,15 +185,6 @@
     <Compile Include="ControlUtils\MyCommands_DgDblClick.cs" />
     <Compile Include="Model\CandidateTransmissionLinesEditorControl.xaml.cs">
       <DependentUpon>CandidateTransmissionLinesEditorControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Model\LoadDurationCurveEditorControl.xaml.cs">
-      <DependentUpon>LoadDurationCurveEditorControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PlanningModelEditorControl.xaml.cs">
-      <DependentUpon>PlanningModelEditorControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PowerSystemEditorControl.xaml.cs">
-      <DependentUpon>PowerSystemEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Analysis\OPF\OPFResultsControl.xaml.cs">
       <DependentUpon>OPFResultsControl.xaml</DependentUpon>
@@ -251,18 +232,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ApplicationWide\WorkspaceBrowser\PowerSystemsBrowserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ApplicationWide\WorkspaceBrowser\StudiesBrowserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ApplicationWide\WorkspaceBrowser\WorkspaceBrowserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ControlUtils\ImageTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -272,10 +241,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ControlUtils\SimpleTerminal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Help\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -301,26 +266,11 @@
     <Compile Include="Helper\WpfRichTextBoxRowColoringRule.cs" />
     <Compile Include="Helper\WpfRichTextBoxTarget.cs" />
     <Compile Include="Helper\WpfRichTextBoxWordColoringRule.cs" />
-    <Compile Include="Help\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Model\CandidateTransmissionLinesEditorControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Model\LoadDurationCurveEditorControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Model\PlanningModelEditorControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Model\PowerSystemEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -332,11 +282,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Model\PowerSystemEditor\PowerSystemBrowserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Model\PowerSystemEditor\PowerSystemCoreEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Model\PowerSystemEditor\PowerSystemEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\PowerSystemStateEditor\PowerSystemStateCollectionDgEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\PowerSystemStateEditor\PowerSystemStateCoreEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -347,11 +309,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Model\PowerSystemEditor\PowerSystemBrowserControl.xaml.cs">
+      <DependentUpon>PowerSystemBrowserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\PowerSystemEditor\PowerSystemCoreEditorControl.xaml.cs">
       <DependentUpon>PowerSystemCoreEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\PowerSystemEditor\PowerSystemEditorControl.xaml.cs">
       <DependentUpon>PowerSystemEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PowerSystemStateEditor\PowerSystemStateCollectionDgEditorControl.xaml.cs">
+      <DependentUpon>PowerSystemStateCollectionDgEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PowerSystemStateEditor\PowerSystemStateCoreEditorControl.xaml.cs">
+      <DependentUpon>PowerSystemStateCoreEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -420,9 +391,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\PowerSystemStateEditor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)

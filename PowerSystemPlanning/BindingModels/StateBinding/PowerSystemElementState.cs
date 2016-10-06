@@ -13,21 +13,23 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
     /// Concrete implementations should override <see cref="MyPowerSystemElement"/> with some specific interface.
     /// </remarks>
     [DataContract()]
-    public abstract class PowerSystemElementState : BindableBase, IPowerSystemElementState
+    public abstract class PowerSystemElementState : SerializableBindableBase, IPowerSystemElementState
     {
+        public PowerSystemState BindingPowerSystemState { get; protected set; }
+
         /// <summary>
         /// The power system state to which this object belongs.
         /// </summary>
-        public IPowerSystemState MyPowerSystemState { get; protected set; }
+        public IPowerSystemState MyPowerSystemState => BindingPowerSystemState;
 
         /// <summary>
         /// The underlying power system element whose state this object describes.
         /// </summary>
         public virtual IPowerSystemElement MyPowerSystemElement { get; }
 
-        protected PowerSystemElementState(IPowerSystemState state)
+        protected PowerSystemElementState(PowerSystemState state)
         {
-            MyPowerSystemState = state;
+            BindingPowerSystemState = state;
         }
     }
 }

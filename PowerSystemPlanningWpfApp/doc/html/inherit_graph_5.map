@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node2" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_events_1_1_document_closed_event.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.Events.Document\lClosedEvent" alt="" coords="164,5,387,61"/>
-<area shape="rect" id="node3" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_events_1_1_power_system_created_event.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.Events.PowerSystem\lCreatedEvent" alt="" coords="153,85,397,141"/>
-<area shape="rect" id="node4" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_events_1_1_request_power_system_edition_event.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.Events.Request\lPowerSystemEditionEvent" alt="" coords="170,165,381,221"/>
+<area shape="rect" id="node3" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_events_1_1_power_system_opened_event.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.Events.PowerSystem\lOpenedEvent" alt="" coords="153,85,397,141"/>
+<area shape="rect" id="node4" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_events_1_1_request_document_open_event.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.Events.Request\lDocumentOpenEvent" alt="" coords="170,165,381,221"/>
 </map>

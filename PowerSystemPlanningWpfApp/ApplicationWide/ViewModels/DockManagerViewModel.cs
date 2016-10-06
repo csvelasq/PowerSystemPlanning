@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using PowerSystemPlanningWpfApp.ApplicationWide.AppModels;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
@@ -7,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
+using System.ComponentModel;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide
 {
@@ -19,6 +22,13 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public ObservableCollection<BaseDocumentViewModel> MyOpenDocuments { get; private set; }
 
+        PowerSysViewModel _OpenedPowerSystemViewModel;
+        public PowerSysViewModel OpenedPowerSystemViewModel
+        {
+            get { return _OpenedPowerSystemViewModel; }
+            set { SetProperty<PowerSysViewModel>(ref _OpenedPowerSystemViewModel, value); }
+        }
+
         BaseDocumentViewModel _ActiveDocumentViewModel;
         public BaseDocumentViewModel ActiveDocumentViewModel
         {
@@ -26,34 +36,24 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
             set { SetProperty<BaseDocumentViewModel>(ref _ActiveDocumentViewModel, value); }
         }
 
-        #region Commands
-        #endregion
-
         public DockManagerViewModel()
         {
             _eventAggregator = ApplicationService.Instance.EventAggregator;
-            //this._eventAggregator.GetEvent<Events.PowerSystemCreatedEvent>()
-            //    .Subscribe((item) => { this.MyOpenDocuments.Add(item); });
-            this._eventAggregator.GetEvent<Events.RequestPowerSystemEditionEvent>()
-                .Subscribe(OnRequestPowerSystemEditionEvent);
+            this._eventAggregator.GetEvent<Events.PowerSystemOpenedEvent>()
+                .Subscribe(OnPowerSystemOpenedEvent);
+            this._eventAggregator.GetEvent<Events.RequestDocumentOpenEvent>()
+                .Subscribe(OnRequestDocumentOpen);
             this._eventAggregator.GetEvent<Events.DocumentClosedEvent>()
                 .Subscribe(OnDocumentClosedEvent);
             MyOpenDocuments = new ObservableCollection<BaseDocumentViewModel>();
         }
 
-        private void OnDocumentClosedEvent(BaseDocumentViewModel obj)
+        private void OnRequestDocumentOpen(BaseDocumentViewModel obj)
         {
-            MyOpenDocuments.Remove(obj);
-        }
-
-        private void OnRequestPowerSystemEditionEvent(PowerSystemSummary obj)
-        {
-            //Focus existing edition document
             if (MyOpenDocuments.Contains(obj))
             {
                 ActiveDocumentViewModel = obj;
             }
-            //New edition document
             else
             {
                 MyOpenDocuments.Add(obj);
@@ -67,6 +67,18 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
             {
                 MyOpenDocuments.Add(doc);
             }
+        }
+
+        private void OnDocumentClosedEvent(BaseDocumentViewModel obj)
+        {
+            MyOpenDocuments.Remove(obj);
+        }
+
+        private void OnPowerSystemOpenedEvent(PowerSysViewModel obj)
+        {
+            MyOpenDocuments.Clear();
+            OpenedPowerSystemViewModel = obj;
+            MyOpenDocuments.Add(obj);
         }
     }
 }

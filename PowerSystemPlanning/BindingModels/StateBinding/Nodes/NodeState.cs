@@ -11,13 +11,15 @@ using PowerSystemPlanning.Models.SystemState.Generator;
 using PowerSystemPlanning.Models.SystemState.Load;
 using PowerSystemPlanning.Models.SystemState.Nodes;
 using Prism.Mvvm;
+using PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes;
 
 namespace PowerSystemPlanning.BindingModels.StateBinding.Nodes
 {
     public class NodeState : PowerSystemElementState, INodeState
     {
-        public INode UnderlyingNode { get; protected set; }
-        public override IPowerSystemElement MyPowerSystemElement => UnderlyingNode;
+        public Node BindingUnderlyingNode { get; protected set; }
+        public INode UnderlyingNode => BindingUnderlyingNode;
+        public override IPowerSystemElement MyPowerSystemElement => BindingUnderlyingNode;
 
         public IList<IInelasticLoadState> InelasticLoadsStates =>
             (from load in MyPowerSystemState.InelasticLoadStates
@@ -67,10 +69,10 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Nodes
             where tl.IsAvailable
             select tl).ToList();
 
-        public NodeState(IPowerSystemState state, INode wrappedInelasticLoad)
+        public NodeState(PowerSystemState state, Node wrappedInelasticLoad)
             : base(state)
         {
-            UnderlyingNode = wrappedInelasticLoad;
+            BindingUnderlyingNode = wrappedInelasticLoad;
         }
     }
 }

@@ -61,6 +61,8 @@
     <Compile Include="BindingModels\StateBinding\Nodes\NodeState.cs" />
     <Compile Include="BindingModels\StateBinding\PowerSystemElementState.cs" />
     <Compile Include="BindingModels\StateBinding\PowerSystemState.cs" />
+    <Compile Include="BindingModels\StateCollectionDataTable\StateCollectionDataTable.cs" />
+    <Compile Include="BindingModels\StateCollectionDataTable\StateDefinition.cs" />
     <Compile Include="IHaveIdAndName.cs" />
     <Compile Include="Models\Planning\InvestmentBranch\CandidateTransmissionLine.cs" />
     <Compile Include="Models\Planning\InvestmentBranch\ICandidateTransmissionLine.cs" />

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.ApplicationWide.WorkspaceBrowser
+namespace PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor
 {
     /// <summary>
-    /// Interaction logic for StudiesBrowserControl.xaml
+    /// Interaction logic for PowerSystemStateCoreEditorControl.xaml
     /// </summary>
-    public partial class StudiesBrowserControl : UserControl
+    public partial class PowerSystemStateCoreEditorControl : UserControl
     {
-        public StudiesBrowserControl()
+        public PowerSystemStateCoreEditorControl()
         {
             InitializeComponent();
         }

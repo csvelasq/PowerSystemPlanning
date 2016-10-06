@@ -4,6 +4,7 @@ using PowerSystemPlanning.Models.SystemBaseData.Generator;
 using PowerSystemPlanning.Models.SystemState.Generator;
 using PowerSystemPlanning.Models.SystemBaseData;
 using PowerSystemPlanning.Models.SystemState;
+using PowerSystemPlanning.BindingModels.BaseDataBinding.Generator;
 
 namespace PowerSystemPlanning.BindingModels.StateBinding.Generator
 {
@@ -14,9 +15,11 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Generator
     public class GeneratingUnitState : PowerSystemElementState, IGeneratingUnitState
     {
         [DataMember()]
-        public IGeneratingUnit UnderlyingGeneratingUnit { get; protected set; }
+        public GeneratingUnit BindingUnderlyingGeneratingUnit { get; protected set; }
 
-        public override IPowerSystemElement MyPowerSystemElement => UnderlyingGeneratingUnit;
+        public IGeneratingUnit UnderlyingGeneratingUnit => BindingUnderlyingGeneratingUnit;
+
+        public override IPowerSystemElement MyPowerSystemElement => BindingUnderlyingGeneratingUnit;
 
         [DataMember()]
         protected double _AvailableCapacity;
@@ -47,15 +50,15 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Generator
         /// </summary>
         /// <param name="state">The power system state to which this object belongs.</param>
         /// <param name="gen">The generating unit whose state this object describes. <see cref="AvailableCapacity"/> is set equal to <see cref="IGeneratingUnit.InstalledCapacity"/>, while <see cref="MarginalCost"/> is set to <see cref="IGeneratingUnit.MarginalCost"/>.</param>
-        public GeneratingUnitState(IPowerSystemState state, IGeneratingUnit gen)
+        public GeneratingUnitState(PowerSystemState state, GeneratingUnit gen)
             : this(state, gen, gen.InstalledCapacity, gen.MarginalCost)
         { }
 
-        public GeneratingUnitState(IPowerSystemState state, IGeneratingUnit gen, double availableCapacity,
+        public GeneratingUnitState(PowerSystemState state, GeneratingUnit gen, double availableCapacity,
             double marginalCost)
             : base(state)
         {
-            UnderlyingGeneratingUnit = gen;
+            BindingUnderlyingGeneratingUnit = gen;
             AvailableCapacity = availableCapacity;
             MarginalCost = marginalCost;
         }

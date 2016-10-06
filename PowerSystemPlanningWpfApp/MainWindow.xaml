@@ -7,9 +7,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp"
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
-        xmlns:browser="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.WorkspaceBrowser"
         xmlns:pwsEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemEditor"
         xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+        xmlns:appWideVm="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.ViewModels"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:dockctrl="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
@@ -25,29 +25,30 @@
                     VerticalAlignment="Center">
             <Menu Background="White" Margin="0,5,0,5">
                 <MenuItem Header="_File">
-                    <MenuItem x:Name="menubtnNew" Header="_New" Command="ApplicationCommands.New">
+                    <MenuItem Header="_New" 
+                              Command="{Binding NewFileCommand}" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/NewFile_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="menubtnOpen" Header="_Open" Command="ApplicationCommands.Open" >
+                    <MenuItem Header="_Open" Command="{Binding OpenFileCommand}" >
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/Open_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="menubtnSave" Header="_Save" Command="ApplicationCommands.Save">
+                    <MenuItem Header="_Save" Command="{Binding OpenedPowerSystemViewModel.SaveFileCommand}">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/Save_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="menubtnSaveAs" Header="_Save As" Command="ApplicationCommands.SaveAs">
+                    <MenuItem Header="_Save As" Command="{Binding SaveFileAsCommand}" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/SaveAs_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <localUtils:RecentFileList x:Name="RecentFileList" />
                     <!--<Separator />-->
-                    <MenuItem x:Name="menubtnExit" Header="_Exit" Command="ApplicationCommands.Close">
+                    <MenuItem x:Name="menubtnExit" Header="_Exit" Command="{Binding ExitCommand}">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/CloseSolution_16x.png" />
                         </MenuItem.Icon>
@@ -61,28 +62,26 @@
                     <MenuItem Header="_Optimal Power Flow" />
                     <MenuItem Header="_Load Duration Curve OPF" />
                 </MenuItem>
-                <MenuItem Header="Configuration">
-                    <MenuItem Header="_Configuration" IsEnabled="False" />
-                    <MenuItem Header="_Settings" IsEnabled="False" />
-                </MenuItem>
-                <MenuItem Header="Help">
-                    <MenuItem x:Name="aboutMenuItem" Header="_About"  />
-                </MenuItem>
             </Menu>
         </StackPanel>
         <!--Contents-->
         <avalonDock:DockingManager DataContext="{Binding MyDockManagerViewModel}" 
                                      DocumentsSource="{Binding MyOpenDocuments}"
                                      ActiveContent="{Binding ActiveDocumentViewModel, Mode=TwoWay}"
-                                     Grid.Column="2" x:Name="dockingManager">
+                                     Grid.Column="2" Loaded="DockingManager_Loaded" x:Name="dockingManager">
             <avalonDock:DockingManager.Resources>
                 <!--add views for specific ViewModels -->
                 <!--View for Power System editor-->
-                <DataTemplate DataType="{x:Type appWide:PowerSystemSummary}">
+                <DataTemplate DataType="{x:Type appWide:PowerSysViewModel}">
                     <pwsEditor:PowerSystemEditorControl />
                 </DataTemplate>
-                <!--View for system state-->
-                <!--View for OPF (based on a system state)-->
+                <!--View for study-->
+                <DataTemplate DataType="{x:Type appWideVm:StudyViewModel}">
+                    <StackPanel>
+                        <TextBlock Text="Study Name:" />
+                        <TextBox Text="{Binding MyStudy.MyTepScenarioStudy.InstanceName}" />
+                    </StackPanel>
+                </DataTemplate>
             </avalonDock:DockingManager.Resources>
             <avalonDock:DockingManager.LayoutItemContainerStyle>
                 <!--you can add additional bindings from the layoutitem to the DockWindowViewModel-->
@@ -92,28 +91,24 @@
             </avalonDock:DockingManager.LayoutItemContainerStyle>
 
             <avalonDock:LayoutRoot>
-                <avalonDock:LayoutPanel Orientation="Horizontal">
-                    <!--Workspace browser-->
-                    <avalonDock:LayoutAnchorablePaneGroup DockWidth="250" 
-                                                                  Orientation="Vertical">
-                        <avalonDock:LayoutAnchorablePane>
-                            <avalonDock:LayoutAnchorable Title="Browser">
-                                <!--Workspace browser-->
-                                <browser:WorkspaceBrowserControl Grid.Column="0" 
-                                                 DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}, Path=MyMainWindowViewModel.MyPowerSystemPlanningApplication}" />
+                <avalonDock:LayoutPanel Orientation="Vertical">
+                    <avalonDock:LayoutPanel Orientation="Horizontal">
+                        <avalonDock:LayoutAnchorablePane DockWidth="250">
+                            <avalonDock:LayoutAnchorable Title="Test Cases">
+                                <pwsEditor:PowerSystemBrowserControl DataContext="{Binding OpenedPowerSystemViewModel}" />
                             </avalonDock:LayoutAnchorable>
                         </avalonDock:LayoutAnchorablePane>
-                    </avalonDock:LayoutAnchorablePaneGroup>
-                    <!--Opened documents: power systems and studies-->
-                    <avalonDock:LayoutDocumentPaneGroup>
-                        <avalonDock:LayoutDocumentPane/>
-                    </avalonDock:LayoutDocumentPaneGroup>
+                        <!--Opened documents: power systems and studies-->
+                        <avalonDock:LayoutDocumentPaneGroup>
+                            <avalonDock:LayoutDocumentPane/>
+                        </avalonDock:LayoutDocumentPaneGroup>
+                    </avalonDock:LayoutPanel>
                 </avalonDock:LayoutPanel>
                 <avalonDock:LayoutRoot.BottomSide>
                     <!--Log and Python Shell-->
                     <avalonDock:LayoutAnchorSide>
                         <avalonDock:LayoutAnchorGroup>
-                            <avalonDock:LayoutAnchorable Title="Log">
+                            <avalonDock:LayoutAnchorable Title="Log" x:Name="bottomAnchor">
                                 <ScrollViewer>
                                     <RichTextBox x:Name="LogRichTextBox" />
                                 </ScrollViewer>

@@ -23,7 +23,7 @@
                         Define scenarios in the following table. Then select one scenario at a time, and proceed to edit states.
                     </localUtils:ImageTextBlock.MessageForTextBlock>
                 </localUtils:ImageTextBlock>
-                <localUtils:CustomDataGrid ItemsSource="{Binding MyScenarios}" 
+                <localUtils:CustomDataGrid ItemsSource="{Binding MyTepStudy.MyScenarios}" 
                                                SelectedItem="{Binding SelectedScenario}"
                                                AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}" Margin="2,2,2,2">
                     <DataGrid.Columns>

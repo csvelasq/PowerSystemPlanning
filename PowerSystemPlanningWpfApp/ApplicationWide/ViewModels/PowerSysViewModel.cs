@@ -1,116 +1,71 @@
-﻿using Ookii.Dialogs.Wpf;
+﻿using NLog;
+using Ookii.Dialogs.Wpf;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
-using PowerSystemPlanningWpfApp.ApplicationWide.AppModels;
+using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide
 {
-    public class PowerSysViewModel : BaseDocumentViewModel
+    public class PowerSysViewModel : BaseDocumentOneXmlViewModel
     {
+        /// <summary>
+        /// NLog Logger for this class.
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// The event aggregator of this app to comunicate between viewmodels.
         /// </summary>
         protected readonly IEventAggregator _eventAggregator;
 
-        PowerSystemInLocalFolder _MyPowerSys;
-        public PowerSystemInLocalFolder MyPowerSys
+        PowerSystem _MyPowerSystem;
+        public PowerSystem MyPowerSystem
         {
-            get { return _MyPowerSys; }
+            get { return _MyPowerSystem; }
             private set
             {
-                if (_MyPowerSys != value)
+                if (_MyPowerSystem != value)
                 {
-                    _MyPowerSys = value;
+                    _MyPowerSystem = value;
                     OnPropertyChanged();
-                    //Publish event
-                    _eventAggregator.GetEvent<ApplicationWide.Events.PowerSystemOpenedEvent>().Publish(this);
                 }
             }
         }
 
         #region UI properties
         public override string Title => "Power System Editor";
-
-        StudyInLocalFolder _SelectedStudy;
-        public StudyInLocalFolder SelectedStudy
-        {
-            get { return _SelectedStudy; }
-            set { SetProperty<StudyInLocalFolder>(ref _SelectedStudy, value); }
-        }
-        #endregion
-
-        #region Commands
-        public DelegateCommand SaveFileCommand { get; private set; }
-        public DelegateCommand NewStudyCommand { get; private set; }
-        public DelegateCommand OpenStudyCommand { get; private set; }
-
-        public void SaveFile()
-        {
-            if (MyPowerSys.FolderAbsolutePath == null)
-            {
-                var dlg = new VistaFolderBrowserDialog();
-                Nullable<bool> result = dlg.ShowDialog();
-                // Process save file dialog box results
-                if (result == true)
-                {
-                    MyPowerSys.FolderAbsolutePath = dlg.SelectedPath;
-                    Save();
-                }
-            }
-            else
-            {
-                Save();
-            }
-        }
-
-        private void Save()
-        {
-            MyPowerSys.SavePowerSystemAndStudiesToXml();
-        }
-
-        public void Open(string xmlPath)
-        {
-            MyPowerSys = new PowerSystemInLocalFolder(xmlPath);
-        }
-
-        private void OpenStudy()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void NewStudy()
-        {
-            //currently only TEP studies are created; other studies can be created later
-            var study = MyPowerSys.NewStudy();
-            var studyVm = new ScenarioEditorViewModel() { MyPowerSystem=MyPowerSys.MyPowerSystem, MyStudy = study };
-            //Publish event
-            _eventAggregator.GetEvent<ApplicationWide.Events.RequestDocumentOpenEvent>().Publish(studyVm);
-        }
         #endregion
 
         public PowerSysViewModel()
         {
             _eventAggregator = ApplicationService.Instance.EventAggregator;
-            SaveFileCommand = new DelegateCommand(SaveFile);
-            NewStudyCommand = new DelegateCommand(NewStudy);
-            OpenStudyCommand = new DelegateCommand(OpenStudy);
         }
 
-        public PowerSysViewModel(string xmlPath) : this()
+        public PowerSysViewModel(string xmlPath) : base(xmlPath)
         {
-            Open(xmlPath);
+            MyPowerSystem = PowerSystem.OpenFromXml(XmlAbsolutePath);
         }
 
         public PowerSysViewModel(PowerSystem pws) : this()
         {
-            MyPowerSys = new PowerSystemInLocalFolder(pws);
+            MyPowerSystem = pws;
         }
+
+        #region Open&Save
+        public override string DefaultFileName => MyPowerSystem.Name;
+        public override void SaveToXml()
+        {
+            MyPowerSystem.SaveToXml(XmlAbsolutePath);
+            logger.Info($"Power System '{MyPowerSystem.Name}' saved to '{XmlAbsolutePath}'.");
+        }
+        #endregion
     }
 }

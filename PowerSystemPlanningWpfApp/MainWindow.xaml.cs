@@ -25,7 +25,7 @@ namespace PowerSystemPlanningWpfApp
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
-            dockingManager.DocumentClosed += MyMainWindowViewModel.DockingManager_DocumentClosed;
+            //dockingManager.DocumentClosed += MyMainWindowViewModel.DockingManager_DocumentClosed;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

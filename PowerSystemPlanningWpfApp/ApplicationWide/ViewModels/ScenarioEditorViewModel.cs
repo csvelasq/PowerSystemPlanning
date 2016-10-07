@@ -1,26 +1,32 @@
-﻿using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
-using PowerSystemPlanning.BindingModels.StateCollectionDataTable;
+﻿using NLog;
+using PowerSystemPlanning.BindingModels.BaseDataBinding;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios;
+using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide
 {
-    public class ScenarioEditorViewModel : StudyViewModel
+    public class ScenarioEditorViewModel : BaseDocumentOneFolderViewModel
     {
-        public override string Title => "Scenarios";
+        /// <summary>
+        /// NLog Logger for this class.
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        public PowerSystem MyPowerSystem { get; set; }
+
+        public BindingTepScenarios MyTepStudy { get; set; }
 
         #region Basic UI Properties
-        BindingList<BindingScenario> _MyScenarios;
-        public BindingList<BindingScenario> MyScenarios
-        {
-            get { return _MyScenarios; }
-            set { SetProperty<BindingList<BindingScenario>>(ref _MyScenarios, value); }
-        }
+        public override string Title => "Scenarios";
 
         BindingScenario _SelectedScenario;
         public BindingScenario SelectedScenario
@@ -28,28 +34,53 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
             get { return _SelectedScenario; }
             set { SetProperty<BindingScenario>(ref _SelectedScenario, value); }
         }
-
-        StateCollectionDataTable _dtStateData;
-        public StateCollectionDataTable dtStateData
-        {
-            get { return _dtStateData; }
-            set { SetProperty<StateCollectionDataTable>(ref _dtStateData, value); }
-        }
         #endregion
 
         #region Commands
         public DelegateCommand EditStatesCommand { get; private set; }
+        public DelegateCommand CommitStatesCommand { get; private set; }
 
         private void EditStates()
         {
-            dtStateData = new StateCollectionDataTable(MyPowerSystem, MyScenarios);
+            MyTepStudy.CreateStateCollection();
+        }
+
+        private void CommitStates()
+        {
+            MyTepStudy.CommitStateCollectionToPowerSystemState();
         }
         #endregion
 
-        public ScenarioEditorViewModel()
+        #region Open&Save
+        public string TepXmlStatesDefinitionAbsolutePath => Path.Combine(FolderAbsolutePath, "tep.xml");
+        public string TepCsvStatesDataAbsolutePath => Path.Combine(FolderAbsolutePath, "states.csv");
+
+        public override void SaveToFolder()
         {
-            MyScenarios = new BindingList<BindingScenario>();
+            MyTepStudy.Save(TepXmlStatesDefinitionAbsolutePath, TepCsvStatesDataAbsolutePath);
+            logger.Info($"Tep under scenarios saved to '{FolderAbsolutePath}'.");
+        }
+
+        //public override void Open()
+        //{
+        //    /*
+        //     * Open input data
+        //     */
+        //    MyTepStudy = BindingTepScenarios.Load(MyOwnerPowerSys.MyPowerSystem, TepXmlStatesDefinitionAbsolutePath, TepCsvStatesDataAbsolutePath);
+        //    /*
+        //     * Open results
+        //     */
+        //}
+        #endregion
+
+        public ScenarioEditorViewModel(PowerSystem system)
+        {
+            MyPowerSystem = system;
+            MyTepStudy = new BindingTepScenarios(MyPowerSystem);
+
+            //Commands
             EditStatesCommand = new DelegateCommand(EditStates);
+            CommitStatesCommand = new DelegateCommand(CommitStates);
         }
     }
 }

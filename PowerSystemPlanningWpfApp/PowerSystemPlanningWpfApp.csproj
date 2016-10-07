@@ -166,16 +166,12 @@
     </Compile>
     <Compile Include="Analysis\TEP\TransmissionExpansionPlanDetailViewModel.cs" />
     <Compile Include="ApplicationService.cs" />
-    <Compile Include="ApplicationWide\AppModels\IPersistentStudy.cs" />
-    <Compile Include="ApplicationWide\AppModels\PowerSystemDefinitionInLocalFolder.cs" />
-    <Compile Include="ApplicationWide\AppModels\StudyInLocalFolder.cs" />
-    <Compile Include="ApplicationWide\AppModels\TepScenarioStudy.cs" />
+    <Compile Include="ApplicationWide\ViewModels\BaseDocumentOneFolderViewModel.cs" />
+    <Compile Include="ApplicationWide\ViewModels\BaseDocumentOneXmlViewModel.cs" />
     <Compile Include="ApplicationWide\ViewModels\BaseDocumentViewModel.cs" />
-    <Compile Include="ApplicationWide\ViewModels\DockManagerViewModel.cs" />
     <Compile Include="ApplicationWide\Events\PowerSystemCreatedEvent.cs" />
     <Compile Include="ApplicationWide\ViewModels\PowerSysViewModel.cs" />
     <Compile Include="ApplicationWide\ViewModels\ScenarioEditorViewModel.cs" />
-    <Compile Include="ApplicationWide\ViewModels\StudyViewModel.cs" />
     <Compile Include="ControlUtils\CustomDg\DataGridColumnsBehavior.cs" />
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>

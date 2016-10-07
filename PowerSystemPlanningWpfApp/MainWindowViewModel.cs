@@ -2,7 +2,6 @@
 using Ookii.Dialogs.Wpf;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
 using PowerSystemPlanningWpfApp.ApplicationWide;
-using PowerSystemPlanningWpfApp.ApplicationWide.AppModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -43,17 +42,25 @@ namespace PowerSystemPlanningWpfApp
                 {
                     _OpenedPowerSystemViewModel = value;
                     OnPropertyChanged();
-                    //Publish event
-                    _eventAggregator.GetEvent<ApplicationWide.Events.PowerSystemOpenedEvent>().Publish(OpenedPowerSystemViewModel);
+                    MyOpenDocuments.Clear();
+                    MyOpenDocuments.Add(OpenedPowerSystemViewModel);
                 }
             }
         }
 
-        public DockManagerViewModel MyDockManagerViewModel { get; private set; }
+        public ObservableCollection<BaseDocumentViewModel> MyOpenDocuments { get; private set; }
+
+        BaseDocumentViewModel _ActiveDocumentViewModel;
+        public BaseDocumentViewModel ActiveDocumentViewModel
+        {
+            get { return _ActiveDocumentViewModel; }
+            set { SetProperty<BaseDocumentViewModel>(ref _ActiveDocumentViewModel, value); }
+        }
         #endregion
 
         #region Commands
         public DelegateCommand OpenFileCommand { get; private set; }
+        public DelegateCommand SaveFileCommand { get; private set; }
         public DelegateCommand ExitCommand { get; private set; }
         public DelegateCommand NewScenarioTepCommand { get; private set; }
 
@@ -71,8 +78,8 @@ namespace PowerSystemPlanningWpfApp
             {
                 var pwsName = Path.GetFileNameWithoutExtension(dlg.FileName);
                 var folder = Path.GetDirectoryName(dlg.FileName);
-                logger.Info($"Opening power system '{pwsName}' from folder '{folder}' (file '{dlg.FileName}')");
                 OpenedPowerSystemViewModel = new PowerSysViewModel(dlg.FileName);
+                logger.Info($"Succesfully opened power system '{pwsName}' from folder '{folder}' (file '{dlg.FileName}')");
             }
         }
 
@@ -89,19 +96,27 @@ namespace PowerSystemPlanningWpfApp
 
             //Commands
             OpenFileCommand = new DelegateCommand(OpenFile);
+            SaveFileCommand = new DelegateCommand(SaveFile);
             ExitCommand = new DelegateCommand(Exit);
+            NewScenarioTepCommand = new DelegateCommand(NewScenarioTep);
 
-            //View models
-            this.MyDockManagerViewModel = new DockManagerViewModel();
+            //Avalon Dock
+            MyOpenDocuments = new ObservableCollection<BaseDocumentViewModel>();
+
             //Create new power system
-            var powerSystem = new PowerSystemPlanning.BindingModels.BaseDataBinding.PowerSystem() { Name = "Unnamed Power System" };
+            var powerSystem = new PowerSystem() { Name = "Unnamed Power System" };
             OpenedPowerSystemViewModel = new PowerSysViewModel(powerSystem);
         }
 
-        public void DockingManager_DocumentClosed(object sender, Xceed.Wpf.AvalonDock.DocumentClosedEventArgs e)
+        private void SaveFile()
         {
-            //Publish event
-            _eventAggregator.GetEvent<ApplicationWide.Events.DocumentClosedEvent>().Publish((BaseDocumentViewModel)e.Document.Content);
+            ActiveDocumentViewModel.Save();
+        }
+
+        private void NewScenarioTep()
+        {
+            var tepVm = new ScenarioEditorViewModel(OpenedPowerSystemViewModel.MyPowerSystem);
+            MyOpenDocuments.Add(tepVm);
         }
     }
 }

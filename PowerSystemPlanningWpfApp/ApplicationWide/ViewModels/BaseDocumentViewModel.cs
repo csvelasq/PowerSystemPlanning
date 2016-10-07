@@ -19,5 +19,10 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// The title of this document.
         /// </summary>
         public virtual string Title { get; }
+
+        /// <summary>
+        /// Save the content wrapped by this view-model.
+        /// </summary>
+        public abstract void Save();
     }
 }

@@ -35,6 +35,7 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
         public BindingTepScenarios(PowerSystem system) : this()
         {
             MyPowerSystem = system;
+            MyScenarios = new BindingList<BindingScenario>();
         }
 
         public void CreateStateCollection()

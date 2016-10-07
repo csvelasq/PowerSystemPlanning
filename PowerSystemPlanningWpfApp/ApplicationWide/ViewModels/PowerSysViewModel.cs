@@ -1,8 +1,6 @@
-﻿using NLog;
-using Ookii.Dialogs.Wpf;
+﻿using Ookii.Dialogs.Wpf;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
 using PowerSystemPlanningWpfApp.ApplicationWide.AppModels;
-using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using System;
@@ -21,8 +19,8 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// </summary>
         protected readonly IEventAggregator _eventAggregator;
 
-        PowerSystemDefinitionInLocalFolder _MyPowerSys;
-        public PowerSystemDefinitionInLocalFolder MyPowerSys
+        PowerSystemInLocalFolder _MyPowerSys;
+        public PowerSystemInLocalFolder MyPowerSys
         {
             get { return _MyPowerSys; }
             private set
@@ -79,7 +77,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public void Open(string xmlPath)
         {
-            MyPowerSys = new PowerSystemDefinitionInLocalFolder(xmlPath);
+            MyPowerSys = new PowerSystemInLocalFolder(xmlPath);
         }
 
         private void OpenStudy()
@@ -89,8 +87,9 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         private void NewStudy()
         {
+            //currently only TEP studies are created; other studies can be created later
             var study = MyPowerSys.NewStudy();
-            var studyVm = new StudyViewModel() { MyStudy = study };
+            var studyVm = new ScenarioEditorViewModel() { MyPowerSystem=MyPowerSys.MyPowerSystem, MyStudy = study };
             //Publish event
             _eventAggregator.GetEvent<ApplicationWide.Events.RequestDocumentOpenEvent>().Publish(studyVm);
         }
@@ -111,7 +110,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public PowerSysViewModel(PowerSystem pws) : this()
         {
-            MyPowerSys = new PowerSystemDefinitionInLocalFolder(pws);
+            MyPowerSys = new PowerSystemInLocalFolder(pws);
         }
     }
 }

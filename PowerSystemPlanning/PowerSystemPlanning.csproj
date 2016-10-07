@@ -33,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GenericParsing">
+      <HintPath>..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\08 csharp\GenericParser_bin\GenericParsing.dll</HintPath>
+    </Reference>
     <Reference Include="Gurobi65.NET">
       <HintPath>..\..\..\..\..\..\..\gurobi651\win64\bin\Gurobi65.NET.dll</HintPath>
     </Reference>
@@ -56,16 +59,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModels\PlanningBinding\BindingTepScenarios\BindingTepScenario.cs" />
     <Compile Include="BindingModels\SerializableBindableBase.cs" />
     <Compile Include="BindingModels\StateBinding\Branch\SimpleTransmissionLineState.cs" />
     <Compile Include="BindingModels\StateBinding\Nodes\NodeState.cs" />
     <Compile Include="BindingModels\StateBinding\PowerSystemElementState.cs" />
     <Compile Include="BindingModels\StateBinding\PowerSystemState.cs" />
-    <Compile Include="BindingModels\StateCollectionDataTable\StateCollectionDataTable.cs" />
-    <Compile Include="BindingModels\StateCollectionDataTable\StateDefinition.cs" />
+    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\ScenarioStateDt\CsvUtils.cs" />
+    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\ScenarioStateDt\StateCollectionDataTable.cs" />
     <Compile Include="IHaveIdAndName.cs" />
     <Compile Include="Models\Planning\InvestmentBranch\CandidateTransmissionLine.cs" />
     <Compile Include="Models\Planning\InvestmentBranch\ICandidateTransmissionLine.cs" />
+    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\BindingScenario.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\MOOScenarioTEP.cs" />
     <Compile Include="Models\Planning\State\IPowerSystemTEPState.cs" />
     <Compile Include="BindingModels\BaseDataBinding\Branch\BranchElement.cs" />
@@ -138,7 +143,7 @@
     <None Include="PowerSystemPlanningDoxy.conf" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BindingModels\PlanningBinding\" />
+    <Folder Include="Models\Planning\Scenarios\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

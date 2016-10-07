@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Events;
 using PowerSystemPlanningWpfApp.ApplicationWide.AppModels;
-using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide.Events
 {

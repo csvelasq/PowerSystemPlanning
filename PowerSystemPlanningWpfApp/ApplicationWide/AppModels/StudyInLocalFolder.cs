@@ -10,60 +10,61 @@ using System.Threading.Tasks;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide.AppModels
 {
-    public class StudyInLocalFolder : SerializableBindableBase
+    /// <summary>
+    /// Provides base logic for saving a study to a subfolder of the folder where the owning power system is saved.
+    /// </summary>
+    /// <remarks>
+    /// Override <see cref="GenericName"/>, <see cref="SaveStudy"/> and <see cref="Open"/>.
+    /// </remarks>
+    public abstract class StudyInLocalFolder : SerializableBindableBase, IPersistentStudy
     {
         /// <summary>
         /// NLog Logger for this class.
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        PowerSystemDefinitionInLocalFolder _MyOwnerPowerSys;
-        public PowerSystemDefinitionInLocalFolder MyOwnerPowerSys
+        PowerSystemInLocalFolder _MyOwnerPowerSys;
+        public PowerSystemInLocalFolder MyOwnerPowerSys
         {
-            get
-            {
-                return _MyOwnerPowerSys;
-            }
-
-            set
-            {
-                SetProperty<PowerSystemDefinitionInLocalFolder>(ref _MyOwnerPowerSys, value);
-            }
+            get { return _MyOwnerPowerSys; }
+            set { SetProperty<PowerSystemInLocalFolder>(ref _MyOwnerPowerSys, value); }
         }
 
-        TepScenarioStudy _MyTepScenarioStudy;
-        public TepScenarioStudy MyTepScenarioStudy
+        public virtual string GenericName { get; }
+
+        string _InstanceName;
+        public string InstanceName
         {
-            get { return _MyTepScenarioStudy; }
-            set { SetProperty<TepScenarioStudy>(ref _MyTepScenarioStudy, value); }
+            get { return _InstanceName; }
+            set { SetProperty<string>(ref _InstanceName, value); }
         }
 
         #region Folder & paths properties
         /// <summary>
-        /// The absolute path to the folder where this power system is saved.
+        /// The name of the Subfolder to which this study will be saved.
         /// </summary>
-        public string FolderAbsolutePath => Path.Combine(MyOwnerPowerSys.FolderAbsolutePath, MyTepScenarioStudy.InstanceName);
+        /// <remarks>
+        /// This allows for easy identification of existing studies based on naming conventions. 
+        /// Not a robust solution but enough if a limited (and known in compile-time) variety of studies can be conducted.
+        /// </remarks>
+        public string SubFolderName => $"{GenericName}__{InstanceName}";
 
         /// <summary>
-        /// The absolute path to the local XML file where this power system is saved.
+        /// The absolute path to the folder where this power system is saved.
         /// </summary>
-        public string MyXmlAbsolutePath => Path.Combine(FolderAbsolutePath, MyTepScenarioStudy.InstanceName + ".xml");
+        public string FolderAbsolutePath => Path.Combine(MyOwnerPowerSys.FolderAbsolutePath, SubFolderName);
         #endregion
 
-        public StudyInLocalFolder()
+        public StudyInLocalFolder(PowerSystemInLocalFolder owner)
         {
-
+            MyOwnerPowerSys = owner;
         }
 
-        public StudyInLocalFolder(string folderAbsolutePath) : this()
-        {
-            var file = new DirectoryInfo(folderAbsolutePath).Name;
-            var xmlFile = Path.Combine(folderAbsolutePath, file + ".xml");
-            MyTepScenarioStudy = TepScenarioStudy.OpenFromXML(xmlFile);
-            MyTepScenarioStudy.MyPowerSystem = MyPowerSys.MyPowerSystem;
-        }
-
-        public void SaveToXml()
+        #region Open&Save methods
+        /// <summary>
+        /// Save this study to <see cref="FolderAbsolutePath"/>, do not override (override <see cref="SaveStudy"/>).
+        /// </summary>
+        public void Save()
         {
             // TODO handle changes in power system's name
             //Create folder if it does not exist
@@ -72,8 +73,20 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.AppModels
                 Directory.CreateDirectory(FolderAbsolutePath);
             }
             //Save power system (overwrites if file existed)
-            MyTepScenarioStudy.SaveToXml(MyXmlAbsolutePath);
-            logger.Info($"Saved study '{MyTepScenarioStudy.InstanceName}' to '{MyXmlAbsolutePath}'.");
+            SaveStudy();
+            logger.Info($"Saved study '{InstanceName}' to '{FolderAbsolutePath}'.");
         }
+        /// <summary>
+        /// Implementation-dependent logic for saving the study.
+        /// </summary>
+        public abstract void SaveStudy();
+
+        public void Identify()
+        {
+            throw new NotImplementedException();
+        }
+
+        public abstract void Open();
+        #endregion
     }
 }

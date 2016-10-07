@@ -35,7 +35,6 @@ var searchData=
   ['statictep',['StaticTEP',['../namespace_power_system_planning_wpf_app_1_1_analysis_1_1_static_t_e_p.html',1,'PowerSystemPlanningWpfApp::Analysis']]],
   ['statictep',['StaticTEP',['../namespace_power_system_planning_wpf_app_1_1_static_t_e_p.html',1,'PowerSystemPlanningWpfApp']]],
   ['studiesbrowser',['StudiesBrowser',['../namespace_power_system_planning_wpf_app_1_1_application_wide_1_1_studies_browser.html',1,'PowerSystemPlanningWpfApp::ApplicationWide']]],
-  ['viewmodels',['ViewModels',['../namespace_power_system_planning_wpf_app_1_1_application_wide_1_1_view_models.html',1,'PowerSystemPlanningWpfApp::ApplicationWide']]],
-  ['workspacebrowser',['WorkspaceBrowser',['../namespace_power_system_planning_wpf_app_1_1_application_1_1_workspace_browser.html',1,'PowerSystemPlanningWpfApp::Application']]],
-  ['workspacebrowser',['WorkspaceBrowser',['../namespace_power_system_planning_wpf_app_1_1_application_wide_1_1_workspace_browser.html',1,'PowerSystemPlanningWpfApp::ApplicationWide']]]
+  ['workspacebrowser',['WorkspaceBrowser',['../namespace_power_system_planning_wpf_app_1_1_application_wide_1_1_workspace_browser.html',1,'PowerSystemPlanningWpfApp::ApplicationWide']]],
+  ['workspacebrowser',['WorkspaceBrowser',['../namespace_power_system_planning_wpf_app_1_1_application_1_1_workspace_browser.html',1,'PowerSystemPlanningWpfApp::Application']]]
 ];

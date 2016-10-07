@@ -1,7 +1,11 @@
 ﻿using PowerSystemPlanning.BindingModels;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios;
+using PowerSystemPlanning.BindingModels.StateCollectionDataTable;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,47 +15,42 @@ using System.Xml;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide.AppModels
 {
-    public class TepScenarioStudy : SerializableBindableBase
+    public class TepScenarioStudy : StudyInLocalFolder
     {
-        public string GenericName => "TEP under Scenarios";
+        public override string GenericName => "TEP-Scenarios";
 
-        string _InstanceName;
-        public string InstanceName
+        public BindingTepScenarios MyTepStudy { get; set; }
+
+        #region filenames
+        public string TepXmlStatesDefinitionAbsolutePath => Path.Combine(FolderAbsolutePath, InstanceName + ".xml");
+        public string TepCsvStatesDataAbsolutePath => Path.Combine(FolderAbsolutePath, InstanceName + ".csv");
+        #endregion
+
+        public TepScenarioStudy(PowerSystemInLocalFolder owner) : base(owner)
         {
-            get { return _InstanceName; }
-            set { SetProperty<string>(ref _InstanceName, value); }
         }
 
-        public double MyNum { get; set; } = 287;
-
-        public TepScenarioStudy()
+        public override void SaveStudy()
         {
-            InstanceName = "tep1";
+            /*
+             * Save input data
+             */
+            MyTepStudy.Save(TepXmlStatesDefinitionAbsolutePath,
+                TepCsvStatesDataAbsolutePath);
+            /*
+             * Save results
+             */
         }
 
-        internal void SaveToXml(string myXmlAbsolutePath)
+        public override void Open()
         {
-            var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
-            DataContractSerializer dcs = new DataContractSerializer(typeof(TepScenarioStudy), dcsSettings);
-            var xmlSettings = new XmlWriterSettings { Indent = true };
-            using (var myXmlWriter = XmlWriter.Create(myXmlAbsolutePath, xmlSettings))
-            {
-                dcs.WriteObject(myXmlWriter, this);
-            }
-        }
-
-        public static TepScenarioStudy OpenFromXML(string xmlPath)
-        {
-            var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
-            DataContractSerializer dcs = new DataContractSerializer(typeof(TepScenarioStudy), dcsSettings);
-            FileStream fs = new FileStream(xmlPath, FileMode.Open);
-            XmlDictionaryReader reader =
-            XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
-
-            //Deserialize the study
-            var deserializedStudy = (TepScenarioStudy)dcs.ReadObject(reader);
-
-            return deserializedStudy;
+            /*
+             * Open input data
+             */
+            MyTepStudy = BindingTepScenarios.Load(MyOwnerPowerSys.MyPowerSystem, TepXmlStatesDefinitionAbsolutePath, TepCsvStatesDataAbsolutePath);
+            /*
+             * Open results
+             */
         }
     }
 }

@@ -5,45 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
-             xmlns:pwsModel="clr-namespace:PowerSystemPlanning.BindingModels.StateBinding;assembly=PowerSystemPlanning"
+             xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance Type=local:StateCollectionDgEditorViewModel}">
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Left" Margin="5,0,5,5">
-            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <TextBlock Text="States" FontWeight="Bold" Margin="5,5,5,5" />
-                <localUtils:ImageTextBlock Width="370" HorizontalAlignment="Left" Margin="5,0,0,0">
-                    <localUtils:ImageTextBlock.MessageForTextBlock>
-                        First define the states in the following table. 
-                        Then press the "Edit" button to simulatenously edit all states in the right table.
-                    </localUtils:ImageTextBlock.MessageForTextBlock>
-                </localUtils:ImageTextBlock>
-                <localUtils:ImageTextButton ToolTip="Edit" Text="Edit" Margin="5,5,5,5"
-                                            Command="{Binding EditStatesCommand}" 
-                                            HorizontalAlignment="Left" VerticalAlignment="Top"
-                                            Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Edit_16x.png" />
-            </StackPanel>
-            <localUtils:CustomDataGrid ItemsSource="{Binding MyStatesDefinition}" 
-                               AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Scenario" 
-                                        Binding="{Binding ScenarioName}" 
-                                        Width="90" />
-                    <DataGridTextColumn Header="State Name" 
-                                        Binding="{Binding StateName}" 
-                                        Width="150" />
-                    <DataGridTextColumn Header="Duration (hours)" 
-                                        Binding="{Binding Duration, StringFormat=N1}" 
-                                        Width="150" />
-                </DataGrid.Columns>
-            </localUtils:CustomDataGrid>
-        </DockPanel>
-        <localUtils:CustomDataGrid ItemsSource="{Binding MyStateCollectionDataTable.DtNodesStates}" 
+             d:DesignHeight="500" d:DesignWidth="500"
+             d:DataContext="{d:DesignInstance Type=appWide:ScenarioEditorViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" >
+            <localUtils:ImageTextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="5,2,0,0">
+                <localUtils:ImageTextBlock.MessageForTextBlock>
+                    Define scenarios and states in the left. Then press the "Edit" button to simultaneously edit all scenarios and states in the right.
+                </localUtils:ImageTextBlock.MessageForTextBlock>
+            </localUtils:ImageTextBlock>
+            <localUtils:ImageTextButton ToolTip="Edit" Text="Edit"
+                                    Command="{Binding EditStatesCommand}" 
+                                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5"
+                                    Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Edit_16x.png" />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--Scenario and States definition-->
+            <local:ScenarioAndStateDefinitionControl Width="300" Grid.Column="0" />
+            <!--Bulk States data edition-->
+            <!--<GroupBox Header="States Editor" Grid.Column="1">-->
+            <localUtils:CustomDataGrid ItemsSource="{Binding dtStateData.DtNodesStates}" Grid.Column="1"
                                
-                                   AutoGenerateColumns="True" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}"
-                               
-                                   CanUserAddRows="False" CanUserDeleteRows="False">
-        </localUtils:CustomDataGrid>
-    </DockPanel>
+                                   AutoGenerateColumns="True"
+                                           CanUserAddRows="False" CanUserDeleteRows="False">
+                </localUtils:CustomDataGrid>
+            <!--</GroupBox>-->
+        </Grid>
+    </Grid>
 </UserControl>

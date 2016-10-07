@@ -19,9 +19,5 @@ namespace PowerSystemPlanning.Models.SystemState
         /// All the power system's states contained in this collection.
         /// </summary>
         IEnumerable<IPowerSystemState> MyPowerSystemStates { get; }
-        /// <summary>
-        /// The number of power system states in this collection.
-        /// </summary>
-        int NumberOfStates { get; }
     }
 }

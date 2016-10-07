@@ -8,15 +8,15 @@
         xmlns:local="clr-namespace:PowerSystemPlanningWpfApp"
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
         xmlns:pwsEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemEditor"
+        xmlns:scenEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor"
         xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
-        xmlns:appWideVm="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.ViewModels"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:dockctrl="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
         x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
         Title="Power System Planning" 
-        Height="800" Width="900" WindowState="Maximized"
+        Height="500" Width="700" WindowState="Maximized"
         Loaded="Window_Loaded"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <DockPanel LastChildFill="True">
@@ -25,8 +25,7 @@
                     VerticalAlignment="Center">
             <Menu Background="White" Margin="0,5,0,5">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" 
-                              Command="{Binding NewFileCommand}" IsEnabled="False">
+                    <MenuItem Header="_New" Command="{Binding NewFileCommand}" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/NewFile_16x.png" />
                         </MenuItem.Icon>
@@ -47,20 +46,14 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <localUtils:RecentFileList x:Name="RecentFileList" />
-                    <!--<Separator />-->
-                    <MenuItem x:Name="menubtnExit" Header="_Exit" Command="{Binding ExitCommand}">
+                    <MenuItem Header="_Exit" Command="{Binding ExitCommand}">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/CloseSolution_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="_Model">
-                    <MenuItem x:Name="menuLDC" Header="_Load Duration Curve" />
-                    <MenuItem x:Name="menuCandidateLines" Header="_Candidate Transmission Lines" />
-                </MenuItem>
-                <MenuItem Header="_Analysis">
-                    <MenuItem Header="_Optimal Power Flow" />
-                    <MenuItem Header="_Load Duration Curve OPF" />
+                <MenuItem Header="_Analysis" Command="{Binding NewScenarioTepCommand}">
+                    <MenuItem Header="_TEP Under Scenarios" />
                 </MenuItem>
             </Menu>
         </StackPanel>
@@ -75,12 +68,9 @@
                 <DataTemplate DataType="{x:Type appWide:PowerSysViewModel}">
                     <pwsEditor:PowerSystemEditorControl />
                 </DataTemplate>
-                <!--View for study-->
-                <DataTemplate DataType="{x:Type appWideVm:StudyViewModel}">
-                    <StackPanel>
-                        <TextBlock Text="Study Name:" />
-                        <TextBox Text="{Binding MyStudy.MyTepScenarioStudy.InstanceName}" />
-                    </StackPanel>
+                <!--View for scenario editor-->
+                <DataTemplate DataType="{x:Type appWide:ScenarioEditorViewModel}">
+                    <scenEditor:PowerSystemStateCollectionDgEditorControl />
                 </DataTemplate>
             </avalonDock:DockingManager.Resources>
             <avalonDock:DockingManager.LayoutItemContainerStyle>
@@ -89,15 +79,14 @@
                     <Setter Property="Title" Value="{Binding Model.Title}" />
                 </Style>
             </avalonDock:DockingManager.LayoutItemContainerStyle>
-
             <avalonDock:LayoutRoot>
                 <avalonDock:LayoutPanel Orientation="Vertical">
                     <avalonDock:LayoutPanel Orientation="Horizontal">
-                        <avalonDock:LayoutAnchorablePane DockWidth="250">
+                        <!--<avalonDock:LayoutAnchorablePane DockWidth="250">
                             <avalonDock:LayoutAnchorable Title="Test Cases">
                                 <pwsEditor:PowerSystemBrowserControl DataContext="{Binding OpenedPowerSystemViewModel}" />
                             </avalonDock:LayoutAnchorable>
-                        </avalonDock:LayoutAnchorablePane>
+                        </avalonDock:LayoutAnchorablePane>-->
                         <!--Opened documents: power systems and studies-->
                         <avalonDock:LayoutDocumentPaneGroup>
                             <avalonDock:LayoutDocumentPane/>

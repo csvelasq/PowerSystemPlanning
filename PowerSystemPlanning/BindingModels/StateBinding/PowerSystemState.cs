@@ -21,22 +21,28 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
     [DataContract()]
     public class PowerSystemState : SerializableBindableBase, IPowerSystemState
     {
+        protected string _Name;
         [DataMember()]
+        public string Name
+        {
+            get { return _Name; }
+            set { SetProperty<string>(ref _Name, value); }
+        }
+
         protected double _Duration;
+        [DataMember()]
         public double Duration
         {
             get { return _Duration; }
             set { SetProperty<double>(ref _Duration, value); }
         }
 
-        protected PowerSystem MyBindingPowerSystem;
+        public PowerSystem MyBindingPowerSystem { get; set; }
         public IPowerSystem MyPowerSystem => MyBindingPowerSystem;
 
-        [DataMember()]
         public BindingList<NodeState> BindingNodeStates { get; set; }
         public IList<INodeState> NodeStates => BindingNodeStates.Cast<INodeState>().ToList();
 
-        [DataMember()]
         public BindingList<GeneratingUnitState> BindingGeneratingUnitStates { get; set; }
         public IList<IGeneratingUnitState> GeneratingUnitStates => BindingGeneratingUnitStates.Cast<IGeneratingUnitState>().ToList();
 
@@ -45,11 +51,9 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
              where gen.IsAvailable
              select (IGeneratingUnitState)gen).ToList();
 
-        [DataMember()]
         public BindingList<InelasticLoadState> BindingInelasticLoadStates { get; set; }
         public IList<IInelasticLoadState> InelasticLoadStates => BindingInelasticLoadStates.Cast<IInelasticLoadState>().ToList();
 
-        [DataMember()]
         public BindingList<SimpleTransmissionLineState> BindingSimpleTransmissionLineStates { get; set; }
         public IList<ISimpleTransmissionLineState> SimpleTransmissionLineStates => BindingSimpleTransmissionLineStates.Cast<ISimpleTransmissionLineState>().ToList();
 
@@ -58,7 +62,20 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
              where tl.IsAvailable
              select (ISimpleTransmissionLineState)tl).ToList();
 
-        public PowerSystemState(PowerSystem system)
+        public PowerSystemState()
+        {
+        }
+
+        public PowerSystemState(PowerSystem system) : this()
+        {
+            InitializeToPowerSystem(system);
+        }
+
+        /// <summary>
+        /// Call upon initialization and after deserializing basic information (name and duration).
+        /// </summary>
+        /// <param name="system"></param>
+        public void InitializeToPowerSystem(PowerSystem system)
         {
             MyBindingPowerSystem = system;
             //Add generator states
@@ -85,6 +102,11 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
             {
                 BindingNodeStates.Add(new NodeState(this, node));
             }
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }

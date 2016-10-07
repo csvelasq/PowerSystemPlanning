@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor.ScenarioAndStateDefinitionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor"
+             xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
+             xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=appWide:ScenarioEditorViewModel}">
+    <Grid DockPanel.Dock="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+        <GroupBox Header="Scenarios" Grid.Row="0">
+            <DockPanel LastChildFill="True">
+                <localUtils:ImageTextBlock DockPanel.Dock="Top" Margin="5,2,0,0">
+                    <localUtils:ImageTextBlock.MessageForTextBlock>
+                        Define scenarios in the following table. Then select one scenario at a time, and proceed to edit states.
+                    </localUtils:ImageTextBlock.MessageForTextBlock>
+                </localUtils:ImageTextBlock>
+                <localUtils:CustomDataGrid ItemsSource="{Binding MyScenarios}" 
+                                               SelectedItem="{Binding SelectedScenario}"
+                                               AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}" Margin="2,2,2,2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Scenario Name" Binding="{Binding Name}" Width="150" />
+                        <DataGridTextColumn Header="Probability" Binding="{Binding Probability, StringFormat=p1}" />
+                    </DataGrid.Columns>
+                </localUtils:CustomDataGrid>
+            </DockPanel>
+        </GroupBox>
+        <GroupBox Header="States Definition" Grid.Row="2">
+            <DockPanel DataContext="{Binding SelectedScenario}">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <TextBlock Text="Selected Scenario:" Margin="5,5,0,0" />
+                    <TextBox Text="{Binding Name}" Width="100" Margin="5,5,0,0" />
+                </StackPanel>
+                <localUtils:ImageTextBlock DockPanel.Dock="Top" Margin="5,2,0,0">
+                    <localUtils:ImageTextBlock.MessageForTextBlock>
+                        Define the states of the currently selected scenario in the following table.
+                    </localUtils:ImageTextBlock.MessageForTextBlock>
+                </localUtils:ImageTextBlock>
+                <localUtils:CustomDataGrid ItemsSource="{Binding BindableStates}" 
+                               AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="State Name" Binding="{Binding Name}" 
+                                        Width="150" />
+                        <DataGridTextColumn Header="Duration (hours)" Binding="{Binding Duration, StringFormat=N1}" 
+                                        Width="70" />
+                    </DataGrid.Columns>
+                </localUtils:CustomDataGrid>
+            </DockPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

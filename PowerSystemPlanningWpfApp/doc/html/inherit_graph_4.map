@@ -3,6 +3,7 @@
 <area shape="rect" id="node3" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_app_models_1_1_study_in_local_folder.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.AppModels.Study\lInLocalFolder" alt="" coords="259,85,481,141"/>
 <area shape="rect" id="node4" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_app_models_1_1_tep_scenario_study.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.AppModels.TepScenarioStudy" alt="" coords="223,166,517,207"/>
 <area shape="rect" id="node5" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_base_document_view_model.html" title="Base class for view&#45;models of a document (e.g. a power system or a specific study) ..." alt="" coords="234,231,506,273"/>
-<area shape="rect" id="node6" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_power_sys_view_model.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.PowerSysViewModel" alt="" coords="565,194,808,235"/>
-<area shape="rect" id="node7" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_view_models_1_1_study_view_model.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.ViewModels.Study\lViewModel" alt="" coords="573,260,801,316"/>
+<area shape="rect" id="node6" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_power_sys_view_model.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.PowerSysViewModel" alt="" coords="565,198,808,239"/>
+<area shape="rect" id="node7" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_study_view_model.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.StudyViewModel" alt="" coords="578,263,795,305"/>
+<area shape="rect" id="node8" href="$class_power_system_planning_wpf_app_1_1_application_wide_1_1_scenario_editor_view_model.html" title="PowerSystemPlanningWpfApp.\lApplicationWide.ScenarioEditor\lViewModel" alt="" coords="856,256,1061,312"/>
 </map>

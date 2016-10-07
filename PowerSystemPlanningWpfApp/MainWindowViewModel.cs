@@ -55,6 +55,7 @@ namespace PowerSystemPlanningWpfApp
         #region Commands
         public DelegateCommand OpenFileCommand { get; private set; }
         public DelegateCommand ExitCommand { get; private set; }
+        public DelegateCommand NewScenarioTepCommand { get; private set; }
 
         private void OpenFile()
         {

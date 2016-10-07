@@ -20,7 +20,7 @@ namespace PowerSystemPlanning.Models.SystemState
         /// The duration (hours) this state is valid.
         /// </summary>
         double Duration { get; set; }
-
+        string Name { get; set; }
         IList<INodeState> NodeStates { get; }
         /// <summary>
         /// The state of each generating unit in this power system.

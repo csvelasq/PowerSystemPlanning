@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['main',['Main',['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()'],['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()'],['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()']]],
+  ['main',['Main',['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()'],['../class_power_system_planning_wpf_app_1_1_app.html#aa23fe02d7267383953638c68a677eea8',1,'PowerSystemPlanningWpfApp.App.Main()']]],
   ['mainwindow',['MainWindow',['../class_power_system_planning_wpf_app_1_1_main_window.html',1,'PowerSystemPlanningWpfApp']]],
   ['mainwindowviewmodel',['MainWindowViewModel',['../class_power_system_planning_wpf_app_1_1_main_window_view_model.html',1,'PowerSystemPlanningWpfApp']]],
   ['menuclickeventargs',['MenuClickEventArgs',['../class_power_system_planning_wpf_app_1_1_control_utils_1_1_recent_file_list_1_1_menu_click_event_args.html',1,'PowerSystemPlanningWpfApp::ControlUtils::RecentFileList']]],

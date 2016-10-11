@@ -1,6 +1,7 @@
 var searchData=
 [
   ['bindablepowersystem',['BindablePowerSystem',['../class_power_system_planning_1_1_binding_models_1_1_planning_binding_1_1_binding_scenarios_1_1_binding_scenario.html#adb9930be07435387231feb61cb44f615',1,'PowerSystemPlanning::BindingModels::PlanningBinding::BindingScenarios::BindingScenario']]],
+  ['bindablestates',['BindableStates',['../class_power_system_planning_1_1_binding_models_1_1_planning_binding_1_1_binding_scenarios_1_1_binding_scenario.html#ad900d1d2fa4c209bc75f8c4c5140cf1a',1,'PowerSystemPlanning::BindingModels::PlanningBinding::BindingScenarios::BindingScenario']]],
   ['bindinggeneratingunits',['BindingGeneratingUnits',['../class_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_power_system.html#adc3c17190e8dea94fbe0c321176514c0',1,'PowerSystemPlanning::BindingModels::BaseDataBinding::PowerSystem']]],
   ['bindinginelasticloads',['BindingInelasticLoads',['../class_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_power_system.html#a2f7aa4154df87a46b2d21b15234082a6',1,'PowerSystemPlanning::BindingModels::BaseDataBinding::PowerSystem']]],
   ['bindingnodes',['BindingNodes',['../class_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_power_system.html#aa51a600b58f4c79b46d48f9b7bdf1833',1,'PowerSystemPlanning::BindingModels::BaseDataBinding::PowerSystem']]],

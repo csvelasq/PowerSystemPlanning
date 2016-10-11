@@ -72,7 +72,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Ookii.Dialogs.Wpf">
-      <HintPath>..\..\..\..\Documents\cs_vsExamples\Ookii.Dialogs\Ookii.Dialogs.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\03 wpf\Ookii.Dialogs\Ookii.Dialogs.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
@@ -111,7 +111,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\03 wpf\AvalonDockMyBuild\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <HintPath>..\..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\03 wpf\AvalonDockMyBuild\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
     <Reference Include="Xceed.Wpf.DataGrid, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
@@ -151,7 +151,7 @@
     <Compile Include="Analysis\ScenarioTEP\Enumerate\ScenarioTEPEnumerateControl.xaml.cs">
       <DependentUpon>ScenarioTEPEnumerateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectControl.xaml.cs">
+    <Compile Include="Analysis\ScenarioTEP\BruteForcePareto\ScenarioTEPLDCInspectControl.xaml.cs">
       <DependentUpon>ScenarioTEPLDCInspectControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectWindow.xaml.cs">
@@ -171,7 +171,9 @@
     <Compile Include="ApplicationWide\ViewModels\BaseDocumentViewModel.cs" />
     <Compile Include="ApplicationWide\Events\PowerSystemCreatedEvent.cs" />
     <Compile Include="ApplicationWide\ViewModels\PowerSysViewModel.cs" />
-    <Compile Include="ApplicationWide\ViewModels\ScenarioEditorViewModel.cs" />
+    <Compile Include="ApplicationWide\ViewModels\Tep\CandidateTransmissionLinesEditorViewModel.cs" />
+    <Compile Include="ApplicationWide\ViewModels\Tep\ScenarioEditorViewModel.cs" />
+    <Compile Include="ApplicationWide\ViewModels\Tep\ScenarioTepSetupViewModel.cs" />
     <Compile Include="ControlUtils\CustomDg\DataGridColumnsBehavior.cs" />
     <Compile Include="ControlUtils\ImageTextBlock.xaml.cs">
       <DependentUpon>ImageTextBlock.xaml</DependentUpon>
@@ -214,7 +216,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Analysis\ScenarioTEP\ScenarioTEPLDCInspectControl.xaml">
+    <Page Include="Analysis\ScenarioTEP\BruteForcePareto\ScenarioTEPLDCInspectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,13 +306,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Model\PowerSystemStateEditor\StateSummaryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\ScenarioTep\CandidateLinesEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\ScenarioTep\ScenarioTepSetupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="ApplicationWide\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Model\PowerSystemEditor\PowerSystemBrowserControl.xaml.cs">
       <DependentUpon>PowerSystemBrowserControl.xaml</DependentUpon>
     </Compile>
@@ -328,6 +342,15 @@
     </Compile>
     <Compile Include="Model\PowerSystemStateEditor\ScenarioAndStateDefinitionControl.xaml.cs">
       <DependentUpon>ScenarioAndStateDefinitionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PowerSystemStateEditor\StateSummaryControl.xaml.cs">
+      <DependentUpon>StateSummaryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ScenarioTep\CandidateLinesEditorControl.xaml.cs">
+      <DependentUpon>CandidateLinesEditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ScenarioTep\ScenarioTepSetupControl.xaml.cs">
+      <DependentUpon>ScenarioTepSetupControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

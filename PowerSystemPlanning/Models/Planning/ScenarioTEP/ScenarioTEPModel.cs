@@ -32,7 +32,7 @@ namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
                     _MyCandidateTransmissionLines.AddingNew += (sender, e) =>
                     {
                         var id = MyScenarios[0].MyPowerSystem.TransmissionLines.Count + MyCandidateTransmissionLines.Count;
-                        e.NewObject = new CandidateTransmissionLine(MyScenarios[0].MyPowerSystem);
+                        //e.NewObject = new CandidateTransmissionLine(MyScenarios[0].MyPowerSystem);
                     };
                     NotifyPropertyChanged();
                 }

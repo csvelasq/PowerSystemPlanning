@@ -15,10 +15,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using PowerSystemPlanningWpfApp.ApplicationWide.Events;
 
 namespace PowerSystemPlanningWpfApp
 {
-
     public class MainWindowViewModel : BindableBase
     {
         /// <summary>
@@ -32,7 +32,9 @@ namespace PowerSystemPlanningWpfApp
         protected readonly IEventAggregator _eventAggregator;
 
         #region View Models
+
         PowerSysViewModel _OpenedPowerSystemViewModel;
+
         public PowerSysViewModel OpenedPowerSystemViewModel
         {
             get { return _OpenedPowerSystemViewModel; }
@@ -43,7 +45,7 @@ namespace PowerSystemPlanningWpfApp
                     _OpenedPowerSystemViewModel = value;
                     OnPropertyChanged();
                     MyOpenDocuments.Clear();
-                    MyOpenDocuments.Add(OpenedPowerSystemViewModel);
+                    OnDocumentOpened(OpenedPowerSystemViewModel);
                 }
             }
         }
@@ -51,18 +53,23 @@ namespace PowerSystemPlanningWpfApp
         public ObservableCollection<BaseDocumentViewModel> MyOpenDocuments { get; private set; }
 
         BaseDocumentViewModel _ActiveDocumentViewModel;
+
         public BaseDocumentViewModel ActiveDocumentViewModel
         {
             get { return _ActiveDocumentViewModel; }
             set { SetProperty<BaseDocumentViewModel>(ref _ActiveDocumentViewModel, value); }
         }
+
         #endregion
 
         #region Commands
+
         public DelegateCommand OpenFileCommand { get; private set; }
         public DelegateCommand SaveFileCommand { get; private set; }
         public DelegateCommand ExitCommand { get; private set; }
+        public DelegateCommand NewScenarioOpfCommand { get; private set; }
         public DelegateCommand NewScenarioTepCommand { get; private set; }
+        public DelegateCommand OpenScenarioTepCommand { get; private set; }
 
         private void OpenFile()
         {
@@ -72,40 +79,33 @@ namespace PowerSystemPlanningWpfApp
             dlg.DefaultExt = ".xml";
             dlg.Filter = "XML Files (.xml)|*.xml";
             // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
+            bool? result = dlg.ShowDialog();
             // Get the selected file name and display in a TextBox 
             if (result == true)
             {
-                var pwsName = Path.GetFileNameWithoutExtension(dlg.FileName);
-                var folder = Path.GetDirectoryName(dlg.FileName);
-                OpenedPowerSystemViewModel = new PowerSysViewModel(dlg.FileName);
-                logger.Info($"Succesfully opened power system '{pwsName}' from folder '{folder}' (file '{dlg.FileName}')");
+                OpenPowerSystemFile(dlg.FileName);
             }
         }
 
-        private void Exit()
+        private bool OpenPowerSystemFile(string path)
         {
-            logger.Info($"Shutting down...");
-            System.Windows.Application.Current.Shutdown();
-        }
-        #endregion
-
-        public MainWindowViewModel()
-        {
-            _eventAggregator = ApplicationService.Instance.EventAggregator;
-
-            //Commands
-            OpenFileCommand = new DelegateCommand(OpenFile);
-            SaveFileCommand = new DelegateCommand(SaveFile);
-            ExitCommand = new DelegateCommand(Exit);
-            NewScenarioTepCommand = new DelegateCommand(NewScenarioTep);
-
-            //Avalon Dock
-            MyOpenDocuments = new ObservableCollection<BaseDocumentViewModel>();
-
-            //Create new power system
-            var powerSystem = new PowerSystem() { Name = "Unnamed Power System" };
-            OpenedPowerSystemViewModel = new PowerSysViewModel(powerSystem);
+            try
+            {
+                var pwsName = Path.GetFileNameWithoutExtension(path);
+                var folder = Path.GetDirectoryName(path);
+                OpenedPowerSystemViewModel = new PowerSysViewModel(path);
+                //log opened file and persiste last opened file
+                logger.Info(
+                    $"Succesfully opened power system '{pwsName}' from folder '{folder}' (file '{path}')");
+                Properties.Settings.Default.LastOpenedPowerSystem = path;
+                Properties.Settings.Default.Save();
+                return true;
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, $"Error opening power system in file '{path}'.");
+                return false;
+            }
         }
 
         private void SaveFile()
@@ -113,10 +113,60 @@ namespace PowerSystemPlanningWpfApp
             ActiveDocumentViewModel.Save();
         }
 
-        private void NewScenarioTep()
+        private void Exit()
+        {
+            logger.Info($"Shutting down...");
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void NewScenarioOpf()
         {
             var tepVm = new ScenarioEditorViewModel(OpenedPowerSystemViewModel.MyPowerSystem);
             MyOpenDocuments.Add(tepVm);
+        }
+
+        private void NewScenarioTep()
+        {
+            var tepVm = new ScenarioTepSetupViewModel(OpenedPowerSystemViewModel.MyPowerSystem);
+            MyOpenDocuments.Add(tepVm);
+        }
+
+        private void OpenScenarioTep()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        public MainWindowViewModel()
+        {
+            _eventAggregator = ApplicationService.Instance.EventAggregator;
+            _eventAggregator.GetEvent<RequestDocumentOpenEvent>().Subscribe(OnDocumentOpened);
+
+            //Commands
+            OpenFileCommand = new DelegateCommand(OpenFile);
+            SaveFileCommand = new DelegateCommand(SaveFile);
+            ExitCommand = new DelegateCommand(Exit);
+            NewScenarioOpfCommand = new DelegateCommand(NewScenarioOpf);
+            NewScenarioTepCommand = new DelegateCommand(NewScenarioTep);
+            OpenScenarioTepCommand = new DelegateCommand(OpenScenarioTep);
+
+            //Avalon Dock
+            MyOpenDocuments = new ObservableCollection<BaseDocumentViewModel>();
+
+            //Try to open last opened power system
+            var lastPws = Properties.Settings.Default.LastOpenedPowerSystem;
+            if (!OpenPowerSystemFile(lastPws))
+            {
+                //Create new power system
+                var powerSystem = new PowerSystem() { Name = "Unnamed Power System" };
+                OpenedPowerSystemViewModel = new PowerSysViewModel(powerSystem);
+                logger.Info("New power system created since last opened power system could not be opened.");
+            }
+        }
+
+        private void OnDocumentOpened(BaseDocumentViewModel document)
+        {
+            MyOpenDocuments.Add(document);
         }
     }
 }

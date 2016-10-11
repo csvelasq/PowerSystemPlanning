@@ -97,7 +97,30 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
         /// </summary>
         public void CommitStateCollectionToPowerSystemState()
         {
-            throw new NotImplementedException();
+            foreach (DataRow row in DtNodesStates.Rows)
+            {
+                foreach (var scenario in MyScenariosAndStates)
+                {
+                    foreach (var state in scenario.MyPowerSystemStates)
+                    {
+                        var node = state.NodeStates.First(x => x.UnderlyingNode.Name == (string)row[NodeNameColumn]);
+                        //load
+                        if (node.InelasticLoadsStates.Count > 0)
+                        {
+                            var load = node.InelasticLoadsStates.First();
+                            load.Consumption = (double)row[String.Format(ConsumptionColumn, scenario, state)];
+                        }
+                        //generating capacity
+                        if (node.GeneratingUnitsStates.Count > 0)
+                        {
+                            var gen = node.GeneratingUnitsStates.First();
+                            gen.IsAvailable = true;
+                            gen.AvailableCapacity = (double)row[String.Format(GeneratingCapacityColumn, scenario, state)];
+                            gen.MarginalCost = (double)row[String.Format(MarginalCostColumn, scenario, state)];
+                        }
+                    }
+                }
+            }
         }
 
         public void SaveDtToCsv(string csvAbsolutePath)

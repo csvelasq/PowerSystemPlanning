@@ -12,30 +12,48 @@ using System.Xml;
 
 namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
 {
-    public class BindingTepScenarios : SerializableBindableBase
+    /// <summary>
+    /// A collection of scenarios bindable to GUI.
+    /// </summary>
+    [DataContract()]
+    public class BindingScenarioCollection : SerializableBindableBase
     {
+        /// <summary>
+        /// The underlying power system.
+        /// </summary>
+        [DataMember()]
         public PowerSystem MyPowerSystem { get; protected set; }
 
         BindingList<BindingScenario> _MyScenarios;
+        /// <summary>
+        /// The set of scenarios and states of the power system.
+        /// </summary>
+        [DataMember()]
         public BindingList<BindingScenario> MyScenarios
         {
             get { return _MyScenarios; }
             set { SetProperty<BindingList<BindingScenario>>(ref _MyScenarios, value); }
         }
 
+        public BindingScenarioCollection() { }
+
+        public BindingScenarioCollection(PowerSystem system) : this()
+        {
+            MyPowerSystem = system;
+            MyScenarios = new BindingList<BindingScenario>();
+            MyScenarios.Add(new BindingScenario("Scen1", system));
+            MyScenarios.Add(new BindingScenario("Scen2", system));
+        }
+
+        #region Easy Edition
         StateCollectionDataTable _MyStateCollectionDt;
+        /// <summary>
+        /// An object useful for simultaneously editing all scenarios and states.
+        /// </summary>
         public StateCollectionDataTable MyStateCollectionDt
         {
             get { return _MyStateCollectionDt; }
             set { SetProperty<StateCollectionDataTable>(ref _MyStateCollectionDt, value); }
-        }
-
-        public BindingTepScenarios() { }
-
-        public BindingTepScenarios(PowerSystem system) : this()
-        {
-            MyPowerSystem = system;
-            MyScenarios = new BindingList<BindingScenario>();
         }
 
         public void CreateStateCollection()
@@ -47,6 +65,7 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
         {
             MyStateCollectionDt.CommitStateCollectionToPowerSystemState();
         }
+        #endregion
 
         /// <summary>
         /// Saves this study to a local folder.
@@ -67,7 +86,7 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
             MyStateCollectionDt.SaveDtToCsv(csvAbsolutePath);
         }
 
-        public static BindingTepScenarios Load(PowerSystem system, string xmlAbsolutePath, string csvAbsolutePath)
+        public static BindingScenarioCollection LoadFromFolder(PowerSystem system, string xmlAbsolutePath, string csvAbsolutePath)
         {
             //Opens the scenarios/states definition
             var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
@@ -77,7 +96,7 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
             XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
             var myScenarios = (BindingList<BindingScenario>)dcs.ReadObject(reader);
             //Create the tep object
-            var tep = new BindingTepScenarios(system);
+            var tep = new BindingScenarioCollection(system);
             //Open the datatable data on states
             tep.CreateStateCollection();
             tep.MyStateCollectionDt.LoadDtFromCsv(csvAbsolutePath);

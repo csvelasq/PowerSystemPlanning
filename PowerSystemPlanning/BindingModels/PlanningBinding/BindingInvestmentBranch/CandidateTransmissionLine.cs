@@ -2,11 +2,15 @@
 using PowerSystemPlanning.Models.SystemBaseData;
 using PowerSystemPlanning.Models.SystemBaseData.Branch;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
+using PowerSystemPlanning.BindingModels.BaseDataBinding.Branch;
 
 namespace PowerSystemPlanning.Models.Planning.InvestmentBranch
 {
     public class CandidateTransmissionLine : PowerSystemElement, ICandidateTransmissionLine
     {
+        public SimpleTransmissionLine BindableTransmissionLine { get; protected set; }
+        public ISimpleTransmissionLine UnderlyingSimpleTransmissionLine => BindableTransmissionLine;
+
         protected double _InvestmentCost;
         public double InvestmentCost
         {
@@ -14,11 +18,10 @@ namespace PowerSystemPlanning.Models.Planning.InvestmentBranch
             set { SetProperty<double>(ref _InvestmentCost, value); }
         }
 
-        public ISimpleTransmissionLine UnderlyingSimpleTransmissionLine
-        { get; protected set; }
-        
-        public CandidateTransmissionLine(PowerSystem pws)
-            : base(pws, pws.GeneratingUnits.Count)
-        { }
+        public CandidateTransmissionLine(SimpleTransmissionLine transmissionLine)
+            : base(transmissionLine.MyBindingPowerSystem, transmissionLine.Id)
+        {
+            BindableTransmissionLine = transmissionLine;
+        }
     }
 }

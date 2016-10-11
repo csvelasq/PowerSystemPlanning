@@ -18,10 +18,16 @@ using Prism.Mvvm;
 
 namespace PowerSystemPlanning.BindingModels.StateBinding
 {
+    /// <summary>
+    /// A particular state of a power system.
+    /// </summary>
     [DataContract()]
     public class PowerSystemState : SerializableBindableBase, IPowerSystemState
     {
         protected string _Name;
+        /// <summary>
+        /// Name of this state.
+        /// </summary>
         [DataMember()]
         public string Name
         {
@@ -30,6 +36,9 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
         }
 
         protected double _Duration;
+        /// <summary>
+        /// The duration (hours) of this state.
+        /// </summary>
         [DataMember()]
         public double Duration
         {
@@ -37,13 +46,35 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
             set { SetProperty<double>(ref _Duration, value); }
         }
 
+        [DataMember()]
         public PowerSystem MyBindingPowerSystem { get; set; }
+
+        [DataMember()]
+        public BindingList<NodeState> BindingNodeStates { get; set; }
+
+        [DataMember()]
+        public BindingList<GeneratingUnitState> BindingGeneratingUnitStates { get; set; }
+
+        [DataMember()]
+        public BindingList<InelasticLoadState> BindingInelasticLoadStates { get; set; }
+
+        [DataMember()]
+        public BindingList<SimpleTransmissionLineState> BindingSimpleTransmissionLineStates { get; set; }
+
+        #region Summary Properties
+        public double PeakLoad => (from load in BindingInelasticLoadStates
+                                   select load.Consumption).Max();
+        public double TotalLoad => (from load in BindingInelasticLoadStates
+                                    select load.Consumption * Duration).Sum();
+        public double AvailableGeneratingCapacity => (from gen in BindingGeneratingUnitStates
+                                                      select gen.AvailableCapacity).Sum();
+        #endregion
+
+        #region IPowerSystemState implementation
         public IPowerSystem MyPowerSystem => MyBindingPowerSystem;
 
-        public BindingList<NodeState> BindingNodeStates { get; set; }
         public IList<INodeState> NodeStates => BindingNodeStates.Cast<INodeState>().ToList();
 
-        public BindingList<GeneratingUnitState> BindingGeneratingUnitStates { get; set; }
         public IList<IGeneratingUnitState> GeneratingUnitStates => BindingGeneratingUnitStates.Cast<IGeneratingUnitState>().ToList();
 
         public IList<IGeneratingUnitState> ActiveGeneratingUnitStates =>
@@ -51,16 +82,15 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
              where gen.IsAvailable
              select (IGeneratingUnitState)gen).ToList();
 
-        public BindingList<InelasticLoadState> BindingInelasticLoadStates { get; set; }
         public IList<IInelasticLoadState> InelasticLoadStates => BindingInelasticLoadStates.Cast<IInelasticLoadState>().ToList();
 
-        public BindingList<SimpleTransmissionLineState> BindingSimpleTransmissionLineStates { get; set; }
         public IList<ISimpleTransmissionLineState> SimpleTransmissionLineStates => BindingSimpleTransmissionLineStates.Cast<ISimpleTransmissionLineState>().ToList();
 
         public IList<ISimpleTransmissionLineState> ActiveSimpleTransmissionLineStates =>
             (from tl in BindingSimpleTransmissionLineStates
              where tl.IsAvailable
              select (ISimpleTransmissionLineState)tl).ToList();
+        #endregion
 
         public PowerSystemState()
         {

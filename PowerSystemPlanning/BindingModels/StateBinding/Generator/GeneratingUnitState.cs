@@ -21,24 +21,24 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Generator
 
         public override IPowerSystemElement MyPowerSystemElement => BindingUnderlyingGeneratingUnit;
 
-        [DataMember()]
         protected double _AvailableCapacity;
+        [DataMember()]
         public double AvailableCapacity
         {
             get { return _AvailableCapacity; }
             set { SetProperty<double>(ref _AvailableCapacity, value); }
         }
 
-        [DataMember()]
         protected double _MarginalCost;
+        [DataMember()]
         public double MarginalCost
         {
             get { return _MarginalCost; }
             set { SetProperty<double>(ref _MarginalCost, value); }
         }
 
-        [DataMember()]
         protected bool _IsAvailable = true;
+        [DataMember()]
         public bool IsAvailable
         {
             get { return _IsAvailable; }

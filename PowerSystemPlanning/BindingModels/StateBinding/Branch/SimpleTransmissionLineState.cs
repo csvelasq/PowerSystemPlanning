@@ -19,8 +19,8 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Branch
 
         public override IPowerSystemElement MyPowerSystemElement => UnderlyingTransmissionLine;
 
-        [DataMember()]
         protected bool _IsAvailable = true;
+        [DataMember()]
         public bool IsAvailable
         {
             get { return _IsAvailable; }
@@ -40,8 +40,8 @@ namespace PowerSystemPlanning.BindingModels.StateBinding.Branch
             }
         }
 
-        [DataMember()]
         protected double _AvailableThermalCapacity;
+        [DataMember()]
         public double AvailableThermalCapacity
         {
             get { return _AvailableThermalCapacity; }

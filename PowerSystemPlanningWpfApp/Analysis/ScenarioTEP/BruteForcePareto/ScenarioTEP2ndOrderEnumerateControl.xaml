@@ -11,18 +11,23 @@
              d:DataContext="{d:DesignInstance local:ScenarioTEPParetoViewModel}">
     <DockPanel LastChildFill="True">
         <!--Number of possible alternatives-->
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"  Margin="0,0,0,5">
-            <TextBlock Text="{Binding MyScenarioTEPModel.TransmissionExpansionPlansCount}" />
-            <TextBlock Text=" possible transmission expansion plans." />
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="2,2,2,2">
+            <TextBlock >
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} possible transmission expansion plans.">
+                        <Binding Path="MyScenarioTEPModel.TransmissionExpansionPlansCount" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
         </StackPanel>
         <!--Action buttons: build pareto-frontier-->
-        <Button Command="{Binding BuildParetoFrontier}" HorizontalAlignment="Left" DockPanel.Dock="Top">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Run_32x.png" Width="16" />
-                <TextBlock Margin="5,0,5,0">Build Exact Pareto Frontier</TextBlock>
-            </StackPanel>
-        </Button>
-        <localUtils:ImageTextBlock MessageForTextBlock="Building the pareto-frontier by exhaustive enumeration is computationally expensive." Margin="0,5,0,5" DockPanel.Dock="Top" />
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <localUtils:ImageTextButton Command="{Binding BuildParetoFrontier}" 
+                                    ToolTip="Build exact Pareto front"
+                                    Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Run_32x.png"
+                                    HorizontalAlignment="Left" Margin="2,2,2,2" />
+            <localUtils:ImageTextBlock MessageForTextBlock="Building the pareto-frontier by exhaustive enumeration is computationally expensive." Margin="2,2,2,2" VerticalAlignment="Center" />
+        </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

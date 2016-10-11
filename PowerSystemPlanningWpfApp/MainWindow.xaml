@@ -10,37 +10,43 @@
         xmlns:pwsEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemEditor"
         xmlns:scenEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor"
         xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Terminal="clr-namespace:Simple.Wpf.Terminal;assembly=Simple.Wpf.Terminal"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:dockctrl="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
+        xmlns:scenarioTep="clr-namespace:PowerSystemPlanningWpfApp.Model.ScenarioTep"
         x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
         Title="Power System Planning" 
         Height="500" Width="700" WindowState="Maximized"
         Loaded="Window_Loaded"
-        d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}">
+    <Window.CommandBindings>
+        <!--<CommandBinding Command="New" Executed="y"  CanExecute="x" />-->
+        <CommandBinding Command="Open" Executed="OnOpenExecuted" />
+        <CommandBinding Command="Save" Executed="OnSaveExecuted" />
+    </Window.CommandBindings>
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top"  
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Center">
-            <Menu Background="White" Margin="0,5,0,5">
+            <Menu Margin="0,5,0,5">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" Command="{Binding NewFileCommand}" IsEnabled="False">
+                    <MenuItem Header="_New" Command="ApplicationCommands.New" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/NewFile_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Open" Command="{Binding OpenFileCommand}" >
+                    <MenuItem Header="_Open" Command="ApplicationCommands.Open" >
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/Open_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Save" Command="{Binding SaveFileCommand}">
+                    <MenuItem Header="_Save" Command="ApplicationCommands.Save">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/Save_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Save As" Command="{Binding SaveFileAsCommand}" IsEnabled="False">
+                    <MenuItem Header="_Save As" Command="ApplicationCommands.SaveAs" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/SaveAs_16x.png" />
                         </MenuItem.Icon>
@@ -53,7 +59,11 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Analysis">
-                    <MenuItem Header="_TEP Under Scenarios" Command="{Binding NewScenarioTepCommand}" />
+                    <MenuItem Header="_OPF under Scenarios" Command="{Binding NewScenarioOpfCommand}" />
+                    <MenuItem Header="_TEP under Scenarios">
+                        <MenuItem Header="_New" Command="{Binding NewScenarioTepCommand}" />
+                        <MenuItem Header="_Open Existing" Command="{Binding OpenScenarioTepCommand}" />
+                    </MenuItem>
                 </MenuItem>
             </Menu>
         </StackPanel>
@@ -70,6 +80,10 @@
                 <!--View for scenario editor-->
                 <DataTemplate DataType="{x:Type appWide:ScenarioEditorViewModel}">
                     <scenEditor:PowerSystemStateCollectionDgEditorControl />
+                </DataTemplate>
+                <!--View for scenario tep setup-->
+                <DataTemplate DataType="{x:Type appWide:ScenarioTepSetupViewModel}">
+                    <scenarioTep:ScenarioTepSetupControl />
                 </DataTemplate>
             </avalonDock:DockingManager.Resources>
             <avalonDock:DockingManager.LayoutItemContainerStyle>

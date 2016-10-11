@@ -9,7 +9,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Simple Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <properties:Settings x:Key="Settings" />
             <Style x:Key="CellRightAlign">
                 <Setter Property="Control.HorizontalAlignment" Value="Right" />
             </Style>

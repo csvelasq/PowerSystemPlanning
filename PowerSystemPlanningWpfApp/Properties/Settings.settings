@@ -5,7 +5,7 @@
     <Setting Name="Setting" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Workspace" Type="System.String" Scope="User">
+    <Setting Name="LastOpenedPowerSystem" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

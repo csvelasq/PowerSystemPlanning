@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PowerSystemPlanning.BindingModels.StateBinding;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide
 {
@@ -23,7 +24,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public PowerSystem MyPowerSystem { get; set; }
 
-        public BindingTepScenarios MyTepStudy { get; set; }
+        public BindingScenarioCollection MyTepStudy { get; set; }
 
         #region Basic UI Properties
         public override string Title => "Scenarios";
@@ -33,6 +34,13 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         {
             get { return _SelectedScenario; }
             set { SetProperty<BindingScenario>(ref _SelectedScenario, value); }
+        }
+
+        PowerSystemState _SelectedState;
+        public PowerSystemState SelectedState
+        {
+            get { return _SelectedState; }
+            set { SetProperty<PowerSystemState>(ref _SelectedState, value); }
         }
         #endregion
 
@@ -58,7 +66,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         public override void SaveToFolder()
         {
             MyTepStudy.Save(TepXmlStatesDefinitionAbsolutePath, TepCsvStatesDataAbsolutePath);
-            logger.Info($"Tep under scenarios saved to '{FolderAbsolutePath}'.");
+            logger.Info($"Scenarios saved to '{FolderAbsolutePath}'.");
         }
 
         //public override void Open()
@@ -76,7 +84,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         public ScenarioEditorViewModel(PowerSystem system)
         {
             MyPowerSystem = system;
-            MyTepStudy = new BindingTepScenarios(MyPowerSystem);
+            MyTepStudy = new BindingScenarioCollection(MyPowerSystem);
 
             //Commands
             EditStatesCommand = new DelegateCommand(EditStates);

@@ -22,6 +22,7 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios
         /// <summary>
         /// The underlying power system data for this scenario
         /// </summary>
+        [DataMember()]
         public PowerSystem BindablePowerSystem
         {
             get { return _BindablePowerSystem; }
@@ -37,6 +38,8 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios
                 }
             }
         }
+
+        public IPowerSystem MyPowerSystem => BindablePowerSystem;
 
         string _Name;
         /// <summary>
@@ -54,9 +57,10 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios
         [DataMember()]
         public double Probability { get; set; } = 0;
 
-        public IPowerSystem MyPowerSystem => BindablePowerSystem;
-
         BindingList<PowerSystemState> _BindableStates;
+        /// <summary>
+        /// The set of states this scenario is composed of.
+        /// </summary>
         [DataMember()]
         public BindingList<PowerSystemState> BindableStates
         {
@@ -65,6 +69,15 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios
         }
 
         public IEnumerable<IPowerSystemState> MyPowerSystemStates => BindableStates;
+
+        #region Summary Properties
+        public double PeakLoad => (from state in BindableStates
+                                   select state.PeakLoad).Max();
+        public double TotalLoad => (from state in BindableStates
+                                    select state.TotalLoad).Sum();
+        public double AvailableGeneratingCapacity => (from state in BindableStates
+                                                      select state.AvailableGeneratingCapacity).Sum();
+        #endregion
 
         public BindingScenario()
         {

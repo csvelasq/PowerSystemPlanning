@@ -38,12 +38,12 @@ namespace PowerSystemPlanningWpfApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Workspace {
+        public string LastOpenedPowerSystem {
             get {
-                return ((string)(this["Workspace"]));
+                return ((string)(this["LastOpenedPowerSystem"]));
             }
             set {
-                this["Workspace"] = value;
+                this["LastOpenedPowerSystem"] = value;
             }
         }
     }

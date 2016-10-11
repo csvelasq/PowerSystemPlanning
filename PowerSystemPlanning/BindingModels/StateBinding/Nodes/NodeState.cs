@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using PowerSystemPlanning.BindingModels.StateBinding.Generator;
 using PowerSystemPlanning.Models.SystemBaseData;
 using PowerSystemPlanning.Models.SystemBaseData.Nodes;
@@ -15,8 +16,10 @@ using PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes;
 
 namespace PowerSystemPlanning.BindingModels.StateBinding.Nodes
 {
+    [DataContract()]
     public class NodeState : PowerSystemElementState, INodeState
     {
+        [DataMember()]
         public Node BindingUnderlyingNode { get; protected set; }
         public INode UnderlyingNode => BindingUnderlyingNode;
         public override IPowerSystemElement MyPowerSystemElement => BindingUnderlyingNode;

@@ -8,6 +8,7 @@ var searchData=
   ['baseopfresultelement',['BaseOPFResultElement',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_opf_results_1_1_base_o_p_f_result_element.html',1,'PowerSystemPlanning::Solvers::OPF::OpfResults']]],
   ['baseoptimizationpowersystemsolver',['BaseOptimizationPowerSystemSolver',['../class_power_system_planning_1_1_solvers_1_1_g_r_b_optimization_1_1_base_optimization_power_system_solver.html',1,'PowerSystemPlanning::Solvers::GRBOptimization']]],
   ['bindingscenario',['BindingScenario',['../class_power_system_planning_1_1_binding_models_1_1_planning_binding_1_1_binding_scenarios_1_1_binding_scenario.html',1,'PowerSystemPlanning::BindingModels::PlanningBinding::BindingScenarios']]],
-  ['bindingtepscenarios',['BindingTepScenarios',['../class_power_system_planning_1_1_binding_models_1_1_planning_binding_1_1_binding_tep_scenarios_1_1_binding_tep_scenarios.html',1,'PowerSystemPlanning::BindingModels::PlanningBinding::BindingTepScenarios']]],
+  ['bindingscenariocollection',['BindingScenarioCollection',['../class_power_system_planning_1_1_binding_models_1_1_planning_binding_1_1_binding_tep_scenarios_1_1_binding_scenario_collection.html',1,'PowerSystemPlanning::BindingModels::PlanningBinding::BindingTepScenarios']]],
+  ['bindingtepmodel',['BindingTepModel',['../class_power_system_planning_1_1_binding_models_1_1_planning_binding_1_1_binding_tep_scenarios_1_1_binding_tep_model.html',1,'PowerSystemPlanning::BindingModels::PlanningBinding::BindingTepScenarios']]],
   ['branchelement',['BranchElement',['../class_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_branch_1_1_branch_element.html',1,'PowerSystemPlanning::BindingModels::BaseDataBinding::Branch']]]
 ];

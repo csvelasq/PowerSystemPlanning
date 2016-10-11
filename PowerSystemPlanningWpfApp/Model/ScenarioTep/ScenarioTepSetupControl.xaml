@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="PowerSystemPlanningWpfApp.Model.ScenarioTep.ScenarioTepSetupControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model.ScenarioTep"
+             xmlns:stateEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor"
+             xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="700"
+             d:DataContext="{d:DesignInstance Type=appWide:ScenarioTepSetupViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="300" />
+        </Grid.RowDefinitions>
+        <stateEditor:PowerSystemStateCollectionDgEditorControl DataContext="{Binding ScenarioVm}" Grid.Row="0" />
+        <local:CandidateLinesEditorControl DataContext="{Binding CandidatesVm}" Grid.Row="1" />
+    </Grid>
+</UserControl>

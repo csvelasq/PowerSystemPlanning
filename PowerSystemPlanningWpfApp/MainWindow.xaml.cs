@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows.Input;
 using NLog;
 
 namespace PowerSystemPlanningWpfApp
@@ -58,6 +59,16 @@ namespace PowerSystemPlanningWpfApp
             bottomAnchor.ToggleAutoHide();
             var root = (Xceed.Wpf.AvalonDock.Layout.LayoutAnchorablePane)bottomAnchor.Parent;
             root.DockHeight = new GridLength(200);
+        }
+
+        private void OnOpenExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MyMainWindowViewModel.OpenFileCommand.Execute();
+        }
+
+        private void OnSaveExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MyMainWindowViewModel.SaveFileCommand.Execute();
         }
     }
 }

@@ -9,6 +9,7 @@ using PowerSystemPlanning.Models.SystemBaseData;
 using System.ComponentModel;
 using PowerSystemPlanning.BindingModels.StateBinding;
 using System.Runtime.Serialization;
+using PowerSystemPlanning.Models.Planning.Scenarios;
 
 namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios
 {
@@ -16,9 +17,20 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios
     /// Encapsulates power system data in a particular future scenario being modeled.
     /// </summary>
     [DataContract()]
-    public class BindingScenario : SerializableBindableBase, IPowerSystemStateCollection
+    public class BindableStaticScenario : SerializableBindableBase, IStaticScenario
     {
+        #region internal fields
         PowerSystem _BindablePowerSystem;
+        string _Name;
+        double _Probability;
+        BindableStaticStateCollection _MyStaticStateCollection;
+        #endregion
+
+        #region interface implementation
+        public IPowerSystem MyPowerSystem => BindablePowerSystem;
+        public IPowerSystemStateCollection MyStateCollection => MyStaticStateCollection;
+        #endregion
+
         /// <summary>
         /// The underlying power system data for this scenario
         /// </summary>
@@ -38,10 +50,7 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios
                 }
             }
         }
-
-        public IPowerSystem MyPowerSystem => BindablePowerSystem;
-
-        string _Name;
+        
         /// <summary>
         /// The name of this scenario.
         /// </summary>
@@ -51,45 +60,45 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios
             get { return _Name; }
             set { SetProperty<string>(ref _Name, value); }
         }
+
         /// <summary>
         /// The probability that this scenario occurs
         /// </summary>
         [DataMember()]
-        public double Probability { get; set; } = 0;
+        public double Probability
+        {
+            get { return _Probability; }
+            set { SetProperty<double>(ref _Probability, value); }
+        }
 
-        BindingList<PowerSystemState> _BindableStates;
-        /// <summary>
-        /// The set of states this scenario is composed of.
-        /// </summary>
         [DataMember()]
-        public BindingList<PowerSystemState> BindableStates
+        public BindableStaticStateCollection MyStaticStateCollection
         {
-            get { return _BindableStates; }
-            protected set { SetProperty<BindingList<PowerSystemState>>(ref _BindableStates, value); }
+            get { return _MyStaticStateCollection; }
+            set { SetProperty<BindableStaticStateCollection>(ref _MyStaticStateCollection, value); }
+        }
+        
+        public BindableStaticScenario()
+        {
         }
 
-        public IEnumerable<IPowerSystemState> MyPowerSystemStates => BindableStates;
-
-        #region Summary Properties
-        public double PeakLoad => (from state in BindableStates
-                                   select state.PeakLoad).Max();
-        public double TotalLoad => (from state in BindableStates
-                                    select state.TotalLoad).Sum();
-        public double AvailableGeneratingCapacity => (from state in BindableStates
-                                                      select state.AvailableGeneratingCapacity).Sum();
-        #endregion
-
-        public BindingScenario()
+        public BindableStaticScenario(PowerSystem powerSystem, string name, double probability,
+            IList<PowerSystemState> states)
+            : this()
         {
-            BindableStates = new BindingList<PowerSystemState>();
-            BindableStates.Add(new PowerSystemState() { Name = "Peak", Duration = 760 });
-            BindableStates.Add(new PowerSystemState() { Name = "Valley", Duration = 8000 });
-        }
-
-        public BindingScenario(string name, PowerSystem powerSystem) : this()
-        {
-            Name = name;
             BindablePowerSystem = powerSystem;
+            Name = name;
+            Probability = probability;
+            MyStaticStateCollection = new BindableStaticStateCollection(states);
+        }
+
+        public BindableStaticScenario(PowerSystem powerSystem, string name, double probability)
+            : this()
+        {
+            BindablePowerSystem = powerSystem;
+            Name = name;
+            Probability = probability;
+            MyStaticStateCollection = new BindableStaticStateCollection();
         }
 
         public override string ToString()

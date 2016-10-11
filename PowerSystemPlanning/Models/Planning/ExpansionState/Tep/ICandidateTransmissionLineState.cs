@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanning.Models.SystemState.Branch
+namespace PowerSystemPlanning.Models.Planning.ExpansionState.Tep
 {
     public interface ICandidateTransmissionLineState : IInvestmentElementState
     {

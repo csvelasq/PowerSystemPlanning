@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
 {
-    public class StateCollectionDataTable : SerializableBindableBase
+    public class ScenarioAndStateDataTableEditor : SerializableBindableBase
     {
         public const string NodeNameColumn = "Node Name"; //string
         public const string ConsumptionColumn = "Consumption '{0}.{1}'"; //double [MW]
@@ -19,13 +19,13 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
 
         public PowerSystem MyPowerSystem { get; protected set; }
 
-        public BindingList<BindingScenario> MyScenariosAndStates { get; protected set; }
+        public BindingList<BindableStaticScenario> MyScenariosAndStates { get; protected set; }
 
         public DataTable DtNodesStates { get; protected set; }
 
-        public StateCollectionDataTable() { }
+        public ScenarioAndStateDataTableEditor() { }
 
-        public StateCollectionDataTable(PowerSystem powerSystem, BindingList<BindingScenario> scenariosAndStates) : this()
+        public ScenarioAndStateDataTableEditor(PowerSystem powerSystem, BindingList<BindingScenarios.BindableStaticScenario> scenariosAndStates) : this()
         {
             MyPowerSystem = powerSystem;
             MyScenariosAndStates = scenariosAndStates;
@@ -57,13 +57,13 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
             //Add other columns: load, Generating Capacity, Marginal Cost; under each scenario; under each state
             foreach (var scenario in MyScenariosAndStates)
             {
-                foreach (var state in scenario.MyPowerSystemStates)
+                foreach (var state in scenario.MyStateCollection.MyPowerSystemStates)
                 {
                     //load
                     column = new DataColumn(String.Format(ConsumptionColumn, scenario, state), typeof(double));
                     dt.Columns.Add(column);
                 }
-                foreach (var state in scenario.MyPowerSystemStates)
+                foreach (var state in scenario.MyStateCollection.MyPowerSystemStates)
                 {
                     //generating capacity
                     column = new DataColumn(String.Format(GeneratingCapacityColumn, scenario, state), typeof(double));
@@ -101,7 +101,7 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
             {
                 foreach (var scenario in MyScenariosAndStates)
                 {
-                    foreach (var state in scenario.MyPowerSystemStates)
+                    foreach (var state in scenario.MyStateCollection.MyPowerSystemStates)
                     {
                         var node = state.NodeStates.First(x => x.UnderlyingNode.Name == (string)row[NodeNameColumn]);
                         //load

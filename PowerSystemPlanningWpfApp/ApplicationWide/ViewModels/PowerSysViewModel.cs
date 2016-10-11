@@ -21,11 +21,6 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// The event aggregator of this app to comunicate between viewmodels.
-        /// </summary>
-        protected readonly IEventAggregator _eventAggregator;
-
         PowerSystem _MyPowerSystem;
         public PowerSystem MyPowerSystem
         {
@@ -46,7 +41,6 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public PowerSysViewModel()
         {
-            _eventAggregator = ApplicationService.Instance.EventAggregator;
         }
 
         public PowerSysViewModel(string xmlPath) : base(xmlPath)

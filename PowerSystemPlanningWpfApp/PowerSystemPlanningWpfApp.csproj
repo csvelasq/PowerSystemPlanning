@@ -72,7 +72,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Ookii.Dialogs.Wpf">
-      <HintPath>..\..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\03 wpf\Ookii.Dialogs\Ookii.Dialogs.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\cs_vsExamples\Ookii.Dialogs\Ookii.Dialogs.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
@@ -111,7 +111,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\03 wpf\AvalonDockMyBuild\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <HintPath>..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\03 wpf\AvalonDockMyBuild\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
     <Reference Include="Xceed.Wpf.DataGrid, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>

@@ -1,16 +1,20 @@
 var searchData=
 [
   ['ibranchelement',['IBranchElement',['../interface_power_system_planning_1_1_models_1_1_system_base_data_1_1_branch_1_1_i_branch_element.html',1,'PowerSystemPlanning::Models::SystemBaseData::Branch']]],
+  ['ibuildtepunderscenariosparetofront',['IBuildTepUnderScenariosParetoFront',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_i_build_tep_under_scenarios_pareto_front.html',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP']]],
+  ['ibuildtepunderscenariosparetofrontbruteforce',['IBuildTepUnderScenariosParetoFrontBruteForce',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_i_build_tep_under760ba1b84a48244d7470cc9652ab3a41.html',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP']]],
   ['icandidatetransmissionline',['ICandidateTransmissionLine',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_investment_branch_1_1_i_candidate_transmission_line.html',1,'PowerSystemPlanning::Models::Planning::InvestmentBranch']]],
-  ['icandidatetransmissionlinestate',['ICandidateTransmissionLineState',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_branch_1_1_i_candidate_transmission_line_state.html',1,'PowerSystemPlanning::Models::SystemState::Branch']]],
+  ['icandidatetransmissionlinestate',['ICandidateTransmissionLineState',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_expansion_state_1_1_tep_1_1_i_candidate_transmission_line_state.html',1,'PowerSystemPlanning::Models::Planning::ExpansionState::Tep']]],
   ['ielementwithavailability',['IElementWithAvailability',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_i_element_with_availability.html',1,'PowerSystemPlanning::Models::SystemState']]],
+  ['ienumeratetransmissionexpansionalternatives',['IEnumerateTransmissionExpansionAlternatives',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_i_enumerate_transmission_expansion_alternatives.html',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP']]],
   ['igeneratingunit',['IGeneratingUnit',['../interface_power_system_planning_1_1_models_1_1_system_base_data_1_1_generator_1_1_i_generating_unit.html',1,'PowerSystemPlanning::Models::SystemBaseData::Generator']]],
   ['igeneratingunitstate',['IGeneratingUnitState',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_generator_1_1_i_generating_unit_state.html',1,'PowerSystemPlanning::Models::SystemState::Generator']]],
   ['ihaveidandname',['IHaveIdAndName',['../interface_power_system_planning_1_1_i_have_id_and_name.html',1,'PowerSystemPlanning']]],
+  ['ihavepowersystem',['IHavePowerSystem',['../interface_power_system_planning_1_1_models_1_1_system_base_data_1_1_i_have_power_system.html',1,'PowerSystemPlanning::Models::SystemBaseData']]],
   ['iinelasticload',['IInelasticLoad',['../interface_power_system_planning_1_1_models_1_1_system_base_data_1_1_load_1_1_i_inelastic_load.html',1,'PowerSystemPlanning::Models::SystemBaseData::Load']]],
   ['iinelasticloadstate',['IInelasticLoadState',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_load_1_1_i_inelastic_load_state.html',1,'PowerSystemPlanning::Models::SystemState::Load']]],
   ['iinvestmentelement',['IInvestmentElement',['../interface_power_system_planning_1_1_models_1_1_system_base_data_1_1_i_investment_element.html',1,'PowerSystemPlanning::Models::SystemBaseData']]],
-  ['iinvestmentelementstate',['IInvestmentElementState',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_i_investment_element_state.html',1,'PowerSystemPlanning::Models::SystemState']]],
+  ['iinvestmentelementstate',['IInvestmentElementState',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_expansion_state_1_1_i_investment_element_state.html',1,'PowerSystemPlanning::Models::Planning::ExpansionState']]],
   ['imultiobjectiveindividual',['IMultiObjectiveIndividual',['../interface_power_system_planning_1_1_multi_objective_1_1_i_multi_objective_individual.html',1,'PowerSystemPlanning::MultiObjective']]],
   ['imultiobjectiveoptimizationproblem',['IMultiObjectiveOptimizationProblem',['../interface_power_system_planning_1_1_multi_objective_1_1_i_multi_objective_optimization_problem.html',1,'PowerSystemPlanning::MultiObjective']]],
   ['inelasticload',['InelasticLoad',['../class_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_load_1_1_inelastic_load.html',1,'PowerSystemPlanning::BindingModels::BaseDataBinding::Load']]],
@@ -24,7 +28,12 @@ var searchData=
   ['ipowersystemstate',['IPowerSystemState',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_i_power_system_state.html',1,'PowerSystemPlanning::Models::SystemState']]],
   ['ipowersystemstatecollection',['IPowerSystemStateCollection',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_i_power_system_state_collection.html',1,'PowerSystemPlanning::Models::SystemState']]],
   ['ipowersystemstudy',['IPowerSystemStudy',['../interface_power_system_planning_1_1_solvers_1_1_i_power_system_study.html',1,'PowerSystemPlanning::Solvers']]],
-  ['ipowersystemtepstate',['IPowerSystemTepState',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_state_1_1_i_power_system_tep_state.html',1,'PowerSystemPlanning::Models::Planning::State']]],
   ['isimpletransmissionline',['ISimpleTransmissionLine',['../interface_power_system_planning_1_1_models_1_1_system_base_data_1_1_branch_1_1_i_simple_transmission_line.html',1,'PowerSystemPlanning::Models::SystemBaseData::Branch']]],
-  ['isimpletransmissionlinestate',['ISimpleTransmissionLineState',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_branch_1_1_i_simple_transmission_line_state.html',1,'PowerSystemPlanning::Models::SystemState::Branch']]]
+  ['isimpletransmissionlinestate',['ISimpleTransmissionLineState',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_branch_1_1_i_simple_transmission_line_state.html',1,'PowerSystemPlanning::Models::SystemState::Branch']]],
+  ['istaticscenario',['IStaticScenario',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenarios_1_1_i_static_scenario.html',1,'PowerSystemPlanning::Models::Planning::Scenarios']]],
+  ['istaticscenariocollection',['IStaticScenarioCollection',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenarios_1_1_i_static_scenario_collection.html',1,'PowerSystemPlanning::Models::Planning::Scenarios']]],
+  ['istaticscenariotepmodel',['IStaticScenarioTepModel',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_i_static_scenario_tep_model.html',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP']]],
+  ['istaticscenariotepsimulationmodel',['IStaticScenarioTepSimulationModel',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_i_static_scenario_tep_simulation_model.html',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP']]],
+  ['istaticstatecollection',['IStaticStateCollection',['../interface_power_system_planning_1_1_models_1_1_system_state_1_1_i_static_state_collection.html',1,'PowerSystemPlanning::Models::SystemState']]],
+  ['istatictransmissionexpansionplan',['IStaticTransmissionExpansionPlan',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_i_static_transmission_expansion_plan.html',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP']]]
 ];

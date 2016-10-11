@@ -16,7 +16,7 @@ namespace PowerSystemPlanning
         {
             //Opens the scenarios/states definition
             var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
-            var dcs = new DataContractSerializer(typeof(BindingTepModel), dcsSettings);
+            var dcs = new DataContractSerializer(typeof(BindableTepModel), dcsSettings);
             var fs = new FileStream(xmlPath, FileMode.Open);
             var reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
             var deserializedObject = (T)dcs.ReadObject(reader);

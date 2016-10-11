@@ -16,8 +16,8 @@
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-        <GroupBox Header="Scenarios" Grid.Row="0" DataContext="{Binding MyTepStudy.MyScenarios}">
-            <ListView>
+        <GroupBox Header="Summary of Scenarios" Grid.Row="0" DataContext="{Binding MyTepStudy}">
+            <ListView ItemsSource="{Binding MyScenarios}" Margin="2,2,2,2">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -34,7 +34,7 @@
                 <DataGridTextColumn Header="Scenario Name" Binding="{Binding Name}" Width="150" />
                 <DataGridTextColumn Header="Probability" Binding="{Binding Probability, StringFormat=p1}" />-->
         </GroupBox>
-        <GroupBox Header="States Definition" Grid.Row="2">
+        <GroupBox Header="Summary of States" Grid.Row="2">
             <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                     <TextBlock Text="Selected Scenario:" Margin="5,5,0,0" />

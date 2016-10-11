@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PowerSystemPlanning.Models.SystemBaseData;
 
-namespace PowerSystemPlanning.Models.SystemState
+namespace PowerSystemPlanning.Models.Planning.ExpansionState
 {
     /// <summary>
     /// Represents the current state of an investment element.

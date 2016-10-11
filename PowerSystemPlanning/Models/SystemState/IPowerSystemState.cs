@@ -10,12 +10,8 @@ namespace PowerSystemPlanning.Models.SystemState
     /// <summary>
     /// Encapsulates one particular state of a power system.
     /// </summary>
-    public interface IPowerSystemState
+    public interface IPowerSystemState : IHavePowerSystem
     {
-        /// <summary>
-        /// The power system whose state this object encapsulates.
-        /// </summary>
-        IPowerSystem MyPowerSystem { get; }
         /// <summary>
         /// The duration (hours) this state is valid.
         /// </summary>

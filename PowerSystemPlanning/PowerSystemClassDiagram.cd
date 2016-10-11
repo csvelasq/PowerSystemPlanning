@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PowerSystemPlanning.BindingModels.BaseDataBinding.Branch.BranchElement" Collapsed="true">
+    <Position X="15.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQAAAAEAAAAAAAgAAAgAAAAAAAAAEAAAA=</HashCode>
+      <FileName>BindingModels\BaseDataBinding\Branch\BranchElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.BaseDataBinding.Branch.SimpleTransmissionLine" Collapsed="true">
+    <Position X="15.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAACAAAAAAAAAAAAEAARAAAAAAAAA=</HashCode>
+      <FileName>BindingModels\BaseDataBinding\Branch\SimpleTransmissionLine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.BaseDataBinding.Generator.GeneratingUnit" Collapsed="true">
+    <Position X="20" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAQAAEAAAAAACAAAAAA=</HashCode>
+      <FileName>BindingModels\BaseDataBinding\Generator\GeneratingUnit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.BaseDataBinding.Load.InelasticLoad" Collapsed="true">
+    <Position X="22.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BindingModels\BaseDataBinding\Load\InelasticLoad.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes.Node" Collapsed="true">
+    <Position X="17.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAEAAAAAAAAAAAAAgAAAAAAAAAAAAACIAIAAAAA=</HashCode>
+      <FileName>BindingModels\BaseDataBinding\Nodes\Node.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.BaseDataBinding.Nodes.NodeElement" Collapsed="true">
+    <Position X="21.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAgAAAAAAAAgAAAAAACAAAAAAAA=</HashCode>
+      <FileName>BindingModels\BaseDataBinding\Nodes\NodeElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.BaseDataBinding.PowerSystem" Collapsed="true">
+    <Position X="11" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAgEAQAAAAAAAAAAAAAtAQAAgAAAAAQAQCIAAICAAE=</HashCode>
+      <FileName>BindingModels\BaseDataBinding\PowerSystem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.BaseDataBinding.PowerSystemElement" Collapsed="true">
+    <Position X="20" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAIAQAAAAAAAAAkAAAAAAEAAA=</HashCode>
+      <FileName>BindingModels\BaseDataBinding\PowerSystemElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.InvestmentBranch.CandidateTransmissionLine" Collapsed="true">
+    <Position X="24.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAACAAAAAAEAAABAAA=</HashCode>
+      <FileName>BindingModels\PlanningBinding\BindingInvestmentBranch\CandidateTransmissionLine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.PlanningBinding.BindingInvestmentBranch.SelectableTransmissionLine" Collapsed="true">
+    <Position X="40" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAACAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>BindingModels\PlanningBinding\BindingInvestmentBranch\SelectableTransmissionLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios.BindableStaticScenario" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEAIAAAAAAAgMAAAAIIQAAAAABAAAgAAAAAAAAAA=</HashCode>
+      <FileName>BindingModels\PlanningBinding\BindingScenarios\BindableStaticScenario.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios.BindableStaticScenarioCollection" Collapsed="true">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAMEAgAAAAAAAAAAAgAAgAAAAAACAAgAAgAAAAAAA=</HashCode>
+      <FileName>BindingModels\PlanningBinding\BindingScenarios\BindableStaticScenarioCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios.CsvUtils" Collapsed="true">
+    <Position X="40" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BindingModels\PlanningBinding\BindingScenarios\ScenarioStateDt\CsvUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios.ScenarioAndStateDataTableEditor" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgABAEAAQAAAAAAAAACABAAAAAAACICkAIAAAAAAAA=</HashCode>
+      <FileName>BindingModels\PlanningBinding\BindingScenarios\ScenarioStateDt\ScenarioAndStateDataTableEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios.BindableStaticTransmissionExpansionPlan" Collapsed="true">
+    <Position X="2.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>BindingModels\PlanningBinding\BindingTepScenarios\BindableStaticTransmissionExpansionPlan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios.BindableTepModel" Collapsed="true">
+    <Position X="13.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAEACAAAAAAAAAAAAAAAwAAAAAAAAQhAAAAABAAUA=</HashCode>
+      <FileName>BindingModels\PlanningBinding\BindingTepScenarios\BindableTepModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.SerializableBindableBase" Collapsed="true">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BindingModels\SerializableBindableBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.StateBinding.BindableStaticStateCollection" Collapsed="true">
+    <Position X="26.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEgAAAAAAAAAIAAAAAAAABAAAAAAAgQAgQIEAAQA=</HashCode>
+      <FileName>BindingModels\StateBinding\BindableStaticStateCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.StateBinding.PowerSystemElementState" Collapsed="true">
+    <Position X="32.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAA=</HashCode>
+      <FileName>BindingModels\StateBinding\PowerSystemElementState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.StateBinding.PowerSystemState" Collapsed="true">
+    <Position X="2" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAyAAACACAAAEEAAgIAQADAIAAAAEkBAASAAAACA=</HashCode>
+      <FileName>BindingModels\StateBinding\PowerSystemState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.StateBinding.Branch.SimpleTransmissionLineState" Collapsed="true">
+    <Position X="29" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAABABAJgAAAA=</HashCode>
+      <FileName>BindingModels\StateBinding\Branch\SimpleTransmissionLineState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.StateBinding.Generator.GeneratingUnitState" Collapsed="true">
+    <Position X="31.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAQAAAAAAAAAAIAAgEAAAAABCIAAACA=</HashCode>
+      <FileName>BindingModels\StateBinding\Generator\GeneratingUnitState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.StateBinding.Load.InelasticLoadState" Collapsed="true">
+    <Position X="33.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAwAAAAAAAAABAAAAAAAEgBAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>BindingModels\StateBinding\Load\InelasticLoadState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.BindingModels.StateBinding.Nodes.NodeState" Collapsed="true">
+    <Position X="35.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAAAAAAEKAAAAAgAAAAQAAAAAACAEAJAQAAQAA=</HashCode>
+      <FileName>BindingModels\StateBinding\Nodes\NodeState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.MixedUtils" Collapsed="true">
+    <Position X="38.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAQA=</HashCode>
+      <FileName>MixedUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.LDC.LoadDurationCurveByBlocks" Collapsed="true">
+    <Position X="43.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\LDC\DurationCurveBlocks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.LDC.LoadBlock" Collapsed="true">
+    <Position X="41.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAEAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\LDC\DurationCurveBlocks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.ScenarioTEP.MOOScenarioTEP" Collapsed="true">
+    <Position X="13.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Models\Planning\ScenarioTEP\MOOScenarioTEP.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.ScenarioTEP.PowerSystemScenario" Collapsed="true">
+    <Position X="43.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIQAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\ScenarioTEP\PowerSystemScenario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.ScenarioTEP.ScenarioPowerSystemPlanningModel" Collapsed="true">
+    <Position X="3.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAABAEAAAIICAAAQIAwAgAAAQAEAAACAAQAAEDA=</HashCode>
+      <FileName>Models\Planning\ScenarioTEP\ScenarioPowerSystemPlanningModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.ScenarioTEP.ScenarioTEPModel" Collapsed="true">
+    <Position X="3.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACAACAAAAAAAAAAAAAAAAAAAAAUACAAAAAAABAAAA=</HashCode>
+      <FileName>Models\Planning\ScenarioTEP\ScenarioTEPModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.ScenarioTEP.TransmissionExpansionPlan" Collapsed="true">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAQAACAABCAIIAACAEAAAAAkAAAAQABAAAIEAAAAAA=</HashCode>
+      <FileName>Models\Planning\ScenarioTEP\TransmissionExpansionPlan.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.ScenarioTEP.TransmissionExpansionPlanScenarioDetailedResults" Collapsed="true">
+    <Position X="38.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAgABAAAABAAAAAAAAAAAAAAIQAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\ScenarioTEP\TransmissionExpansionPlanScenarioResults.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Models.Planning.ScenarioTEP.TransmissionExpansionPlanLDCResultsForOneScenario" Collapsed="true">
+    <Position X="43.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAACAAAAAAEIAYAAAACAACAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\ScenarioTEP\TransmissionExpansionPlanScenarioResults.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.MultiObjective.BaseMultiObjectiveIndividual" Collapsed="true">
+    <Position X="1.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAABCAAAAAAAAAAIAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>MultiObjective\BaseMultiObjectiveIndividual.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.MultiObjective.BaseMultiObjectiveIndividualList" Collapsed="true">
+    <Position X="38.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAgAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>MultiObjective\BaseMultiObjectiveIndividualList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.MultiObjective.BaseMultiObjectiveOptimizationProblem" Collapsed="true">
+    <Position X="13.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAACAAAAAACAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>MultiObjective\BaseMultiObjectiveOptimizationProblem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.MultiObjective.ObjectiveFunctionInOptimizationProblem" Collapsed="true">
+    <Position X="41.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAEAAAAAAEAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>MultiObjective\BaseMultiObjectiveOptimizationProblem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.GRBOptimization.BaseGRBOptimizationModel" Collapsed="true">
+    <Position X="1.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAWAAAAAQQAAEAAAAAgAAEAAAAAAAAAAACAg=</HashCode>
+      <FileName>Solvers\GRBOptimization\BaseGRBOptimizationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.GRBOptimization.BaseGRBOptimizationModelResult" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAQAAAAAAhAAAAAAAACAAAAAAAAAQ=</HashCode>
+      <FileName>Solvers\GRBOptimization\BaseGRBOptimizationModelResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.GRBOptimization.BaseOptimizationPowerSystemSolver" Collapsed="true">
+    <Position X="10.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAgAAAIIAAAAABQgAAQAAAAAAA=</HashCode>
+      <FileName>Solvers\GRBOptimization\BaseOptimizationPowerSystemSolver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.SolverResults" Collapsed="true">
+    <Position X="41.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAEAAAAAAAAgAIGAAAAAAQIKIAAAEAAAAAABAAAEAA=</HashCode>
+      <FileName>Solvers\SolverResults.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.LDCOPF.LDCOPFModel" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAQAEQAAAAAAAAAAQAAAAAAAgAQA=</HashCode>
+      <FileName>Solvers\LDCOPF\LDCOPFModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.LDCOPF.LDCOPFModelSolver" Collapsed="true">
+    <Position X="10.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACEIAQAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Solvers\LDCOPF\LDCOPFModelSolver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults.LdcOpfModelResults" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAACAAAAAEAAAAEAAAAABAAAAAiACBAAAAQA=</HashCode>
+      <FileName>Solvers\LDCOPF\LdcOpfResults\LdcOpfModelResults.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults.NodeLdcOpfResult" Collapsed="true">
+    <Position X="40" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAACAAgIAEgCAAAAAAAABAAAAAiQABAAAAAA=</HashCode>
+      <FileName>Solvers\LDCOPF\LdcOpfResults\NodeLdcOpfResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.OPF.OPFModel" Collapsed="true">
+    <Position X="2.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAKAAAQBAAgACAkEEBAQIAgAACAABAAACgAAgIAA=</HashCode>
+      <FileName>Solvers\OPF\OPFModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.OPF.OpfResults.BaseOPFResultElement" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Solvers\OPF\OpfResults\BaseOPFResultElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.OPF.OpfResults.GeneratingUnitOPFResult" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABABAAAAAAAAAAAAAAAAACAAAEAACABAQAAAA=</HashCode>
+      <FileName>Solvers\OPF\OpfResults\GeneratingUnitOPFResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.OPF.OpfResults.LoadOPFResult" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIAAAAASAAAAAAAAAAAAAABAAAAAAEgAAAAAAAAA=</HashCode>
+      <FileName>Solvers\OPF\OpfResults\LoadOPFResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.OPF.OpfResults.NodeOPFResult" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAAAACAAAAAECAAEAAAAAAHAgAAAkAABAAAAAA=</HashCode>
+      <FileName>Solvers\OPF\OpfResults\NodeOPFResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.OPF.OpfResults.OPFModelResult" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAIAAAAACAAAEAEAAAEAAAAAQHAgAAAiIAhQCAAEA=</HashCode>
+      <FileName>Solvers\OPF\OpfResults\OPFModelResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.OPF.OpfResults.TransmissionLineOPFResult" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIBAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Solvers\OPF\OpfResults\TransmissionLineOPFResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSystemPlanning.Solvers.ScenarioTEP.ScenarioTEPMOOParetoBruteForce" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAACAACAAAgAAAIAAAAAABQgAAQEAgAgAA=</HashCode>
+      <FileName>Solvers\ScenarioTEP\ScenarioTEPMOOParetoBruteForce.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="PowerSystemPlanning.Models.Planning.InvestmentBranch.ICandidateTransmissionLine" Collapsed="true">
+    <Position X="7" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\InvestmentBranch\ICandidateTransmissionLine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.IHaveIdAndName" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IHaveIdAndName.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.Planning.ExpansionState.IInvestmentElementState" Collapsed="true">
+    <Position X="6.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\Planning\ExpansionState\IInvestmentElementState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.Planning.ExpansionState.Tep.ICandidateTransmissionLineState" Collapsed="true">
+    <Position X="6.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Planning\ExpansionState\Tep\ICandidateTransmissionLineState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.Planning.ExpansionState.Tep.IPowerSystemTepState" Collapsed="true">
+    <Position X="27.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\ExpansionState\Tep\IPowerSystemTEPState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.IInvestmentElement" Collapsed="true">
+    <Position X="7" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\IInvestmentElement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.IHavePowerSystem" Collapsed="true">
+    <Position X="11.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\IHavePowerSystem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.IPowerSystem" Collapsed="true">
+    <Position X="43.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAgAAQAAAAAAAAAAAAAgAQAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\IPowerSystem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.IPowerSystemElement" Collapsed="true">
+    <Position X="11.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\IPowerSystemElement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.Planning.Scenarios.IBindableStaticScenario" Collapsed="true">
+    <Position X="18.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAIQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\Scenarios\IBindableStaticScenario.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.Planning.Scenarios.IBindableStaticScenarioCollection" Collapsed="true">
+    <Position X="22.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Planning\Scenarios\IBindableStaticScenarioCollection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.Planning.ScenarioTEP.IStaticTransmissionExpansionPlan" Collapsed="true">
+    <Position X="27.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Models\Planning\ScenarioTEP\IStaticTransmissionExpansionPlan.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.Branch.IBranchElement" Collapsed="true">
+    <Position X="16" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\Branch\IBranchElement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.Branch.ISimpleTransmissionLine" Collapsed="true">
+    <Position X="16" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\Branch\ISimpleTransmissionLine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.Generator.IGeneratingUnit" Collapsed="true">
+    <Position X="11.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\Generator\IGeneratingUnit.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.Load.IInelasticLoad" Collapsed="true">
+    <Position X="13.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\Load\IInelasticLoad.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.Nodes.INode" Collapsed="true">
+    <Position X="9.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAEAAAAAAAAAAAAAgAAAAAAAAAAAAACIAIAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\Nodes\INode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemBaseData.Nodes.INodeElement" Collapsed="true">
+    <Position X="12.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Models\SystemBaseData\Nodes\INodeElement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.Branch.ISimpleTransmissionLineState" Collapsed="true">
+    <Position X="5.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAA=</HashCode>
+      <FileName>Models\SystemState\Branch\ISimpleTransmissionLineState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.Generator.IGeneratingUnitState" Collapsed="true">
+    <Position X="7.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAIAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\SystemState\Generator\IGeneratingUnitState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.IElementWithAvailability" Collapsed="true">
+    <Position X="6.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\SystemState\IElementWithAvailability.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.IPowerSystemElementState" Collapsed="true">
+    <Position X="0.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAA=</HashCode>
+      <FileName>Models\SystemState\IPowerSystemElementState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.IPowerSystemState" Collapsed="true">
+    <Position X="20.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACACAAAAAAAgAAQACAAAAAAEABAACAAAAAA=</HashCode>
+      <FileName>Models\SystemState\IPowerSystemState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.IPowerSystemStateCollection" Collapsed="true">
+    <Position X="25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\SystemState\IPowerSystemStateCollection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.IStaticStateCollection" Collapsed="true">
+    <Position X="25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\SystemState\IStaticStateCollection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.Load.IInelasticLoadState" Collapsed="true">
+    <Position X="38.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAwAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SystemState\Load\IInelasticLoadState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Models.SystemState.Nodes.INodeState" Collapsed="true">
+    <Position X="0.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAEKAAAAAgAAAAQAAAAAACAEAIAQAAQAA=</HashCode>
+      <FileName>Models\SystemState\Nodes\INodeState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.MultiObjective.IMultiObjectiveIndividual" Collapsed="true">
+    <Position X="40" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAABCAAAAAAAAAAIAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>MultiObjective\IMultiObjectiveIndividual.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.MultiObjective.IMultiObjectiveOptimizationProblem" Collapsed="true">
+    <Position X="41.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAACAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MultiObjective\IMultiObjectiveOptimizationProblem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PowerSystemPlanning.Solvers.IPowerSystemStudy" Collapsed="true">
+    <Position X="38.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAIAAAAAABQgAAQAAAAAAA=</HashCode>
+      <FileName>Solvers\IPowerSystemStudy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="PowerSystemPlanning.MultiObjective.OptimizationSense" Collapsed="true">
+    <Position X="38.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAgA=</HashCode>
+      <FileName>MultiObjective\BaseMultiObjectiveOptimizationProblem.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PowerSystemPlanning.Solvers.SolverResultState" Collapsed="true">
+    <Position X="40" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAEBAAAAAAAAAAAAAAAACAAAAAAQAABIAAAAAAAA=</HashCode>
+      <FileName>Solvers\SolverResults.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

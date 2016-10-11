@@ -82,7 +82,7 @@ namespace PowerSystemPlanning.MultiObjective
             return other.Dominates(this);
         }
 
-        public BaseMultiObjectiveIndividual(BaseMultiObjectiveOptimizationProblem myProblem)
+        protected BaseMultiObjectiveIndividual(BaseMultiObjectiveOptimizationProblem myProblem)
         {
             MyProblem = myProblem;
         }

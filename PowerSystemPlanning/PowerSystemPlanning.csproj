@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GenericParsing">
-      <HintPath>..\..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\03 wpf\GenericParser_bin\GenericParsing.dll</HintPath>
+      <HintPath>..\..\..\..\Dropbox\Ing PUC\Magister\03 Tesis de Magister\06 Analisis y modelos\08 csharp\GenericParser_bin\GenericParsing.dll</HintPath>
     </Reference>
     <Reference Include="Gurobi65.NET">
       <HintPath>..\..\..\..\..\..\..\gurobi651\win64\bin\Gurobi65.NET.dll</HintPath>
@@ -60,26 +60,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingModels\PlanningBinding\BindingInvestmentBranch\SelectableTransmissionLine.cs" />
-    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\BindingScenarioCollection.cs" />
-    <Compile Include="BindingModels\PlanningBinding\BindingTepScenarios\BindingTepModel.cs" />
+    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\BindableStaticScenarioCollection.cs" />
+    <Compile Include="BindingModels\PlanningBinding\BindingTepScenarios\BindableStaticTransmissionExpansionPlan.cs" />
+    <Compile Include="Models\Planning\Scenarios\IStaticScenario.cs" />
+    <Compile Include="BindingModels\PlanningBinding\BindingTepScenarios\BindableTepModel.cs" />
     <Compile Include="BindingModels\SerializableBindableBase.cs" />
     <Compile Include="BindingModels\StateBinding\Branch\SimpleTransmissionLineState.cs" />
     <Compile Include="BindingModels\StateBinding\Nodes\NodeState.cs" />
     <Compile Include="BindingModels\StateBinding\PowerSystemElementState.cs" />
     <Compile Include="BindingModels\StateBinding\PowerSystemState.cs" />
     <Compile Include="BindingModels\PlanningBinding\BindingScenarios\ScenarioStateDt\CsvUtils.cs" />
-    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\ScenarioStateDt\StateCollectionDataTable.cs" />
+    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\ScenarioStateDt\ScenarioAndStateDataTableEditor.cs" />
+    <Compile Include="BindingModels\StateBinding\BindableStaticStateCollection.cs" />
     <Compile Include="IHaveIdAndName.cs" />
     <Compile Include="BindingModels\PlanningBinding\BindingInvestmentBranch\CandidateTransmissionLine.cs" />
     <Compile Include="MixedUtils.cs" />
     <Compile Include="Models\Planning\InvestmentBranch\ICandidateTransmissionLine.cs" />
-    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\BindingScenario.cs" />
+    <Compile Include="BindingModels\PlanningBinding\BindingScenarios\BindableStaticScenario.cs" />
+    <Compile Include="Models\Planning\Scenarios\IStaticScenarioCollection.cs" />
+    <Compile Include="Models\Planning\ScenarioTEP\IBuildTepUnderScenariosParetoFront.cs" />
+    <Compile Include="Models\Planning\ScenarioTEP\IBuildTepUnderScenariosParetoFrontBruteForce.cs" />
+    <Compile Include="Models\Planning\ScenarioTEP\IEnumerateTransmissionExpansionAlternatives.cs" />
+    <Compile Include="Models\Planning\ScenarioTEP\IStaticScenarioTepModel.cs" />
+    <Compile Include="Models\Planning\ScenarioTEP\IStaticScenarioTepSimulationModel.cs" />
+    <Compile Include="Models\Planning\ScenarioTEP\IStaticTransmissionExpansionPlan.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\MOOScenarioTEP.cs" />
-    <Compile Include="Models\Planning\State\IPowerSystemTEPState.cs" />
     <Compile Include="BindingModels\BaseDataBinding\Branch\BranchElement.cs" />
+    <Compile Include="Models\Planning\ScenarioTEP\PowerSystemScenario.cs" />
+    <Compile Include="Models\Planning\ScenarioTEP\ScenarioPowerSystemPlanningModel.cs" />
     <Compile Include="Models\SystemBaseData\Branch\IBranchElement.cs" />
+    <Compile Include="Models\SystemBaseData\IHavePowerSystem.cs" />
     <Compile Include="Models\SystemBaseData\IPowerSystemElement.cs" />
-    <Compile Include="Models\Planning\State\Branch\ICandidateTransmissionLineState.cs" />
+    <Compile Include="Models\Planning\ExpansionState\Tep\ICandidateTransmissionLineState.cs" />
     <Compile Include="Models\SystemBaseData\Nodes\INode.cs" />
     <Compile Include="Models\SystemState\Branch\ISimpleTransmissionLineState.cs" />
     <Compile Include="BindingModels\StateBinding\Generator\GeneratingUnitState.cs" />
@@ -87,12 +99,13 @@
     <Compile Include="Models\SystemBaseData\Load\IInelasticLoad.cs" />
     <Compile Include="Models\SystemState\IPowerSystemElementState.cs" />
     <Compile Include="Models\SystemState\IPowerSystemStateCollection.cs" />
+    <Compile Include="Models\SystemState\IStaticStateCollection.cs" />
     <Compile Include="Models\SystemState\Load\IInelasticLoadState.cs" />
     <Compile Include="BindingModels\StateBinding\Load\InelasticLoadState.cs" />
     <Compile Include="Models\SystemState\Generator\IGeneratingUnitState.cs" />
     <Compile Include="Models\SystemState\IElementWithAvailability.cs" />
     <Compile Include="Models\Planning\IInvestmentElement.cs" />
-    <Compile Include="Models\Planning\State\IInvestmentElementState.cs" />
+    <Compile Include="Models\Planning\ExpansionState\IInvestmentElementState.cs" />
     <Compile Include="Models\SystemState\IPowerSystemState.cs" />
     <Compile Include="Models\SystemBaseData\Nodes\INodeElement.cs" />
     <Compile Include="Models\SystemBaseData\Branch\ISimpleTransmissionLine.cs" />
@@ -104,8 +117,6 @@
     <Compile Include="MultiObjective\IMultiObjectiveIndividual.cs" />
     <Compile Include="MultiObjective\IMultiObjectiveOptimizationProblem.cs" />
     <Compile Include="Models\Planning\ScenarioTEP\TransmissionExpansionPlanScenarioResults.cs" />
-    <Compile Include="Models\Planning\ScenarioTEP\ScenarioPowerSystemPlanningModel.cs" />
-    <Compile Include="Models\Planning\ScenarioTEP\PowerSystemScenario.cs" />
     <Compile Include="BindingModels\BaseDataBinding\Generator\GeneratingUnit.cs" />
     <Compile Include="BindingModels\BaseDataBinding\Load\InelasticLoad.cs" />
     <Compile Include="Models\SystemBaseData\IPowerSystem.cs" />
@@ -139,6 +150,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="PowerSystemClassDiagram.cd" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -24,16 +24,21 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public PowerSystem MyPowerSystem { get; set; }
 
-        public BindingScenarioCollection MyTepStudy { get; set; }
+        BindableStaticScenarioCollection _MyScenarios;
+        public BindableStaticScenarioCollection MyScenarios
+        {
+            get { return _MyScenarios; }
+            set { SetProperty<BindableStaticScenarioCollection>(ref _MyScenarios, value); }
+        }
 
         #region Basic UI Properties
         public override string Title => "Scenarios";
 
-        BindingScenario _SelectedScenario;
-        public BindingScenario SelectedScenario
+        PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios.BindableStaticScenario _SelectedScenario;
+        public BindableStaticScenario SelectedScenario
         {
             get { return _SelectedScenario; }
-            set { SetProperty<BindingScenario>(ref _SelectedScenario, value); }
+            set { base.SetProperty(ref _SelectedScenario, (PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios.BindableStaticScenario)value); }
         }
 
         PowerSystemState _SelectedState;
@@ -50,12 +55,12 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         private void EditStates()
         {
-            MyTepStudy.CreateStateCollection();
+            MyScenarios.CreateStateCollection();
         }
 
         private void CommitStates()
         {
-            MyTepStudy.CommitStateCollectionToPowerSystemState();
+            MyScenarios.CommitStateCollectionToPowerSystemState();
         }
         #endregion
 
@@ -65,7 +70,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public override void SaveToFolder()
         {
-            MyTepStudy.Save(TepXmlStatesDefinitionAbsolutePath, TepCsvStatesDataAbsolutePath);
+            MyScenarios.SaveToLocalFolderForEdition(TepXmlStatesDefinitionAbsolutePath, TepCsvStatesDataAbsolutePath);
             logger.Info($"Scenarios saved to '{FolderAbsolutePath}'.");
         }
 
@@ -84,7 +89,9 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         public ScenarioEditorViewModel(PowerSystem system)
         {
             MyPowerSystem = system;
-            MyTepStudy = new BindingScenarioCollection(MyPowerSystem);
+            var defaultScenarios =
+                BindableStaticScenarioCollection.CreateDefaultScenarios(MyPowerSystem);
+            MyScenarios = new BindableStaticScenarioCollection(MyPowerSystem, defaultScenarios);
 
             //Commands
             EditStatesCommand = new DelegateCommand(EditStates);

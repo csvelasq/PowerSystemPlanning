@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
-             xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+             xmlns:vms="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type=appWide:ScenarioEditorViewModel}">
-    <Grid DockPanel.Dock="Left">
+             d:DataContext="{d:DesignInstance Type=vms:ScenarioEditorViewModel}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
             <RowDefinition Height="5" />
@@ -24,7 +24,7 @@
                         Define scenarios in the following table. Then select one scenario at a time, and proceed to edit states.
                     </localUtils:ImageTextBlock.MessageForTextBlock>
                 </localUtils:ImageTextBlock>
-                <localUtils:CustomDataGrid ItemsSource="{Binding MyTepStudy.MyScenarios}" 
+                <localUtils:CustomDataGrid ItemsSource="{Binding MyStaticScenarios.MyScenarios}" 
                                                SelectedItem="{Binding SelectedScenario}"
                                                AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}" Margin="2,2,2,2">
                     <DataGrid.Columns>
@@ -49,7 +49,7 @@
                         Define the states of the currently selected scenario in the following table.
                     </localUtils:ImageTextBlock.MessageForTextBlock>
                 </localUtils:ImageTextBlock>
-                <localUtils:CustomDataGrid ItemsSource="{Binding SelectedScenario.BindableStates}"
+                <localUtils:CustomDataGrid ItemsSource="{Binding SelectedScenario.MyStaticStateCollection.BindableStates}"
                                            SelectedItem="{Binding SelectedState}"
                                AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DgColumnHeaderWrap}">
                     <DataGrid.Columns>

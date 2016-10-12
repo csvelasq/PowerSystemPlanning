@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using NLog;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
-using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
 
-namespace PowerSystemPlanningWpfApp.ApplicationWide
+namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
     public class ScenarioTepSetupViewModel : BaseDocumentOneFolderViewModel
     {
@@ -17,6 +18,9 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public PowerSystem MyPowerSystem { get; protected set; }
+
+        public BindableTepModel MyTepModel { get; protected set; }
+
         public ScenarioEditorViewModel ScenarioVm { get; protected set; }
         public CandidateTransmissionLinesEditorViewModel CandidatesVm { get; protected set; }
 
@@ -25,8 +29,22 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         public ScenarioTepSetupViewModel(PowerSystem system)
         {
             MyPowerSystem = system;
-            ScenarioVm = new ScenarioEditorViewModel(system);
-            CandidatesVm = new CandidateTransmissionLinesEditorViewModel(system.BindingTransmissionLines);
+            MyTepModel = new BindableTepModel(MyPowerSystem);
+            var defaultScenarios =
+                BindableStaticScenarioCollection.CreateDefaultScenarios(MyPowerSystem);
+            //Create scenario view-model
+            ScenarioVm = new ScenarioEditorViewModel(MyPowerSystem, MyTepModel.MyBindableScenarios);
+            //Create Candidate Transmission lines view-model
+            CandidatesVm = new CandidateTransmissionLinesEditorViewModel(MyPowerSystem.BindingTransmissionLines);
+            CandidatesVm.PropertyChanged += CandidatesVm_PropertyChanged;
+        }
+
+        private void CandidatesVm_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CandidatesVm.CandidateLines))
+            {
+                MyTepModel.MyBindableCandidateTransmissionLines = CandidatesVm.CandidateLines;
+            }
         }
 
         public override void SaveToFolder()

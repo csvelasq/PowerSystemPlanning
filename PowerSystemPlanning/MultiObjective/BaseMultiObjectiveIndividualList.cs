@@ -14,50 +14,47 @@ namespace PowerSystemPlanning.MultiObjective
     /// This class is not intended to be extended by classes which deal directly 
     /// with concrete implementations of <see cref="BaseMultiObjectiveIndividual"/>.
     /// </remarks>
-    public class BaseMultiObjectiveIndividualList : List<IMultiObjectiveIndividual>
+    public class BaseMultiObjectiveIndividualList
     {
         /// <summary>
         /// A reference to the optimization problem for which this individual is a solution.
         /// </summary>
-        public BaseMultiObjectiveOptimizationProblem MyProblem
-        {
-            get
-            {
-                return _MyProblem;
-            }
+        public IMultiObjectiveOptimizationProblem MyProblem { get; protected set; }
 
-            protected set
-            {
-                _MyProblem = value;
-            }
-        }
-        BaseMultiObjectiveOptimizationProblem _MyProblem;
+        public List<IMultiObjectiveIndividual> Individuals { get; protected set; }
 
-        public BaseMultiObjectiveIndividualList(BaseMultiObjectiveOptimizationProblem myProblem)
+        public BaseMultiObjectiveIndividualList(IMultiObjectiveOptimizationProblem myProblem)
         {
             this.MyProblem = myProblem;
+        }
+
+        public BaseMultiObjectiveIndividualList(IMultiObjectiveOptimizationProblem myProblem,
+            IList<IMultiObjectiveIndividual> individuals)
+        {
+            this.MyProblem = myProblem;
+            Individuals = new List<IMultiObjectiveIndividual>(individuals);
         }
 
         /// <summary>
         /// Builds the pareto efficient frontier by comparing each individual with every other individual in this collection.
         /// </summary>
-        /// <returns>A collection of pareto efficient </returns>
-        public BaseMultiObjectiveIndividualList BuildParetoEfficientFrontier()
+        /// <returns>A collection of pareto efficient individuals.</returns>
+        public List<IMultiObjectiveIndividual> BuildParetoEfficientFrontier()
         {
-            BaseMultiObjectiveIndividualList paretoFront = new BaseMultiObjectiveIndividualList(this.MyProblem);
+            List<IMultiObjectiveIndividual> paretoFront = new List<IMultiObjectiveIndividual>();
             //check every individual in this collection
-            for (int i = 0; i < this.Count; i++)
+            for (int i = 0; i < Individuals.Count; i++)
             {
-                var individual = this[i];
+                var individual = Individuals[i];
                 //check 'ind' against every other individual
                 //we need to find one individual that dominates ind1
                 //if not, ind1 is in the pareto frontier
                 bool individualIsInParetoFront = true;
-                for (int j = 0; j < this.Count; j++)
+                for (int j = 0; j < Individuals.Count; j++)
                 {
                     if (j != i)
                     {
-                        if (this[j].Dominates(individual))
+                        if (Individuals[j].Dominates(individual))
                         {
                             individualIsInParetoFront = false;
                             break;

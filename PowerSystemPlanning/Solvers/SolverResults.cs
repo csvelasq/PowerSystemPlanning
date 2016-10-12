@@ -21,6 +21,11 @@ namespace PowerSystemPlanning.Solvers
     /// </remarks>
     public class SolverResults
     {
+        #region internal fields
+        DateTime _StartTime;
+        TimeSpan _ExecutionTime;
+        #endregion
+
         /// <summary>
         /// NLog Logger for this solver.
         /// </summary>
@@ -43,7 +48,6 @@ namespace PowerSystemPlanning.Solvers
 
         Stopwatch MyStopWatch { get; set; }
 
-        DateTime _StartTime;
         /// <summary>
         /// start time of the process
         /// </summary>
@@ -59,7 +63,6 @@ namespace PowerSystemPlanning.Solvers
             }
         }
 
-        TimeSpan _ExecutionTime;
         /// <summary>
         /// The total execution time of this solver.
         /// </summary>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using PowerSystemPlanningWpfApp.ApplicationWide.Events;
 using Prism.Events;
 
-namespace PowerSystemPlanningWpfApp.ApplicationWide
+namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
     /// <summary>
     /// Base class for view-models of a document (e.g. a power system or a specific study)
@@ -32,6 +32,11 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         /// </summary>
         public abstract void Save();
 
+        /// <summary>
+        /// Save the content wrapped by this view-model.
+        /// </summary>
+        public abstract void SaveAs();
+
         protected BaseDocumentViewModel()
         {
             _eventAggregator = ApplicationService.Instance.EventAggregator;
@@ -40,7 +45,6 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         protected void NotifyNewDocumentOpened(BaseDocumentViewModel document)
         {
             _eventAggregator.GetEvent<RequestDocumentOpenEvent>().Publish(document);
-            //eventAggregator.GetEvent<TickerSymbolSelectedEvent>().Subscribe(...
         }
     }
 }

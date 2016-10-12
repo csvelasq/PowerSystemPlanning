@@ -10,40 +10,29 @@ using PowerSystemPlanning.Models.Planning.InvestmentBranch;
 using Prism.Commands;
 using Prism.Mvvm;
 
-namespace PowerSystemPlanningWpfApp.ApplicationWide
+namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
     public class CandidateTransmissionLinesEditorViewModel : BindableBase
     {
+        #region internal fields
         private BindingList<SelectableTransmissionLine> _transmissionLines;
+        private BindingList<CandidateTransmissionLine> _candidateLines;
+        #endregion
 
         public BindingList<SelectableTransmissionLine> TransmissionLines
         {
             get { return _transmissionLines; }
             set { SetProperty<BindingList<SelectableTransmissionLine>>(ref _transmissionLines, value); }
         }
-
-        public BindingList<SimpleTransmissionLine> SelectedTransmissionLines => null;
-
-        private BindingList<CandidateTransmissionLine> _candidateLines;
-
+        
         public BindingList<CandidateTransmissionLine> CandidateLines
         {
             get { return _candidateLines; }
             set { SetProperty<BindingList<CandidateTransmissionLine>>(ref _candidateLines, value); }
         }
 
+        #region Commands
         public DelegateCommand EditCandidateLinesCommand { get; protected set; }
-
-        public CandidateTransmissionLinesEditorViewModel(BindingList<SimpleTransmissionLine> transmissionLines)
-        {
-            TransmissionLines = new BindingList<SelectableTransmissionLine>();
-            foreach (var line in transmissionLines)
-            {
-                var selectableLine = new SelectableTransmissionLine(line);
-                TransmissionLines.Add(selectableLine);
-            }
-            EditCandidateLinesCommand = new DelegateCommand(EditCandidateLines);
-        }
 
         private void EditCandidateLines()
         {
@@ -54,6 +43,18 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
                     candidates.Add(new CandidateTransmissionLine(line.MyLine));
             }
             CandidateLines = candidates;
+        }
+        #endregion
+
+        public CandidateTransmissionLinesEditorViewModel(BindingList<SimpleTransmissionLine> transmissionLines)
+        {
+            TransmissionLines = new BindingList<SelectableTransmissionLine>();
+            foreach (var line in transmissionLines)
+            {
+                var selectableLine = new SelectableTransmissionLine(line);
+                TransmissionLines.Add(selectableLine);
+            }
+            EditCandidateLinesCommand = new DelegateCommand(EditCandidateLines);
         }
     }
 }

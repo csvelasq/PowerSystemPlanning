@@ -5,61 +5,48 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model.ScenarioTep"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
-             xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+        xmlns:vms="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400"
-             d:DataContext="{d:DesignInstance Type=appWide:CandidateTransmissionLinesEditorViewModel}">
+             d:DesignHeight="300" d:DesignWidth="600"
+             d:DataContext="{d:DesignInstance Type=vms:CandidateTransmissionLinesEditorViewModel}">
     <DockPanel>
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-            <localUtils:ImageTextBlock Margin="2,2,2,2">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <localUtils:ImageTextBlock Margin="2,2,2,2" Grid.Column="0">
                 <localUtils:ImageTextBlock.MessageForTextBlock>
                     Select transmission lines which are candidates for expansion in the left panel. Then press the "edit" button to edit investment costs for selected transmission lines, in the right table.
                 </localUtils:ImageTextBlock.MessageForTextBlock>
             </localUtils:ImageTextBlock>
             <localUtils:ImageTextButton ToolTip="Edit" Text="Edit" 
                                         Command="{Binding EditCandidateLinesCommand}"
-                                        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5"
+                                        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5" Grid.Column="1"
                                         Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Edit_16x.png" />
-        </StackPanel>
+        </Grid>
         <Grid DockPanel.Dock="Left">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ListView ItemsSource="{Binding TransmissionLines}"
-                      SelectionMode="Multiple" 
+            <localUtils:CustomDataGrid ItemsSource="{Binding TransmissionLines}" AutoGenerateColumns="False"
                       HorizontalContentAlignment="Stretch" Grid.Column="0" Margin="2,2,2,2">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <DockPanel LastChildFill="True">
-                            <CheckBox IsChecked="{Binding IsSelected}" 
-                                      DockPanel.Dock="Left"  Margin="2,2,2,2" />
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding MyLine.Name}" FontWeight="Bold" />
-                                <TextBlock TextWrapping="Wrap">
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}From node '{0}' to  '{1}'">
-                                            <Binding Path="MyLine.NodeFromName"></Binding>
-                                            <Binding Path="MyLine.NodeToName"></Binding>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                                <TextBlock TextWrapping="Wrap">
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0} MW, {1} mho">
-                                            <Binding Path="MyLine.ThermalCapacity"></Binding>
-                                            <Binding Path="MyLine.SusceptanceMho"></Binding>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </StackPanel>
-                        </DockPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="Is Candidate?" Binding="{Binding IsSelected}"
+                                            Width="70"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding MyLine.Name}"
+                                        Width="80"/>
+                    <DataGridTextColumn Header="Node From" Binding="{Binding MyLine.NodeFromName}"
+                                        Width="70"/>
+                    <DataGridTextColumn Header="Node To" Binding="{Binding MyLine.NodeToName}"
+                                        Width="70"/>
+                    <DataGridTextColumn Header="Capacity (MW)" Binding="{Binding MyLine.ThermalCapacity}" />
+                </DataGrid.Columns>
+            </localUtils:CustomDataGrid>
             <localUtils:CustomDataGrid ItemsSource="{Binding CandidateLines}" Grid.Column="1" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding BindableTransmissionLine.Name}" />
                     <DataGridTextColumn Header="Total Investment Cost (MUS$)" Binding="{Binding InvestmentCost, StringFormat=C1}" Width="120" />
                 </DataGrid.Columns>
             </localUtils:CustomDataGrid>

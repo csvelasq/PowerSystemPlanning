@@ -1,4 +1,5 @@
 ﻿using PowerSystemPlanning.Models.Planning.ScenarioTEP;
+using PowerSystemPlanning.Solvers.ScenarioTEP;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -23,45 +24,19 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate
     /// </remarks>
     public class ScenarioTepAlternativesEnumControlViewModel : BindableBase
     {
-        public ScenarioTEPModel _MyScenarioTEPModel;
-        public ScenarioTEPModel MyScenarioTEPModel
+        public List<MooStaticTePlan> EnumeratedAlternatives
         {
-            get { return _MyScenarioTEPModel; }
-            set
-            {
-                SetProperty<ScenarioTEPModel>(ref _MyScenarioTEPModel, value);
-            }
+            get { return _EnumeratedTransmissionExpansionAlternatives; }
+            set { SetProperty<List<MooStaticTePlan>>(ref _EnumeratedTransmissionExpansionAlternatives, value); }
         }
 
-        IEnumerable<TransmissionExpansionPlan> _TepAlternatives;
-        public IEnumerable<TransmissionExpansionPlan> TepAlternatives
-        {
-            get { return _TepAlternatives; }
-            set
-            {
-                SetProperty<IEnumerable<TransmissionExpansionPlan>>(ref _TepAlternatives, value);
-                SetDgColumns();
-            }
-        }
+        #region internal fields
+        List<MooStaticTePlan> _EnumeratedTransmissionExpansionAlternatives;
+        ObservableCollection<DataGridColumn> _columnCollection = new ObservableCollection<DataGridColumn>();
+        #endregion
 
-        private ObservableCollection<DataGridColumn> _columnCollection = new ObservableCollection<DataGridColumn>();
-        public ObservableCollection<DataGridColumn> MyColumnCollection
-        {
-            get { return _columnCollection; }
-            set
-            {
-                SetProperty<ObservableCollection<DataGridColumn>>(ref _columnCollection, value);
-            }
-        }
-
+        #region Commands
         public ICommand DgTepEnum_DoubleClick { get; private set; }
-
-        public ScenarioTepAlternativesEnumControlViewModel()
-        {
-            DgTepEnum_DoubleClick = new DelegateCommand(InspectTepAlternativeDetails);
-            AddCommonDataColumns(MyColumnCollection);
-        }
-
         private void InspectTepAlternativeDetails()
         {
             //Display window with detailed information of selected transmission expansion plan
@@ -71,30 +46,31 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate
             MessageBoxImage icon = MessageBoxImage.Information;// Display message box
             MessageBox.Show(messageBoxText, caption, button, icon);
         }
+        #endregion
 
-        private void AddCommonDataColumns(ObservableCollection<DataGridColumn> columns)
+        public ScenarioTepAlternativesEnumControlViewModel(List<MooStaticTePlan> enumeratedAlternatives)
         {
-            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("New Transmission Lines Count", "BuiltTransmissionLines.Count", "", 110));
-            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Investment Cost (MUS$)", "TotalInvestmentCost", "C1", 90));
-            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Transmission lines", "BuiltTransmissionLinesNames", "", 90));
-            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Expected costs (MMUS$)", "ExpectedTotalCosts", "C", 90));
+            DgTepEnum_DoubleClick = new DelegateCommand(InspectTepAlternativeDetails);
+            EnumeratedAlternatives = enumeratedAlternatives;
+            SetDgColumns();
+        }
+
+        #region UI Datatable binding
+        public ObservableCollection<DataGridColumn> MyColumnCollection
+        {
+            get { return _columnCollection; }
+            set { SetProperty<ObservableCollection<DataGridColumn>>(ref _columnCollection, value); }
         }
 
         private void SetDgColumns()
         {
-            if (TepAlternatives != null && TepAlternatives.Count() > 0)
+            if (EnumeratedAlternatives != null && EnumeratedAlternatives.Count() > 0)
             {
                 ObservableCollection<DataGridColumn> colList = new ObservableCollection<DataGridColumn>();
                 //Add common columns
-                /*
-                <DataGridTextColumn Header="New Transmission Lines Count" Binding="{Binding BuiltTransmissionLines.Count}" Width="110" />
-                <DataGridTextColumn Header="Investment Cost (MUS$)" Binding="{Binding TotalInvestmentCost}" Width="90" />
-                <DataGridTextColumn Header="Transmission lines" Binding="{Binding BuiltTransmissionLinesNames}" Width="90" />
-                <DataGridTextColumn Header="Expected costs (MMUS$)" Binding="{Binding ExpectedTotalCosts, StringFormat=C}" Width="90" ElementStyle="{StaticResource ResourceKey=CellRightAlign}" />
-                */
                 AddCommonDataColumns(colList);
                 //Add one column for each scenario
-                var objectiveFunctions = TepAlternatives.First().MyProblem.MyObjectiveFunctionsDefinition;
+                var objectiveFunctions = EnumeratedAlternatives.First().MyProblem.MyObjectiveFunctionsDefinition;
                 for (int i = 0; i < objectiveFunctions.Count; i++)
                 {
                     colList.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle
@@ -104,5 +80,20 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate
                 MyColumnCollection = colList;
             }
         }
+
+        private void AddCommonDataColumns(ObservableCollection<DataGridColumn> columns)
+        {
+            /*
+            <DataGridTextColumn Header="New Transmission Lines Count" Binding="{Binding BuiltTransmissionLines.Count}" Width="110" />
+            <DataGridTextColumn Header="Investment Cost (MUS$)" Binding="{Binding TotalInvestmentCost}" Width="90" />
+            <DataGridTextColumn Header="Transmission lines" Binding="{Binding BuiltTransmissionLinesNames}" Width="90" />
+            <DataGridTextColumn Header="Expected costs (MMUS$)" Binding="{Binding ExpectedTotalCosts, StringFormat=C}" Width="90" ElementStyle="{StaticResource ResourceKey=CellRightAlign}" />
+            */
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("New Transmission Lines Count", "BuiltTransmissionLines.Count", "", 110));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Investment Cost (MUS$)", "TotalInvestmentCost", "C1", 90));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Transmission lines", "BuiltTransmissionLinesNames", "", 90));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Expected costs (MMUS$)", "ExpectedTotalCosts", "C", 90));
+        }
+        #endregion
     }
 }

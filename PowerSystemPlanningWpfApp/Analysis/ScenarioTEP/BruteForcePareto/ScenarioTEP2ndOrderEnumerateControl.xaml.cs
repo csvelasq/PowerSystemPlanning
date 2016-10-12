@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto
+namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
 {
     /// <summary>
     /// Interaction logic for ScenarioTEP2ndOrderEnumerateControl.xaml

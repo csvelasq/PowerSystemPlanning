@@ -1,29 +1,28 @@
-﻿<UserControl x:Class="PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto.ScenarioTEP2ndOrderEnumerateControl"
+﻿<UserControl x:Class="PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.ScenarioTEP2ndOrderEnumerateControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.BruteForcePareto"
+             xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP"
+             xmlns:vms="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.ViewModels"
              xmlns:enumControl="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="1000" Background="White"
-             d:DataContext="{d:DesignInstance local:ScenarioTEPParetoViewModel}">
+             d:DesignHeight="400" d:DesignWidth="500" Background="White"
+             d:DataContext="{d:DesignInstance vms:ScenarioTEPParetoViewModel}">
     <DockPanel LastChildFill="True">
         <!--Number of possible alternatives-->
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="2,2,2,2">
-            <TextBlock >
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0} possible transmission expansion plans.">
-                        <Binding Path="MyScenarioTEPModel.TransmissionExpansionPlansCount" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-        </StackPanel>
+        <TextBlock DockPanel.Dock="Top" Margin="2,2,2,2">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} possible transmission expansion plans.">
+                    <Binding Path="MyParetoFrontBuilder.TransmissionExpansionPlansCount" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
         <!--Action buttons: build pareto-frontier-->
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <localUtils:ImageTextButton Command="{Binding BuildParetoFrontier}" 
-                                    ToolTip="Build exact Pareto front"
+                                    Text="Solve" ToolTip="Build exact Pareto front"
                                     Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Run_32x.png"
                                     HorizontalAlignment="Left" Margin="2,2,2,2" />
             <localUtils:ImageTextBlock MessageForTextBlock="Building the pareto-frontier by exhaustive enumeration is computationally expensive." Margin="2,2,2,2" VerticalAlignment="Center" />
@@ -38,15 +37,19 @@
             <GroupBox Header="Pareto Frontier" Grid.Column="0">
                 <DockPanel>
                     <!--Number of elements in pareto frontier-->
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <Label Content="Solutions in Pareto Frontier:" />
-                        <Label Content="{Binding TepAlternativesInParetoFront.Count}" />
-                    </StackPanel>
+                    <TextBlock DockPanel.Dock="Top">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} efficient solutions">
+                                <Binding Path="ParetoAlternativesViewModel.EnumeratedAlternatives.Count" Mode="OneWay" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <!--Efficient alternatives-->
                     <enumControl:ScenarioTepAlternativesEnumControl DataContext="{Binding ParetoAlternativesViewModel}" />
                 </DockPanel>
             </GroupBox>
-            <!--Enumeration/evaluation results-->
             <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" />
+            <!--All Alternatives-->
             <GroupBox Header="All alternatives" Grid.Column="2">
                 <enumControl:ScenarioTepAlternativesEnumControl DataContext="{Binding AllAlternativesViewModel}" />
             </GroupBox>

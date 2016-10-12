@@ -9,29 +9,32 @@
         xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
         xmlns:pwsEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemEditor"
         xmlns:scenEditor="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor"
-        xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+        xmlns:vms="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.ViewModels"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:dockctrl="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
         xmlns:scenarioTep="clr-namespace:PowerSystemPlanningWpfApp.Model.ScenarioTep"
+        xmlns:scenarioTepAnalysis="clr-namespace:PowerSystemPlanningWpfApp.Analysis.ScenarioTEP"
         x:Class="PowerSystemPlanningWpfApp.MainWindow"
         mc:Ignorable="d"
         Title="Power System Planning" 
         Height="500" Width="700" WindowState="Maximized"
         Loaded="Window_Loaded"
-        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}">
+        d:DataContext="{d:DesignInstance Type=vms:MainWindowViewModel}">
     <Window.CommandBindings>
-        <!--<CommandBinding Command="New" Executed="y"  CanExecute="x" />-->
+        <CommandBinding Command="New" Executed="OnNewExecuted" />
         <CommandBinding Command="Open" Executed="OnOpenExecuted" />
         <CommandBinding Command="Save" Executed="OnSaveExecuted" />
+        <CommandBinding Command="SaveAs" Executed="OnSaveAsExecuted" />
+        <CommandBinding Command="Close" Executed="OnCloseExecuted" />
     </Window.CommandBindings>
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top"  
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Center">
-            <Menu Margin="0,5,0,5">
+            <Menu Margin="0,5,0,5" Background="Transparent">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" Command="ApplicationCommands.New" IsEnabled="False">
+                    <MenuItem Header="_New" Command="ApplicationCommands.New">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/NewFile_16x.png" />
                         </MenuItem.Icon>
@@ -46,13 +49,13 @@
                             <Image Source="pack://application:,,,/Resources/Save_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Save As" Command="ApplicationCommands.SaveAs" IsEnabled="False">
+                    <MenuItem Header="_Save As" Command="ApplicationCommands.SaveAs">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/SaveAs_16x.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <localUtils:RecentFileList x:Name="RecentFileList" />
-                    <MenuItem Header="_Exit" Command="{Binding ExitCommand}">
+                    <MenuItem Header="_Exit" Command="ApplicationCommands.Close">
                         <MenuItem.Icon>
                             <Image Source="pack://application:,,,/Resources/CloseSolution_16x.png" />
                         </MenuItem.Icon>
@@ -74,17 +77,27 @@
             <avalonDock:DockingManager.Resources>
                 <!--add views for specific ViewModels -->
                 <!--View for Power System editor-->
-                <DataTemplate DataType="{x:Type appWide:PowerSysViewModel}">
+                <DataTemplate DataType="{x:Type vms:PowerSysViewModel}">
                     <pwsEditor:PowerSystemEditorControl />
                 </DataTemplate>
                 <!--View for scenario editor-->
-                <DataTemplate DataType="{x:Type appWide:ScenarioEditorViewModel}">
+                <DataTemplate DataType="{x:Type vms:ScenarioEditorViewModel}">
                     <scenEditor:PowerSystemStateCollectionDgEditorControl />
                 </DataTemplate>
                 <!--View for scenario tep setup-->
-                <DataTemplate DataType="{x:Type appWide:ScenarioTepSetupViewModel}">
+                <DataTemplate DataType="{x:Type vms:ScenarioTepSetupViewModel}">
                     <scenarioTep:ScenarioTepSetupControl />
                 </DataTemplate>
+                <!--View for scenario tep setup-->
+                <DataTemplate DataType="{x:Type vms:ScenarioTepSetupAndParetoViewModel}">
+                    <scenarioTepAnalysis:ScenarioTepSetupThenBruteForceControl />
+                </DataTemplate>
+                <!--View for pareto builder scenario tep-->
+                <DataTemplate DataType="{x:Type vms:ScenarioTEPParetoViewModel}">
+                    <scenarioTepAnalysis:ScenarioTEP2ndOrderEnumerateControl />
+                </DataTemplate>
+                <!--View for OPFLDCViewModel-->
+                <!--View for OPFViewModel-->
             </avalonDock:DockingManager.Resources>
             <avalonDock:DockingManager.LayoutItemContainerStyle>
                 <!--you can add additional bindings from the layoutitem to the DockWindowViewModel-->

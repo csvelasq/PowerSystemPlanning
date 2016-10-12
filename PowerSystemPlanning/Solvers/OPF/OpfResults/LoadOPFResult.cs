@@ -15,7 +15,7 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
         public double HourlyCurtailmentCost => PowerCurtailed * MyLoadState.LoadSheddingCost;
         public double TotalCurtailmentCost => EnergyCurtailed * MyLoadState.LoadSheddingCost;
 
-        public LoadOPFResult(OPFModelResult globalResults, IInelasticLoadState state, double pCurtailed)
+        public LoadOPFResult(OpfModelResult globalResults, IInelasticLoadState state, double pCurtailed)
             : base(globalResults)
         {
             MyLoadState = state;

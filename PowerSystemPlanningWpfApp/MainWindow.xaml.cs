@@ -8,6 +8,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
 using NLog;
+using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
+using Prism.Events;
+using PowerSystemPlanningWpfApp.ApplicationWide.Events;
 
 namespace PowerSystemPlanningWpfApp
 {
@@ -16,6 +19,11 @@ namespace PowerSystemPlanningWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The event aggregator of this app to comunicate between viewmodels.
+        /// </summary>
+        protected readonly IEventAggregator _eventAggregator;
+
         public MainWindowViewModel MyMainWindowViewModel
         {
             get { return (MainWindowViewModel)this.DataContext; }
@@ -26,7 +34,8 @@ namespace PowerSystemPlanningWpfApp
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
-            //dockingManager.DocumentClosed += MyMainWindowViewModel.DockingManager_DocumentClosed;
+            _eventAggregator = ApplicationService.Instance.EventAggregator;
+            _eventAggregator.GetEvent<PowerSystemOpenedEvent>().Subscribe(OnPowerSystemOpened);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -58,7 +67,33 @@ namespace PowerSystemPlanningWpfApp
         {
             bottomAnchor.ToggleAutoHide();
             var root = (Xceed.Wpf.AvalonDock.Layout.LayoutAnchorablePane)bottomAnchor.Parent;
-            root.DockHeight = new GridLength(200);
+            root.DockHeight = new GridLength(150);
+        }
+
+        private void OnNewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            // Configure the message box to be displayed
+            string caption = "Power system planning";
+            string messageBoxText = "Do you want to save changes to this document before creating a new model? Click 'Yes' to save and close, 'No' to close without saving, or 'Cancel' to not close.";
+            MessageBoxButton button = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icon = MessageBoxImage.Warning;// Display message box
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            // Process message box results
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    // User pressed Yes button: save and then create new
+                    MyMainWindowViewModel.SaveFileCommand.Execute();
+                    MyMainWindowViewModel.NewFileCommand.Execute();
+                    break;
+                case MessageBoxResult.No:
+                    // User pressed No button: create new immediately
+                    MyMainWindowViewModel.NewFileCommand.Execute();
+                    break;
+                case MessageBoxResult.Cancel:
+                    // User pressed Cancel button: don't do anythin
+                    break;
+            }
         }
 
         private void OnOpenExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -66,9 +101,24 @@ namespace PowerSystemPlanningWpfApp
             MyMainWindowViewModel.OpenFileCommand.Execute();
         }
 
+        private void OnPowerSystemOpened(PowerSysViewModel obj)
+        {
+            RecentFileList.InsertFile(obj.XmlAbsolutePath);
+        }
+
         private void OnSaveExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             MyMainWindowViewModel.SaveFileCommand.Execute();
+        }
+
+        private void OnSaveAsExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MyMainWindowViewModel.SaveFileAsCommand.Execute();
+        }
+
+        private void OnCloseExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            MyMainWindowViewModel.ExitCommand.Execute();
         }
     }
 }

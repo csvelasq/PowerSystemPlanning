@@ -14,7 +14,7 @@ namespace PowerSystemPlanning.MultiObjective
         /// <summary>
         /// A reference to the optimization problem for which this individual is a solution.
         /// </summary>
-        public BaseMultiObjectiveOptimizationProblem MyProblem { get; }
+        public IMultiObjectiveOptimizationProblem MyProblem { get; }
         /// <summary>
         /// The value of each of the objective functions for this individual
         /// </summary>
@@ -41,7 +41,7 @@ namespace PowerSystemPlanning.MultiObjective
 
             bool atLeastOneObjectiveBetter = false;
 
-            for (int i = 0; i < MyProblem.NumberOfObjectives; i++)
+            for (int i = 0; i < MyProblem.MyObjectiveFunctionsDefinition.Count; i++)
             {
                 if (ObjectiveValues[i] > other.ObjectiveValues[i])
                 {
@@ -82,9 +82,9 @@ namespace PowerSystemPlanning.MultiObjective
             return other.Dominates(this);
         }
 
-        protected BaseMultiObjectiveIndividual(BaseMultiObjectiveOptimizationProblem myProblem)
+        protected BaseMultiObjectiveIndividual(IMultiObjectiveOptimizationProblem problem)
         {
-            MyProblem = myProblem;
+            MyProblem = problem;
         }
     }
 }

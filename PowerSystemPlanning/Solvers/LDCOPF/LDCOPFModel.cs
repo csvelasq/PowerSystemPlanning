@@ -12,7 +12,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
     /// <summary>
     /// Linear programming optimal power flow model for a load-duration curve representation of demand.
     /// </summary>
-    public class LDCOPFModel : BaseGRBOptimizationModel
+    public class LdcOpfModel : BaseGRBOptimizationModel
     {
         public override string GRBOptimizationModelName { get { return "Linear Optimal (DC) Power Flow, with Load Duration Curve Representation of Demand"; } }
 
@@ -21,25 +21,25 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         /// <summary>
         /// The OPF model in each block of the duration curve.
         /// </summary>
-        public List<OPFModel> OpfByBlock { get; protected set; }
+        public List<OpfModel> OpfByBlock { get; protected set; }
 
         /// <summary>
         /// The results of the OPF model in each block of the duration curve.
         /// </summary>
-        public List<OPFModelResult> OpfResultsByBlock { get; protected set; }
+        public List<OpfModelResult> OpfResultsByBlock { get; protected set; }
 
         /// <summary>
         /// Detailed results for this LDCOPF, set by calling <see cref="BuildLDCOPFModelResults"/> (after the model is solved).
         /// </summary>
         public LdcOpfModelResults MyDetailedLDCOPFModelResults { get; protected set; }
 
-        public LDCOPFModel(IEnumerable<IPowerSystemState> powerSystemStates)
+        public LdcOpfModel(IEnumerable<IPowerSystemState> powerSystemStates)
             : base()
         {
             this.MyPowerSystemStates = new List<IPowerSystemState>(powerSystemStates);
         }
 
-        public LDCOPFModel(IEnumerable<IPowerSystemState> powerSystemStates, GRBEnv grbEnv, GRBModel grbModel)
+        public LdcOpfModel(IEnumerable<IPowerSystemState> powerSystemStates, GRBEnv grbEnv, GRBModel grbModel)
             : base(grbEnv, grbModel)
         {
             this.MyPowerSystemStates = new List<IPowerSystemState>(powerSystemStates);
@@ -48,10 +48,10 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         public override void BuildGRBOptimizationModel()
         {
             //creates opf model for each block in the LDC
-            OpfByBlock = new List<OPFModel>();
+            OpfByBlock = new List<OpfModel>();
             foreach (var state in MyPowerSystemStates)
             {
-                var opfBlock = new OPFModel(state, MyGrbEnv, MyGrbModel);
+                var opfBlock = new OpfModel(state, MyGrbEnv, MyGrbModel);
                 opfBlock.BuildGRBOptimizationModel();
                 OpfByBlock.Add(opfBlock);
             }
@@ -65,8 +65,8 @@ namespace PowerSystemPlanning.Solvers.LDCOPF
         {
             int status = MyGrbModel.Get(GRB.IntAttr.Status);
             //detailed results for each block
-            OpfResultsByBlock = new List<OPFModelResult>();
-            foreach (OPFModel opfModel in this.OpfByBlock)
+            OpfResultsByBlock = new List<OpfModelResult>();
+            foreach (OpfModel opfModel in this.OpfByBlock)
             {
                 OpfResultsByBlock.Add(opfModel.BuildOPFModelResults());
             }

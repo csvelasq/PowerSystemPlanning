@@ -75,7 +75,7 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
              where load.MyLoadState.UnderlyingInelasticLoad.ConnectionNode == MyNodeState.UnderlyingNode
              select load.TotalCurtailmentCost).Sum();
 
-        public NodeOPFResult(OPFModelResult globalResult, INodeState node, double angle, double spotPrice)
+        public NodeOPFResult(OpfModelResult globalResult, INodeState node, double angle, double spotPrice)
             : base(globalResult)
         {
             MyNodeState = node;

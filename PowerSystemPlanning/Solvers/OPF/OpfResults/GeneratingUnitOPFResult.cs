@@ -34,7 +34,7 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
         /// </summary>
         public double TotalGenerationCost => HourlyGenerationCost * OpfDuration;
 
-        public GeneratingUnitOPFResult(OPFModelResult globalResult, IGeneratingUnitState genState, double output)
+        public GeneratingUnitOPFResult(OpfModelResult globalResult, IGeneratingUnitState genState, double output)
             : base(globalResult)
         {
             MyGeneratingUnitState = genState;

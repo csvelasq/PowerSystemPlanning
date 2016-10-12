@@ -14,7 +14,7 @@ namespace PowerSystemPlanning.MultiObjective
         /// <summary>
         /// A reference to the optimization problem for which this individual is a solution.
         /// </summary>
-        BaseMultiObjectiveOptimizationProblem MyProblem { get; }
+        IMultiObjectiveOptimizationProblem MyProblem { get; }
         /// <summary>
         /// The value of each of the objective functions for this individual
         /// </summary>

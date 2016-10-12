@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor
+namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP
 {
     /// <summary>
-    /// Interaction logic for StateSummaryControl.xaml
+    /// Interaction logic for ScenarioTepSetupThenBruteForceControl.xaml
     /// </summary>
-    public partial class StateSummaryControl : UserControl
+    public partial class ScenarioTepSetupThenBruteForceControl : UserControl
     {
-        public StateSummaryControl()
+        public ScenarioTepSetupThenBruteForceControl()
         {
             InitializeComponent();
         }

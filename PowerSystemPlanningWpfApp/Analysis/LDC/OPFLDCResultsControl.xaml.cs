@@ -23,18 +23,6 @@ namespace PowerSystemPlanningWpfApp.Analysis.LDC
     /// </summary>
     public partial class OPFLDCResultsControl : UserControl
     {
-        LdcOpfModelResults _MyLDCOPFModelResults;
-        public LdcOpfModelResults MyLDCOPFModelResults
-        {
-            get { return _MyLDCOPFModelResults; }
-            set
-            {
-                _MyLDCOPFModelResults = value;
-                //Databinding
-                DataContext = _MyLDCOPFModelResults;
-            }
-        }
-
         public OPFLDCResultsControl()
         {
             InitializeComponent();

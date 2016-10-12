@@ -26,5 +26,7 @@ namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
         /// Adimensional factor that multiplies investment costs in objective function.
         /// </summary>
         double InvestmentCostsMultiplierInObjectiveFunction { get; }
+
+        ICandidateTransmissionLineState CreateCandidateLineState(ICandidateTransmissionLine line);
     }
 }

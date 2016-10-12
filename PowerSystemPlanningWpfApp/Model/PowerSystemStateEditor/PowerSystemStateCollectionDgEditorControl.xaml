@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerSystemPlanningWpfApp.Model.PowerSystemStateEditor"
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
-             xmlns:appWide="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide"
+             xmlns:vms="clr-namespace:PowerSystemPlanningWpfApp.ApplicationWide.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700"
-             d:DataContext="{d:DesignInstance Type=appWide:ScenarioEditorViewModel}">
+             d:DataContext="{d:DesignInstance Type=vms:ScenarioEditorViewModel}">
     <!--Content-->
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,9 +16,10 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <!--Scenario and States definition-->
-        <local:ScenarioAndStateDefinitionControl DataContext="{Binding}" Width="300" Grid.Column="0" />
+        <local:ScenarioAndStateDefinitionControl 
+            Width="300" Grid.Column="0" />
         <!--Bulk States data edition-->
-        <GroupBox Header="State Editor" Grid.Column="1">
+        <GroupBox Header="Scenarios and States Editor" Grid.Column="1">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" >
                     <localUtils:ImageTextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="5,2,0,0">
@@ -37,7 +38,7 @@
                                     Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Save_16x.png" />
                     </StackPanel>
                 </StackPanel>
-                <localUtils:CustomDataGrid ItemsSource="{Binding MyTepStudy.MyStateCollectionDt.DtNodesStates}" 
+                <localUtils:CustomDataGrid ItemsSource="{Binding MyStaticScenarios.MyStateCollectionDt.DtNodesStates}" 
                                            AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False">
                 </localUtils:CustomDataGrid>
             </DockPanel>

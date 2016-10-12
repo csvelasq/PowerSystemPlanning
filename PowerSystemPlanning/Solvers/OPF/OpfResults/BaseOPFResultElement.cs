@@ -4,11 +4,11 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
 {
     public abstract class BaseOPFResultElement
     {
-        public OPFModelResult GlobalResultsOpfModelResults { get; protected set; }
+        public OpfModelResult GlobalResultsOpfModelResults { get; protected set; }
 
         public double OpfDuration => GlobalResultsOpfModelResults.MyPowerSystemState.Duration;
 
-        public BaseOPFResultElement(OPFModelResult globalResults)
+        public BaseOPFResultElement(OpfModelResult globalResults)
         {
             GlobalResultsOpfModelResults = globalResults;
         }

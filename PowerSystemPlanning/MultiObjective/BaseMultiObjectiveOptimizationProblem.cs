@@ -10,40 +10,15 @@ namespace PowerSystemPlanning.MultiObjective
     /// Base class for defining a multi-objective optimization problem
     /// </summary>
     /// <remarks>
-    /// Concrete implementations must override <see cref="MyMOOName"/> with an arbitrary problem name;
-    /// and they must define, at the outset, the list of objective functions <see cref="MyObjectiveFunctionsDefinition"/>.
+    /// Concrete implementations must define, at the outset, the list of objective functions <see cref="MyObjectiveFunctionsDefinition"/>.
     /// </remarks>
     public abstract class BaseMultiObjectiveOptimizationProblem : IMultiObjectiveOptimizationProblem
     {
         /// <summary>
-        /// The name of this multiobjective optimization problem.
-        /// </summary>
-        public abstract string MyMOOName { get; }
-
-        /// <summary>
         /// A list defining the objective functions of this multiobjective problem.
         /// </summary>
         public List<ObjectiveFunctionInOptimizationProblem> MyObjectiveFunctionsDefinition
-        {
-            get
-            {
-                return _MyObjectiveFunctionsDefinition;
-            }
-
-            set
-            {
-                _MyObjectiveFunctionsDefinition = value;
-            }
-        }
-        List<ObjectiveFunctionInOptimizationProblem> _MyObjectiveFunctionsDefinition;
-
-        /// <summary>
-        /// Gets the number of objectives in this optimization problem.
-        /// </summary>
-        public int NumberOfObjectives
-        {
-            get { return MyObjectiveFunctionsDefinition.Count; }
-        }
+        { get; protected set; }
     }
 
     /// <summary>
@@ -54,36 +29,12 @@ namespace PowerSystemPlanning.MultiObjective
         /// <summary>
         /// The sense of this optimization objective (minimize or maximize).
         /// </summary>
-        public OptimizationSense MySense
-        {
-            get
-            {
-                return _MySense;
-            }
-
-            set
-            {
-                _MySense = value;
-            }
-        }
-        OptimizationSense _MySense;
+        public OptimizationSense MySense { get; set; }
 
         /// <summary>
         /// The name of this objective function.
         /// </summary>
-        public string MyObjectiveName
-        {
-            get
-            {
-                return _MyObjectiveName;
-            }
-
-            set
-            {
-                _MyObjectiveName = value;
-            }
-        }
-        string _MyObjectiveName;
+        public string MyObjectiveName { get; set; }
     }
 
     /// <summary>

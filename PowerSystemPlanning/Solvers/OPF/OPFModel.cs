@@ -12,7 +12,7 @@ namespace PowerSystemPlanning.Solvers.OPF
     /// <remarks>
     /// The most simple OPF model based on DC power flow. Load shedding is allowed (modeled as fictitious generation) so the problem is always feasible (by shedding all load in every bus of the power system).
     /// </remarks>
-    public class OPFModel : BaseGRBOptimizationModel
+    public class OpfModel : BaseGRBOptimizationModel
     {
         public override string GRBOptimizationModelName => "Linear Optimal (DC) Power Flow";
 
@@ -21,7 +21,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <summary>
         /// The results of this simple OPF model (set by <see cref="BuildOPFModelResults"/>).
         /// </summary>
-        public OPFModelResult MyOPFModelResult { get; protected set; }
+        public OpfModelResult MyOPFModelResult { get; protected set; }
 
         #region Gurobi model vars and constraints
         /// <summary>
@@ -111,7 +111,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// Creates the Gurobi OPF model for the provided power system.
         /// </summary>
         /// <param name="powerSystem">The power system for which the OPF will be solved.</param>
-        public OPFModel(IPowerSystemState powerSystem) : base()
+        public OpfModel(IPowerSystemState powerSystem) : base()
         {
             this.MyPowerSystemState = powerSystem;
         }
@@ -122,7 +122,7 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// <param name="powerSystem"></param>
         /// <param name="env"></param>
         /// <param name="model"></param>
-        public OPFModel(IPowerSystemState powerSystem, GRBEnv env, GRBModel model) : base(env, model)
+        public OpfModel(IPowerSystemState powerSystem, GRBEnv env, GRBModel model) : base(env, model)
         {
             this.MyPowerSystemState = powerSystem;
         }
@@ -285,9 +285,9 @@ namespace PowerSystemPlanning.Solvers.OPF
         /// </summary>
         /// <returns></returns>
         /// <remarks>This method should be called upon successful solution of the model.</remarks>
-        public OPFModelResult BuildOPFModelResults()
+        public OpfModelResult BuildOPFModelResults()
         {
-            MyOPFModelResult = new OPFModelResult(MyPowerSystemState, GRBModelStatus, ObjVal, PGen_Solution, PFlow_Solution, LShed_Solution, BusAng_Solution, NodalSpotPrice);
+            MyOPFModelResult = new OpfModelResult(MyPowerSystemState, GRBModelStatus, ObjVal, PGen_Solution, PFlow_Solution, LShed_Solution, BusAng_Solution, NodalSpotPrice);
             return MyOPFModelResult;
         }
     }

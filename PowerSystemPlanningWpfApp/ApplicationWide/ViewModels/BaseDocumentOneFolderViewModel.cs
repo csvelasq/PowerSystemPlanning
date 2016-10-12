@@ -22,14 +22,19 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
             }
             else
             {
-                var dlg = new VistaFolderBrowserDialog();
-                bool? result = dlg.ShowDialog();
-                // Process save file dialog box results
-                if (result == true)
-                {
-                    FolderAbsolutePath = dlg.SelectedPath;
-                    SaveToFolder();
-                }
+                SaveAs();
+            }
+        }
+
+        public override void SaveAs()
+        {
+            var dlg = new VistaFolderBrowserDialog();
+            bool? result = dlg.ShowDialog();
+            // Process save file dialog box results
+            if (result == true)
+            {
+                FolderAbsolutePath = dlg.SelectedPath;
+                SaveToFolder();
             }
         }
 

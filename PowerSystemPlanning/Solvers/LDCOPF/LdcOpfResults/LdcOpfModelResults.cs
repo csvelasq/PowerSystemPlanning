@@ -16,7 +16,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults
         /// <summary>
         /// The results of the OPF model in each block of the duration curve.
         /// </summary>
-        public List<OPFModelResult> MyOpfResultsByBlock { get; protected set; }
+        public List<OpfModelResult> MyOpfResultsByBlock { get; protected set; }
 
         public List<NodeLdcOpfResult> MyDetailedNodeLdcOpfResults { get; protected set; }
 
@@ -51,7 +51,7 @@ namespace PowerSystemPlanning.Solvers.LDCOPF.LdcOpfResults
 
         public LdcOpfModelResults(int status) : base(status) { }
 
-        public LdcOpfModelResults(int status, double objVal, List<OPFModelResult> opfResultsByBlock, IList<INode> nodes)
+        public LdcOpfModelResults(int status, double objVal, List<OpfModelResult> opfResultsByBlock, IList<INode> nodes)
             : base(status, objVal)
         {
             this.MyOpfResultsByBlock = opfResultsByBlock;

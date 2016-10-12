@@ -8,7 +8,7 @@
              xmlns:localUtils="clr-namespace:PowerSystemPlanningWpfApp.ControlUtils"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="950" Background="White"
-             d:DataContext="{d:DesignInstance planningModel:OPFModelResult}">
+             d:DataContext="{d:DesignInstance Type=planningModel:OpfModelResult}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

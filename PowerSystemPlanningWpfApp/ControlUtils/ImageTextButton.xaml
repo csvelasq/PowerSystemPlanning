@@ -8,7 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="20">
     <StackPanel Orientation="Horizontal">
-        <Image Source="{Binding ElementName=MyImageButton, Path=Image}" Width="16" />
-        <TextBlock VerticalAlignment="Center" Margin="0,0,0,0" Text="{Binding ElementName=MyImageButton, Path=Text}" />
+        <Image Source="{Binding ElementName=MyImageButton, Path=Image}" 
+               Width="16" />
+        <TextBlock Text="{Binding ElementName=MyImageButton, Path=Text}"
+                   VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1,1,1,1" />
     </StackPanel>
 </Button>

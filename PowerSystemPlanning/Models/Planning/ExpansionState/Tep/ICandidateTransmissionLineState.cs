@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PowerSystemPlanning.Models.Planning.InvestmentBranch;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,6 @@ namespace PowerSystemPlanning.Models.Planning.ExpansionState.Tep
         /// <remarks>
         /// Implementations should return <see cref="UnderlyingCandidateTransmissionLine"/> in the getter of the underlying investment element in <see cref="IInvestmentElementState"/>.
         /// </remarks>
-        ICandidateTransmissionLineState UnderlyingCandidateTransmissionLine { get; }
+        ICandidateTransmissionLine UnderlyingCandidateTransmissionLine { get; }
     }
 }

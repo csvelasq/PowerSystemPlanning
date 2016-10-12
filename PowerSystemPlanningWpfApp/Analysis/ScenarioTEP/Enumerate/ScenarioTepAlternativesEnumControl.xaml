@@ -10,7 +10,7 @@
              d:DataContext="{d:DesignInstance local:ScenarioTepAlternativesEnumControlViewModel}">
     <DockPanel>
         <localUtils:ImageTextBlock MessageForTextBlock="Double-click one plan in the above grid in order to inspect details (a new window will open)." Margin="0,5,0,5" DockPanel.Dock="Bottom" />
-        <localUtils:CustomDataGrid ItemsSource="{Binding TepAlternatives, Mode=OneWay}" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgTEPEnum"
+        <localUtils:CustomDataGrid ItemsSource="{Binding EnumeratedAlternatives, Mode=OneWay}" AutoGenerateColumns="False" IsReadOnly="True"
                                    localUtils:MyCommands_DgDblClick.DataGridDoubleClickCommand="{Binding DgTepEnum_DoubleClick}"
                                    localUtils:DataGridColumnsBehavior.BindableColumns="{Binding MyColumnCollection}">
             <DataGrid.Columns>

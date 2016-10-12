@@ -1,7 +1,6 @@
 ﻿using NLog;
 using Ookii.Dialogs.Wpf;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
-using PowerSystemPlanningWpfApp.ApplicationWide;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -16,8 +15,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PowerSystemPlanningWpfApp.ApplicationWide.Events;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
 
-namespace PowerSystemPlanningWpfApp
+namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
@@ -31,10 +31,12 @@ namespace PowerSystemPlanningWpfApp
         /// </summary>
         protected readonly IEventAggregator _eventAggregator;
 
-        #region View Models
-
+        #region Internal fields
         PowerSysViewModel _OpenedPowerSystemViewModel;
+        BaseDocumentViewModel _ActiveDocumentViewModel;
+        #endregion
 
+        #region View Models
         public PowerSysViewModel OpenedPowerSystemViewModel
         {
             get { return _OpenedPowerSystemViewModel; }
@@ -45,31 +47,37 @@ namespace PowerSystemPlanningWpfApp
                     _OpenedPowerSystemViewModel = value;
                     OnPropertyChanged();
                     MyOpenDocuments.Clear();
-                    OnDocumentOpened(OpenedPowerSystemViewModel);
+                    _eventAggregator.GetEvent<PowerSystemOpenedEvent>().Publish(_OpenedPowerSystemViewModel);
+                    _eventAggregator.GetEvent<RequestDocumentOpenEvent>().Publish(_OpenedPowerSystemViewModel);
                 }
             }
         }
 
         public ObservableCollection<BaseDocumentViewModel> MyOpenDocuments { get; private set; }
 
-        BaseDocumentViewModel _ActiveDocumentViewModel;
-
         public BaseDocumentViewModel ActiveDocumentViewModel
         {
             get { return _ActiveDocumentViewModel; }
             set { SetProperty<BaseDocumentViewModel>(ref _ActiveDocumentViewModel, value); }
         }
-
         #endregion
 
         #region Commands
-
+        public DelegateCommand NewFileCommand { get; private set; }
         public DelegateCommand OpenFileCommand { get; private set; }
         public DelegateCommand SaveFileCommand { get; private set; }
+        public DelegateCommand SaveFileAsCommand { get; private set; }
         public DelegateCommand ExitCommand { get; private set; }
         public DelegateCommand NewScenarioOpfCommand { get; private set; }
         public DelegateCommand NewScenarioTepCommand { get; private set; }
         public DelegateCommand OpenScenarioTepCommand { get; private set; }
+
+        private void NewFile()
+        {
+            OpenedPowerSystemViewModel = new PowerSysViewModel(new PowerSystem());
+            //log opened file and persiste last opened file
+            logger.Info("New power system created.");
+        }
 
         private void OpenFile()
         {
@@ -113,6 +121,11 @@ namespace PowerSystemPlanningWpfApp
             ActiveDocumentViewModel.Save();
         }
 
+        private void SaveFileAs()
+        {
+            ActiveDocumentViewModel.SaveAs();
+        }
+
         private void Exit()
         {
             logger.Info($"Shutting down...");
@@ -121,19 +134,24 @@ namespace PowerSystemPlanningWpfApp
 
         private void NewScenarioOpf()
         {
-            var tepVm = new ScenarioEditorViewModel(OpenedPowerSystemViewModel.MyPowerSystem);
-            MyOpenDocuments.Add(tepVm);
+            var tepVm = new ScenarioEditorViewModel(OpenedPowerSystemViewModel.MyPowerSystem, new BindableStaticScenarioCollection(OpenedPowerSystemViewModel.MyPowerSystem));
+            OpenDocument(tepVm);
         }
 
         private void NewScenarioTep()
         {
-            var tepVm = new ScenarioTepSetupViewModel(OpenedPowerSystemViewModel.MyPowerSystem);
-            MyOpenDocuments.Add(tepVm);
+            var tepVm = new ScenarioTepSetupAndParetoViewModel(OpenedPowerSystemViewModel.MyPowerSystem);
+            OpenDocument(tepVm);
         }
 
         private void OpenScenarioTep()
         {
             throw new NotImplementedException();
+        }
+
+        private void OpenDocument(BaseDocumentViewModel document)
+        {
+            _eventAggregator.GetEvent<RequestDocumentOpenEvent>().Publish(document);
         }
         #endregion
 
@@ -143,8 +161,10 @@ namespace PowerSystemPlanningWpfApp
             _eventAggregator.GetEvent<RequestDocumentOpenEvent>().Subscribe(OnDocumentOpened);
 
             //Commands
+            NewFileCommand = new DelegateCommand(NewFile);
             OpenFileCommand = new DelegateCommand(OpenFile);
             SaveFileCommand = new DelegateCommand(SaveFile);
+            SaveFileCommand = new DelegateCommand(SaveFileAs);
             ExitCommand = new DelegateCommand(Exit);
             NewScenarioOpfCommand = new DelegateCommand(NewScenarioOpf);
             NewScenarioTepCommand = new DelegateCommand(NewScenarioTep);
@@ -167,6 +187,7 @@ namespace PowerSystemPlanningWpfApp
         private void OnDocumentOpened(BaseDocumentViewModel document)
         {
             MyOpenDocuments.Add(document);
+            ActiveDocumentViewModel = document;
         }
     }
 }

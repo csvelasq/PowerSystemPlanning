@@ -12,6 +12,10 @@ using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
 using System.IO;
 using PowerSystemPlanning.Models.Planning.ScenarioTEP;
 using PowerSystemPlanning.Models.Planning.Scenarios;
+using PowerSystemPlanning.Models.Planning.ScenarioTEP.Multiobjective;
+using PowerSystemPlanning.Models.Planning.ExpansionState.Tep;
+using PowerSystemPlanning.MultiObjective;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingInvestmentBranch;
 
 namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
 {
@@ -21,17 +25,22 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
         #region internal fields
         BindingList<CandidateTransmissionLine> _MyCandidateTransmissionLines;
         private BindableStaticScenarioCollection _MyScenarios;
-        private double _OperationCostsMultiplierInObjectiveFunction;
-        private double _InvestmentCostsMultiplierInObjectiveFunction;
+        private double _OperationCostsMultiplierInObjectiveFunction = 1;
+        private double _InvestmentCostsMultiplierInObjectiveFunction = 1;
         #endregion
 
-        #region Interface implementation
+        #region IStaticScenarioTepModel implementation
         IList<ICandidateTransmissionLine> IStaticScenarioTepModel.MyCandidateTransmissionLines
             => (from line in MyBindableCandidateTransmissionLines
                 select (ICandidateTransmissionLine)line).ToList();
 
         IStaticScenarioCollection IStaticScenarioTepModel.MyScenarios
             => MyBindableScenarios;
+
+        public ICandidateTransmissionLineState CreateCandidateLineState(ICandidateTransmissionLine line)
+        {
+            return new CandidateTransmissionLineState(line);
+        }
         #endregion
 
         [DataMember()]
@@ -95,6 +104,7 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
             }
         }
 
+        #region Open&Save
         public void SaveToXml(string xmlPath)
         {
             var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
@@ -109,16 +119,18 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
         public static BindableTepModel LoadFromXml(string xmlPath) =>
             MixedUtils.LoadFromXml<BindableTepModel>(xmlPath);
         /*
-    public static BindingTepModel LoadFromXml(string xmlPath)
-    {
-        //Opens the scenarios/states definition
-        var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
-        var dcs = new DataContractSerializer(typeof(BindingTepModel), dcsSettings);
-        var fs = new FileStream(xmlPath, FileMode.Open);
-        var reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
-        var deserializedTepModel = (BindingTepModel)dcs.ReadObject(reader);
-        return deserializedTepModel;
-    }
-        */
+public static BindingTepModel LoadFromXml(string xmlPath)
+{
+//Opens the scenarios/states definition
+var dcsSettings = new DataContractSerializerSettings { PreserveObjectReferences = true };
+var dcs = new DataContractSerializer(typeof(BindingTepModel), dcsSettings);
+var fs = new FileStream(xmlPath, FileMode.Open);
+var reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+var deserializedTepModel = (BindingTepModel)dcs.ReadObject(reader);
+return deserializedTepModel;
+}
+*/
+        #endregion
+
     }
 }

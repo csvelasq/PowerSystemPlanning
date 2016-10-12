@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerSystemPlanningWpfApp.ApplicationWide
+namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
     public class PowerSysViewModel : BaseDocumentOneXmlViewModel
     {
@@ -51,6 +51,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         public PowerSysViewModel(PowerSystem pws) : this()
         {
             MyPowerSystem = pws;
+            NotifyNewDocumentOpened(this);
         }
 
         #region Open&Save
@@ -59,6 +60,8 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         {
             MyPowerSystem.SaveToXml(XmlAbsolutePath);
             logger.Info($"Power System '{MyPowerSystem.Name}' saved to '{XmlAbsolutePath}'.");
+            Properties.Settings.Default.LastOpenedPowerSystem = XmlAbsolutePath;
+            Properties.Settings.Default.Save();
         }
         #endregion
     }

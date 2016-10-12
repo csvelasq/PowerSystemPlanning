@@ -20,7 +20,7 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
         /// </summary>
         public double Utilization => Math.Abs(PowerFlow) / MyTransmissionLineState.AvailableThermalCapacity;
 
-        public TransmissionLineOPFResult(OPFModelResult globalResults, ISimpleTransmissionLineState tlState, double powerFlow)
+        public TransmissionLineOPFResult(OpfModelResult globalResults, ISimpleTransmissionLineState tlState, double powerFlow)
             : base(globalResults)
         {
             MyTransmissionLineState = tlState;

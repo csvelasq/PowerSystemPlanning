@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PowerSystemPlanningWpfApp.Analysis
+namespace PowerSystemPlanningWpfApp.Analysis.StaticTEP
 {
     /// <summary>
     /// Interaction logic for TransmissionExpansionPlanDetailsControl.xaml

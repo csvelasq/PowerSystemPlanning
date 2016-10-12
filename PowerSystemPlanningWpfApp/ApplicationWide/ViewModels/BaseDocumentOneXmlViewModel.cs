@@ -24,17 +24,22 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
             }
             else
             {
-                var dlg = new VistaSaveFileDialog();
-                dlg.FileName = DefaultFileName;
-                dlg.DefaultExt = ".xml";
-                dlg.Filter = "XML file (.xml)|*.xml";
-                Nullable<bool> result = dlg.ShowDialog();
-                // Process save file dialog box results
-                if (result == true)
-                {
-                    XmlAbsolutePath = dlg.FileName;
-                    SaveToXml();
-                }
+                SaveAs();
+            }
+        }
+
+        public override void SaveAs()
+        {
+            var dlg = new VistaSaveFileDialog();
+            dlg.FileName = DefaultFileName;
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "XML file (.xml)|*.xml";
+            bool? result = dlg.ShowDialog();
+            // Process save file dialog box results
+            if (result == true)
+            {
+                XmlAbsolutePath = dlg.FileName;
+                SaveToXml();
             }
         }
 

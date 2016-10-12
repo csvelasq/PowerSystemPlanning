@@ -1,7 +1,6 @@
 ﻿using NLog;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
 using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
-using PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios;
 using PowerSystemPlanningWpfApp.ApplicationWide.ViewModels;
 using Prism.Commands;
 using System;
@@ -13,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PowerSystemPlanning.BindingModels.StateBinding;
 
-namespace PowerSystemPlanningWpfApp.ApplicationWide
+namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
     public class ScenarioEditorViewModel : BaseDocumentOneFolderViewModel
     {
@@ -24,29 +23,32 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public PowerSystem MyPowerSystem { get; set; }
 
-        BindableStaticScenarioCollection _MyScenarios;
-        public BindableStaticScenarioCollection MyScenarios
+        public BindableStaticScenarioCollection MyStaticScenarios
         {
-            get { return _MyScenarios; }
-            set { SetProperty<BindableStaticScenarioCollection>(ref _MyScenarios, value); }
+            get { return _MyStaticScenarios; }
+            set { SetProperty<BindableStaticScenarioCollection>(ref _MyStaticScenarios, value); }
         }
 
         #region Basic UI Properties
         public override string Title => "Scenarios";
 
-        PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios.BindableStaticScenario _SelectedScenario;
         public BindableStaticScenario SelectedScenario
         {
             get { return _SelectedScenario; }
             set { base.SetProperty(ref _SelectedScenario, (PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios.BindableStaticScenario)value); }
         }
 
-        PowerSystemState _SelectedState;
         public PowerSystemState SelectedState
         {
             get { return _SelectedState; }
             set { SetProperty<PowerSystemState>(ref _SelectedState, value); }
         }
+        #endregion
+
+        #region Internal fields
+        BindableStaticScenarioCollection _MyStaticScenarios;
+        BindableStaticScenario _SelectedScenario;
+        PowerSystemState _SelectedState;
         #endregion
 
         #region Commands
@@ -55,12 +57,12 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         private void EditStates()
         {
-            MyScenarios.CreateStateCollection();
+            MyStaticScenarios.CreateStateCollection();
         }
 
         private void CommitStates()
         {
-            MyScenarios.CommitStateCollectionToPowerSystemState();
+            MyStaticScenarios.CommitStateCollectionToPowerSystemState();
         }
         #endregion
 
@@ -70,7 +72,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
 
         public override void SaveToFolder()
         {
-            MyScenarios.SaveToLocalFolderForEdition(TepXmlStatesDefinitionAbsolutePath, TepCsvStatesDataAbsolutePath);
+            MyStaticScenarios.SaveToLocalFolderForEdition(TepXmlStatesDefinitionAbsolutePath, TepCsvStatesDataAbsolutePath);
             logger.Info($"Scenarios saved to '{FolderAbsolutePath}'.");
         }
 
@@ -85,14 +87,11 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide
         //     */
         //}
         #endregion
-
-        public ScenarioEditorViewModel(PowerSystem system)
+            
+        public ScenarioEditorViewModel(PowerSystem system, BindableStaticScenarioCollection scenarios)
         {
             MyPowerSystem = system;
-            var defaultScenarios =
-                BindableStaticScenarioCollection.CreateDefaultScenarios(MyPowerSystem);
-            MyScenarios = new BindableStaticScenarioCollection(MyPowerSystem, defaultScenarios);
-
+            MyStaticScenarios = scenarios;
             //Commands
             EditStatesCommand = new DelegateCommand(EditStates);
             CommitStatesCommand = new DelegateCommand(CommitStates);

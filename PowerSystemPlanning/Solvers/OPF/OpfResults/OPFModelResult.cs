@@ -9,7 +9,7 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
     /// <summary>
     /// Encapsulates results of the OPF model.
     /// </summary>
-    public class OPFModelResult : BaseGRBOptimizationModelResult
+    public class OpfModelResult : BaseGRBOptimizationModelResult
     {
         public IPowerSystemState MyPowerSystemState { get; protected set; }
 
@@ -98,9 +98,9 @@ namespace PowerSystemPlanning.Solvers.OPF.OpfResults
         /// </summary>
         /// <param name="status">The Gurobi status of the optimization</param>
         /// <remarks>This constructor can be used to find out if the model was correctly solved by means of the <see cref="IsModelSolved"/> property.</remarks>
-        public OPFModelResult(int status) : base(status) { }
+        public OpfModelResult(int status) : base(status) { }
 
-        public OPFModelResult(IPowerSystemState powerSystem,
+        public OpfModelResult(IPowerSystemState powerSystem,
             int status, double objVal,
             double[] pGen_Solution,
             double[] pFlow_Solution,

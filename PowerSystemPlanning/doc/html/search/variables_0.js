@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['busangle',['BusAngle',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_o_p_f_model.html#ab8ee32ca58d2d3fa568f59f5f079ac49',1,'PowerSystemPlanning::Solvers::OPF::OPFModel']]]
+  ['busangle',['BusAngle',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_opf_model.html#afab1e491e09af33dc39d124b4e9c702a',1,'PowerSystemPlanning::Solvers::OPF::OpfModel']]]
 ];

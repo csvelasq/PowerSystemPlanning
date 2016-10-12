@@ -89,8 +89,9 @@ namespace PowerSystemPlanningWpfApp.Analysis.ScenarioTEP.Enumerate
             <DataGridTextColumn Header="Transmission lines" Binding="{Binding BuiltTransmissionLinesNames}" Width="90" />
             <DataGridTextColumn Header="Expected costs (MMUS$)" Binding="{Binding ExpectedTotalCosts, StringFormat=C}" Width="90" ElementStyle="{StaticResource ResourceKey=CellRightAlign}" />
             */
-            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("New Transmission Lines Count", "BuiltTransmissionLines.Count", "", 110));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Plan ID", "PlanId", "", 90));
             columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Investment Cost (MUS$)", "TotalInvestmentCost", "C1", 90));
+            columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("New Transmission Lines Count", "BuiltTransmissionLines.Count", "", 110));
             columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Transmission lines", "BuiltTransmissionLinesNames", "", 90));
             columns.Add(ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle("Expected costs (MMUS$)", "ExpectedTotalCosts", "C", 90));
         }

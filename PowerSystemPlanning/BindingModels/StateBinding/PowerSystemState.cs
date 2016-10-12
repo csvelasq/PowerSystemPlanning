@@ -65,7 +65,7 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
         public double PeakLoad => (from load in BindingInelasticLoadStates
                                    select load.Consumption).Max();
         public double TotalLoad => (from load in BindingInelasticLoadStates
-                                    select load.Consumption * Duration).Sum();
+                                    select load.Consumption * Duration / 1e3).Sum();
         public double AvailableGeneratingCapacity => (from gen in BindingGeneratingUnitStates
                                                       select gen.AvailableCapacity).Sum();
         #endregion

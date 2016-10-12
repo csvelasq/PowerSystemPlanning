@@ -9,8 +9,9 @@ namespace PowerSystemPlanning.Models.SystemBaseData
     /// <summary>
     /// An element which can be built by investing a given amount of capital.
     /// </summary>
-    public interface IInvestmentElement : IPowerSystemElement
+    public interface IInvestmentElement 
     {
+        IPowerSystemElement UnderlyingElement { get; }
         /// <summary>
         /// The total investment cost (US$) of this new element.
         /// </summary>

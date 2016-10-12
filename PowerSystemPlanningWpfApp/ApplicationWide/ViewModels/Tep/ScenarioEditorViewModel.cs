@@ -11,6 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PowerSystemPlanning.BindingModels.StateBinding;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Data;
+using System.Windows.Data;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
@@ -49,6 +54,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
         BindableStaticScenarioCollection _MyStaticScenarios;
         BindableStaticScenario _SelectedScenario;
         PowerSystemState _SelectedState;
+        ObservableCollection<DataGridColumn> _columnCollection = new ObservableCollection<DataGridColumn>();
         #endregion
 
         #region Commands
@@ -58,11 +64,50 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
         private void EditStates()
         {
             MyStaticScenarios.CreateStateCollection();
+            SetDgColumns();
         }
 
         private void CommitStates()
         {
             MyStaticScenarios.CommitStateCollectionToPowerSystemState();
+        }
+        #endregion
+
+        #region DataTable Columns
+        public ObservableCollection<DataGridColumn> MyColumnCollection
+        {
+            get { return _columnCollection; }
+            set { SetProperty<ObservableCollection<DataGridColumn>>(ref _columnCollection, value); }
+        }
+
+        private void SetDgColumns()
+        {
+            if (MyStaticScenarios.MyStateCollectionDt.DtNodesStates != null
+                && MyStaticScenarios.MyStateCollectionDt.DtNodesStates.Rows.Count > 0)
+            {
+                ObservableCollection<DataGridColumn> colList = new ObservableCollection<DataGridColumn>();
+                //Add one column for each column in the datatable: only change width
+                foreach (DataColumn dtColumn in MyStaticScenarios.MyStateCollectionDt.DtNodesStates.Columns)
+                {
+                    var colName = dtColumn.ColumnName;
+                    var bindingMode = BindingMode.TwoWay;
+                    var stringFormat = "N1";
+                    if (colName == ScenarioAndStateDataTableEditor.NodeNameColumn)
+                    {
+                        bindingMode = BindingMode.OneWay;
+                        stringFormat = "";
+                    }
+                    else if (colName.Contains(ScenarioAndStateDataTableEditor.MarginalCostColumn.Substring(0,10)))
+                    {
+                        stringFormat = "C1";
+                    }
+                    var dgColumn = ControlUtils.DataGridColumnsBehavior.CreateNewColumn_WithMyStyle
+                        (colName, colName, bindingMode, stringFormat, 110);
+                    colList.Add(dgColumn);
+                }
+                //Set column collection in order to update the view
+                MyColumnCollection = colList;
+            }
         }
         #endregion
 
@@ -87,7 +132,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
         //     */
         //}
         #endregion
-            
+
         public ScenarioEditorViewModel(PowerSystem system, BindableStaticScenarioCollection scenarios)
         {
             MyPowerSystem = system;

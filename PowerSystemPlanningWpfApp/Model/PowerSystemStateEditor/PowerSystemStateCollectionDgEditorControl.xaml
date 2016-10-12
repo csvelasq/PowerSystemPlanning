@@ -38,8 +38,9 @@
                                     Image="pack://application:,,,/PowerSystemPlanningWpfApp;component/Resources/Save_16x.png" />
                     </StackPanel>
                 </StackPanel>
-                <localUtils:CustomDataGrid ItemsSource="{Binding MyStaticScenarios.MyStateCollectionDt.DtNodesStates}" 
-                                           AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False">
+                <localUtils:CustomDataGrid ItemsSource="{Binding MyStaticScenarios.MyStateCollectionDt.DtNodesStates}"
+                                           localUtils:DataGridColumnsBehavior.BindableColumns="{Binding MyColumnCollection}" AutoGenerateColumns="False"
+                                           CanUserAddRows="False" CanUserDeleteRows="False">
                 </localUtils:CustomDataGrid>
             </DockPanel>
         </GroupBox>

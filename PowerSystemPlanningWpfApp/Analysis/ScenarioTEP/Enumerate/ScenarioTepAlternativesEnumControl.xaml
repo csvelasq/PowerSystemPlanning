@@ -13,14 +13,7 @@
         <localUtils:CustomDataGrid ItemsSource="{Binding EnumeratedAlternatives, Mode=OneWay}" AutoGenerateColumns="False" IsReadOnly="True"
                                    localUtils:MyCommands_DgDblClick.DataGridDoubleClickCommand="{Binding DgTepEnum_DoubleClick}"
                                    localUtils:DataGridColumnsBehavior.BindableColumns="{Binding MyColumnCollection}">
-            <DataGrid.Columns>
-                <!--<DataGridTextColumn Header="Plan Id" Binding="{Binding PlanId}" />-->
-                <DataGridTextColumn Header="New Transmission Lines Count" Binding="{Binding BuiltTransmissionLines.Count}" Width="110" />
-                <DataGridTextColumn Header="Investment Cost (MUS$)" Binding="{Binding TotalInvestmentCost}" Width="90" />
-                <DataGridTextColumn Header="Transmission lines" Binding="{Binding BuiltTransmissionLinesNames}" Width="90" />
-                <DataGridTextColumn Header="Expected costs (MMUS$)" Binding="{Binding ExpectedTotalCosts, StringFormat=C}" Width="90" ElementStyle="{StaticResource ResourceKey=CellRightAlign}" />
-                <!--Total costs under each scenario will be bind by the view's code-behind-->
-            </DataGrid.Columns>
+            <!--Columns and Total costs under each scenario will be bind by the view-model-->
         </localUtils:CustomDataGrid>
     </DockPanel>
 </UserControl>

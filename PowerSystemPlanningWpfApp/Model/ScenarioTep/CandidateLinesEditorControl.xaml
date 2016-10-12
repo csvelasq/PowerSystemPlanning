@@ -27,8 +27,8 @@
         </Grid>
         <Grid DockPanel.Dock="Left">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <localUtils:CustomDataGrid ItemsSource="{Binding TransmissionLines}" AutoGenerateColumns="False"
                       HorizontalContentAlignment="Stretch" Grid.Column="0" Margin="2,2,2,2">

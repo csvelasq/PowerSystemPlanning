@@ -29,9 +29,11 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
         public ScenarioTepSetupViewModel(PowerSystem system)
         {
             MyPowerSystem = system;
+            //Create TEP model and add default scenarios (s1 & s2) and states (peak & valley)
             MyTepModel = new BindableTepModel(MyPowerSystem);
             var defaultScenarios =
                 BindableStaticScenarioCollection.CreateDefaultScenarios(MyPowerSystem);
+            MyTepModel.MyBindableScenarios.MyScenarios = defaultScenarios;
             //Create scenario view-model
             ScenarioVm = new ScenarioEditorViewModel(MyPowerSystem, MyTepModel.MyBindableScenarios);
             //Create Candidate Transmission lines view-model

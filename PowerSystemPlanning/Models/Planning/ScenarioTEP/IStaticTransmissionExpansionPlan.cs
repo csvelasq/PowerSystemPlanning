@@ -36,6 +36,10 @@ namespace PowerSystemPlanning.Models.Planning.ScenarioTEP
         /// </summary>
         IList<ICandidateTransmissionLine> BuiltTransmissionLines { get; }
         /// <summary>
+        /// Names of built transmission lines.
+        /// </summary>
+        string BuiltTransmissionLinesNames { get; }
+        /// <summary>
         /// Total investment cost in new transmission lines.
         /// </summary>
         double TotalInvestmentCost { get; }

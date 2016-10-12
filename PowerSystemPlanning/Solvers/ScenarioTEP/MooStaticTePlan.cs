@@ -19,11 +19,26 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
         public IStaticScenarioTepSimulationModel MyTepModel => MyMooSimulationModel;
 
         public IList<ICandidateTransmissionLineState> CandidateTransmissionLineStates { get; protected set; }
-        public IList<ICandidateTransmissionLine> BuiltTransmissionLines
-            => (from line in CandidateTransmissionLineStates
-                where line.IsBuilt
-                select line.UnderlyingCandidateTransmissionLine)
+        public IList<ICandidateTransmissionLine> BuiltTransmissionLines =>
+            (from line in CandidateTransmissionLineStates
+             where line.IsBuilt
+             select line.UnderlyingCandidateTransmissionLine)
             .ToList();
+
+        public string BuiltTransmissionLinesNames
+        {
+            get
+            {
+                string names = "";
+                if (BuiltTransmissionLines.Count > 0)
+                {
+                    foreach (var builtLine in BuiltTransmissionLines)
+                        names += builtLine.UnderlyingSimpleTransmissionLine.Name + ",";
+                    names = names.Substring(0, names.Length - 1); //removes last comma
+                }
+                return $"[{names}]";
+            }
+        }
 
         public ulong PlanId
         {
@@ -33,7 +48,7 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
                 for (int l = 0; l < CandidateTransmissionLineStates.Count; l++)
                 {
                     var lineState = CandidateTransmissionLineStates[l];
-                    id += (ulong) (lineState.IsBuilt ? 1 : 0) << l;
+                    id += (ulong)(lineState.IsBuilt ? 1 : 0) << l;
                 }
                 return id;
             }

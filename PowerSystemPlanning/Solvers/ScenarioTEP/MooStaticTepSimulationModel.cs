@@ -64,12 +64,13 @@ namespace PowerSystemPlanning.Solvers.ScenarioTEP
             return scenariosOperationCosts;
         }
 
-        public IList<ICandidateTransmissionLineState> BuildNewCandidateTransmissionLinesStates(IList<ICandidateTransmissionLine> candidateLines)
+        public IList<ICandidateTransmissionLineState> BuildNewCandidateTransmissionLinesStates(IList<ICandidateTransmissionLine> candidateLinesToBuild)
         {
             var candidateLinesStates = new List<ICandidateTransmissionLineState>();
-            foreach (var candidateLine in candidateLines)
+            foreach (var candidateLine in MyTepModelDefinition.MyCandidateTransmissionLines)
             {
                 var candidateLineState = MyTepModelDefinition.CreateCandidateLineState(candidateLine);
+                candidateLineState.IsBuilt = candidateLinesToBuild.Contains(candidateLine);
                 candidateLinesStates.Add(candidateLineState);
             }
             return candidateLinesStates;

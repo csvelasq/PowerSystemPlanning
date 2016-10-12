@@ -83,8 +83,8 @@ namespace PowerSystemPlanning.BindingModels.StateBinding
         public static BindableStaticStateCollection CreateDefaultStateCollection(PowerSystem system)
         {
             var states = new BindableStaticStateCollection(system);
-            states.BindableStates.Add(new PowerSystemState() { Name = "Peak", Duration = 760 });
-            states.BindableStates.Add(new PowerSystemState() { Name = "Valley", Duration = 8000 });
+            states.BindableStates.Add(new PowerSystemState(system) { Name = "Peak", Duration = 760 });
+            states.BindableStates.Add(new PowerSystemState(system) { Name = "Valley", Duration = 8000 });
             return states;
         }
     }

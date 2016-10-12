@@ -8,5 +8,6 @@ var searchData=
   ['bindingtransmissionlines',['BindingTransmissionLines',['../class_power_system_planning_1_1_binding_models_1_1_base_data_binding_1_1_power_system.html#a6c68b2ebc52685c02bab970106cb44bb',1,'PowerSystemPlanning::BindingModels::BaseDataBinding::PowerSystem']]],
   ['blockdurations',['BlockDurations',['../class_power_system_planning_1_1_models_1_1_planning_1_1_l_d_c_1_1_load_duration_curve_by_blocks.html#ae94a477026dee043e1e010e539b52ef8',1,'PowerSystemPlanning::Models::Planning::LDC::LoadDurationCurveByBlocks']]],
   ['builttransmissionlines',['BuiltTransmissionLines',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_i_static_transmission_expansion_plan.html#a150576a79e583296adf333a0536cdb0a',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP::IStaticTransmissionExpansionPlan']]],
+  ['builttransmissionlinesnames',['BuiltTransmissionLinesNames',['../interface_power_system_planning_1_1_models_1_1_planning_1_1_scenario_t_e_p_1_1_i_static_transmission_expansion_plan.html#ae3ace3ee5365c2ef25b49bb6af92a4c6',1,'PowerSystemPlanning::Models::Planning::ScenarioTEP::IStaticTransmissionExpansionPlan']]],
   ['busang_5fsolution',['BusAng_Solution',['../class_power_system_planning_1_1_solvers_1_1_o_p_f_1_1_opf_model.html#a69d78fd7d81a2a07c8e994ed718dca6a',1,'PowerSystemPlanning::Solvers::OPF::OpfModel']]]
 ];

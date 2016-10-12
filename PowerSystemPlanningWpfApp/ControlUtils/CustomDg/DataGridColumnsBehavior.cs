@@ -84,11 +84,17 @@ namespace PowerSystemPlanningWpfApp.ControlUtils
         {
             return (ObservableCollection<DataGridColumn>)element.GetValue(BindableColumnsProperty);
         }
-        
+
         public static DataGridTextColumn CreateNewColumn_WithMyStyle(string header, string bindingPath, string bindingStringFormat, double width)
+        {
+            return CreateNewColumn_WithMyStyle(header, bindingPath, BindingMode.OneWay, bindingStringFormat, width);
+        }
+
+        public static DataGridTextColumn CreateNewColumn_WithMyStyle(string header, string bindingPath, BindingMode bindingMode, string bindingStringFormat, double width)
         {
             var mybinding = new Binding(bindingPath);
             mybinding.StringFormat = bindingStringFormat;
+            mybinding.Mode = bindingMode;
             DataGridTextColumn col = new DataGridTextColumn
             {
                 Header = header,

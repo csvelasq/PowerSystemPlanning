@@ -1,7 +1,10 @@
 ﻿using PowerSystemPlanning.BindingModels.BaseDataBinding;
 using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
+using PowerSystemPlanning.Models.Planning.Scenarios;
+using PowerSystemPlanning.Models.SystemState;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -13,9 +16,9 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
     public class ScenarioAndStateDataTableEditor : SerializableBindableBase
     {
         public const string NodeNameColumn = "Node Name"; //string
-        public const string ConsumptionColumn = "Consumption '{0}.{1}'"; //double [MW]
-        public const string GeneratingCapacityColumn = "Generating Capacity '{0}.{1}'"; //double [MW]
-        public const string MarginalCostColumn = "Marginal Cost '{0}.{1}'"; //double [US$/MWh]
+        public const string ConsumptionColumn = "Consumption '{0}'-'{1}'"; //double [MW]
+        public const string GeneratingCapacityColumn = "Generating Capacity '{0}'-'{1}'"; //double [MW]
+        public const string MarginalCostColumn = "Marginal Cost '{0}'-'{1}'"; //double [US$/MWh]
 
         public PowerSystem MyPowerSystem { get; protected set; }
 
@@ -76,9 +79,9 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
             return dt;
         }
 
-        private DataColumn GetDataColumnInNodesDt(string colGenericName, int state)
+        private DataColumn GetDataColumnInNodesDt(string colGenericName, IStaticScenario scenario, IPowerSystemState state)
         {
-            return DtNodesStates.Columns[String.Format(colGenericName, state)];
+            return DtNodesStates.Columns[String.Format(colGenericName, scenario.Name, state.Name)];
         }
 
         private void PopulateDefaultNodesDt()
@@ -87,6 +90,34 @@ namespace PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios
             {
                 var row = DtNodesStates.NewRow();
                 row[NodeNameColumn] = node.Name;
+                //Add default consumption, generation capacity and marginal cost
+                foreach (var scenario in MyScenariosAndStates)
+                {
+                    foreach (var state in scenario.MyStateCollection.MyPowerSystemStates)
+                    {
+                        var nodeState = state.NodeStates.First(x => x.UnderlyingNode == node);
+                        //Consumption
+                        if (nodeState.InelasticLoadsStates.Count == 1)
+                            row[String.Format(ConsumptionColumn, scenario, state)] =
+                                nodeState.InelasticLoadsStates[0].Consumption;
+                        else
+                            row[String.Format(ConsumptionColumn, scenario, state)] = 0;
+                        //Generation capacity and marginal cost
+                        if (nodeState.GeneratingUnitsStates.Count == 1)
+                        {
+                            row[String.Format(GeneratingCapacityColumn, scenario, state)] = 
+                                nodeState.GeneratingUnitsStates[0].AvailableCapacity;
+                            row[String.Format(MarginalCostColumn, scenario, state)] =
+                                nodeState.GeneratingUnitsStates[0].MarginalCost;
+                        }
+                        else
+                        {
+                            row[String.Format(GeneratingCapacityColumn, scenario, state)] = 0;
+                            row[String.Format(MarginalCostColumn, scenario, state)] = 0;
+                        }
+                    }
+                }
+                //Add the new row
                 DtNodesStates.Rows.Add(row);
             }
         }

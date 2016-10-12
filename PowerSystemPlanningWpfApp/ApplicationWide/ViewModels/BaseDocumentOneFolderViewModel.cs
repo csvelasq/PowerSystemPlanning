@@ -16,7 +16,7 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 
         public override void Save()
         {
-            if (FolderExists)
+            if (FolderAbsolutePath!=null && FolderExists)
             {
                 SaveToFolder();
             }

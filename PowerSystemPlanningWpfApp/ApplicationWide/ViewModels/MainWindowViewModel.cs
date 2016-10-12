@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using PowerSystemPlanningWpfApp.ApplicationWide.Events;
 using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
+using PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
@@ -146,7 +147,18 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 
         private void OpenScenarioTep()
         {
-            throw new NotImplementedException();
+            // Create OpenFileDialog 
+            var dlg = new VistaOpenFileDialog();
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "XML Files (.xml)|*.xml";
+            // Display OpenFileDialog by calling ShowDialog method 
+            bool? result = dlg.ShowDialog();
+            if (result == true)
+            {
+                var tepVm = new ScenarioTepSetupAndParetoViewModel(dlg.FileName);
+                OpenDocument(tepVm);
+            }
         }
 
         private void OpenDocument(BaseDocumentViewModel document)

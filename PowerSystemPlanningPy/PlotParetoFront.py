@@ -3,15 +3,11 @@ from plotly.graph_objs import Scatter, Layout
 import csv
 import pandas as pd
 
-print 'starting'
 #read pareto front data
-data = pd.read_csv('ParetoFrontData.txt')
+data = pd.read_csv('ParetoFrontData.txt') #csv format: PlanId,Type,X,Y; Type in ('Efficient','Dominated')
 efficient_alternatives_data = data.loc[data['Type']=='Efficient']
 dominated_alternatives_data = data.loc[data['Type']=='Dominated']
-#print data
-#print efficient_alternatives_data 
-#print dominated_alternatives_data 
-            
+
 #plot efficient alternatives and frontier
 x_efficient = efficient_alternatives_data['X'].tolist()
 y_efficient = efficient_alternatives_data['Y'].tolist()
@@ -44,14 +40,17 @@ trace_dominated = Scatter(
     text = ids_dominated
     )
 #render plot
+show_grid_lines = True
 plot_layout = Layout(
     title="Pareto Front for TEP under Scenarios",
     hovermode='closest',
     xaxis=dict(
-        title='Total Cost Scenario 1'
+        title='Total Cost Scenario 1',
+        showgrid=show_grid_lines
         ),
     yaxis=dict(
-        title='Total Cost Scenario 2'
+        title='Total Cost Scenario 2',
+        showgrid=show_grid_lines
         )
     )
 plotly.offline.plot({

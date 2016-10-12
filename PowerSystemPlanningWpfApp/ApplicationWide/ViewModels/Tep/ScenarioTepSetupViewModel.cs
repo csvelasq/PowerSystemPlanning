@@ -7,6 +7,7 @@ using NLog;
 using PowerSystemPlanning.BindingModels.BaseDataBinding;
 using PowerSystemPlanning.BindingModels.PlanningBinding.BindingTepScenarios;
 using PowerSystemPlanning.BindingModels.PlanningBinding.BindingScenarios;
+using System.IO;
 
 namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 {
@@ -51,9 +52,9 @@ namespace PowerSystemPlanningWpfApp.ApplicationWide.ViewModels
 
         public override void SaveToFolder()
         {
-            //Save scenario definition
-            ScenarioVm.SaveToFolder();
-            //Save candidate transmission lines definition
+            //save full tep model
+            var xmlpath = Path.Combine(FolderAbsolutePath, "tep_model.xml");
+            MyTepModel.SaveToXml(xmlpath);
 
             logger.Info($"Tep under scenarios saved to '{FolderAbsolutePath}'.");
         }
